@@ -14,4 +14,10 @@ class Get extends Model {
 
 		return $tableNameArray;
 	}
+
+	public function allRow($tableName) {
+		$sql = "SELECT * FROM $tableName ORDER BY no DESC";
+		$stmt = DB::select($sql);
+		return $stmt;
+	}
 }
