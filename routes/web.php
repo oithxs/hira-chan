@@ -16,4 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', "App\Http\Controllers\showTablesCTL");
 Route::get('/keiziban', "App\Http\Controllers\keizibanCTL");
 
-Route::post('jQuery.ajax/getRow', "App\Http\Controllers\jQuery_ajax");
+Route::post('jQuery.ajax/getRow', "App\Http\Controllers\jQuery_ajax@get_allRow");
+Route::post('jQuery.ajax/sendRow', "App\Http\Controllers\jQuery_ajax@send_Row");

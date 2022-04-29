@@ -16,21 +16,24 @@
 <body>
 	<h1>{{$tableName}}</h1>
 
-	<a href="../public">戻る</a>
+	<a href="{{url('/')}}">戻る</a>
 
 	<br>
-
-	<form id="sendMessage">
-		<p>名前</p>
-		<input type="text" name="name">
-		<p>コメント</p>
-		<textarea name="message"></textarea>
-	</form>
+	<div>
+		<form id="sendMessage">
+			<p>名前</p>
+			<input type="text" name="name">
+			<p>コメント</p>
+			<textarea name="message"></textarea>
+		</form>
+		<button id="sendMessageBtn">書き込み</button>
+		<script src="{{asset('/js/Send_Row.js')}}"></script>
+	</div>
 	
 	<br><br><br>
 	
 	<div id="displayArea">
-		<script src="{{asset('/js/Get_allRow.js')}}"></script>
+	<script src="{{asset('/js/Get_allRow.js')}}"></script>
 	</div>
 
 </body>
