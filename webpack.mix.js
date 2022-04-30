@@ -1,3 +1,4 @@
+const { js } = require('laravel-mix');
 const mix = require('laravel-mix');
 
 /*
@@ -15,5 +16,10 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/Get_allRow.js', 'public/js')
     .js('resources/js/Send_Row.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
-        //
-    ])
+        require('postcss-import'),
+        require('tailwindcss'),
+    ]);
+
+if (mix.inProduction()) {
+    mix.version();
+}

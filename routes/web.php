@@ -12,9 +12,21 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', "App\Http\Controllers\showTablesCTL");
+Route::get('/', function() {
+	return view('welcome');
+});
+Route::get('/hub', "App\Http\Controllers\showTablesCTL");
 Route::get('/keiziban', "App\Http\Controllers\keizibanCTL");
 
 Route::post('jQuery.ajax/getRow', "App\Http\Controllers\jQuery_ajax@get_allRow");
 Route::post('jQuery.ajax/sendRow', "App\Http\Controllers\jQuery_ajax@send_Row");
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
