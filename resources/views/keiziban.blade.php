@@ -16,7 +16,7 @@
 <body>
 	<h1>{{$tableName}}</h1>
 
-	<a href="{{url('/hub')}}">戻る</a>
+	<a href="{{ url('/hub') }}">戻る</a>
 
 	<br>
 	<div>
@@ -27,13 +27,13 @@
 			<textarea name="message"></textarea>
 		</form>
 		<button id="sendMessageBtn">書き込み</button>
-		<script src="{{asset('/js/Send_Row.js')}}"></script>
+		<script src="{{ mix('js/Send_Row.js') }}"></script>
 	</div>
 	
 	<br><br><br>
 	
 	<div id="displayArea">
-	<script src="{{asset('/js/Get_allRow.js')}}"></script>
+	<script src="{{ mix('/js/Get_allRow.js') }}"></script>
 	</div>
 
 </body>

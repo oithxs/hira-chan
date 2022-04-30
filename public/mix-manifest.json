@@ -1,4 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/Get_allRow.js": "/js/Get_allRow.js",
+    "/js/Send_Row.js": "/js/Send_Row.js",
     "/css/app.css": "/css/app.css"
 }
