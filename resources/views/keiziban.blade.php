@@ -16,7 +16,7 @@
 <body>
 	<h1>{{$tableName}}</h1>
 
-	<a href="{{url('/')}}">戻る</a>
+	<a href="{{url('/hub')}}">戻る</a>
 
 	<br>
 	<div>
