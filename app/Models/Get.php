@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\DB;
 
 class Get extends Model {
 	public function showTables() {
-		$tables = DB::select("SHOW TABLES");
+		$tables = DB::connection('mysql_keiziban')->select("SHOW TABLES");
 		$tableNameArray = array_reduce(
     		array_map(function ($table) {
 				return array_values((array) $table);
@@ -17,7 +17,7 @@ class Get extends Model {
 
 	public function allRow($tableName) {
 		$sql = "SELECT * FROM $tableName ORDER BY no DESC";
-		$stmt = DB::select($sql);
+		$stmt = DB::connection('mysql_keiziban')->select($sql);
 		return $stmt;
 	}
 }
