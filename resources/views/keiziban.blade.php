@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            掲示板ハブ
+            {{$tableName}}
         </h2>
     </x-slot>
 
@@ -19,9 +19,7 @@
 					</script>
 				</div>
 
-				<div>
-					<h1>{{$tableName}}</h1>
-					
+				<div>					
 					<a href="{{ url('/hub') }}">戻る</a>
 					<br><br>
 					
