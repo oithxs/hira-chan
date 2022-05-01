@@ -1,21 +1,23 @@
-<!DOCTYPE html>
-<html lang="ja">
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            掲示板ハブ
+        </h2>
+    </x-slot>
 
-<head>
-	<meta cahrset="UTF-8">
-	<title>掲示板ハブ</title>
-</head>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
-<body>
-	<div>
-		<h1>HxSコンピュータ部　掲示板</h1>
-	</div>
-
-	<div>
-		@foreach($tables as $tableName)
-			<li><a href="keiziban?table%5B%5D={{$tableName}}">{{$tableName}}</a></li>
-		@endforeach
-	</div>	
-</body>
-
-</html>
+			<!-- my area begin -->
+				<div>
+					@foreach($tables as $tableName)
+						<li><a href="keiziban?table%5B%5D={{$tableName}}">{{$tableName}}</a></li>
+					@endforeach
+				</div>
+			<!-- my area begin -->
+			
+            </div>
+        </div>
+    </div>
+</x-app-layout>
