@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function() {
 	return view('welcome');
 });
-Route::get('/hub2', "App\Http\Controllers\showTablesCTL");
-Route::get('/keiziban', "App\Http\Controllers\keizibanCTL");
 
 Route::post('jQuery.ajax/getRow', "App\Http\Controllers\jQuery_ajax@get_allRow");
 Route::post('jQuery.ajax/sendRow', "App\Http\Controllers\jQuery_ajax@send_Row");
@@ -37,4 +35,12 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/hub', 'App\Http\Controllers\showTablesCTL')->name('hub');
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/keiziban', 'App\Http\Controllers\keizibanCTL')->name('keiziban');
 });
