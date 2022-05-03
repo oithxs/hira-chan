@@ -575,7 +575,7 @@
     "Update :resource: :title": "Update :resource: :title",
     "Update attached :resource: :title": "Update attached :resource: :title",
     "Update Password": "パスワード更新",
-    "Update your account's profile information and email address.": "プロフィール情報とメールアドレスを更新する。",
+    "Update your account's profile information and email address.": "プロフィール情報を更新する。",
     "Uruguay": "Uruguay",
     "Use a recovery code": "リカバリーコードを使用する",
     "Use an authentication code": "認証コードを使用する",
@@ -614,5 +614,10 @@
     "You may not leave a team that you created.": "自身が作成したチームを離れることはできません。",
     "Your email address is not verified.": "Your email address is not verified.",
     "Zambia": "Zambia",
-    "Zimbabwe": "Zimbabwe"
+    "Zimbabwe": "Zimbabwe",
+
+    "Email register": "学生番号（e1~）確認メールが送信されます", 
+    "Forum Hub": "掲示板ハブ",
+    "Go hub": "掲示板ハブへ戻る", 
+    "Write forum": "書き込み"
 }

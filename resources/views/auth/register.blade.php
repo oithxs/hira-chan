@@ -15,7 +15,7 @@
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="email" value="学生番号（e1~）確認メールが送信されます" />
+                <x-jet-label for="email" value="{{__('Email register')}}" />
                 <x-jet-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email')" required />
             </div>
 
