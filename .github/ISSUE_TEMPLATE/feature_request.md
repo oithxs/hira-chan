@@ -2,7 +2,7 @@
 name: Feature request
 about: 欲しい機能がある場合は，こちらを利用してください
 title: ''
-labels: ''
+labels: enhancement
 assignees: ''
 
 ---
