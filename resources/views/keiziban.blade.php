@@ -25,8 +25,8 @@
 					
 					<div>
 						<form id="sendMessage">
-							<p>名前</p>
-							<input type="text" name="name">
+							<p>{{$username}}</p>
+							<br>
 							<p>コメント</p>
 							<textarea name="message"></textarea>
 						</form>

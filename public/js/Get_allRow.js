@@ -13,9 +13,6 @@ setInterval(function () {
   $.ajax({
     type: "POST",
     url: url + "/jQuery.ajax/getRow",
-    data: {
-      'table': table
-    },
     dataType: "json"
   }).done(function (data) {
     // 成功時

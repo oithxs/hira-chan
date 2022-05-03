@@ -1,8 +1,5 @@
 $('#sendMessageBtn').click(function () {
 	const formElm = document.getElementById("sendMessage");
-	const name = formElm.name.value;
-	const message = formElm.message.value;
-	formElm.name.value = '';
 	formElm.message.value = '';
 
 	$.ajaxSetup({
@@ -14,11 +11,6 @@ $('#sendMessageBtn').click(function () {
 	$.ajax({
 		type: "POST",
 		url: url + "/jQuery.ajax/sendRow",
-		data: {
-			"table": table,
-			"name": name,
-			"message": message
-		},
 	}).done(function () {
 	}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
 		console.log(XMLHttpRequest.status);

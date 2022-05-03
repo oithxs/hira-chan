@@ -5,9 +5,6 @@ var __webpack_exports__ = {};
   \**********************************/
 $('#sendMessageBtn').click(function () {
   var formElm = document.getElementById("sendMessage");
-  var name = formElm.name.value;
-  var message = formElm.message.value;
-  formElm.name.value = '';
   formElm.message.value = '';
   $.ajaxSetup({
     headers: {
@@ -16,12 +13,7 @@ $('#sendMessageBtn').click(function () {
   });
   $.ajax({
     type: "POST",
-    url: url + "/jQuery.ajax/sendRow",
-    data: {
-      "table": table,
-      "name": name,
-      "message": message
-    }
+    url: url + "/jQuery.ajax/sendRow"
   }).done(function () {}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
     console.log(XMLHttpRequest.status);
     console.log(textStatus);
