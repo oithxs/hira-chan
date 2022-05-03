@@ -15,8 +15,8 @@
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="email" value="{{ __('Email') }} ※@以降の文字列は@st.oit.ac.jpに置き換えられます" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                <x-jet-label for="email" value="学生番号（e1~）確認メールが送信されます" />
+                <x-jet-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email')" required />
             </div>
 
             <div class="mt-4">
