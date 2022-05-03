@@ -18,7 +18,7 @@ class jQuery_ajax extends Controller {
 		$send = new Send;
 		$send->insertComment(
 			$request->post('table'), 
-			$request->post('name'), 
+			$request->user()->name, 
 			$request->post('message')
 		);
 		return null;

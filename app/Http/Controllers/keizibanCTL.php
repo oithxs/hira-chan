@@ -11,6 +11,7 @@ class keizibanCTL extends Controller {
 		$stmt = $get->allRow($request->get('table')[0]);
 
 		$response['tableName'] = $request->get('table')[0];
+		$response['username'] = $request->user()->name;
 		$response['url'] = url('/');
 		$response['allRow'] = $stmt;
 		return view('keiziban', $response);
