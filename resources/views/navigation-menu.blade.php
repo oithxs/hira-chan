@@ -16,7 +16,7 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('hub') }}" :active="request()->routeIs('hub')">
-                        掲示板ハブ
+                        {{__('Forum Hub')}}
                     </x-jet-nav-link>
                 </div>
             </div>

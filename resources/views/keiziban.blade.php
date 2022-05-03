@@ -20,7 +20,7 @@
 				</div>
 
 				<div>					
-					<a href="{{ url('/hub') }}">戻る</a>
+					<a href="{{ url('/hub') }}">{{__('Go hub')}}</a>
 					<br><br>
 					
 					<div>
@@ -30,7 +30,7 @@
 							<p>コメント</p>
 							<textarea name="message"></textarea>
 						</form>
-						<button id="sendMessageBtn">書き込み</button>
+						<button id="sendMessageBtn">{{__('Write forum')}}</button>
 						<script src="{{ mix('js/Send_Row.js') }}"></script>
 					</div>
 					
