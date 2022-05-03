@@ -11,6 +11,7 @@ setInterval(function(){
         type: "POST",
         url: url + "/jQuery.ajax/getRow",
         dataType: "json",
+        data: {"table" : table}
     }).done(function (data) { // 成功時
         displayArea.innerHTML = "<br>";
         for (var item in data) {
