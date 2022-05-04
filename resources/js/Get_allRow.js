@@ -1,4 +1,7 @@
-setInterval(function(){
+reload();
+setInterval(reload(), 1000);
+
+function reload(){
     var displayArea = document.getElementById("displayArea");
 
     $.ajaxSetup({
@@ -23,4 +26,4 @@ setInterval(function(){
         console.log(textStatus);
         console.log(errorThrown.message);
     });
-}, 1000);
+}
