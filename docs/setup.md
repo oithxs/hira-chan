@@ -71,6 +71,15 @@ Do you want to continue? [Y/n]: y     # y を入力してEnter
 
 `Setup has finished installing xampp on your computer`と表示されると成功です
 
+### 不要サービスの停止
+
+```sh
+~$ sudo systemctl disable apache2
+~$ sudo systemctl stop apache2
+```
+
+`apache2`を停止しておかないと，予期せぬ動作不良を起こすようです．
+
 ### LAMPP を起動
 
 ```sh
@@ -595,7 +604,6 @@ MAIL_FROM_NAME=<ここでメール受信時の名前を決められます>
 ### LAMPPの自動起動
 
 ```sh
-$ sudo systemctl disable apache2
 $ sudo crontab -e
 no crontab for root - using an empty one
 
