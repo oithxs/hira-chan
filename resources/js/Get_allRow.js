@@ -1,4 +1,4 @@
-
+reload();
 setInterval(reload, 1000);
 
 function reload(){
