@@ -4,12 +4,12 @@
 
 このドキュメントは，本プロジェクトのクローンから環境構築までの手順を記載したものです．
 
-各コマンドの，$マーク前にある `~` や， `/opt/lampp/htdocs/Laravel_Forum-B` などは，現在いるディレクトリを表しています．
+各コマンドの，$マーク前にある `~` や， `/opt/lampp/htdocs/Laravel_Forum-B` などは，現在いるのディレクトりを表しています．
 
 ## 動作確認済みの環境
 
 - Ubuntu-20.04-Server
-- Ubuntu-22.04-Server
+- Ubuntu-22.-4-Server
 
 ## 目次
 
@@ -440,10 +440,10 @@ Application key set successfully.
 3. 掲示板用のデータベースを作成します．こちらもデータベース名は任意です
 4. 掲示板用のデータベースにカラム数4のテーブルを作成します．テーブル名は任意です．
 
-- カラム名: `no`, type: `INT`, NULL インデックスにチェック, A_I コメント にチェック
-- カラム名: `name`, type: `TEXT`
-- カラム名: `message`, type: `TEXT`
-- カラム名: `time`, type: `TEXT`
+カラム名: `no`, type: `INT`, NULL インデックスにチェック, A_I コメント にチェック
+カラム名: `name`, type: `TEXT`
+カラム名: `message`, type: `TEXT`
+カラム名: `time`, type: `TEXT`
 
 でテーブルを作成します．これで掲示板の利用が可能になります．
 
