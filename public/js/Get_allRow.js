@@ -3,8 +3,7 @@ var __webpack_exports__ = {};
 /*!************************************!*\
   !*** ./resources/js/Get_allRow.js ***!
   \************************************/
-reload();
-setInterval(reload(), 1000);
+setInterval(reload, 1000);
 
 function reload() {
   var displayArea = document.getElementById("displayArea");
