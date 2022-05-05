@@ -15,6 +15,7 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/Get_allRow.js', 'public/js')
     .js('resources/js/Send_Row.js', 'public/js')
+    .js('resources/js/Create_thread', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),
