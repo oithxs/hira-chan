@@ -10,6 +10,7 @@ class showTablesCTL extends Controller {
 		$tableNameArray = $get->showTables();
 		
 		$response['tables'] = $tableNameArray;
+		$response['url'] = url('/');
 		return view('hub', $response);
 	}
 }
