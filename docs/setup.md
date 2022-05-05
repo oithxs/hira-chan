@@ -6,7 +6,7 @@
 
 各コマンドの，$マーク前にある `~` や， `/opt/lampp/htdocs/Laravel_Forum-B` などは，現在いるディレクトリを表しています．
 
-## 動作確認済みの環境
+## 以下のOSでは環境構築ができる事を確認しています
 
 - Ubuntu-20.04-Server
 - Ubuntu-22.04-Server
@@ -557,7 +557,7 @@ inet_protcols=ipv4
 $ sudo nano /opt/lampp/etc/php.ini
 ```
 
-php.iniの`[mail function]`ないに，以下の内容を追記してください
+php.iniの`[mail function]`内に，以下の内容を追記してください
 
 ```sh
 [mail function]
