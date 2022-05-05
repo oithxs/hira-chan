@@ -7,9 +7,9 @@ use App\Models\Get;
 class showTablesCTL extends Controller {
 	public function __invoke() {
 		$get = new Get;
-		$tableNameArray = $get->showTables();
+		$stmt = $get->showTables();
 		
-		$response['tables'] = $tableNameArray;
+		$response['tables'] = $stmt;
 		$response['url'] = url('/');
 		return view('hub', $response);
 	}

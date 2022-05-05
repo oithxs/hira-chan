@@ -24,12 +24,16 @@
                 <script src="{{ mix('js/Create_thread.js') }}"></script>
             </div>
 
-                <br><br>
-				<div>
-					@foreach($tables as $tableName)
-						<li><a href="keiziban?table%5B%5D={{$tableName}}">{{$tableName}}</a></li>
-					@endforeach
-				</div>
+            <br><br>
+            
+            <div>
+                <table>
+                    <tr><th>{{__('Thread name')}}</th><td>{{__('Create time')}}</td></tr>
+                    @foreach($tables as $tableInfo)
+                        <tr><th><a href="keiziban?table%5B%5D={{$tableInfo['table_name']}}">{{$tableInfo['table_name']}}</a></th><td>{{$tableInfo['created_at']}}</td></tr>
+                    @endforeach
+                </table>
+            </div>
 			<!-- my area begin -->
 			
             </div>
