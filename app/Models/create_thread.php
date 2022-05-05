@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class create_thread extends Model {
     public function create_thread($tableName) {
         Schema::connection('mysql_keiziban')->create($tableName, function (Blueprint $table) {
-            $table->integer('no', 11)->primary();
+            $table->id('no');
             $table->text('name');
             $table->text('message');
             $table->text('time');
