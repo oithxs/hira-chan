@@ -5,14 +5,10 @@ use Illuminate\Support\Facades\DB;
 
 class Get extends Model {
 	public function showTables() {
-		$tables = DB::connection('mysql_keiziban')->select("SHOW TABLES");
-		$tableNameArray = array_reduce(
-    		array_map(function ($table) {
-				return array_values((array) $table);
-    		}, $tables),
-			'array_merge', []);
-
-		return $tableNameArray;
+		$stmt = json_decode(json_encode(
+			DB::connection('mysql_keiziban')->select("SELECT * FROM hub"),
+		), true);
+		return $stmt;
 	}
 
 	public function allRow($tableName) {
