@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Get;
 use App\Models\Send;
+use App\Models\create_thread;
 
 class jQuery_ajax extends Controller {
 	public function get_allRow(Request $request) {
@@ -21,6 +22,12 @@ class jQuery_ajax extends Controller {
 			$request->user()->name, 
 			$request->post('message')
 		);
+		return null;
+	}
+
+	public function create_thread(Request $request) {
+		$create = new create_thread;
+		$create->create_thread($request->post('table'));
 		return null;
 	}
 }
