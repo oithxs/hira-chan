@@ -27,6 +27,7 @@ class jQuery_ajax extends Controller {
 
 	public function create_thread(Request $request) {
 		$create = new create_thread;
+		$create->insertTable($request->post('table'));
 		$create->create_thread($request->post('table'));
 		return null;
 	}
