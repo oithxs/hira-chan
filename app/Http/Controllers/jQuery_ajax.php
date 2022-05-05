@@ -17,11 +17,13 @@ class jQuery_ajax extends Controller {
 
 	public function send_Row(Request $request) {
 		$send = new Send;
+		$message = $request->post('message');
+		if (isset($message)) {
 		$send->insertComment(
 			$request->post('table'), 
 			$request->user()->name, 
 			$request->post('message')
-		);
+		);}
 		return null;
 	}
 
