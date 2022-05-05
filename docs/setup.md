@@ -1,12 +1,12 @@
 # 本プロジェクトの環境構築まで
 
-更新日：2022/05/05
+更新日：2022/05/05 22:21
 
 このドキュメントは，本プロジェクトのクローンから環境構築までの手順を記載したものです．
 
 各コマンドの，$マーク前にある `~` や， `/opt/lampp/htdocs/Laravel_Forum-B` などは，現在いるディレクトリを表しています．
 
-## 動作確認済みの環境
+## 以下のOSでは環境構築ができる事を確認しています
 
 - Ubuntu-20.04-Server
 - Ubuntu-22.04-Server
@@ -78,7 +78,7 @@ Do you want to continue? [Y/n]: y     # y を入力してEnter
 ~$ sudo systemctl stop apache2
 ```
 
-`apache2`を停止しておかないと，予期せぬ動作不良を起こすようです．
+`apache2`を停止しておかないと，LAMPPのapacheが起動しないなどの動作不良が起こりました．
 
 ### LAMPP を起動
 
@@ -156,7 +156,7 @@ ipアドレスは以下のコマンドで確認できます
 # いろいろ出力されますが，inetの項目にipアドレス（ipv4）が出力されます
 ```
 
-### トラブルシューティング的な
+### 補足
 
 ### LAMPP起動時にApache・MySQL・ProFTPDで`line 22: netstat: command not found`と出力される
 
@@ -182,9 +182,6 @@ Contents of "/opt/lampp/var/proftpd/start.err":
 ```sh
 ~$ sudo apt update -y
 ~$ sudo apt install net-tools
-```
-
-```sh
 ~$ sudo /opt/lampp/lampp restart
 Restarting XAMPP for Linux 8.1.5-0...
 XAMPP: Stopping Apache...ok.
@@ -277,6 +274,8 @@ $ cd ~
 ~$ source ~/.bashrc
 ```
 
+### 確認
+
 ```sh
 ~$ composer -v
    ______
@@ -308,6 +307,8 @@ $ sudo npm install n -g
 ```sh
 $ sudo n lts
 ```
+
+### 確認
 
 ```sh
 $ npm -v
@@ -438,14 +439,6 @@ Application key set successfully.
 1. phpmyadminにアクセスし，左の新規作成をクリックします
 2. 任意のデータベース名を入力し作成をクリックします
 3. 掲示板用のデータベースを作成します．こちらもデータベース名は任意です
-4. 掲示板用のデータベースにカラム数4のテーブルを作成します．テーブル名は任意です．
-
-- カラム名: `no`, type: `INT`, NULL インデックスにチェック, A_I コメント にチェック
-- カラム名: `name`, type: `TEXT`
-- カラム名: `message`, type: `TEXT`
-- カラム名: `time`, type: `TEXT`
-
-でテーブルを作成します．これで掲示板の利用が可能になります．
 
 ### .envファイルの編集
 
@@ -470,11 +463,11 @@ DB_PASSWORD=<phpmyadminのパスワード>
 /opt/lampp/htdocs/Laravel_Forum-B$ chmod 777 -R storage
 ```
 
-### Laravelが使用するテーブルの作成（自動）
+### 使用するテーブルの作成
 
 現段階で http://<IPアドレス>/ へアクセスすると，`<省略> Base table or view not found <省略>`とエラーが表示されていると思います．ページ内の`Run migrations`をクリックして下さい．
 
-`The solution was executed successfully. Refresh now.`へと変化すれば成功です．`Refresh now.` をクリックして下さい
+`The solution was executed successfully. Refresh now.`へと変化すれば成功です．`Refresh now.` をクリックして下さい．
 
 http://<IPアドレス> へとアクセスすると，Laravelのウェルカムページ ＋ 右上に`Log in` ・ `Register`が表示されていれば成功です．
 
@@ -564,7 +557,7 @@ inet_protcols=ipv4
 $ sudo nano /opt/lampp/etc/php.ini
 ```
 
-php.iniの`[mail function]`ないに，以下の内容を追記してください
+php.iniの`[mail function]`内に，以下の内容を追記してください
 
 ```sh
 [mail function]
@@ -577,6 +570,8 @@ sendmail_path = /usr/sbin/sendmail -t -i
 $ cd /opt/lampp/htdocs/Laravel_Forum-B/
 /opt/lampp/htdocs/Laravel_Forum-B$ nano .env
 ```
+
+以下の箇所を変更して下さい
 
 ```sh
 MAIL_MAILER=smtp
