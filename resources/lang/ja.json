@@ -619,5 +619,7 @@
     "Email register": "学生番号（e1~）確認メールが送信されます", 
     "Forum Hub": "掲示板ハブ",
     "Go hub": "掲示板ハブへ戻る", 
-    "Write forum": "書き込み"
+    "Write forum": "書き込み",
+    "Create new thread": "新規スレッドの作成",
+    "Thread name": "スレッド名"
 }
