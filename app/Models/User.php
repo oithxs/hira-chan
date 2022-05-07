@@ -58,4 +58,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'profile_photo_url',
     ];
+
+    // Add custom mail
+    public function sendEmailVerificationNotification() {
+        $this->notify(new \App\Notifications\VerifyEmailAddURL);
+    }
 }
