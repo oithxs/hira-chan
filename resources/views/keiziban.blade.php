@@ -66,8 +66,7 @@
 						</script> 
 						
 						<!-- others -->
-						<script src="{{ mix('js/Send_Row.js') }}"></script>
-						<script src="{{ mix('/js/Get_allRow.js') }}"></script>
+						<script src="{{ mix('js/app_jquery.js') }}"></script>
 					</div>
 				</body> 
 				<!-- my area end -->

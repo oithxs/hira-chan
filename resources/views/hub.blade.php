@@ -40,7 +40,7 @@
 							</thead>
 							<tbody>
 								@foreach($tables as $tableInfo)
-									<tr><th><a href="keiziban?table%5B%5D={{$tableInfo['table_name']}}">{{$tableInfo['table_name']}}</a></th><td>{{$tableInfo['created_at']}}</td></tr>
+									<tr><th><a href="hub/keiziban={{$tableInfo['table_name']}}">{{$tableInfo['table_name']}}</a></th><td>{{$tableInfo['created_at']}}</td></tr>
 								@endforeach
 							</tbody>
 						</table>
@@ -64,7 +64,7 @@
 					</script>
 
 					<!-- others -->
-					<script src="{{ mix('js/Create_thread.js') }}"></script>
+					<script src="{{ mix('js/app_jquery.js') }}"></script>
 				</div>
 			</body>
 			<!-- my area end -->
