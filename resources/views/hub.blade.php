@@ -20,23 +20,31 @@
 				integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
 				crossorigin="anonymous">
 			</head>
+			
 			<body>
-				<div>
-					<form id="createThread">
-						<p>{{__('Thread name')}}<input type="text" name="threadName"></P>
+				<div class="container-fluid">
+					<form id="createThread" class="col-sm">
+						<div class="mb-2">
+							<label class="form-label">スレッド名</label>
+							<input class="form-control" type="text" name="threadName">
+						</div>
+						<button id="create_threadBtn" class="btn btn-primary">{{__('Create new thread')}}</button>
 					</form>
-					<button id="create_threadBtn">{{__('Create new thread')}}</button>
-				</div>
 
-				<br><br>
-				
-				<div>
-					<table>
-						<tr><th>{{__('Thread name')}}</th><td>{{__('Create time')}}</td></tr>
-						@foreach($tables as $tableInfo)
-							<tr><th><a href="keiziban?table%5B%5D={{$tableInfo['table_name']}}">{{$tableInfo['table_name']}}</a></th><td>{{$tableInfo['created_at']}}</td></tr>
-						@endforeach
-					</table>
+					<br><br>
+					
+					<div>
+						<table class="table table-striped">
+							<thead>
+								<tr><th>{{__('Thread name')}}</th><td>{{__('Create time')}}</td></tr>
+							</thead>
+							<tbody>
+								@foreach($tables as $tableInfo)
+									<tr><th><a href="keiziban?table%5B%5D={{$tableInfo['table_name']}}">{{$tableInfo['table_name']}}</a></th><td>{{$tableInfo['created_at']}}</td></tr>
+								@endforeach
+							</tbody>
+						</table>
+					</div>
 				</div>
 
 				<div>
