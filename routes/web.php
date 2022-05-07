@@ -29,6 +29,6 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
     Route::get('/hub', 'App\Http\Controllers\showTablesCTL')->name('hub');
-    Route::get('/keiziban', 'App\Http\Controllers\keizibanCTL')->name('keiziban');
+    Route::get('hub/keiziban={table}', 'App\Http\Controllers\keizibanCTL')->name('keiziban');
     Route::get('/mypage', 'App\Http\Controllers\MyPage')->name('mypage');
 });

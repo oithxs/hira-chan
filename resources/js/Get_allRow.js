@@ -1,5 +1,7 @@
-reload();
-setInterval(reload, 1000);
+if ((location.href).includes('hub/keiziban=')) {
+    reload();
+    setInterval(reload, 1000);
+}
 
 function reload(){
     var displayArea = document.getElementById("displayArea");
