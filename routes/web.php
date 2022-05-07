@@ -19,6 +19,7 @@ Route::get('/', function() {
 Route::post('jQuery.ajax/getRow', "App\Http\Controllers\jQuery_ajax@get_allRow");
 Route::post('jQuery.ajax/sendRow', "App\Http\Controllers\jQuery_ajax@send_Row");
 Route::post('jQuery.ajax/create_thread', "App\Http\Controllers\jQuery_ajax@create_thread");
+Route::get('/account/delete/{id}/{hash}', 'App\Http\Controllers\AccountDelete')->name('account/delete');
 
 Route::middleware([
     'auth:sanctum',
