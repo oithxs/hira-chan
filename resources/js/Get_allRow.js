@@ -15,13 +15,13 @@ function reload(){
         url: url + "/jQuery.ajax/getRow",
         dataType: "json",
         data: {"table" : table}
-    }).done(function (data) { // 成功時
+    }).done(function (data) {
         displayArea.innerHTML = "<br>";
         for (var item in data) {
-            displayArea.insertAdjacentHTML('beforeend', data[item]['no'] + ": " + data[item]['name'] + " " + data[item]['time'] + "<br>" +
+            displayArea.insertAdjacentHTML('afterbegin', data[item]['no'] + ": " + data[item]['name'] + " " + data[item]['time'] + "<br>" +
                 data[item]['message'] + "<hr><br>");
         }
-    }).fail(function (XMLHttpRequest, textStatus, errorThrown) { // 失敗時
+    }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
         console.log(XMLHttpRequest.status);
         console.log(textStatus);
         console.log(errorThrown.message);

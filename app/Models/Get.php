@@ -12,7 +12,7 @@ class Get extends Model {
 	}
 
 	public function allRow($tableName) {
-		$sql = "SELECT * FROM $tableName ORDER BY no DESC";
+		$sql = "SELECT * FROM $tableName ORDER BY no ASC";
 		$stmt = DB::connection('mysql_keiziban')->select($sql);
 		return $stmt;
 	}
