@@ -10,16 +10,18 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
 			<!-- my area begin -->
-				<div>
+				<head>
+					<meta charset="utf-8">
 					<meta name="csrf-token" content="{{ csrf_token() }}">
-					<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-					<script>
-						const url = "{{$url}}";
-						const table = "{{$tableName}}";
-					</script>
-				</div>
+					<meta name="viewport" content="width=device-width, initial-scale=1">
+					<!-- Bootstrap CSS -->
+					<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
+					rel="stylesheet" 
+					integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
+					crossorigin="anonymous">
+				</head>
 
-				<div>					
+				<body>
 					<a href="{{ url('/hub') }}">{{__('Go hub')}}</a>
 					<br><br>
 					
@@ -31,15 +33,34 @@
 							<textarea name="message"></textarea>
 						</form>
 						<button id="sendMessageBtn">{{__('Write forum')}}</button>
-						<script src="{{ mix('js/Send_Row.js') }}"></script>
 					</div>
 					
 					<br><br><br>
 					
-					<div id="displayArea">
+					<div id="displayArea"></div>
+
+					<div>
+						<!-- Bootstrap用JavaScript -->
+						<script
+						src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+						integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+						crossorigin="anonymous"
+						></script>
+
+						<!-- jQuery -->
+						<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+
+						<!-- グローバル変数 -->
+						<script>
+							const url = "{{$url}}";
+							const table = "{{$tableName}}";
+						</script>
+
+						<!-- others -->
+						<script src="{{ mix('js/Send_Row.js') }}"></script>
 						<script src="{{ mix('/js/Get_allRow.js') }}"></script>
 					</div>
-				</div>
+				</body>
 			<!-- my area end -->
 
             </div>
