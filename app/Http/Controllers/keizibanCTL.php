@@ -8,9 +8,9 @@ use App\Models\Get;
 class keizibanCTL extends Controller {
 	public function __invoke(Request $request) {
 		$get = new Get;
-		$stmt = $get->allRow($request->get('table')[0]);
+		$stmt = $get->allRow($request->table);
 
-		$response['tableName'] = $request->get('table')[0];
+		$response['tableName'] = $request->table;
 		$response['username'] = $request->user()->name;
 		$response['url'] = url('/');
 		$response['allRow'] = $stmt;
