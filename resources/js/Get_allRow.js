@@ -20,8 +20,13 @@ function reload(){
     }).done(function (data) {
         displayArea.innerHTML = "<br>";
         for (var item in data) {
-            displayArea.insertAdjacentHTML('afterbegin', data[item]['no'] + ": " + data[item]['name'] + " " + data[item]['time'] + "<br>" +
-                data[item]['message'] + "<hr><br>");
+            displayArea.insertAdjacentHTML('afterbegin',
+            data[item]['no'] + ": " + data[item]['name'] + " " + data[item]['time'] + 
+            "<br>" +
+            data[item]['message'] +
+            "<br>" +
+            "<button type='button' class='btn btn-secondary' onClick='like(" + data[item]['no'] + ")'>like</button>" +
+            "<hr>");
         }
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
         console.log(XMLHttpRequest.status);
@@ -29,3 +34,5 @@ function reload(){
         console.log(errorThrown.message);
     });
 }
+
+
