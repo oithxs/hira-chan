@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// データ処理
-Route::post('jQuery.ajax/getRow', "App\Http\Controllers\jQuery_ajax@get_allRow");
-Route::post('jQuery.ajax/sendRow', "App\Http\Controllers\jQuery_ajax@send_Row");
-Route::post('jQuery.ajax/create_thread', "App\Http\Controllers\jQuery_ajax@create_thread");
-
 // 画面遷移
 Route::get('/', function() { return view('welcome');});
 Route::get('/account/delete/{id}/{hash}', 'App\Http\Controllers\AccountDelete')->middleware('auth')->name('account/delete');
@@ -31,4 +26,10 @@ Route::middleware([
     Route::get('/hub', 'App\Http\Controllers\showTablesCTL')->name('hub');
     Route::get('hub/keiziban={table}', 'App\Http\Controllers\keizibanCTL')->name('keiziban');
     Route::get('/mypage', 'App\Http\Controllers\MyPage')->name('mypage');
+
+    // データ処理
+    Route::post('jQuery.ajax/getRow', "App\Http\Controllers\jQuery_ajax@get_allRow");
+    Route::post('jQuery.ajax/sendRow', "App\Http\Controllers\jQuery_ajax@send_Row");
+    Route::post('jQuery.ajax/create_thread', "App\Http\Controllers\jQuery_ajax@create_thread");
+    Route::post('jQuery.ajax/like', "App\Http\Controllers\jQuery_ajax@like");
 });
