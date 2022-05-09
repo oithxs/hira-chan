@@ -11,6 +11,7 @@ class keizibanCTL extends Controller {
 		$stmt = $get->allRow($request->table);
 
 		$response['tableName'] = $request->table;
+		$response['thread_id'] = $request->thread_id;
 		$response['username'] = $request->user()->name;
 		$response['url'] = url('/');
 		$response['allRow'] = $stmt;

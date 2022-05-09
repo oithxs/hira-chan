@@ -27,6 +27,7 @@
 					<script>
 						const url = "{{$url}}";
 						const table = "{{$tableName}}";
+						const thread_id = "{{$thread_id}}";
 					</script>
 
 					<script>
@@ -41,7 +42,7 @@
 								type:"POST",
 								url: url + "/jQuery.ajax/like",
 								data: {
-									"thread_id": table,
+									"thread_id": thread_id,
 									"message_id": message_id
 								}
 							}).done(function () {
