@@ -41,10 +41,11 @@ class jQuery_ajax extends Controller {
 		$user_id = $request->user()->id;
 
 		$like = new Like;
-		$like->thread_id = $thread_id;
-		$like->message_id = $message_id;
-		$like->user_id = $user_id;
-		$like->save();
+		$like->like(
+			$thread_id,
+			$message_id,
+			$user_id
+		);
 
 		return null;
 	}
