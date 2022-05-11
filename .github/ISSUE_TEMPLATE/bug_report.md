@@ -2,7 +2,7 @@
 name: Bug report
 about: バグ改善のための報告用
 title: ''
-labels: bug
+labels: 'Type: Feature'
 assignees: ''
 
 ---
