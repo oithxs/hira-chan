@@ -19,6 +19,40 @@
 					rel="stylesheet" 
 					integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
 					crossorigin="anonymous">
+
+					<!-- jQuery -->
+					<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script> 
+					
+					<!-- グローバル変数 -->
+					<script>
+						const url = "{{$url}}";
+						const table = "{{$tableName}}";
+						const thread_id = "{{$thread_id}}";
+					</script>
+
+					<script>
+						function like(message_id) {
+							$.ajaxSetup({
+								headers: {
+									'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+								}
+							});
+
+							$.ajax({
+								type:"POST",
+								url: url + "/jQuery.ajax/like",
+								data: {
+									"thread_id": thread_id,
+									"message_id": message_id
+								}
+							}).done(function () {
+							}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+								console.log(XMLHttpRequest.status);
+								console.log(textStatus);
+								console.log(errorThrown.message);
+							});
+						}
+					</script>
 				</head>
 
 				<body>
@@ -55,15 +89,6 @@
 						integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
 						crossorigin="anonymous"
 						></script> 
-						
-						<!-- jQuery -->
-						<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script> 
-						
-						<!-- グローバル変数 -->
-						<script>
-							const url = "{{$url}}";
-							const table = "{{$tableName}}";
-						</script> 
 						
 						<!-- others -->
 						<script src="{{ mix('js/app_jquery.js') }}"></script>
