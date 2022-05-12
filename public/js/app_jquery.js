@@ -5,7 +5,7 @@ var __webpack_exports__ = {};
 /*!************************************!*\
   !*** ./resources/js/Get_allRow.js ***!
   \************************************/
-if (location.href.includes('hub/keiziban=')) {
+if (location.href.includes('hub/thread_name=')) {
   reload();
   setInterval(reload, 1000);
 }
@@ -22,7 +22,7 @@ function reload() {
     url: url + "/jQuery.ajax/getRow",
     dataType: "json",
     data: {
-      "table": table
+      "table": thread_id
     }
   }).done(function (data) {
     displayArea.innerHTML = "<br>";
@@ -56,7 +56,7 @@ $('#sendMessageBtn').click(function () {
     type: "POST",
     url: url + "/jQuery.ajax/sendRow",
     data: {
-      "table": table,
+      "table": thread_id,
       "message": message
     }
   }).done(function () {}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
