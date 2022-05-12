@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
 class create_thread extends Model {
-    public function create_thread($tableName) {
-        Schema::connection('mysql_keiziban')->create($tableName, function (Blueprint $table) {
+    public function create_thread($thread_id) {
+        Schema::connection('mysql_keiziban')->create($thread_id, function (Blueprint $table) {
             $table->id('no');
             $table->text('name');
             $table->text('message');
@@ -18,10 +18,10 @@ class create_thread extends Model {
         return null;
     }
 
-    public function insertTable($tableName) {
+    public function insertTable($tableName, $thread_id) {
         DB::connection('mysql_keiziban')->insert(
-        "INSERT INTO hub(id, table_name, created_at) VALUES(NULL, :table_name, NOW())", 
-        [$tableName]);
+        "INSERT INTO hub(id, thread_id, thread_name, created_at) VALUES(NULL, :thread_id, :thread_name, NOW())", 
+        [$thread_id, $tableName]);
         return null;
     }
 }
