@@ -1,7 +1,7 @@
 <x-app-layout>
 	<x-slot name="header">
 		<h2 class="font-semibold text-xl text-gray-800 leading-tight"> 
-			{{$thread_name}} 
+			{{ str_replace("&slash;", "/", $thread_name) }} 
 		</h2>
 	</x-slot>
 
@@ -26,7 +26,7 @@
 					<!-- グローバル変数 -->
 					<script>
 						const url = "{{$url}}";
-						const table = "{{$thread_name}}";
+						const table = "{{ str_replace('&slash;', '/', $thread_name) }}";
 						const thread_id = "{{$thread_id}}";
 					</script>
 
