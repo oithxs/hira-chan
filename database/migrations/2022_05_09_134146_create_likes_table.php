@@ -15,7 +15,7 @@ class CreateLikesTable extends Migration
     {
         Schema::connection('mysql_keiziban')->create('likes', function (Blueprint $table) {
             $table->id();
-            $table->integer('thread_id')->unsigned();
+            $table->string('thread_id');
             $table->integer('message_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();

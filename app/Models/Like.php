@@ -15,7 +15,7 @@ class Like extends Model {
             likes
         SELECT
             NULL,
-            $thread_id,
+            '$thread_id',
             $message_id,
             $user_id,
             NOW(),
