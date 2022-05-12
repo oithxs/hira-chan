@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 class Like extends Model {
     public function like($thread_id, $message_id, $user_id) {
+        $thread_id = htmlspecialchars($thread_id, ENT_QUOTES, 'UTF-8');
+        
         $query =<<<EOM
         INSERT INTO
             likes
