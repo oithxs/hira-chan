@@ -25,7 +25,7 @@ function reload(){
             "<br>" +
             data[item]['message'] +
             "<br>" +
-            "<button type='button' class='btn btn-secondary' onClick='like(" + data[item]['no'] + ")'>like</button>" +
+            "<button type='button' class='btn btn-secondary' onClick='like(" + data[item]['no'] + ")'>like</button> " + data[item]['count_user'] +
             "<hr>");
         }
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {

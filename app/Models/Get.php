@@ -12,7 +12,19 @@ class Get extends Model {
 	}
 
 	public function allRow($tableName) {
-		$sql = "SELECT * FROM $tableName ORDER BY no ASC";
+		$tableName = htmlspecialchars($tableName,  ENT_QUOTES, 'UTF-8');
+		$sql = <<<EOF
+		SELECT
+			$tableName.*, COALESCE(COUNT(likes.user_id), 0) AS count_user
+		FROM 
+			$tableName
+		LEFT OUTER JOIN
+			likes
+		ON 
+			'$tableName' = likes.thread_id AND
+			$tableName.no = likes.message_id
+		GROUP BY $tableName.no;
+		EOF;
 		$stmt = DB::connection('mysql_keiziban')->select($sql);
 		return $stmt;
 	}
