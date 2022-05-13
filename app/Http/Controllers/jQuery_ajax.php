@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Get;
 use App\Models\Send;
 use App\Models\create_thread;
@@ -30,8 +31,9 @@ class jQuery_ajax extends Controller {
 
 	public function create_thread(Request $request) {
 		$create = new create_thread;
-		$create->insertTable($request->post('table'));
-		$create->create_thread($request->post('table'));
+		$uuid = str_replace("-", "", Str::uuid());
+		$create->insertTable($request->post('table'), $uuid);
+		$create->create_thread($uuid);
 		return null;
 	}
 

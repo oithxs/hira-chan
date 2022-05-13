@@ -40,7 +40,7 @@
 							</thead>
 							<tbody>
 								@foreach($tables as $tableInfo)
-									<tr><th><a href="hub/keiziban={{ $tableInfo['table_name'] }}&thread_id={{ $tableInfo['id'] }}">{{$tableInfo['table_name']}}</a></th><td>{{$tableInfo['created_at']}}</td></tr>
+									<tr><th><a href="hub/thread_name={{ $tableName = str_replace('/', '&slash;', $tableInfo['thread_name']); }}/id={{ $tableInfo['thread_id'] }}">{{$tableInfo['thread_name']}}</a></th><td>{{$tableInfo['created_at']}}</td></tr>
 								@endforeach
 							</tbody>
 						</table>

@@ -13,7 +13,7 @@ $('#sendMessageBtn').click(function () {
 		type: "POST",
 		url: url + "/jQuery.ajax/sendRow",
 		data: {
-			"table": table,
+			"table": thread_id,
 			"message": message
 		},
 	}).done(function () {

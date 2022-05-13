@@ -1,4 +1,4 @@
-if ((location.href).includes('hub/keiziban=')) {
+if ((location.href).includes('hub/thread_name=')) {
     reload();
     setInterval(reload, 1000);
 }
@@ -16,7 +16,7 @@ function reload(){
         type: "POST",
         url: url + "/jQuery.ajax/getRow",
         dataType: "json",
-        data: {"table" : table}
+        data: {"table" : thread_id}
     }).done(function (data) {
         displayArea.innerHTML = "<br>";
         for (var item in data) {
@@ -25,7 +25,7 @@ function reload(){
             "<br>" +
             data[item]['message'] +
             "<br>" +
-            "<button type='button' class='btn btn-secondary' onClick='like(" + data[item]['no'] + ")'>like</button>" +
+            "<button type='button' class='btn btn-secondary' onClick='like(" + data[item]['no'] + ")'>like</button> " + data[item]['count_user'] +
             "<hr>");
         }
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
