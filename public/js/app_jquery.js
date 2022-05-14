@@ -25,10 +25,14 @@ function reload() {
       "table": thread_id
     }
   }).done(function (data) {
-    displayArea.innerHTML = "<br>";
+    if (data['result'] == "NO") {
+      displayArea.innerHTML = "\n            <div class=\"mt-4\">\n                <h1 class=\"text-danger\">\u203B\u30B9\u30EC\u30C3\u30C9\u304C\u5B58\u5728\u3057\u307E\u305B\u3093</h1>\n            </div>";
+    } else {
+      displayArea.innerHTML = "<br>";
 
-    for (var item in data) {
-      displayArea.insertAdjacentHTML('afterbegin', data[item]['no'] + ": " + data[item]['name'] + " " + data[item]['time'] + "<br>" + data[item]['message'] + "<br>" + "<button type='button' class='btn btn-secondary' onClick='like(" + data[item]['no'] + ")'>like</button> " + data[item]['count_user'] + "<hr>");
+      for (var item in data) {
+        displayArea.insertAdjacentHTML('afterbegin', data[item]['no'] + ": " + data[item]['name'] + " " + data[item]['time'] + "<br>" + data[item]['message'] + "<br>" + "<button type='button' class='btn btn-secondary' onClick='like(" + data[item]['no'] + ")'>like</button> " + data[item]['count_user'] + "<hr>");
+      }
     }
   }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
     console.log(XMLHttpRequest.status);

@@ -25,7 +25,14 @@ class Get extends Model {
 			$tableName.no = likes.message_id
 		GROUP BY $tableName.no;
 		EOF;
-		$stmt = DB::connection('mysql_keiziban')->select($sql);
+		
+		$exists = DB::connection('mysql_keiziban')->select("SELECT * FROM hub WHERE thread_id = '$tableName'");
+		if ($exists) {
+			$stmt = DB::connection('mysql_keiziban')->select($sql);
+		} else {
+			$stmt = null;
+		}
+		
 		return $stmt;
 	}
 }
