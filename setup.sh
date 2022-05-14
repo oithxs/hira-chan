@@ -2,7 +2,8 @@
 
 # 入力が必要な物を最初に
 
-echo データベースが2つ作成します．データベース名を入力してください
+echo データベースを2つ作成します．データベース名を入力してください
+echo ※「_」は使用可能ですが，「-」は使用できません
 echo -n メインデータベース：
 read main_database
 echo -n 掲示板要データベース：
@@ -84,8 +85,6 @@ sudo php artisan migrate
 
 # LAMPP の起動
 
-sudo /opt/lampp/lampp stop
-sudo /opt/lampp/lampp start
 sudo /opt/lampp/lampp restart
 
 exit 0
