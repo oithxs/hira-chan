@@ -14,6 +14,10 @@ class jQuery_ajax extends Controller {
 		$get = new Get;
 		$tableName = $request->post('table');
 		$stmt = $get->allRow($tableName);
+		if ($stmt == null) {
+			$stmt['result'] = "NO";
+			return json_encode($stmt);
+		}
 		return json_encode($stmt);
 	}
 
