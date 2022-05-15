@@ -9,19 +9,23 @@ fi
 
 # 入力が必要な物を最初に
 
+read -sp "[sudo] password for $USER: " sudo_pass
 echo "データベースを2つ作成します．データベース名を入力してください"
 echo "※「_」は使用可能ですが，「-」は使用できません"
 echo -n "メインデータベース："
 read main_database
-echo -n "掲示板要データベース："
+echo -n "掲示板用データベース："
 read keiziban_database
+echo "MySQL/phpMyAdmin関連のパスワードを設定します"
+read -sp "Password: " mysql_pass
+echo 
 
 cd
 
 # 必要なパッケージを一括インストール
 
 sudo apt update -y
-sudo apt install -y net-tools php libapache2-mod-php php-gd php-xml php-cli php-mbstring php-soap php-xmlrpc php-zip nodejs npm php-mysql
+sudo apt install -y net-tools expect php libapache2-mod-php php-gd php-xml php-cli php-mbstring php-soap php-xmlrpc php-zip nodejs npm php-mysql
 
 # LAMPPのインストール
 
@@ -52,6 +56,37 @@ sudo /opt/lampp/lampp restart
 
 echo "CREATE DATABASE $main_database" | /opt/lampp/bin/mysql -u root
 echo "CREATE DATABASE $keiziban_database" | /opt/lampp/bin/mysql -u root
+
+# LAMPPのセキュリティ
+
+command="/opt/lampp/lampp security"
+
+expect -c "
+	spawn $command
+	expect \"password\"
+	send \"$sudo_pass\n\"
+	expect \"yes\"
+	send \"no\n\"
+	expect \"yes\"
+	send \"yes\n\"
+	expect \"Password\"
+	send \"$mysql_pass\n\"
+	expect \"Password\"
+	send \"$mysql_pass\n\"
+	expect \"yes\"
+	send \"yes\n\"
+	expect \"Password\"
+	send \"$mysql_pass\n\"
+	expect \"Password\"
+	send \"$mysql_pass\n\"
+	expect \"yes\"
+	send \"yes\n\"
+	expect \"Password\"
+	send \"$mysql_pass\n\"
+	expect \"Password\"
+	send \"$mysql_pass\n\"
+	exit 0
+"
 
 # Composer のインストール
 
@@ -85,6 +120,7 @@ php artisan key:generate
 
 sed -ie "s/DB_DATABASE=laravel/DB_DATABASE=$main_database/" .env
 sed -ie "s/DB_DATABASE_KEIZIBAN=/DB_DATABASE_KEIZIBAN=$keiziban_database/" .env
+sed -ie "s/DB_PASSWORD=/DB_PASSWORD=$mysql_pass/" .env
 
 chmod 777 -R storage
 
