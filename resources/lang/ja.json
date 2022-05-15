@@ -625,5 +625,6 @@
     "Create time": "作成日時",
     "My page": "マイページ",
     "Password register notice": "：大学アカウントのパスワードでは登録しないでください",
-    "Password login notice": "：大学アカウントのパスワードを入力しないでください"
+    "Password login notice": "：大学アカウントのパスワードを入力しないでください",
+    "Registration notice": "この登録情報が流出しても責任はとりません（とれません）"
 }
