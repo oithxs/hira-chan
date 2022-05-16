@@ -71,7 +71,9 @@
 									<div class="mb-2">
 										<label class="form-label">コメント</label>
 										<textarea class="form-control" name="message" rows="7"></textarea>
+										<br>
 										<div class="form-text">入力欄の右下にマウスカーソルを移動させると，高さを変えることができます</div>
+										<div id="sendAlertArea"></div>
 									</div>
 								</form>
 								<button id="sendMessageBtn" class="btn btn-primary">{{__('Write forum')}}</button>
