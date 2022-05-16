@@ -29,7 +29,9 @@ function reload(){
                 displayArea.insertAdjacentHTML('afterbegin',
                 data[item]['no'] + ": " + data[item]['name'] + " " + data[item]['time'] + 
                 "<br>" +
+                "<p style='overflow-wrap: break-word;'>" +
                 data[item]['message'] +
+                "</p>" +
                 "<br>" +
                 "<button type='button' class='btn btn-secondary' onClick='like(" + data[item]['no'] + ")'>like</button> " + data[item]['count_user'] +
                 "<hr>");

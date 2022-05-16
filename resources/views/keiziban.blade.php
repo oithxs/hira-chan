@@ -71,13 +71,15 @@
 									<div class="mb-2">
 										<label class="form-label">コメント</label>
 										<textarea class="form-control" name="message" rows="7"></textarea>
+										<br>
 										<div class="form-text">入力欄の右下にマウスカーソルを移動させると，高さを変えることができます</div>
+										<div id="sendAlertArea"></div>
 									</div>
 								</form>
 								<button id="sendMessageBtn" class="btn btn-primary">{{__('Write forum')}}</button>
 							</div>
 
-							<div id="displayArea" data-bs-spy="scroll" class="col-8 overflow-auto" style="position:relative; height:70vh; overflow:scroll"></div>
+							<div id="displayArea" class="col-8" style="height:70vh; width: 100% overflow-y:scroll; overflow-x:hidden;"></div>
 
 						</div>
 					</div>
