@@ -1,12 +1,16 @@
 $('#sendMessageBtn').click(function () {
+	var rows_limit = 20;
+	var bytes_limit = 300;
 	var sendAlertArea = document.getElementById("sendAlertArea");
 	var formElm = document.getElementById("sendMessage");
 	var message = formElm.message.value;
 
 	if (message.trim() == 0) {
 		sendAlertArea.innerHTML = "<div class='alert alert-danger'>書き込みなし・空白・改行のみの投稿は出来ません</div>";
-	} else if (message.rows() > 20) {
-		sendAlertArea.innerHTML = "<div class='alert alert-danger'>入力は10行以内にして下さい</div>";
+	} else if (message.rows() > rows_limit) {
+		sendAlertArea.innerHTML = "<div class='alert alert-danger'>入力は" + rows_limit + "行以内にして下さい</div>";
+	} else if (message.bytes() > bytes_limit) {
+		sendAlertArea.innerHTML = "<div class='alert alert-danger'>入力は" + bytes_limit / 3 + "文字(英数字は " + bytes_limit + "文字)以内にして下さい</div>";
 	} else {
 		sendAlertArea.innerHTML = "";
 
