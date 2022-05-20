@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\Get_AccessLog;
+use App\Models\Record_AccessLog;
 
 class Access_log
 {
@@ -20,7 +20,7 @@ class Access_log
         $table = $request->thread_id;
         $user = $request->user()->id;
         $ip = $request->ip();
-        $save = new Get_AccessLog;
+        $save = new Record_AccessLog;
         $save->func(
             $table,
             $user,
