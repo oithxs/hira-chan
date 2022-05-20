@@ -40,6 +40,6 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
     Route::get('/hub', 'App\Http\Controllers\showTablesCTL')->name('hub');
-    Route::get('hub/thread_name={thread_name}/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->name('keiziban');
+    Route::get('hub/thread_name={thread_name}/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
     Route::get('/mypage', 'App\Http\Controllers\MyPage')->name('mypage');
 });
