@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Models\User;
+use App\Admin\Extensions\Tools\ReleasePost;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -25,6 +26,12 @@ class UserController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new User());
+
+        $grid->tools(function ($tools) {
+            $tools->batch(function ($batch) {
+                $batch->add(__('Send Mail'), new ReleasePost(1));
+            });
+        });
 
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
