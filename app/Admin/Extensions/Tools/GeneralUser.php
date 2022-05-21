@@ -4,7 +4,7 @@ namespace App\Admin\Extensions\Tools;
 
 use Encore\Admin\Grid\Tools\BatchAction;
 
-class ReleasePost extends BatchAction
+class GeneralUser extends BatchAction
 {
     protected $action;
 
@@ -21,7 +21,7 @@ $('{$this->getElementClass()}').on('click', function() {
 
     $.ajax({
         method: 'post',
-        url: '{$this->resource}/release',
+        url: '{$this->resource}/mail',
         data: {
             _token:LA.token,
             ids: $.admin.grid.selected(),

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function release(Request $request)
+    public function __invoke(Request $request)
     {
         $count = 0;
         foreach (User::find($request->get('ids')) as $post) {

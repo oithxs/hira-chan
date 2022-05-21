@@ -14,6 +14,6 @@ Route::group([
     $router->get('/', 'HomeController@index')->name('home');
     $router->resource('/users', UserController::class);
 
-    $router->get('/users/release', 'PostController@release')->middleware('AccessGET');
-    $router->post('/users/release', 'PostController@release');
+    $router->get('/users/mail', 'PostController')->middleware('AccessGET');
+    $router->post('/users/mail', 'PostController');
 });

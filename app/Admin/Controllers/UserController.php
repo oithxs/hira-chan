@@ -3,7 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Models\User;
-use App\Admin\Extensions\Tools\ReleasePost;
+use App\Admin\Extensions\Tools\GeneralUser;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -29,7 +29,7 @@ class UserController extends AdminController
 
         $grid->tools(function ($tools) {
             $tools->batch(function ($batch) {
-                $batch->add(__('Send Mail'), new ReleasePost(1));
+                $batch->add(__('Send Mail'), new GeneralUser(1));
             });
         });
 
