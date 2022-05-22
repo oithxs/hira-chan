@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Routing\Router;
-use App\Admin\Controllers\PostController;
 
 Admin::routes();
 
@@ -12,6 +11,7 @@ Route::group([
     'as'            => config('admin.route.prefix') . '.',
 ], function (Router $router) {
     $router->get('/', 'HomeController@index')->name('home');
+    $router->get('/users/create/mail', 'MailController@show');
     $router->resource('/users', UserController::class);
 
     $router->get('/users/mail', 'PostController')->middleware('AccessGET');

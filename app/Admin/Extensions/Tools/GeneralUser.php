@@ -27,13 +27,8 @@ $('{$this->getElementClass()}').on('click', function() {
             ids: $.admin.grid.selected(),
             action: {$this->action}
         },
-		dataType: 'text',
-        success: function () {
-            $.pjax.reload('#pjax-container');
-            toastr.success('操作成功');
-        }
 	}).done(function (data) {
-		document.write(data);
+		document.location = '/admin/users/create/mail'; // dataを遷移先に渡したい
 	}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
 		console.log(XMLHttpRequest.status);
 		console.log(textStatus);

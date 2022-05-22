@@ -13,7 +13,7 @@ class PostController extends Controller
         $count = 0;
         foreach (User::find($request->get('ids')) as $post) {
             $users[$count++] = array(
-                "id" => $post->id
+                $post
             );
         }
         return $users;
