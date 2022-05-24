@@ -2,7 +2,9 @@
 
 namespace App\Admin\Forms;
 
+use App\Mail\ContactMail;
 use Encore\Admin\Widgets\Form;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
 class MailForm extends Form
@@ -23,9 +25,16 @@ class MailForm extends Form
      */
     public function handle(Request $request)
     {
-        // 送信ボタン押した後の処理
-        //admin_success('Processed successfully.');
-        admin_success($request->text); // 入力内容取得
+        session_start();
+
+        $count = 1;
+        while (isset($_SESSION['email'.$count])) {
+            $emails[$count] = $_SESSION['email'.$count];
+            $count++;
+        }
+        Mail::to($emails)->send(new ContactMail($request->mail_message));
+
+        admin_success('Processed successfully.');
         return back();
     }
 
@@ -34,7 +43,7 @@ class MailForm extends Form
      */
     public function form()
     {
-		$this->textarea("text", __('Send mail text'));
+		$this->textarea("mail_message", __('Send mail text'));
     }
 
     /**

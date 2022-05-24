@@ -26,9 +26,9 @@ $('{$this->getElementClass()}').on('click', function() {
             _token:LA.token,
             ids: $.admin.grid.selected(),
             action: {$this->action}
-        },
-	}).done(function (data) {
-		document.location = '/admin/users/create/mail'; // dataを遷移先に渡したい
+        }
+	}).done(function () {
+		document.location = '/admin/users/create/mail';
 	}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
 		console.log(XMLHttpRequest.status);
 		console.log(textStatus);

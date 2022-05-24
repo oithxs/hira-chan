@@ -10,12 +10,11 @@ class PostController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $count = 0;
+        $count = 1;
+        session_start();
         foreach (User::find($request->get('ids')) as $post) {
-            $users[$count++] = array(
-                $post
-            );
+            $_SESSION['email'.$count] = $post->email;
+            $count++;
         }
-        return $users;
     }
 }
