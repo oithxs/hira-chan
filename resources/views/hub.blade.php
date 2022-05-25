@@ -36,11 +36,11 @@
 					<div>
 						<table class="table table-striped">
 							<thead>
-								<tr><th>{{__('Thread name')}}</th><td>{{__('Create time')}}</td></tr>
+								<tr><th>{{__('Thread name')}}</th><td>{{__('Create time')}}</td><td>{{__('Access number')}}</td></tr>
 							</thead>
 							<tbody>
 								@foreach($tables as $tableInfo)
-									<tr><th><a href="hub/thread_name={{ $tableName = str_replace('/', '&slash;', $tableInfo['thread_name']); }}/id={{ $tableInfo['thread_id'] }}">{{$tableInfo['thread_name']}}</a></th><td>{{$tableInfo['created_at']}}</td></tr>
+									<tr><th><a href="hub/thread_name={{ $tableName = str_replace('/', '&slash;', $tableInfo['thread_name']); }}/id={{ $tableInfo['thread_id'] }}">{{$tableInfo['thread_name']}}</a></th><td>{{$tableInfo['created_at']}}</td><td>{{ $tableInfo['Access'] }}</td></tr>
 								@endforeach
 							</tbody>
 						</table>
