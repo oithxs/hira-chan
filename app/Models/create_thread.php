@@ -14,14 +14,7 @@ class create_thread extends Model {
             $table->text('message');
             $table->text('time');
         });
-
-        Schema::connection('mysql_access_log')->create($thread_id, function (Blueprint $table) {
-            $table->id();
-            $table->text('time');
-            $table->text('name');
-            $table->text('access_log');
-        });
-
+        
         return null;
     }
 
