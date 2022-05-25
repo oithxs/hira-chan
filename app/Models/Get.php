@@ -5,8 +5,14 @@ use Illuminate\Support\Facades\DB;
 
 class Get extends Model {
 	public function showTables() {
+		$sql = <<<EOF
+		SELECT
+		 * 
+		FROM
+			hub
+		EOF;
 		$stmt = json_decode(json_encode(
-			DB::connection('mysql_keiziban')->select("SELECT * FROM hub"),
+			DB::connection('mysql_keiziban')->select($sql),
 		), true);
 		return $stmt;
 	}
