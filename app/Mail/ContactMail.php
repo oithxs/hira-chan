@@ -31,7 +31,7 @@ class ContactMail extends Mailable
     public function build()
     {
         return $this->from('******@example.com') // 送信元
-        ->subject('お問い合わせ完了のお知らせ') // メールタイトル
+        ->subject('HxSコンピュータ部・掲示板サイト') // メールタイトル
         ->view('emails.contact') // どのテンプレートを呼び出すか
         ->with(['content' => $this->content]); // withオプションでセットしたデータをテンプレートへ受け渡す
     }

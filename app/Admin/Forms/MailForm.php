@@ -34,7 +34,7 @@ class MailForm extends Form
         }
         Mail::to($emails)->send(new ContactMail($request->mail_message));
 
-        admin_success('Processed successfully.');
+        admin_success('送信完了');
         return back();
     }
 
