@@ -36,7 +36,11 @@ class jQuery_ajax extends Controller {
 	public function create_thread(Request $request) {
 		$create = new create_thread;
 		$uuid = str_replace("-", "", Str::uuid());
-		$create->insertTable($request->post('table'), $uuid);
+		$create->insertTable(
+			$request->post('table'),
+			$uuid,
+			$request->user()->id
+		);
 		$create->create_thread($uuid);
 		return null;
 	}
