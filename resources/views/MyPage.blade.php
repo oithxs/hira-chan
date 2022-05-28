@@ -10,7 +10,6 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
 			<!-- my area begin -->
-			{{$username}}
 			<!-- my area end -->
 
             </div>
