@@ -626,5 +626,7 @@
     "My page": "マイページ",
     "Password register notice": "：大学アカウントのパスワードでは登録しないでください",
     "Password login notice": "：大学アカウントのパスワードを入力しないでください",
-    "Registration notice": "この登録情報が流出しても責任はとりません（とれません）"
+    "Registration notice": "この登録情報が流出しても責任はとりません（とれません）",
+    "Send Mail": "一括メール送信",
+    "Send mail text": "本文"
 }
