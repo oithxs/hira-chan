@@ -28,6 +28,7 @@ class jQuery_ajax extends Controller {
 		$send->insertComment(
 			$request->post('table'), 
 			$request->user()->name, 
+			$request->user()->email,
 			$request->post('message')
 		);}
 		return null;
@@ -36,7 +37,11 @@ class jQuery_ajax extends Controller {
 	public function create_thread(Request $request) {
 		$create = new create_thread;
 		$uuid = str_replace("-", "", Str::uuid());
-		$create->insertTable($request->post('table'), $uuid);
+		$create->insertTable(
+			$request->post('table'),
+			$uuid,
+			$request->user()->email
+		);
 		$create->create_thread($uuid);
 		return null;
 	}

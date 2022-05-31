@@ -17,6 +17,7 @@ class CreateHubTable extends Migration
             $table->id();
             $table->string('thread_id');
             $table->string('thread_name');
+            $table->string('user_email');
             $table->string('created_at');
         });
     }

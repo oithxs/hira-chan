@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class Send extends Model {
-	public function insertComment($table, $name, $message) {
+	public function insertComment($table, $name, $user_email, $message) {
 		$special_character_set = array (
 			"&" => "&amp;",
 			"<" => "&lt;",
@@ -20,8 +20,8 @@ class Send extends Model {
 		}
 
 		DB::connection('mysql_keiziban')->insert(
-			"INSERT INTO $table(no, name, message, time) VALUES(NULL, :name, :message, NOW())", 
-			[$name, $message]);
+			"INSERT INTO $table(no, name, user_email, message, time) VALUES(NULL, :name, :user_email, :message, NOW())", 
+			[$name, $user_email, $message]);
 		return null;
 	}
 }
