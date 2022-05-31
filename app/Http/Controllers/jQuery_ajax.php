@@ -28,6 +28,7 @@ class jQuery_ajax extends Controller {
 		$send->insertComment(
 			$request->post('table'), 
 			$request->user()->name, 
+			$request->user()->email,
 			$request->post('message')
 		);}
 		return null;
@@ -39,7 +40,7 @@ class jQuery_ajax extends Controller {
 		$create->insertTable(
 			$request->post('table'),
 			$uuid,
-			$request->user()->id
+			$request->user()->email
 		);
 		$create->create_thread($uuid);
 		return null;
