@@ -17,7 +17,7 @@ class Get extends Model {
 		return $stmt;
 	}
 
-	public function allRow($tableName) {
+	public function allRow($tableName, $user_id) {
 		$tableName = htmlspecialchars($tableName,  ENT_QUOTES, 'UTF-8');
 		$sql = <<<EOF
 		SELECT
@@ -29,7 +29,7 @@ class Get extends Model {
 				 FROM 
 					likes 
 				WHERE 
-					likes.user_id = 1 AND 
+					likes.user_id = $user_id AND 
 					'$tableName' = likes.thread_id AND 
 					$tableName.no = likes.message_id), 0) 
 					AS user_like

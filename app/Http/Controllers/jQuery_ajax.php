@@ -14,7 +14,8 @@ class jQuery_ajax extends Controller {
 		$get = new Get;
 		$tableName = $request->post('table');
 		$stmt = $get->allRow(
-			$tableName
+			$tableName,
+			$request->user()->id
 		);
 		if ($stmt == null) {
 			$stmt['result'] = "NO";
