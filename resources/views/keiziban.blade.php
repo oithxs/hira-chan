@@ -1,7 +1,11 @@
 <x-app-layout>
 	<x-slot name="header">
+		<?php
+			$thread_name = str_replace("&slash;", "/", $thread_name);
+			$thread_name = str_replace("&backSlash;", "\\", $thread_name);
+		?>
 		<h2 class="font-semibold text-xl text-gray-800 leading-tight"> 
-			{{ str_replace("&slash;", "/", $thread_name) }} 
+			{{ $thread_name }} 
 		</h2>
 	</x-slot>
 
