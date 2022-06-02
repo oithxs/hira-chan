@@ -63,4 +63,18 @@ class jQuery_ajax extends Controller {
 
 		return null;
 	}
+
+	public function unlike(Request $request) {
+		$thread_id = $request->thread_id;
+		$message_id = $request->message_id;
+		$user_id = $request->user()->id;
+
+		$like = new Like;
+		$like->unlike(
+			$thread_id,
+			$message_id,
+			$user_id
+		);
+		return null;
+	}
 }

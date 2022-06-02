@@ -34,7 +34,7 @@ function reload(){
                     data[item]['message'] +
                     "</p>" +
                     "<br>" +
-                    "<button type='button' class='btn btn-dark' onClick='like(" + data[item]['no'] + ")'>like</button> " + data[item]['count_user'] +
+                    "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['no'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] +
                     "<hr>");
                 } else {
                     displayArea.insertAdjacentHTML('afterbegin',
@@ -44,7 +44,7 @@ function reload(){
                     data[item]['message'] +
                     "</p>" +
                     "<br>" +
-                    "<button type='button' class='btn btn-light' onClick='like(" + data[item]['no'] + ")'>like</button> " + data[item]['count_user'] +
+                    "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['no'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] +
                     "<hr>");
                 }
             }

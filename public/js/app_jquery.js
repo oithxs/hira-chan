@@ -32,9 +32,9 @@ function reload() {
 
       for (var item in data) {
         if (data[item]['user_like'] == 1) {
-          displayArea.insertAdjacentHTML('afterbegin', data[item]['no'] + ": " + data[item]['name'] + " " + data[item]['time'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + data[item]['message'] + "</p>" + "<br>" + "<button type='button' class='btn btn-dark' onClick='like(" + data[item]['no'] + ")'>like</button> " + data[item]['count_user'] + "<hr>");
+          displayArea.insertAdjacentHTML('afterbegin', data[item]['no'] + ": " + data[item]['name'] + " " + data[item]['time'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + data[item]['message'] + "</p>" + "<br>" + "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['no'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] + "<hr>");
         } else {
-          displayArea.insertAdjacentHTML('afterbegin', data[item]['no'] + ": " + data[item]['name'] + " " + data[item]['time'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + data[item]['message'] + "</p>" + "<br>" + "<button type='button' class='btn btn-light' onClick='like(" + data[item]['no'] + ")'>like</button> " + data[item]['count_user'] + "<hr>");
+          displayArea.insertAdjacentHTML('afterbegin', data[item]['no'] + ": " + data[item]['name'] + " " + data[item]['time'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + data[item]['message'] + "</p>" + "<br>" + "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['no'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] + "<hr>");
         }
       }
     }
