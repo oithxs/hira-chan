@@ -1,7 +1,11 @@
 <x-app-layout>
 	<x-slot name="header">
+		<?php
+			$title = str_replace("&slash;", "/", $thread_name);
+			$title = str_replace("&backSlash;", "\\", $title);
+		?>
 		<h2 class="font-semibold text-xl text-gray-800 leading-tight"> 
-			{{ str_replace("&slash;", "/", $thread_name) }} 
+			{{ $title }} 
 		</h2>
 	</x-slot>
 
@@ -25,9 +29,10 @@
 					
 					<!-- グローバル変数 -->
 					<script>
-						const url = "{{$url}}";
-						const table = "{{ str_replace('&slash;', '/', $thread_name) }}";
-						const thread_id = "{{$thread_id}}";
+						console.log("{{ $thread_name }}");
+						const url = "{{ $url }}";
+						const table = "{{ $thread_name }}";
+						const thread_id = "{{ $thread_id }}";
 					</script>
 
 					<script>
