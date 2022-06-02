@@ -8,7 +8,10 @@ use App\Models\Get;
 class keizibanCTL extends Controller {
 	public function __invoke(Request $request) {
 		$get = new Get;
-		$stmt = $get->allRow($request->thread_id);
+		$stmt = $get->allRow(
+			$request->thread_id, 
+			$request->user()->id
+		);
 
 		$response['thread_name'] = $request->thread_name;
 		$response['thread_id'] = $request->thread_id;
