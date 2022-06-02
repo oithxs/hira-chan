@@ -31,26 +31,42 @@
 					</script>
 
 					<script>
-						function like(message_id) {
+						function likes(message_id, user_like) {
 							$.ajaxSetup({
 								headers: {
 									'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 								}
 							});
 
-							$.ajax({
-								type:"POST",
-								url: url + "/jQuery.ajax/like",
-								data: {
-									"thread_id": thread_id,
-									"message_id": message_id
-								}
-							}).done(function () {
-							}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-								console.log(XMLHttpRequest.status);
-								console.log(textStatus);
-								console.log(errorThrown.message);
-							});
+							if (user_like == 1) {
+								$.ajax({
+									type:"POST",
+									url: url + "/jQuery.ajax/unlike",
+									data: {
+										"thread_id": thread_id,
+										"message_id": message_id
+									}
+								}).done(function () {
+								}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+									console.log(XMLHttpRequest.status);
+									console.log(textStatus);
+									console.log(errorThrown.message);
+								});
+							} else {
+								$.ajax({
+									type:"POST",
+									url: url + "/jQuery.ajax/like",
+									data: {
+										"thread_id": thread_id,
+										"message_id": message_id
+									}
+								}).done(function () {
+								}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+									console.log(XMLHttpRequest.status);
+									console.log(textStatus);
+									console.log(errorThrown.message);
+								});
+							}
 						}
 					</script>
 				</head>
