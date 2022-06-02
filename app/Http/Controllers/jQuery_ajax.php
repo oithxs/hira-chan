@@ -13,7 +13,9 @@ class jQuery_ajax extends Controller {
 	public function get_allRow(Request $request) {
 		$get = new Get;
 		$tableName = $request->post('table');
-		$stmt = $get->allRow($tableName);
+		$stmt = $get->allRow(
+			$tableName
+		);
 		if ($stmt == null) {
 			$stmt['result'] = "NO";
 			return json_encode($stmt);

@@ -21,7 +21,18 @@ class Get extends Model {
 		$tableName = htmlspecialchars($tableName,  ENT_QUOTES, 'UTF-8');
 		$sql = <<<EOF
 		SELECT
-			$tableName.*, COALESCE(COUNT(likes.user_id), 0) AS count_user
+			$tableName.*, 
+			COUNT(likes.user_id) AS count_user,
+			COALESCE((
+				SELECT 
+					1 
+				 FROM 
+					likes 
+				WHERE 
+					likes.user_id = 1 AND 
+					'$tableName' = likes.thread_id AND 
+					$tableName.no = likes.message_id), 0) 
+					AS user_like
 		FROM 
 			$tableName
 		LEFT OUTER JOIN
