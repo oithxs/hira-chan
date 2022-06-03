@@ -17,19 +17,19 @@ class Get extends Model {
 		return $stmt;
 	}
 
-	public function allRow($tableName, $user_id) {
+	public function allRow($tableName, $user_email) {
 		$tableName = htmlspecialchars($tableName,  ENT_QUOTES, 'UTF-8');
 		$sql = <<<EOF
 		SELECT
 			$tableName.*, 
-			COUNT(likes.user_id) AS count_user,
+			COUNT(likes.user_email) AS count_user,
 			COALESCE((
 				SELECT 
 					1 
 				 FROM 
 					likes 
 				WHERE 
-					likes.user_id = $user_id AND 
+					likes.user_email = '$user_email' AND 
 					'$tableName' = likes.thread_id AND 
 					$tableName.no = likes.message_id), 0) 
 					AS user_like

@@ -17,7 +17,7 @@ class CreateLikesTable extends Migration
             $table->id();
             $table->string('thread_id');
             $table->integer('message_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->string('user_email');
             $table->timestamps();
         });
     }
