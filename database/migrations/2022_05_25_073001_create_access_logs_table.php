@@ -16,7 +16,7 @@ class CreateAccessLogsTable extends Migration
         Schema::connection('mysql_keiziban')->create('access_logs', function (Blueprint $table) {
             $table->id();
             $table->text('time');
-            $table->text('user_id');
+            $table->text('user_email');
             $table->text('thread_name');
             $table->text('thread_id');
             $table->text('access_log');

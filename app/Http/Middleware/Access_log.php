@@ -19,13 +19,13 @@ class Access_log
     {
         $thread_name = $request->thread_name;
         $thread_id = $request->thread_id;
-        $user = $request->user()->id;
+        $user_email = $request->user()->email;
         $ip = $request->ip();
         $save = new Record_AccessLog;
         $save->func(
             $thread_name,
             $thread_id,
-            $user,
+            $user_email,
             $ip
         );
         return $next($request);
