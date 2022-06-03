@@ -20,9 +20,28 @@ class create_thread extends Model {
     }
 
     public function insertTable($tableName, $thread_id, $user_email) {
+        $query = <<<EOF
+        INSERT INTO
+            hub(
+                thread_id,
+                thread_name,
+                user_email,
+                created_at
+            )
+        VALUES(
+            :thread_id,
+            :thread_name,
+            :user_email,
+            NOW()
+        )
+        EOF;
+
         DB::connection('mysql_keiziban')->insert(
-        "INSERT INTO hub(id, thread_id, thread_name, user_email, created_at) VALUES(NULL, :thread_id, :thread_name, :user_email, NOW())", 
-        [$thread_id, $tableName, $user_email]);
+        $query, [
+            'thread_id' => $thread_id, 
+            'thread_name' => $tableName, 
+            'user_email' => $user_email
+        ]);
         return null;
     }
 }
