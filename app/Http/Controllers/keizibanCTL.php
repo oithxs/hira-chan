@@ -13,11 +13,16 @@ class keizibanCTL extends Controller {
 			$request->user()->id
 		);
 
+		if ($stmt == 0) {
+			$response['result'] = 0;
+		} else {
+			$response['result'] = 1;
+		}
+
 		$response['thread_name'] = $request->thread_name;
 		$response['thread_id'] = $request->thread_id;
 		$response['username'] = $request->user()->name;
 		$response['url'] = url('/');
-		$response['allRow'] = $stmt;
 		return view('keiziban', $response);
 	}
 }

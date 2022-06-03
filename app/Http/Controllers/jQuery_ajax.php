@@ -17,10 +17,7 @@ class jQuery_ajax extends Controller {
 			$tableName,
 			$request->user()->id
 		);
-		if ($stmt == null) {
-			$stmt['result'] = "NO";
-			return json_encode($stmt);
-		}
+
 		return json_encode($stmt);
 	}
 
