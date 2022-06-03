@@ -25,17 +25,13 @@ function reload() {
       "table": thread_id
     }
   }).done(function (data) {
-    if (data['result'] == "NO") {
-      displayArea.innerHTML = "\n            <div class=\"mt-4\">\n                <h1 class=\"text-danger\">\u203B\u30B9\u30EC\u30C3\u30C9\u304C\u5B58\u5728\u3057\u307E\u305B\u3093</h1>\n            </div>";
-    } else {
-      displayArea.innerHTML = "<br>";
+    displayArea.innerHTML = "<br>";
 
-      for (var item in data) {
-        if (data[item]['user_like'] == 1) {
-          displayArea.insertAdjacentHTML('afterbegin', data[item]['no'] + ": " + data[item]['name'] + " " + data[item]['time'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + data[item]['message'] + "</p>" + "<br>" + "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['no'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] + "<hr>");
-        } else {
-          displayArea.insertAdjacentHTML('afterbegin', data[item]['no'] + ": " + data[item]['name'] + " " + data[item]['time'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + data[item]['message'] + "</p>" + "<br>" + "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['no'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] + "<hr>");
-        }
+    for (var item in data) {
+      if (data[item]['user_like'] == 1) {
+        displayArea.insertAdjacentHTML('afterbegin', data[item]['no'] + ": " + data[item]['name'] + " " + data[item]['time'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + data[item]['message'] + "</p>" + "<br>" + "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['no'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] + "<hr>");
+      } else {
+        displayArea.insertAdjacentHTML('afterbegin', data[item]['no'] + ": " + data[item]['name'] + " " + data[item]['time'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + data[item]['message'] + "</p>" + "<br>" + "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['no'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] + "<hr>");
       }
     }
   }).fail(function (XMLHttpRequest, textStatus, errorThrown) {

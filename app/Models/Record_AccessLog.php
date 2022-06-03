@@ -4,8 +4,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class Record_AccessLog extends Model {
-    public function func($thread, $user, $ip) {
-        $thread = htmlspecialchars($thread,ENT_QUOTES,"UTF-8");
+    public function func($thread_name, $thread_id, $user, $ip) {
+        $thread_name = htmlspecialchars($thread_name, ENT_QUOTES, "UTF-8");
+        $thread_id = htmlspecialchars($thread_id, ENT_QUOTES, "UTF-8");
 
         $sql= <<<EOF
         INSERT INTO
@@ -14,20 +15,26 @@ class Record_AccessLog extends Model {
                 id,
                 time,
                 user_id,
+                thread_name,
                 thread_id,
                 access_log
             )
             VALUES(
                 NULL,
                 NOW(),
-                :usr_name,
-                '$thread',
+                :user_id,
+                :thread_name,
+                :thread_id,
                 :access_log
             )
         EOF;
         DB::connection('mysql_keiziban')->insert(
-            $sql,
-            [$user, $ip]
+            $sql, [
+                'user_id' => $user, 
+                'thread_name' => $thread_name,
+                'thread_id' => $thread_id,
+                'access_log' => $ip
+            ]
         );
 
         return null;

@@ -17,12 +17,14 @@ class Access_log
      */
     public function handle(Request $request, Closure $next)
     {
-        $table = $request->thread_id;
+        $thread_name = $request->thread_name;
+        $thread_id = $request->thread_id;
         $user = $request->user()->id;
         $ip = $request->ip();
         $save = new Record_AccessLog;
         $save->func(
-            $table,
+            $thread_name,
+            $thread_id,
             $user,
             $ip
         );

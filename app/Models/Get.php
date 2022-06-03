@@ -47,7 +47,7 @@ class Get extends Model {
 		if ($exists) {
 			$stmt = DB::connection('mysql_keiziban')->select($sql);
 		} else {
-			$stmt = null;
+			$stmt = 0;
 		}
 		
 		return $stmt;

@@ -29,7 +29,6 @@
 					
 					<!-- グローバル変数 -->
 					<script>
-						console.log("{{ $thread_name }}");
 						const url = "{{ $url }}";
 						const table = "{{ $thread_name }}";
 						const thread_id = "{{ $thread_id }}";
@@ -82,27 +81,34 @@
 								<a href="{{ url('/hub') }}">{{__('Go hub')}}</a>
 								<p class="h2">{{$username}}</p>
 							</div> 
-							<br><br>
+							<br>
+							<br>
 
+						@if ($result == 1)
 							<div class="row">
-							<hr>
-							
-							<div class="col-4">
-								<form id="sendMessage">
-									<div class="mb-2">
-										<label class="form-label">コメント</label>
-										<textarea class="form-control" name="message" rows="7"></textarea>
-										<br>
-										<div class="form-text">入力欄の右下にマウスカーソルを移動させると，高さを変えることができます</div>
-										<div id="sendAlertArea"></div>
-									</div>
-								</form>
-								<button id="sendMessageBtn" class="btn btn-primary">{{__('Write forum')}}</button>
+								<hr>
+								<div class="col-4">
+									<form id="sendMessage">
+										<div class="mb-2">
+											<label class="form-label">コメント</label>
+											<textarea class="form-control" name="message" rows="7"></textarea>
+											<br>
+											<div class="form-text">入力欄の右下にマウスカーソルを移動させると，高さを変えることができます</div>
+											<div id="sendAlertArea"></div>
+										</div>
+									</form>
+									<button id="sendMessageBtn" class="btn btn-primary">{{__('Write forum')}}</button>
+								</div>
+
+								<div id="displayArea" class="col-8" style="height:70vh; width: 100% overflow-y:scroll; overflow-x:hidden;"></div>
 							</div>
-
-							<div id="displayArea" class="col-8" style="height:70vh; width: 100% overflow-y:scroll; overflow-x:hidden;"></div>
-
-						</div>
+						@else
+							<div class="mt-4">
+								<h1 class="text-danger">※スレッドが存在しません</h1>
+							</div>
+							<br>
+							<br>
+						@endif
 					</div>
 
 					<div>
@@ -114,7 +120,9 @@
 						></script> 
 						
 						<!-- others -->
-						<script src="{{ mix('js/app_jquery.js') }}"></script>
+						@if ($result == 1)
+							<script src="{{ mix('js/app_jquery.js') }}"></script>
+						@endif
 					</div>
 				</body> 
 				<!-- my area end -->
