@@ -13,20 +13,18 @@ class Record_AccessLog extends Model {
         INSERT INTO
         
             access_logs (
-                id,
-                time,
                 user_email,
                 thread_name,
                 thread_id,
-                access_log
+                access_log,
+                created_at
             )
             VALUES(
-                NULL,
-                NOW(),
                 :user_email,
                 :thread_name,
                 :thread_id,
-                :access_log
+                :access_log,
+                NOW()
             )
         EOF;
         DB::connection('mysql_keiziban')->insert(
