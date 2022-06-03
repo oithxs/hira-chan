@@ -15,7 +15,7 @@ class jQuery_ajax extends Controller {
 		$tableName = $request->post('table');
 		$stmt = $get->allRow(
 			$tableName,
-			$request->user()->id
+			$request->user()->email
 		);
 
 		return json_encode($stmt);
@@ -49,13 +49,13 @@ class jQuery_ajax extends Controller {
 	public function like(Request $request) {
 		$thread_id = $request->thread_id;
 		$message_id = $request->message_id;
-		$user_id = $request->user()->id;
+		$user_email = $request->user()->email;
 
 		$like = new Like;
 		$like->like(
 			$thread_id,
 			$message_id,
-			$user_id
+			$user_email
 		);
 
 		return null;
@@ -64,13 +64,13 @@ class jQuery_ajax extends Controller {
 	public function unlike(Request $request) {
 		$thread_id = $request->thread_id;
 		$message_id = $request->message_id;
-		$user_id = $request->user()->id;
+		$user_email = $request->user()->email;
 
 		$like = new Like;
 		$like->unlike(
 			$thread_id,
 			$message_id,
-			$user_id
+			$user_email
 		);
 		return null;
 	}
