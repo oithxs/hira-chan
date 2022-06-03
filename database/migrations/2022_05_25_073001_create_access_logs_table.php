@@ -17,6 +17,7 @@ class CreateAccessLogsTable extends Migration
             $table->id();
             $table->text('time');
             $table->text('user_id');
+            $table->text('thread_name');
             $table->text('thread_id');
             $table->text('access_log');
         });
