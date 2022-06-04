@@ -7,21 +7,21 @@ fi
 
 # 入力が必要な物を最初に
 
-echo -n "個人ユーザ名："
+echo -n "User name: "
 read personal_user
-echo -n "アプリ名："
+echo -n "App name: "
 read Application_name
-echo "データベースを2つ作成します．データベース名を入力してください"
-echo "※「_」は使用可能ですが，「-」は使用できません"
-echo -n "メインデータベース："
+echo "Create two databases. Please enter the database names."
+echo "The \"_\" character can be used. The \"_\" character cannot be used."
+echo -n "Main database: "
 read main_database
-echo -n "掲示板用データベース："
+echo -n "Database for BBS: "
 read keiziban_database
-echo "MySQL/phpMyAdmin関連のパスワードを設定します"
+echo "Set MySQL/phpMyAdmin related passwords"
 read -sp "Password: " mysql_pass
 echo 
-echo "メール送信関連の設定をします"
-echo -n "アカウント名(@以下不要)："
+echo "Configure mail-related settings."
+echo -n "Account name (no @ or below required): "
 read account_name
 read -sp "Application Password: " Application_pass
 echo
