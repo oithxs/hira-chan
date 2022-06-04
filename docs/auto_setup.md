@@ -13,8 +13,7 @@
 ## 目次
 
 1. [リポジトリのクローン](#1-リポジトリのクローン)
-2. [メール送信のためのインストール](#2-メール送信のためのインストール)
-3. [シェルスクリプトの実行](#3-シェルスクリプトの実行)
+2. [シェルスクリプトの実行](#2-シェルスクリプトの実行)
 
 ## 1. リポジトリのクローン
 
@@ -27,20 +26,7 @@ $ cd ~
 
 ssh通信の鍵生成・githubへのキーの追加は[docs/setup.mp](https://github.com/hxs-mini2/Laravel_Forum-B/blob/develop/docs/setup.md#4-リポジトリのクローンからサイトの表示まで)を参考にしてください
 
-## 2. メール送信のためのインストール
-
-```sh
-~$ sudo apt install -y postfix bsd-mailx libsasl2-modules
-```
-
-コマンド実行後，いくつかの設定を行います．その手順は以下の通りです．
-
-1. いろいろ書かれていますが，ボタンがそれしかないので `OK`
-2. `Internet with smarthost` を選択
-3. System mail nameはそのままEnter
-4. SMTP relay hostは`[smtp.gmail.com]:587`を入力
-
-## 3. シェルスクリプトの実行
+## 2. シェルスクリプトの実行
 
 1. 作成したgoogleアカウントでログイン
 2. セキュリティに移動

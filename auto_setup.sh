@@ -5,12 +5,6 @@ if [ "$EUID" -ne 0 ]; then
 	exit 1
 fi
 
-ls /etc | grep postfix >/dev/null 2>&1
-if [ $? -ne 0 ]; then
-	echo "Postfix is not installed"
-	exit 1
-fi
-
 # 入力が必要な物を最初に
 
 echo -n "個人ユーザ名："
@@ -37,7 +31,8 @@ cd /home/$personal_user
 # 必要なパッケージを一括インストール
 
 apt update -y
-apt install -y net-tools expect php libapache2-mod-php php-gd php-xml php-cli php-mbstring php-soap php-xmlrpc php-zip nodejs npm php-mysql
+apt install -y net-tools expect php libapache2-mod-php php-gd php-xml php-cli php-mbstring php-soap php-xmlrpc php-zip nodejs php-mysql
+DEBIAN_FRONTEND=noninteractive apt install -y npm postfix bsd-mailx libsasl2-modules
 
 # LAMPPのインストール
 
@@ -151,12 +146,14 @@ postmap /etc/postfix/sasl_passwd
 
 # main.cfの編集
 
+sed -ie 's/relayhost = /relayhost = [smtp.gmail.com]:587/' main.cf
+sed -ie 's/inet_protcols = all/inet_protcols = ipv4/' main.cf
+
 cat <<EOF >>main.cf
-	smtp_use_tls = yes
-	smtp_sasl_auth_enable = yes
-	smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
-	smtp_sasl_tls_security_options = noanonymous
-	inet_protcols=ipv4
+smtp_use_tls = yes
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+smtp_sasl_tls_security_options = noanonymous
 EOF
 
 # 設定の反映
