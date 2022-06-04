@@ -1,6 +1,6 @@
 # 本プロジェクトの開発環境構築まで
 
-更新日：2022/06/04 23:17
+更新日：2022/06/05 0:07
 
 このドキュメントは，本プロジェクトをクローンしてシェルスクリプトによる環境構築までの手順を記載したものです．
 
@@ -53,3 +53,42 @@ Application Password: <Googleアカウントのアプリパスワードを入力
 
 正常に動作すれば以上です．
 `docs/setup.md`の手順完了後と同じ状態になります．（なっているはずです）
+
+## その他
+
+### LAMPPの自動起動
+
+```sh
+$ sudo crontab -e
+no crontab for root - using an empty one
+
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.basic
+  3. /usr/bin/vim.tiny
+  4. /bin/ed
+
+Choose 1-4 [1]: 1    # 1 を入力してEnter
+```
+
+下記の内容を追記・私はもともとある文はすべて削除しています
+
+```sh
+@reboot /opt/lampp/lmapp start
+```
+
+### laravel-admin の初期ユーザ設定
+
+以下のコマンドを実行するだけです
+
+```sh
+$ php artisan admin:install
+```
+
+## 参考サイト
+
+- [UbuntuにLAMPP(XAMPPのLinux版)をインストールする](https://lil.la/archives/4324)
+- [Ubuntu20.04にComposerをインストールする手順](https://mebee.info/2020/06/02/post-10844/)
+- [Ubuntu で Node の最新版/推奨版を使う (n コマンド編)](https://qiita.com/cointoss1973/items/c000c4f84ae4b0c166b5)
+- [Gmail 経由でメールを送信するように Postfix を設定する](https://blog.ymyzk.com/2017/06/postfix-smarthost-gmail/)
+- [非対話形式でパッケージを自動更新する(debconfを無効化)](https://blog.jicoman.info/2017/01/autoupgrade_apt-get_dpkg/)
