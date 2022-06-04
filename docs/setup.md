@@ -1,14 +1,15 @@
 # 本プロジェクトの環境構築まで
 
-更新日：2022/05/05 22:21
+更新日：2022/06/05 1:43
 
 このドキュメントは，本プロジェクトのクローンから環境構築までの手順を記載したものです．
 
 各コマンドの，$マーク前にある `~` や， `/opt/lampp/htdocs/Laravel_Forum-B` などは，現在いるディレクトリを表しています．
 
+Ubuntu-22.04-Server ではパッケージ更新の際に `Which services should be restarted?` （など）で止まる事があるようです．そのため，それ以外のOSを利用する場合は以下の手順のなかでところどころ素通りするピンク色の対話画面があります．
+
 ## 以下のOSでは環境構築ができる事を確認しています
 
-- Ubuntu-20.04-Server
 - Ubuntu-22.04-Server
 
 ## 目次
@@ -81,6 +82,10 @@ Do you want to continue? [Y/n]: y     # y を入力してEnter
 `apache2`を停止しておかないと，LAMPPのapacheが起動しないなどの動作不良が起こりました．
 
 ### LAMPP を起動
+
+ここでは起動していませんが，`ProFTPD` はエラー無く普通に起動する場合もあります．
+
+`line 22: netstat: command not found` はおそらく出るかと思います．
 
 ```sh
 ~$ sudo /opt/lampp/lampp start
@@ -264,7 +269,7 @@ $ cd ~
 ~$ curl -sS https://getcomposer.org/installer | php
 ```
 
-コマンド実行後，`composer.phar`ファイルが作成？ダウンロード？されたかと思います
+コマンド実行後，`composer.phar` がダウンロードされます
 
 ### Composerを利用できる様に設定
 
@@ -277,16 +282,8 @@ $ cd ~
 ### 確認
 
 ```sh
-~$ composer -v
-   ______
-  / ____/___  ____ ___  ____  ____  ________  _____
- / /   / __ \/ __ `__ \/ __ \/ __ \/ ___/ _ \/ ___/
-/ /___/ /_/ / / / / / / /_/ / /_/ (__  )  __/ /
-\____/\____/_/ /_/ /_/ .___/\____/____/\___/_/
-                    /_/
-Composer version 2.3.5 2022-04-13 16:43:00
-
-<省略>
+~$ composer -V
+Composer version 2.3.6 2022-06-01 21:57:13
 ```
 
 このように表示されれば成功です．
@@ -299,6 +296,11 @@ node.js・npmコマンドは，Laravelで使用するた導入します．
 
 ```sh
 $ sudo apt install -y nodejs npm
+```
+
+コマンド実行後，ピンク色の対話画面が出てきますがそのまま `Tab` でカーソルを移動させ， `OK` を選択して下さい．
+
+```sh
 $ sudo npm install n -g
 ```
 
@@ -312,9 +314,11 @@ $ sudo n lts
 
 ```sh
 $ npm -v
-8.5.5
+8.11.0
 $ node -v
-v16.15.0
+v16.15.1
+$ n -V
+v8.2.0
 ```
 
 このように表示されればインストール完了です
@@ -439,22 +443,62 @@ Application key set successfully.
 ### データベースの作成
 
 1. phpmyadminにアクセスし，左の新規作成をクリックします
-2. 任意のデータベース名を入力し作成をクリックします
+2. Laravelの機能が使用するデータベースを作成します．任意のデータベース名を入力し作成をクリックします
 3. 掲示板用のデータベースを作成します．こちらもデータベース名は任意です
 
 ### .envファイルの編集
 
 ```sh
-/opt/lampp/htdocs/Laravel_Forum-B$ sudo nano .env
+/opt/lampp/htdocs/Laravel_Forum-B$ nano .env
 ```
 
 以下の箇所を書き換えます．
 
 ```sh
-DB_DATABASE=<データベース名>
-DB_DATABASE_KEIZIBAN=<掲示板用のデータベース名>
-
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=<メインデータベース名>
+DB_DATABASE_KEIZIBAN=<掲示板用データベース名>
+DB_USERNAME=root
 DB_PASSWORD=<phpmyadminのパスワード>
+```
+
+### 使用するテーブルの作成
+
+使用するテーブルを自動生成します．以下のコマンドを実行して下さい
+
+```sh
+/opt/lampp/htdocs/Laravel_Forum-B$ sudo apt install -y php-mysql
+```
+
+コマンド実行後，ピンク色の対話画面が出てきますがそのまま `Tab` でカーソルを移動させ， `OK` を選択して下さい．
+
+その後，以下のコマンドを実行するとテーブルが自動生成されます．
+
+```sh
+/opt/lampp/htdocs/Laravel_Forum-B$ sudo php artisan migrate
+Migration table created successfully.
+Migrating: 2014_10_12_000000_create_users_table
+Migrated:  2014_10_12_000000_create_users_table (42.95ms)
+Migrating: 2014_10_12_100000_create_password_resets_table
+Migrated:  2014_10_12_100000_create_password_resets_table (49.99ms)
+Migrating: 2014_10_12_200000_add_two_factor_columns_to_users_table
+Migrated:  2014_10_12_200000_add_two_factor_columns_to_users_table (14.07ms)
+Migrating: 2016_01_04_173148_create_admin_tables
+Migrated:  2016_01_04_173148_create_admin_tables (473.45ms)
+Migrating: 2019_08_19_000000_create_failed_jobs_table
+Migrated:  2019_08_19_000000_create_failed_jobs_table (58.19ms)
+Migrating: 2019_12_14_000001_create_personal_access_tokens_table
+Migrated:  2019_12_14_000001_create_personal_access_tokens_table (77.10ms)
+Migrating: 2022_04_30_125059_create_sessions_table
+Migrated:  2022_04_30_125059_create_sessions_table (145.04ms)
+Migrating: 2022_05_05_112244_create_hub_table
+Migrated:  2022_05_05_112244_create_hub_table (26.38ms)
+Migrating: 2022_05_09_134146_create_likes_table
+Migrated:  2022_05_09_134146_create_likes_table (27.73ms)
+Migrating: 2022_05_25_073001_create_access_logs_table
+Migrated:  2022_05_25_073001_create_access_logs_table (29.03ms)
 ```
 
 ### ログファイルを開けるように
@@ -465,22 +509,24 @@ DB_PASSWORD=<phpmyadminのパスワード>
 /opt/lampp/htdocs/Laravel_Forum-B$ chmod 777 -R storage
 ```
 
-### 使用するテーブルの作成
-
-現段階で http://<IPアドレス>/ へアクセスすると，`<省略> Base table or view not found <省略>`とエラーが表示されていると思います．ページ内の`Run migrations`をクリックして下さい．
-
-`The solution was executed successfully. Refresh now.`へと変化すれば成功です．`Refresh now.` をクリックして下さい．
-
-http://<IPアドレス> へとアクセスすると，Laravelのウェルカムページ ＋ 右上に`Log in` ・ `Register`が表示されていれば成功です．
+これで，HxSコンピュータ部のホームページが表示される様になります．
 
 ## 5. アカウント新規登録時のメール検証機能まで
 
 メール検証の送り送り元アカウント・メール送信（Postfix）機能を構築します
 
-### 準備
+### アプリパスワードの生成
 
-- googleアカウントの作成をしてください
-- そのアカウントの2段階認証を有効にしてください
+1. googleアカウントの作成をしてください（既存のものを利用する場合は不要です）
+2. 作成した・既存のアカウントを利用してGoogle Chromeなどでログインして下さい
+3. そのアカウントの2段階認証を有効にしてください
+4. セキュリティに移動
+5. アプリ パスワードに移動
+6. アプリを選択でその他を選び，アプリパスワードの名前を入力（なんでも）
+7. 生成されたパスワードをコピー
+8. 完了をクリック
+
+アプリパスワードは複数回使用するため，環境構築が終了するまではどこかにメモをしておいてください
 
 ### Postfixをインストールする
 
@@ -495,16 +541,9 @@ $ sudo apt install -y postfix bsd-mailx libsasl2-modules
 3. System mail nameはそのままEnter
 4. SMTP relay hostは`[smtp.gmail.com]:587`を入力
 
-### アプリパスワードの生成
+ここで一旦画面が閉じます．
 
-1. 作成したgoogleアカウントでログイン
-2. セキュリティに移動
-3. アプリ パスワードに移動
-4. アプリを選択でその他を選び，アプリパスワードの名前を入力（なんでも）
-5. 生成されたパスワードをコピー
-6. 完了をクリック
-
-アプリパスワードは複数回使用するため，環境構築が終了するまではどこかにメモをしておいてください
+その後， `Which services should be restarted?` と聞かれますが，何も選択せず `OK` （各項目の意味は分からないので必要に応じて選択して下さい．多分問題ありません．多分...）
 
 ### アプリパスワードの適応１
 
@@ -531,7 +570,7 @@ $ cd /etc/postfix
 ### main.cfの編集
 
 ```sh
-/etc/postfix$ sudo nano /etc/postfix/main.cf
+/etc/postfix$ sudo nano main.cf
 ```
 
 一番下に，以下の内容を追記
@@ -556,7 +595,8 @@ inet_protcols=ipv4
 ### php.iniの編集
 
 ```sh
-$ sudo nano /opt/lampp/etc/php.ini
+$ cd /opt/lampp/etc
+/opt/lampp/etc$ sudo nano php.ini
 ```
 
 php.iniの`[mail function]`内に，以下の内容を追記してください
@@ -575,6 +615,10 @@ $ cd /opt/lampp/htdocs/Laravel_Forum-B/
 
 以下の箇所を変更して下さい
 
+ただし `MAIL_FROM_NAME=` の欄は，`.env` ファイル一番上の `APP_NAME=` の欄を書き換える事をオススメします．この場合は `MAIL_FROM_NAME=` の欄は書き換え無しです． 
+
+`APP_NAME=` の欄書き換えにより，ブラウザのタイトル欄もそれに変わる用です．日本語使用出来ました．
+
 ```sh
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.gmail.com
@@ -589,11 +633,11 @@ MAIL_FROM_NAME=<ここでメール受信時の名前を決められます>
 ### メール検証テスト
 
 1. http://<IPアドレス>へアクセス
-2. Registerへ移動
-3. そこにメールが送信されるので，学生番号は自分のもの．それ以外は適当に
+2. 掲示板へ移動し，新規登録はコチラをクリックします．
+3. 学生番号は自分のもの．それ以外は適当に入力します．
 4. アカウント作成をクリック
-5. 大学アカウントのメールボックスの迷惑メールを確認
-6. URLをコピー・ブラウザに張り付けてEnter
+5. 大学アカウントのメールボックス（の迷惑メール）を確認
+6. メールの「検証する」をクリック（迷惑メールの場合：一番上のURLをコピー・ブラウザに張り付けてEnter）
 7. ダッシュボードへ移動できれば環境構築完了
 
 ## その他
@@ -617,6 +661,14 @@ Choose 1-4 [1]: 1    # 1 を入力してEnter
 
 ```sh
 @reboot /opt/lampp/lmapp start
+```
+
+### laravel-admin の初期ユーザ設定
+
+以下のコマンドを実行するだけです
+
+```sh
+$ php artisan admin:install
 ```
 
 ## 参考サイト
