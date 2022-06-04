@@ -50,8 +50,8 @@ ssh通信の鍵生成・githubへのキーの追加は[docs/setup.mp](https://gi
 6. 完了をクリック
 
 ```sh
-~$ chmod +x Laravel_Forum-B/setup.sh
-~$ sudo ./Laravel_Forum-B/setup.sh
+~$ chmod +x Laravel_Forum-B/auto_setup.sh
+~$ sudo ./Laravel_Forum-B/auto_setup.sh
 個人ユーザ名：<シェルスクリプトを実行しようとしている個人ユーザ名を入力して下さい>
 アプリ名：<メール送信元などに表示されます>
 データベースを2つ作成します．データベース名を入力して下さい
