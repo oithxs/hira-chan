@@ -52,4 +52,20 @@ class Get extends Model {
 		
 		return $stmt;
 	}
+
+	public function access_ranking() {
+		$sql = <<<EOF
+		SELECT 
+			access_logs.thread_name, COUNT(*) AS access_count
+		FROM 
+			access_logs
+		GROUP BY access_logs.thread_id
+		ORDER BY COUNT(*) DESC;
+		EOF;
+
+		$stmt = json_decode(json_encode(
+			DB::connection('mysql_keiziban')->select($sql),
+		), true);
+		return $stmt;
+	}
 }
