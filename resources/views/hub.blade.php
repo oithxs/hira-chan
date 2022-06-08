@@ -40,7 +40,7 @@
 							</thead>
 							<tbody>
 								@foreach($tables as $tableInfo)
-									<?php
+								<?php
 										$tableName = str_replace('/', '&slash;', $tableInfo['thread_name']);
 										$tableName = str_replace('\\', '&backSlash;' , $tableName);
 									?>
