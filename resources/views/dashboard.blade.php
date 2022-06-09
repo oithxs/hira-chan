@@ -1,7 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{__('Top page')}}
+            @if (!Auth::user()->is_admin)
+                {{__('Top page')}}
+            @else
+                管理者用ページ
+            @endif
         </h2>
     </x-slot>
 

@@ -13,7 +13,11 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{__('Top page')}}
+                        @if (!Auth::user()->is_admin)
+                            {{__('Top page')}}
+                        @else
+                            管理者用ページ
+                        @endif
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('hub') }}" :active="request()->routeIs('hub')">
                         {{__('Forum Hub')}}
