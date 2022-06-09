@@ -3,6 +3,7 @@
 		<?php
 			$title = str_replace("&slash;", "/", $thread_name);
 			$title = str_replace("&backSlash;", "\\", $title);
+			$title = str_replace("&hash;", "#", $title);
 		?>
 		<h2 class="font-semibold text-xl text-gray-800 leading-tight"> 
 			{{ $title }} 

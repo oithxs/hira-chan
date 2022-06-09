@@ -52,4 +52,26 @@ class Get extends Model {
 		
 		return $stmt;
 	}
+
+	public function access_ranking() {
+		$sql = <<<EOF
+		SELECT 
+			hub.thread_name, COUNT(*) AS access_count
+		FROM 
+			hub
+		RIGHT OUTER JOIN
+			access_logs
+			ON
+				access_logs.thread_id = hub.thread_id
+		WHERE 
+			hub.thread_name IS NOT NULL
+		GROUP BY hub.thread_id
+		ORDER BY COUNT(*) DESC;
+		EOF;
+
+		$stmt = json_decode(json_encode(
+			DB::connection('mysql_keiziban')->select($sql),
+		), true);
+		return $stmt;
+	}
 }
