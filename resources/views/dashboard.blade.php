@@ -55,7 +55,11 @@
 							</thead>
 							<tbody>
                             @foreach($access_ranking as $row)
-                                    <tr><th>{{ $count++ }}</th><td>{{ $row['access_count'] }}</td><td>{{ $row['thread_name'] }}</td></tr>
+                                    <?php
+                                        $title = str_replace("&amp;slash;", "/", $row['thread_name']);
+                                        $title = str_replace("&amp;backSlash;", "\\", $title);
+                                    ?>
+                                    <tr><th>{{ $count++ }}</th><td>{{ $row['access_count'] }}</td><td>{{ $title }}</td></tr>
                             @endforeach
                             </tbody>
 						</table>
