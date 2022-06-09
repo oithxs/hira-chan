@@ -40,9 +40,10 @@
 							</thead>
 							<tbody>
 								@foreach($tables as $tableInfo)
-									<?php
+								<?php
 										$tableName = str_replace('/', '&slash;', $tableInfo['thread_name']);
 										$tableName = str_replace('\\', '&backSlash;' , $tableName);
+										$tableName = str_replace('#', '&hash;', $tableName);
 									?>
 									<tr><th><a href="hub/thread_name={{ $tableName }}/id={{ $tableInfo['thread_id'] }}">{{$tableInfo['thread_name']}}</a></th><td>{{$tableInfo['created_at']}}</td></tr>
 								@endforeach
