@@ -56,19 +56,14 @@ class Get extends Model {
 	public function access_ranking() {
 		$sql = <<<EOF
 		SELECT 
-			access_logs.thread_name, COUNT(*) AS access_count
+			hub.thread_name, COUNT(*) AS access_count
 		FROM 
+			hub
+		RIGHT OUTER JOIN
 			access_logs
-		WHERE
-			EXISTS(
-				SELECT
-					hub.thread_id
-				FROM
-					hub
-				WHERE
-					access_logs.thread_id = hub.thread_id
-			)
-		GROUP BY access_logs.thread_id
+			ON
+				access_logs.thread_id = hub.thread_id
+		GROUP BY hub.thread_id
 		ORDER BY COUNT(*) DESC;
 		EOF;
 
