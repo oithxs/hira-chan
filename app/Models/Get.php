@@ -59,6 +59,15 @@ class Get extends Model {
 			access_logs.thread_name, COUNT(*) AS access_count
 		FROM 
 			access_logs
+		WHERE
+			EXISTS(
+				SELECT
+					hub.thread_id
+				FROM
+					hub
+				WHERE
+					access_logs.thread_id = hub.thread_id
+			)
 		GROUP BY access_logs.thread_id
 		ORDER BY COUNT(*) DESC;
 		EOF;
