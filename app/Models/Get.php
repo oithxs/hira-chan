@@ -63,6 +63,8 @@ class Get extends Model {
 			access_logs
 			ON
 				access_logs.thread_id = hub.thread_id
+		WHERE 
+			hub.thread_name IS NOT NULL
 		GROUP BY hub.thread_id
 		ORDER BY COUNT(*) DESC;
 		EOF;
