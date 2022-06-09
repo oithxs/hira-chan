@@ -56,8 +56,10 @@
 							<tbody>
                             @foreach($access_ranking as $row)
                                     <?php
-                                        $title = str_replace("&amp;slash;", "/", $row['thread_name']);
-                                        $title = str_replace("&amp;backSlash;", "\\", $title);
+                                        $title = str_replace("&amp;", "&", $row['thread_name']);
+                                        $title = str_replace("&slash;", "/", $title);
+                                        $title = str_replace("&backSlash;", "\\", $title);
+                                        $title = str_replace("&hash;", "#", $title);
                                     ?>
                                     <tr><th>{{ $count++ }}</th><td>{{ $row['access_count'] }}</td><td>{{ $title }}</td></tr>
                             @endforeach
