@@ -1,6 +1,6 @@
 # 本プロジェクトの環境構築まで
 
-更新日：2022/06/05 15:26
+最終更新日：2022/06/10 22:41
 
 このドキュメントは，本プロジェクトのクローンから環境構築までの手順を記載したものです．
 
@@ -28,7 +28,7 @@ XAMPPはwebアプリケーションの実行に必要なフリーソフトウェ
 
 ```sh
 $ cd ~
-~$ wget https://www.apachefriends.org/xampp-files/8.1.5/xampp-linux-x64-8.1.5-0-installer.run
+~$ wget wget https://downloadsapachefriends.global.ssl.fastly.net/8.1.5/xampp-linux-x64-8.1.5-0-installer.run
 ```
 
 実行後，`xampp-linux-x64-8.1.5-0-installer.run` がダウンロードされています．
@@ -671,6 +671,16 @@ Choose 1-4 [1]: 1    # 1 を入力してEnter
 $ php artisan admin:install
 $ php artisan db:seed
 ```
+
+### laravel-admin のユーザアバター
+
+そのままだとフォルダの権限が不足しているので
+
+```sh
+$ chmod 777 -R public/uploads
+```
+
+.envファイルの `APP_URL` を環境構築したコンピュータのIP（ドメイン）に編集
 
 ## 参考サイト
 
