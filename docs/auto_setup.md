@@ -1,6 +1,6 @@
 # 本プロジェクトの開発環境構築まで
 
-更新日：2022/06/05 15:26
+最終更新日：2022/06/10 22:41
 
 このドキュメントは，本プロジェクトをクローンしてシェルスクリプトによる環境構築までの手順を記載したものです．
 
@@ -38,16 +38,16 @@ ssh通信の鍵生成・githubへのキーの追加は[docs/setup.mp](https://gi
 ```sh
 ~$ chmod +x Laravel_Forum-B/auto_setup.sh
 ~$ sudo ./Laravel_Forum-B/auto_setup.sh
-個人ユーザ名：<シェルスクリプトを実行しようとしている個人ユーザ名を入力して下さい>
-アプリ名：<メール送信元などに表示されます>
-データベースを2つ作成します．データベース名を入力して下さい
-※「_」は使用可能ですが，「-」は使用できません
-メインデータベース：<「-」を使用すれば動作がおかしくなります．>
-掲示板用データベース：<上に同じ・メインデータベースと同じ名前を入力しないで下さい>
-MySQL/phpMyAdmin関連のパスワードを設定します
+User name: <シェルスクリプトを実行しようとしている個人ユーザ名を入力して下さい>
+App name: <メール送信元などに表示されます>
+Create two databases. Please enter the database names.
+The "_" character can be used. The "_" character cannot be used.
+Main database: <「-」を使用すれば動作がおかしくなります．>
+Database for BBS: <上に同じ・メインデータベースと同じ名前を入力しないで下さい>
+Set MySQL/phpMyAdmin related passwords
 Password: <MySQL等に登録するパスワードです>
-メール送信関連の設定をします
-アカウント名(@以下不要)：<Googleアカウントの@以前のみを入力して下さい>
+Configure mail-related settings.
+Account name (no @ or below required): <Googleアカウントの@以前のみを入力して下さい>
 Application Password: <Googleアカウントのアプリパスワードを入力して下さい>
 ```
 
@@ -85,6 +85,16 @@ Choose 1-4 [1]: 1    # 1 を入力してEnter
 $ php artisan admin:install
 $ php artisan db:seed
 ```
+
+### laravel-admin のユーザアバター
+
+そのままだとフォルダの権限が不足しているので
+
+```sh
+$ chmod 777 -R public/uploads
+```
+
+.envファイルの `APP_URL` を環境構築したコンピュータのIP（ドメイン）に編集
 
 ## 参考サイト
 
