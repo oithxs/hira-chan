@@ -120,5 +120,29 @@ $('#create_threadBtn').click(function () {
 });
 })();
 
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!***************************************!*\
+  !*** ./resources/js/Delete_thread.js ***!
+  \***************************************/
+$('#delete_threadBtn').click(function () {
+  var formElm = document.getElementById("thread_actions_form");
+  var thread_id = formElm.thread_id.value;
+  console.log(thread_id);
+});
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!*************************************!*\
+  !*** ./resources/js/Edit_thread.js ***!
+  \*************************************/
+$('#edit_threadBtn').click(function () {
+  var formElm = document.getElementById("thread_actions_form");
+  var thread_id = formElm.thread_id.value;
+  console.log(thread_id);
+});
+})();
+
 /******/ })()
 ;

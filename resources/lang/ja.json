@@ -170,7 +170,7 @@
     "Download": "Download",
     "E-Mail Address": "メールアドレス",
     "Ecuador": "Ecuador",
-    "Edit": "Edit",
+    "Edit": "編集",
     "Edit :resource": "Edit :resource",
     "Edit Attached": "Edit Attached",
     "Editor": "編集者",
@@ -632,5 +632,8 @@
     "New register": "新規登録はコチラ",
     "Top page": "トップページ",
     "Access count": "アクセス回数",
-    "Access Ranking": "順位"
+    "Access Ranking": "順位",
+    "Setting": "設定",
+    "Do you really want to delete it?": "本当に削除しますか？",
+    "Edit thread": "スレッドの編集"
 }

@@ -1,7 +1,7 @@
 <x-app-layout>
 	<x-slot name="header">
 		<h2 class="font-semibold text-xl text-gray-800 leading-tight">
-			{{__('Forum Hub')}}
+			{{ __('Forum Hub') }}
 		</h2>
 	</x-slot>
 
@@ -36,19 +36,98 @@
 					<div>
 						<table class="table table-striped">
 							<thead>
-								<tr><th>{{__('Thread name')}}</th><td>{{__('Create time')}}</td></tr>
+								<tr>
+									<th>{{ __('Thread name') }}</th>
+									<td>{{ __('Create time') }}</td>
+									@if (Auth::user()->is_admin)
+										<td>
+											{{ __('Setting') }}
+										</td>
+									@endif
+								</tr>
 							</thead>
 							<tbody>
 								@foreach($tables as $tableInfo)
-								<?php
+									<?php
 										$tableName = str_replace('/', '&slash;', $tableInfo['thread_name']);
 										$tableName = str_replace('\\', '&backSlash;' , $tableName);
 										$tableName = str_replace('#', '&hash;', $tableName);
 									?>
-									<tr><th><a href="hub/thread_name={{ $tableName }}/id={{ $tableInfo['thread_id'] }}">{{$tableInfo['thread_name']}}</a></th><td>{{$tableInfo['created_at']}}</td></tr>
+									<tr>
+										<th>
+											<a href="hub/thread_name={{ $tableName }}/id={{ $tableInfo['thread_id'] }}">{{ $tableInfo['thread_name'] }}</a>
+										</th>
+										<td>
+											{{ $tableInfo['created_at'] }}
+										</td>
+										@if (Auth::user()->is_admin)
+											<td>
+												<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+													<li class="nav-item dropdown">
+														<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+															・・・
+														</a>
+														<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+															<li>
+																<!-- actions -->
+																<button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#DeleteThreadModal">
+																	{{ __('Delete') }}
+																</button>
+																<button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#EditThreadModal">
+																	{{ __('Edit') }}
+																</button>
+																
+																<!-- data -->
+																<form id="thread_actions_form">
+																	<input type="hidden" name="thread_id" value="{{ $tableInfo['thread_id'] }}">
+																</form>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</td>
+										@endif
+									</tr>
 								@endforeach
 							</tbody>
 						</table>
+					</div>
+				</div>
+
+				<!-- Modal -->
+				<div class="modal fade" id="DeleteThreadModal" tabindex="-1" aria-labelledby="DeleteThreadModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-body">
+								{{ __('Do you really want to delete it?') }}
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+								<button id="delete_threadBtn" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal fade" id="EditThreadModal" tabindex="-1" aria-labelledby="EditThreadModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header">
+								{{ __('Edit thread') }}
+							</div>
+							<div class="modal-body">
+								<form id="edit_thread_form">
+									<div class="mb-3">
+										<label for="thread-name" class="col-form-label">{{ __('Thread name') }}</label>
+										<input id="ThreadNameText" type="text" class="form-control">
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+								<button id="edit_threadBtn" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -65,7 +144,7 @@
 
 					<!-- グローバル変数 -->
 					<script>
-						const url = "{{$url}}";
+						const url = "{{ $url }}";
 					</script>
 
 					<!-- others -->
