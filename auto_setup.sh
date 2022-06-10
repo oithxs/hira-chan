@@ -36,7 +36,7 @@ DEBIAN_FRONTEND=noninteractive apt install -y npm postfix bsd-mailx libsasl2-mod
 
 # LAMPPのインストール
 
-wget https://www.apachefriends.org/xampp-files/8.1.5/xampp-linux-x64-8.1.5-0-installer.run
+wget https://downloadsapachefriends.global.ssl.fastly.net/8.1.5/xampp-linux-x64-8.1.5-0-installer.run
 chmod +x xampp-linux-x64-8.1.5-0-installer.run
 yes | ./xampp-linux-x64-8.1.5-0-installer.run
 

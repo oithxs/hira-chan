@@ -1,6 +1,6 @@
 # 本プロジェクトの環境構築まで
 
-最終更新日：2022/06/06 21:14
+最終更新日：2022/06/10 22:41
 
 このドキュメントは，本プロジェクトのクローンから環境構築までの手順を記載したものです．
 
@@ -28,7 +28,7 @@ XAMPPはwebアプリケーションの実行に必要なフリーソフトウェ
 
 ```sh
 $ cd ~
-~$ wget https://www.apachefriends.org/xampp-files/8.1.5/xampp-linux-x64-8.1.5-0-installer.run
+~$ wget wget https://downloadsapachefriends.global.ssl.fastly.net/8.1.5/xampp-linux-x64-8.1.5-0-installer.run
 ```
 
 実行後，`xampp-linux-x64-8.1.5-0-installer.run` がダウンロードされています．
