@@ -1,6 +1,6 @@
 # 本プロジェクトの開発環境構築まで
 
-最終更新日：2022/06/10 22:41
+最終更新日：2022/06/11 20:25
 
 このドキュメントは，本プロジェクトをクローンしてシェルスクリプトによる環境構築までの手順を記載したものです．
 
@@ -24,7 +24,7 @@ $ cd ~
 ~$ git clone https://github.com/hxs-mini2/Laravel_Forum-B.git
 ```
 
-ssh通信の鍵生成・githubへのキーの追加は[docs/setup.mp](https://github.com/hxs-mini2/Laravel_Forum-B/blob/develop/docs/setup.md#4-リポジトリのクローンからサイトの表示まで)を参考にしてください
+ssh通信の鍵生成・githubへのキーの追加は[docs/setup.mp](https://github.com/hxs-mini2/Laravel_Forum-B/blob/develop/docs/dev/Ubuntu-2204-Server.md#4-リポジトリのクローンからサイトの表示まで)を参考にしてください
 
 ## 2. シェルスクリプトの実行
 
@@ -36,8 +36,8 @@ ssh通信の鍵生成・githubへのキーの追加は[docs/setup.mp](https://gi
 6. 完了をクリック
 
 ```sh
-~$ chmod +x Laravel_Forum-B/auto_setup.sh
-~$ sudo ./Laravel_Forum-B/auto_setup.sh
+~$ chmod +x Laravel_Forum-B/docs/dev/src/auto_Ubuntu-2204-Server.sh
+~$ sudo ./Laravel_Forum-B/docs/dev/src/auto_Ubuntu2204-Server.sh
 User name: <シェルスクリプトを実行しようとしている個人ユーザ名を入力して下さい>
 App name: <メール送信元などに表示されます>
 Create two databases. Please enter the database names.
