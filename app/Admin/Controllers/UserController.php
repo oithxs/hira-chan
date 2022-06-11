@@ -5,6 +5,7 @@ namespace App\Admin\Controllers;
 use App\Models\User;
 use App\Admin\Extensions\Tools\GeneralUser;
 use Encore\Admin\Controllers\AdminController;
+use Illuminate\Support\Facades\Hash;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;

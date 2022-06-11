@@ -1,6 +1,6 @@
 # 本プロジェクトの環境構築まで
 
-最終更新日：2022/06/10 22:41
+最終更新日：2022/06/11 20:25
 
 このドキュメントは，本プロジェクトのクローンから環境構築までの手順を記載したものです．
 
@@ -99,7 +99,6 @@ fail.
 Contents of "/opt/lampp/var/proftpd/start.err":
 2022-05-04 16:41:09,468 ubu-serv proftpd[991]: fatal: unknown configuration directive 'function' on line 44 of '/opt/lampp/etc/proftpd.conf'
 ```
-
 
 ### 最低限のセキュリティ設定を行う
 
