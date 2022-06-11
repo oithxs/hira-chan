@@ -5,6 +5,7 @@ namespace App\Admin\Controllers;
 use App\Models\User;
 use App\Admin\Extensions\Tools\GeneralUser;
 use Encore\Admin\Controllers\AdminController;
+use Illuminate\Support\Facades\Hash;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
@@ -96,6 +97,10 @@ class UserController extends AdminController
         $form->text('remember_token', __('Remember token'));
         $form->number('current_team_id', __('Current team id'));
         $form->text('profile_photo_path', __('Profile photo path'));
+
+        $form->saving(function (Form $form) {
+            $form->password = Hash::make($form->password);
+        });
 
         return $form;
     }
