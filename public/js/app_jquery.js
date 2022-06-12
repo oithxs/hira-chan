@@ -33,7 +33,7 @@ function reload() {
         msg = data[item]['message'];
       } else {
         user = "-----";
-        msg = "この投稿は管理者によって削除されました";
+        msg = "<br>この投稿は管理者によって削除されました";
       }
 
       if (data[item]['user_like'] == 1) {
@@ -201,6 +201,34 @@ $('#delete_messageBtn').click(function () {
   $.ajax({
     type: "POST",
     url: url + "/jQuery.ajax/delete_message",
+    data: {
+      "thread_id": thread_id,
+      "message_id": message_id
+    }
+  }).done(function () {}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+    console.log(XMLHttpRequest.status);
+    console.log(textStatus);
+    console.log(errorThrown.message);
+  });
+});
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!*****************************************!*\
+  !*** ./resources/js/Restore_message.js ***!
+  \*****************************************/
+$('#restore_messageBtn').click(function () {
+  var formElm = document.getElementById("message_actions_form");
+  var message_id = formElm.message_id.value;
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $.ajax({
+    type: "POST",
+    url: url + "/jQuery.ajax/restore_message",
     data: {
       "thread_id": thread_id,
       "message_id": message_id

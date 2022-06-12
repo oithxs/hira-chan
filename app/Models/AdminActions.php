@@ -53,4 +53,18 @@ class AdminActions extends Model {
 		DB::connection('mysql_keiziban')->statement($query);
 		return null;
 	}
+
+	public function restore_message_record($thread_id, $message_id) {
+		$query = <<<EOF
+		UPDATE
+			$thread_id
+		SET
+			$thread_id.is_validity = 1
+		WHERE
+			$thread_id.no = '$message_id'
+		EOF;
+
+		DB::connection('mysql_keiziban')->statement($query);
+		return null;
+	}
 }

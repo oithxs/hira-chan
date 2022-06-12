@@ -106,6 +106,9 @@
 																<button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#DeleteMessageModal">
 																	{{ __('Delete') }}
 																</button>
+																<button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#RestoreMessageModal">
+																	{{ __('Restore') }}
+																</button>
 															</li>
 														</ul>
 													</li>
@@ -148,6 +151,19 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 								<button id="delete_messageBtn" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal fade" id="RestoreMessageModal" tabindex="-1" aria-labelledby="RestoreMessageModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-body">
+								{{ __('Do you really want to restore it?') }}
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+								<button id="restore_messageBtn" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
 							</div>
 						</div>
 					</div>

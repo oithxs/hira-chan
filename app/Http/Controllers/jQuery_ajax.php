@@ -105,4 +105,14 @@ class jQuery_ajax extends Controller {
 
 		return null;
 	}
+
+	public function restore_message(Request $request) {
+		$thread_id = $request->thread_id;
+		$message_id = $request->message_id;
+
+		$admin_actions = new AdminActions;
+		$admin_actions->restore_message_record($thread_id, $message_id);
+
+		return null;
+	}
 }

@@ -25,7 +25,7 @@ function reload(){
                 msg = data[item]['message'];
             } else {
                 user = "-----";
-                msg = "この投稿は管理者によって削除されました";
+                msg = "<br>この投稿は管理者によって削除されました";
             }
 
             if (data[item]['user_like'] == 1) {
