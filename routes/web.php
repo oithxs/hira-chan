@@ -27,6 +27,7 @@ Route::middleware([
     Route::get('jQuery.ajax/unlike', "App\Http\Controllers\jQuery_ajax@unlike");
     Route::get('jQuery.ajax/delete_thread', "App\Http\Controllers\jQuery_ajax@delete_thread");
     Route::get('jQuery.ajax/edit_thread', "App\Http\Controllers\jQuery_ajax@edit_thread");
+    Route::get('jQuery.ajax/delete_message', "App\Http\Controllers\jQuery_ajax@delete_message");
 });
 
 // データ処理
@@ -37,6 +38,7 @@ Route::post('jQuery.ajax/like', "App\Http\Controllers\jQuery_ajax@like");
 Route::post('jQuery.ajax/unlike', "App\Http\Controllers\jQuery_ajax@unlike");
 Route::post('jQuery.ajax/delete_thread', "App\Http\Controllers\jQuery_ajax@delete_thread");
 Route::post('jQuery.ajax/edit_thread', "App\Http\Controllers\jQuery_ajax@edit_thread");
+Route::post('jQuery.ajax/delete_message', "App\Http\Controllers\jQuery_ajax@delete_message");
 
 Route::middleware([
     'auth:sanctum',

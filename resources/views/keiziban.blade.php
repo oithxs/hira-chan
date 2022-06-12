@@ -127,7 +127,7 @@
 									<button id="sendMessageBtn" class="btn btn-primary">{{__('Write forum')}}</button>
 								</div>
 
-								<div id="displayArea" class="col-8" style="height:70vh; width: 100% overflow-y:scroll; overflow-x:hidden;"></div>
+								<div id="displayArea" class="col-8" style="height:70vh; width:100; overflow-y:scroll; overflow-x:hidden;"></div>
 							</div>
 						@else
 							<div class="mt-4">

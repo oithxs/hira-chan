@@ -20,22 +20,30 @@ function reload(){
     }).done(function (data) {
         displayArea.innerHTML = "<br>";
         for (var item in data) {
+            if (data[item]['is_validity']) {
+                user = data[item]['name'];
+                msg = data[item]['message'];
+            } else {
+                user = "-----";
+                msg = "この投稿は管理者によって削除されました";
+            }
+
             if (data[item]['user_like'] == 1) {
                 displayArea.insertAdjacentHTML('afterbegin',
-                data[item]['no'] + ": " + data[item]['name'] + " " + data[item]['time'] + 
+                data[item]['no'] + ": " + user + " " + data[item]['time'] + 
                 "<br>" +
                 "<p style='overflow-wrap: break-word;'>" +
-                data[item]['message'] +
+                msg +
                 "</p>" +
                 "<br>" +
                 "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['no'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] +
                 "<hr>");
             } else {
                 displayArea.insertAdjacentHTML('afterbegin',
-                data[item]['no'] + ": " + data[item]['name'] + " " + data[item]['time'] + 
+                data[item]['no'] + ": " + user + " " + data[item]['time'] + 
                 "<br>" +
                 "<p style='overflow-wrap: break-word;'>" +
-                data[item]['message'] +
+                msg +
                 "</p>" +
                 "<br>" +
                 "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['no'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] +

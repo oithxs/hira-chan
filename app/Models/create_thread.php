@@ -14,6 +14,7 @@ class create_thread extends Model {
             $table->text('user_email');
             $table->text('message');
             $table->text('time');
+            $table->boolean('is_validity')->default(true);
         });
         
         return null;
