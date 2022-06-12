@@ -32,6 +32,33 @@
 					</form>
 
 					<br><br>
+				
+					@if (Auth::user()->is_admin)
+						<form id="thread_actions_form">
+							<label class="form-label">対象：スレッドID</label>
+							<input id="thread_id" class="form-control" type="text">
+							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+										操作
+									</a>
+									<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+										<li>
+											<!-- actions -->
+											<button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#DeleteThreadModal">
+												{{ __('Delete') }}
+											</button>
+											<button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#EditThreadModal">
+												{{ __('Edit') }}
+											</button>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</form>
+					@endif
+				
+					<br><br>
 					
 					<div>
 						<table class="table table-striped">
@@ -41,7 +68,7 @@
 									<td>{{ __('Create time') }}</td>
 									@if (Auth::user()->is_admin)
 										<td>
-											{{ __('Setting') }}
+											{{ __('Thread ID') }}
 										</td>
 									@endif
 								</tr>
@@ -62,29 +89,7 @@
 										</td>
 										@if (Auth::user()->is_admin)
 											<td>
-												<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-													<li class="nav-item dropdown">
-														<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-															・・・
-														</a>
-														<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-															<li>
-																<!-- actions -->
-																<button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#DeleteThreadModal">
-																	{{ __('Delete') }}
-																</button>
-																<button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#EditThreadModal">
-																	{{ __('Edit') }}
-																</button>
-																
-																<!-- data -->
-																<form id="thread_actions_form">
-																	<input type="hidden" name="thread_id" value="{{ $tableInfo['thread_id'] }}">
-																</form>
-															</li>
-														</ul>
-													</li>
-												</ul>
+												{{ $tableInfo['thread_id'] }}
 											</td>
 										@endif
 									</tr>
