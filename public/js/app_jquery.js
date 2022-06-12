@@ -144,5 +144,17 @@ $('#edit_threadBtn').click(function () {
 });
 })();
 
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!****************************************!*\
+  !*** ./resources/js/Delete_message.js ***!
+  \****************************************/
+$('#delete_messageBtn').click(function () {
+  var formElm = document.getElementById("message_actions_form");
+  var thread_id = formElm.message_id.value;
+  console.log(thread_id);
+});
+})();
+
 /******/ })()
 ;

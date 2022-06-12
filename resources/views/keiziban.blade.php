@@ -89,6 +89,32 @@
 							<div class="row">
 								<hr>
 								<div class="col-4">
+									@if (Auth::user()->is_admin)
+										<form id="message_actions_form">
+											<div class="mb-2">
+												<label class="form-label">対象：コメントID</label>
+												<input id="message_id" value="1" min="1" class="form-control" type="number">
+
+												<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+													<li class="nav-item dropdown">
+														<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+															操作
+														</a>
+														<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+															<li>
+																<!-- actions -->
+																<button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#DeleteMessageModal">
+																	{{ __('Delete') }}
+																</button>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</div>
+										</form>
+										
+									@endif
+
 									<form id="sendMessage">
 										<div class="mb-2">
 											<label class="form-label">コメント</label>
@@ -111,6 +137,21 @@
 							<br>
 						@endif
 					</div>
+
+				<!-- Modal -->
+				<div class="modal fade" id="DeleteMessageModal" tabindex="-1" aria-labelledby="DeleteMessageModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-body">
+								{{ __('Do you really want to delete it?') }}
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+								<button id="delete_messageBtn" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+							</div>
+						</div>
+					</div>
+				</div>
 
 					<div>
 						<!-- Bootstrap用JavaScript -->
