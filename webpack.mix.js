@@ -16,7 +16,11 @@ mix.js('resources/js/app.js', 'public/js')
     .js([
         'resources/js/Get_allRow.js', 
         'resources/js/Send_Row.js', 
-        'resources/js/Create_thread'
+        'resources/js/Create_thread',
+        'resources/js/Delete_thread',
+        'resources/js/Edit_thread',
+        'resources/js/Delete_message',
+        'resources/js/Restore_message'
     ], 'public/js/app_jquery.js')
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),

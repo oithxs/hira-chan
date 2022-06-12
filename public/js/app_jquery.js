@@ -28,10 +28,18 @@ function reload() {
     displayArea.innerHTML = "<br>";
 
     for (var item in data) {
-      if (data[item]['user_like'] == 1) {
-        displayArea.insertAdjacentHTML('afterbegin', data[item]['no'] + ": " + data[item]['name'] + " " + data[item]['time'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + data[item]['message'] + "</p>" + "<br>" + "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['no'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] + "<hr>");
+      if (data[item]['is_validity']) {
+        user = data[item]['name'];
+        msg = data[item]['message'];
       } else {
-        displayArea.insertAdjacentHTML('afterbegin', data[item]['no'] + ": " + data[item]['name'] + " " + data[item]['time'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + data[item]['message'] + "</p>" + "<br>" + "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['no'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] + "<hr>");
+        user = "-----";
+        msg = "<br>この投稿は管理者によって削除されました";
+      }
+
+      if (data[item]['user_like'] == 1) {
+        displayArea.insertAdjacentHTML('afterbegin', data[item]['no'] + ": " + user + " " + data[item]['time'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>" + "<br>" + "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['no'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] + "<hr>");
+      } else {
+        displayArea.insertAdjacentHTML('afterbegin', data[item]['no'] + ": " + user + " " + data[item]['time'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>" + "<br>" + "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['no'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] + "<hr>");
       }
     }
   }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
@@ -111,6 +119,119 @@ $('#create_threadBtn').click(function () {
     url: url + "/jQuery.ajax/create_thread",
     data: {
       "table": threadName
+    }
+  }).done(function () {}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+    console.log(XMLHttpRequest.status);
+    console.log(textStatus);
+    console.log(errorThrown.message);
+  });
+});
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!***************************************!*\
+  !*** ./resources/js/Delete_thread.js ***!
+  \***************************************/
+$('#delete_threadBtn').click(function () {
+  var formElm = document.getElementById("thread_actions_form");
+  var thread_id = formElm.thread_id.value;
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $.ajax({
+    type: "POST",
+    url: url + "/jQuery.ajax/delete_thread",
+    data: {
+      "thread_id": thread_id
+    }
+  }).done(function () {}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+    console.log(XMLHttpRequest.status);
+    console.log(textStatus);
+    console.log(errorThrown.message);
+  });
+});
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!*************************************!*\
+  !*** ./resources/js/Edit_thread.js ***!
+  \*************************************/
+$('#edit_threadBtn').click(function () {
+  var formElm = document.getElementById("thread_actions_form");
+  var thread_id = formElm.thread_id.value;
+  var formElm = document.getElementById("edit_thread_form");
+  var thread_name = formElm.ThreadNameText.value;
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $.ajax({
+    type: "POST",
+    url: url + "/jQuery.ajax/edit_thread",
+    data: {
+      "thread_id": thread_id,
+      "thread_name": thread_name
+    }
+  }).done(function () {}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+    console.log(XMLHttpRequest.status);
+    console.log(textStatus);
+    console.log(errorThrown.message);
+  });
+});
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!****************************************!*\
+  !*** ./resources/js/Delete_message.js ***!
+  \****************************************/
+$('#delete_messageBtn').click(function () {
+  var formElm = document.getElementById("message_actions_form");
+  var message_id = formElm.message_id.value;
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $.ajax({
+    type: "POST",
+    url: url + "/jQuery.ajax/delete_message",
+    data: {
+      "thread_id": thread_id,
+      "message_id": message_id
+    }
+  }).done(function () {}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+    console.log(XMLHttpRequest.status);
+    console.log(textStatus);
+    console.log(errorThrown.message);
+  });
+});
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!*****************************************!*\
+  !*** ./resources/js/Restore_message.js ***!
+  \*****************************************/
+$('#restore_messageBtn').click(function () {
+  var formElm = document.getElementById("message_actions_form");
+  var message_id = formElm.message_id.value;
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $.ajax({
+    type: "POST",
+    url: url + "/jQuery.ajax/restore_message",
+    data: {
+      "thread_id": thread_id,
+      "message_id": message_id
     }
   }).done(function () {}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
     console.log(XMLHttpRequest.status);

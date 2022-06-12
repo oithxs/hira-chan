@@ -170,7 +170,7 @@
     "Download": "Download",
     "E-Mail Address": "メールアドレス",
     "Ecuador": "Ecuador",
-    "Edit": "Edit",
+    "Edit": "編集",
     "Edit :resource": "Edit :resource",
     "Edit Attached": "Edit Attached",
     "Editor": "編集者",
@@ -426,7 +426,7 @@
     "resource": "resource",
     "Resources": "Resources",
     "resources": "resources",
-    "Restore": "Restore",
+    "Restore": "復元",
     "Restore Resource": "Restore Resource",
     "Restore Selected": "Restore Selected",
     "results": "results",
@@ -632,5 +632,9 @@
     "New register": "新規登録はコチラ",
     "Top page": "トップページ",
     "Access count": "アクセス回数",
-    "Access Ranking": "順位"
+    "Access Ranking": "順位",
+    "Thread ID": "スレッドID",
+    "Do you really want to delete it?": "本当に削除しますか？",
+    "Do you really want to restore it?": "本当に復元しますか？",
+    "Edit thread": "スレッドの編集"
 }
