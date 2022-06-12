@@ -25,4 +25,18 @@ class AdminActions extends Model {
 		DB::connection('mysql_keiziban')->statement($query);
 		return null;
 	}
+
+	public function edit_thread_record($thread_id, $thread_name) {
+		$query = <<<EOF
+		UPDATE
+			hub
+		SET
+			hub.thread_name = '$thread_name'
+		WHERE
+			hub.thread_id = '$thread_id'
+		EOF;
+
+		DB::connection('mysql_keiziban')->statement($query);
+		return null;
+	}
 }

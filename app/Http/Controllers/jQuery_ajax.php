@@ -85,4 +85,14 @@ class jQuery_ajax extends Controller {
 
 		return null;
 	}
+
+	public function edit_thread(Request $request) {
+		$thread_id = $request->thread_id;
+		$thread_name = $request->thread_name;
+
+		$admin_actions = new AdminActions;
+		$admin_actions->edit_thread_record($thread_id, $thread_name);
+
+		return null;
+	}
 }
