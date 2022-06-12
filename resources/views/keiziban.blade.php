@@ -105,7 +105,7 @@
                         @if ($result == 1)
                         <div class="row">
                             <hr />
-                            <div class="col-4">
+                            <div class="col-sm-4 col-xs-12">
                                 <form id="sendMessage">
                                     <div class="mb-2">
                                         <label class="form-label"
@@ -114,7 +114,7 @@
                                         <textarea
                                             class="form-control"
                                             name="message"
-                                            rows="7"
+                                            rows="4"
                                         ></textarea>
                                         <br />
                                         <div class="form-text">
@@ -133,7 +133,7 @@
 
                             <div
                                 id="displayArea"
-                                class="col-8"
+                                class="col-sm-8 col-xs-12"
                                 style="
                                     height: 70vh;
                                     width: 100;
