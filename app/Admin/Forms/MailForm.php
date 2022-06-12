@@ -30,6 +30,7 @@ class MailForm extends Form
         $count = 1;
         while (isset($_SESSION['email'.$count])) {
             $emails[$count] = $_SESSION['email'.$count];
+            unset($_SESSION['email'.$count]);
             $count++;
         }
         Mail::to($emails)->send(new ContactMail($request->mail_message));
