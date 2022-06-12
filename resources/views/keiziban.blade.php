@@ -156,6 +156,7 @@
                                     overflow-x: hidden;
                                 "></div>
                         </div>
+
                         @else
                         <div class="mt-4">
                             <h1 class="text-danger">※スレッドが存在しません</h1>
