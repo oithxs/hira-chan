@@ -2,5 +2,8 @@
     "editor.formatOnSave": true,
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 1000,
-    "editor.formatOnType": true
+    "editor.formatOnType": true,
+    "files.associations": {
+        "*.blade.php": "html"
+    }
 }
