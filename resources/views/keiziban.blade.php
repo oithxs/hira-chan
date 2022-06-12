@@ -136,7 +136,7 @@
                                 class="col-8"
                                 style="
                                     height: 70vh;
-                                    width: 100%;
+                                    width: 100;
                                     overflow-y: scroll;
                                     overflow-x: hidden;
                                 "
