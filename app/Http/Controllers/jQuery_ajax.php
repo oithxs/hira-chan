@@ -8,6 +8,7 @@ use App\Models\Get;
 use App\Models\Send;
 use App\Models\create_thread;
 use App\Models\Like;
+use App\Models\AdminActions;
 
 class jQuery_ajax extends Controller {
 	public function get_allRow(Request $request) {
@@ -72,6 +73,16 @@ class jQuery_ajax extends Controller {
 			$message_id,
 			$user_email
 		);
+		return null;
+	}
+
+	public function delete_thread(Request $request) {
+		$thread_id = $request->thread_id;
+
+		$admin_actions = new AdminActions;
+		$admin_actions->delete_thread($thread_id);
+		$admin_actions->delete_thread_record($thread_id);
+
 		return null;
 	}
 }
