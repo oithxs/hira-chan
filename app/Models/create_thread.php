@@ -1,13 +1,16 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-class create_thread extends Model {
-    public function create_thread($thread_id) {
+class create_thread extends Model
+{
+    public function create_thread($thread_id)
+    {
         Schema::connection('mysql_keiziban')->create($thread_id, function (Blueprint $table) {
             $table->id('no');
             $table->text('name');
@@ -16,11 +19,12 @@ class create_thread extends Model {
             $table->text('time');
             $table->boolean('is_validity')->default(true);
         });
-        
+
         return null;
     }
 
-    public function insertTable($tableName, $thread_id, $user_email) {
+    public function insertTable($tableName, $thread_id, $user_email)
+    {
         $query = <<<EOF
         INSERT INTO
             hub(
@@ -38,11 +42,13 @@ class create_thread extends Model {
         EOF;
 
         DB::connection('mysql_keiziban')->insert(
-        $query, [
-            'thread_id' => $thread_id, 
-            'thread_name' => $tableName, 
-            'user_email' => $user_email
-        ]);
+            $query,
+            [
+                'thread_id' => $thread_id,
+                'thread_name' => $tableName,
+                'user_email' => $user_email
+            ]
+        );
         return null;
     }
 }

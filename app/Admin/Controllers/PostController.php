@@ -13,7 +13,7 @@ class PostController extends Controller
         $count = 1;
         session_start();
         foreach (User::find($request->get('ids')) as $post) {
-            $_SESSION['email'.$count] = $post->email;
+            $_SESSION['email' . $count] = $post->email;
             $count++;
         }
     }

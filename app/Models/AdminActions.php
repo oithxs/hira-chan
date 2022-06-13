@@ -1,20 +1,25 @@
 <?php
+
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class AdminActions extends Model {
-	public function delete_thread($thread_id) {
+class AdminActions extends Model
+{
+    public function delete_thread($thread_id)
+    {
         $query = <<<EOF
 		DROP TABLE $thread_id
 		EOF;
 
-		DB::connection('mysql_keiziban')->statement($query);
-		return null;
-	}
+        DB::connection('mysql_keiziban')->statement($query);
+        return null;
+    }
 
-	public function delete_thread_record($thread_id) {
-		$query = <<<EOF
+    public function delete_thread_record($thread_id)
+    {
+        $query = <<<EOF
 		DELETE
 		FROM
 			hub
@@ -22,12 +27,13 @@ class AdminActions extends Model {
 			hub.thread_id = '$thread_id'
 		EOF;
 
-		DB::connection('mysql_keiziban')->statement($query);
-		return null;
-	}
+        DB::connection('mysql_keiziban')->statement($query);
+        return null;
+    }
 
-	public function edit_thread_record($thread_id, $thread_name) {
-		$query = <<<EOF
+    public function edit_thread_record($thread_id, $thread_name)
+    {
+        $query = <<<EOF
 		UPDATE
 			hub
 		SET
@@ -36,12 +42,13 @@ class AdminActions extends Model {
 			hub.thread_id = '$thread_id'
 		EOF;
 
-		DB::connection('mysql_keiziban')->statement($query);
-		return null;
-	}
+        DB::connection('mysql_keiziban')->statement($query);
+        return null;
+    }
 
-	public function delete_message_record($thread_id, $message_id) {
-		$query = <<<EOF
+    public function delete_message_record($thread_id, $message_id)
+    {
+        $query = <<<EOF
 		UPDATE
 			$thread_id
 		SET
@@ -50,12 +57,13 @@ class AdminActions extends Model {
 			$thread_id.no = '$message_id'
 		EOF;
 
-		DB::connection('mysql_keiziban')->statement($query);
-		return null;
-	}
+        DB::connection('mysql_keiziban')->statement($query);
+        return null;
+    }
 
-	public function restore_message_record($thread_id, $message_id) {
-		$query = <<<EOF
+    public function restore_message_record($thread_id, $message_id)
+    {
+        $query = <<<EOF
 		UPDATE
 			$thread_id
 		SET
@@ -64,7 +72,7 @@ class AdminActions extends Model {
 			$thread_id.no = '$message_id'
 		EOF;
 
-		DB::connection('mysql_keiziban')->statement($query);
-		return null;
-	}
+        DB::connection('mysql_keiziban')->statement($query);
+        return null;
+    }
 }

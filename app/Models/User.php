@@ -60,7 +60,8 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     // Add custom mail
-    public function sendEmailVerificationNotification() {
+    public function sendEmailVerificationNotification()
+    {
         $this->notify(new \App\Notifications\VerifyEmailAddURL);
     }
 }
