@@ -28,9 +28,9 @@ class MailForm extends Form
         session_start();
 
         $count = 1;
-        while (isset($_SESSION['email'.$count])) {
-            $emails[$count] = $_SESSION['email'.$count];
-            unset($_SESSION['email'.$count]);
+        while (isset($_SESSION['email' . $count])) {
+            $emails[$count] = $_SESSION['email' . $count];
+            unset($_SESSION['email' . $count]);
             $count++;
         }
         Mail::to($emails)->send(new ContactMail($request->mail_message));
@@ -44,7 +44,7 @@ class MailForm extends Form
      */
     public function form()
     {
-		$this->textarea("mail_message", __('Send mail text'));
+        $this->textarea("mail_message", __('Send mail text'));
     }
 
     /**
@@ -54,7 +54,6 @@ class MailForm extends Form
      */
     public function data()
     {
-        return [
-        ];
+        return [];
     }
 }

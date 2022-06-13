@@ -73,16 +73,17 @@ class VerifyEmailAddURL extends Notification
         );
     }
 
-    protected function accountDeleteUrl($notifiable) {
+    protected function accountDeleteUrl($notifiable)
+    {
         return URL::temporarySignedRoute(
             'account/delete',
             Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),
             [
                 'id' => $notifiable->getKey(),
                 'hash' => sha1(
-                    $notifiable->getKey() . 
-                    $notifiable->getEmailForVerification() . 
-                    $notifiable->getKey()
+                    $notifiable->getKey() .
+                        $notifiable->getEmailForVerification() .
+                        $notifiable->getKey()
                 ),
             ]
         );

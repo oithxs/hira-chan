@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Like extends Model {
-    public function like($thread_id, $message_id, $user_email) {
+class Like extends Model
+{
+    public function like($thread_id, $message_id, $user_email)
+    {
         $thread_id = htmlspecialchars($thread_id, ENT_QUOTES, 'UTF-8');
-        
-        $query =<<<EOF
+
+        $query = <<<EOF
         INSERT INTO
             likes
         SELECT
@@ -34,21 +36,23 @@ class Like extends Model {
                     user_email = :user_email
             );
         EOF;
-        
+
         DB::connection('mysql_keiziban')->insert(
-            $query, [
-                'thread_id' => $thread_id, 
-                'message_id' => $message_id, 
+            $query,
+            [
+                'thread_id' => $thread_id,
+                'message_id' => $message_id,
                 'user_email' => $user_email,
             ]
         );
         return null;
     }
 
-    public function unlike($thread_id, $message_id, $user_email) {
+    public function unlike($thread_id, $message_id, $user_email)
+    {
         $thread_id = htmlspecialchars($thread_id, ENT_QUOTES, 'UTF-8');
-        
-        $query =<<<EOF
+
+        $query = <<<EOF
         DELETE
         FROM
             likes

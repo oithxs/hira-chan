@@ -14,8 +14,8 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .js([
-        'resources/js/Get_allRow.js', 
-        'resources/js/Send_Row.js', 
+        'resources/js/Get_allRow.js',
+        'resources/js/Send_Row.js',
         'resources/js/Create_thread',
         'resources/js/Delete_thread',
         'resources/js/Edit_thread',
@@ -25,7 +25,9 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),
-    ]);
+    ])
+    .postCss('resources/css/welcome.css', 'public/css/design.css')
+    .postCss('resources/css/normalize.css', 'public/css/design.css');
 
 if (mix.inProduction()) {
     mix.version();
