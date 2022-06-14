@@ -13,31 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// ページ移動（非ログイン）
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/account/delete/{id}/{hash}', 'App\Http\Controllers\AccountDelete')->middleware('auth')->name('account/delete');
 
-// データ処理
-Route::middleware([
-    'PostAccess_only'
-])->group(function () {
-    Route::match(['get', 'post'], 'jQuery.ajax/getRow', "App\Http\Controllers\jQuery_ajax@get_allRow");
-    Route::match(['get', 'post'], 'jQuery.ajax/sendRow', "App\Http\Controllers\jQuery_ajax@send_Row");
-    Route::match(['get', 'post'], 'jQuery.ajax/create_thread', "App\Http\Controllers\jQuery_ajax@create_thread");
-    Route::match(['get', 'post'], 'jQuery.ajax/like', "App\Http\Controllers\jQuery_ajax@like");
-    Route::match(['get', 'post'], 'jQuery.ajax/unlike', "App\Http\Controllers\jQuery_ajax@unlike");
-
-    Route::middleware([
-        'Is_Admin'
-    ])->group(function () {
-        Route::match(['get', 'post'], 'jQuery.ajax/admin/delete_thread', "App\Http\Controllers\jQuery_ajax@delete_thread");
-        Route::match(['get', 'post'], 'jQuery.ajax/admin/edit_thread', "App\Http\Controllers\jQuery_ajax@edit_thread");
-        Route::match(['get', 'post'], 'jQuery.ajax/admin/delete_message', "App\Http\Controllers\jQuery_ajax@delete_message");
-        Route::match(['get', 'post'], 'jQuery.ajax/admin/restore_message', "App\Http\Controllers\jQuery_ajax@restore_message");
-    });
-});
-
+// ページ移動（要ログイン）
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -50,3 +31,27 @@ Route::middleware([
     Route::get('hub/thread_name=/id=', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
     Route::get('/mypage', 'App\Http\Controllers\MyPage')->name('mypage');
 });
+
+// データ処理
+Route::middleware([
+    'PostAccess_only'
+])->group(function () {
+    Route::match(['get', 'post'], 'jQuery.ajax/getRow', "App\Http\Controllers\jQuery_ajax@get_allRow");
+    Route::match(['get', 'post'], 'jQuery.ajax/sendRow', "App\Http\Controllers\jQuery_ajax@send_Row");
+    Route::match(['get', 'post'], 'jQuery.ajax/create_thread', "App\Http\Controllers\jQuery_ajax@create_thread");
+    Route::match(['get', 'post'], 'jQuery.ajax/like', "App\Http\Controllers\jQuery_ajax@like");
+    Route::match(['get', 'post'], 'jQuery.ajax/unlike', "App\Http\Controllers\jQuery_ajax@unlike");
+
+    // 管理者ユーザのみ
+    Route::middleware([
+        'Is_Admin'
+    ])->group(function () {
+        Route::match(['get', 'post'], 'jQuery.ajax/admin/delete_thread', "App\Http\Controllers\jQuery_ajax@delete_thread");
+        Route::match(['get', 'post'], 'jQuery.ajax/admin/edit_thread', "App\Http\Controllers\jQuery_ajax@edit_thread");
+        Route::match(['get', 'post'], 'jQuery.ajax/admin/delete_message', "App\Http\Controllers\jQuery_ajax@delete_message");
+        Route::match(['get', 'post'], 'jQuery.ajax/admin/restore_message', "App\Http\Controllers\jQuery_ajax@restore_message");
+    });
+});
+
+// アカウント登録キャンセル
+Route::get('/account/delete/{id}/{hash}', 'App\Http\Controllers\AccountDelete')->middleware('auth')->name('account/delete');
