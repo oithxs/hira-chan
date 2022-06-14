@@ -27,10 +27,15 @@ Route::middleware([
     Route::match(['get', 'post'], 'jQuery.ajax/create_thread', "App\Http\Controllers\jQuery_ajax@create_thread");
     Route::match(['get', 'post'], 'jQuery.ajax/like', "App\Http\Controllers\jQuery_ajax@like");
     Route::match(['get', 'post'], 'jQuery.ajax/unlike', "App\Http\Controllers\jQuery_ajax@unlike");
-    Route::match(['get', 'post'], 'jQuery.ajax/delete_thread', "App\Http\Controllers\jQuery_ajax@delete_thread");
-    Route::match(['get', 'post'], 'jQuery.ajax/edit_thread', "App\Http\Controllers\jQuery_ajax@edit_thread");
-    Route::match(['get', 'post'], 'jQuery.ajax/delete_message', "App\Http\Controllers\jQuery_ajax@delete_message");
-    Route::match(['get', 'post'], 'jQuery.ajax/restore_message', "App\Http\Controllers\jQuery_ajax@restore_message");
+
+    Route::middleware([
+        'Is_Admin'
+    ])->group(function () {
+        Route::match(['get', 'post'], 'jQuery.ajax/admin/delete_thread', "App\Http\Controllers\jQuery_ajax@delete_thread");
+        Route::match(['get', 'post'], 'jQuery.ajax/admin/edit_thread', "App\Http\Controllers\jQuery_ajax@edit_thread");
+        Route::match(['get', 'post'], 'jQuery.ajax/admin/delete_message', "App\Http\Controllers\jQuery_ajax@delete_message");
+        Route::match(['get', 'post'], 'jQuery.ajax/admin/restore_message', "App\Http\Controllers\jQuery_ajax@restore_message");
+    });
 });
 
 Route::middleware([

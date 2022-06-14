@@ -10,7 +10,7 @@ $('#delete_threadBtn').click(function () {
 
     $.ajax({
         type: "POST",
-        url: url + "/jQuery.ajax/delete_thread",
+        url: url + "/jQuery.ajax/admin/delete_thread",
         data: {
             "thread_id": thread_id
         },

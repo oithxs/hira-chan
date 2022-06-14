@@ -10,7 +10,7 @@ $('#restore_messageBtn').click(function () {
 
     $.ajax({
         type: "POST",
-        url: url + "/jQuery.ajax/restore_message",
+        url: url + "/jQuery.ajax/admin/restore_message",
         data: {
             "thread_id": thread_id,
             "message_id": message_id

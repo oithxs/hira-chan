@@ -143,7 +143,7 @@ $('#delete_threadBtn').click(function () {
   });
   $.ajax({
     type: "POST",
-    url: url + "/jQuery.ajax/delete_thread",
+    url: url + "/jQuery.ajax/admin/delete_thread",
     data: {
       "thread_id": thread_id
     }
@@ -172,7 +172,7 @@ $('#edit_threadBtn').click(function () {
   });
   $.ajax({
     type: "POST",
-    url: url + "/jQuery.ajax/edit_thread",
+    url: url + "/jQuery.ajax/admin/edit_thread",
     data: {
       "thread_id": thread_id,
       "thread_name": thread_name
@@ -200,7 +200,7 @@ $('#delete_messageBtn').click(function () {
   });
   $.ajax({
     type: "POST",
-    url: url + "/jQuery.ajax/delete_message",
+    url: url + "/jQuery.ajax/admin/delete_message",
     data: {
       "thread_id": thread_id,
       "message_id": message_id
@@ -228,7 +228,7 @@ $('#restore_messageBtn').click(function () {
   });
   $.ajax({
     type: "POST",
-    url: url + "/jQuery.ajax/restore_message",
+    url: url + "/jQuery.ajax/admin/restore_message",
     data: {
       "thread_id": thread_id,
       "message_id": message_id
