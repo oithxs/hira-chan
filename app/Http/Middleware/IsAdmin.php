@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class AccessGET
+class IsAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,11 @@ class AccessGET
      */
     public function handle(Request $request, Closure $next)
     {
-        abort(404);
-        exit;
+        if ($request->user()->is_admin) {
+            return $next($request);
+        } else {
+            abort(403);
+            exit;
+        }
     }
 }

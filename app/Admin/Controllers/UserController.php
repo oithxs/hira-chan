@@ -39,6 +39,7 @@ class UserController extends AdminController
         $grid->column('email', __('Email'));
         $grid->column('email_verified_at', __('Email verified at'));
         $grid->column('password', __('Password'));
+        $grid->column('is_admin');
         $grid->column('two_factor_secret', __('Two factor secret'));
         $grid->column('two_factor_recovery_codes', __('Two factor recovery codes'));
         $grid->column('two_factor_confirmed_at', __('Two factor confirmed at'));
@@ -66,6 +67,7 @@ class UserController extends AdminController
         $show->field('email', __('Email'));
         $show->field('email_verified_at', __('Email verified at'));
         $show->field('password', __('Password'));
+        $show->field('is_admin');
         $show->field('two_factor_secret', __('Two factor secret'));
         $show->field('two_factor_recovery_codes', __('Two factor recovery codes'));
         $show->field('two_factor_confirmed_at', __('Two factor confirmed at'));
@@ -91,6 +93,7 @@ class UserController extends AdminController
         $form->email('email', __('Email'));
         $form->datetime('email_verified_at', __('Email verified at'))->default(date('Y-m-d H:i:s'));
         $form->password('password', __('Password'));
+        $form->text('is_admin');
         $form->textarea('two_factor_secret', __('Two factor secret'));
         $form->textarea('two_factor_recovery_codes', __('Two factor recovery codes'));
         $form->datetime('two_factor_confirmed_at', __('Two factor confirmed at'))->default(date('Y-m-d H:i:s'));

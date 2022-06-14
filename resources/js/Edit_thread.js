@@ -13,7 +13,7 @@ $('#edit_threadBtn').click(function () {
 
     $.ajax({
         type: "POST",
-        url: url + "/jQuery.ajax/edit_thread",
+        url: url + "/jQuery.ajax/admin/edit_thread",
         data: {
             "thread_id": thread_id,
             "thread_name": thread_name

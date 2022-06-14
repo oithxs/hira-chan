@@ -10,7 +10,7 @@ $('#delete_messageBtn').click(function () {
 
     $.ajax({
         type: "POST",
-        url: url + "/jQuery.ajax/delete_message",
+        url: url + "/jQuery.ajax/admin/delete_message",
         data: {
             "thread_id": thread_id,
             "message_id": message_id
