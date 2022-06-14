@@ -13,34 +13,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function() { return view('welcome');});
+Route::get('/', function () {
+    return view('welcome');
+});
 Route::get('/account/delete/{id}/{hash}', 'App\Http\Controllers\AccountDelete')->middleware('auth')->name('account/delete');
 
-// URLからのアクセス対策
-Route::middleware([
-    'AccessGET'
-])->group(function () {
-    Route::get('jQuery.ajax/getRow', "App\Http\Controllers\jQuery_ajax@get_allRow");
-    Route::get('jQuery.ajax/sendRow', "App\Http\Controllers\jQuery_ajax@send_Row");
-    Route::get('jQuery.ajax/create_thread', "App\Http\Controllers\jQuery_ajax@create_thread");
-    Route::get('jQuery.ajax/like', "App\Http\Controllers\jQuery_ajax@like");
-    Route::get('jQuery.ajax/unlike', "App\Http\Controllers\jQuery_ajax@unlike");
-    Route::get('jQuery.ajax/delete_thread', "App\Http\Controllers\jQuery_ajax@delete_thread");
-    Route::get('jQuery.ajax/edit_thread', "App\Http\Controllers\jQuery_ajax@edit_thread");
-    Route::get('jQuery.ajax/delete_message', "App\Http\Controllers\jQuery_ajax@delete_message");
-    Route::get('jQuery.ajax/restore_message', "App\Http\Controllers\jQuery_ajax@restore_message");
-});
-
 // データ処理
-Route::post('jQuery.ajax/getRow', "App\Http\Controllers\jQuery_ajax@get_allRow");
-Route::post('jQuery.ajax/sendRow', "App\Http\Controllers\jQuery_ajax@send_Row");
-Route::post('jQuery.ajax/create_thread', "App\Http\Controllers\jQuery_ajax@create_thread");
-Route::post('jQuery.ajax/like', "App\Http\Controllers\jQuery_ajax@like");
-Route::post('jQuery.ajax/unlike', "App\Http\Controllers\jQuery_ajax@unlike");
-Route::post('jQuery.ajax/delete_thread', "App\Http\Controllers\jQuery_ajax@delete_thread");
-Route::post('jQuery.ajax/edit_thread', "App\Http\Controllers\jQuery_ajax@edit_thread");
-Route::post('jQuery.ajax/delete_message', "App\Http\Controllers\jQuery_ajax@delete_message");
-Route::post('jQuery.ajax/restore_message', "App\Http\Controllers\jQuery_ajax@restore_message");
+Route::middleware([
+    'PostAccess_only'
+])->group(function () {
+    Route::match(['get', 'post'], 'jQuery.ajax/getRow', "App\Http\Controllers\jQuery_ajax@get_allRow");
+    Route::match(['get', 'post'], 'jQuery.ajax/sendRow', "App\Http\Controllers\jQuery_ajax@send_Row");
+    Route::match(['get', 'post'], 'jQuery.ajax/create_thread', "App\Http\Controllers\jQuery_ajax@create_thread");
+    Route::match(['get', 'post'], 'jQuery.ajax/like', "App\Http\Controllers\jQuery_ajax@like");
+    Route::match(['get', 'post'], 'jQuery.ajax/unlike', "App\Http\Controllers\jQuery_ajax@unlike");
+    Route::match(['get', 'post'], 'jQuery.ajax/delete_thread', "App\Http\Controllers\jQuery_ajax@delete_thread");
+    Route::match(['get', 'post'], 'jQuery.ajax/edit_thread', "App\Http\Controllers\jQuery_ajax@edit_thread");
+    Route::match(['get', 'post'], 'jQuery.ajax/delete_message', "App\Http\Controllers\jQuery_ajax@delete_message");
+    Route::match(['get', 'post'], 'jQuery.ajax/restore_message', "App\Http\Controllers\jQuery_ajax@restore_message");
+});
 
 Route::middleware([
     'auth:sanctum',
