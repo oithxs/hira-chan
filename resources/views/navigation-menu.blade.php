@@ -6,20 +6,20 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-jet-application-mark class="block h-9 w-auto" />
+                        <x-jet-application-mark class="block h-9 w-auto text-decoration-none" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" class="text-decoration-none">
                         @if (!Auth::user()->is_admin)
                         {{__('Top page')}}
                         @else
                         管理者用ページ
                         @endif
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('hub') }}" :active="request()->routeIs('hub')">
+                    <x-jet-nav-link href="{{ route('hub') }}" :active="request()->routeIs('hub')" class="text-decoration-none">
                         {{__('Forum Hub')}}
                     </x-jet-nav-link>
                 </div>
@@ -113,11 +113,11 @@
                                 {{ __('Manage Account') }}
                             </div>
 
-                            <x-jet-dropdown-link href="{{ route('mypage') }}">
+                            <x-jet-dropdown-link href="{{ route('mypage') }}" class="text-decoration-none">
                                 {{ __('My page') }}
                             </x-jet-dropdown-link>
 
-                            <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                            <x-jet-dropdown-link href="{{ route('profile.show') }}" class="text-decoration-none">
                                 {{ __('Profile') }}
                             </x-jet-dropdown-link>
 
@@ -133,7 +133,7 @@
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                 @csrf
 
-                                <x-jet-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
+                                <x-jet-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();" class="text-decoration-none">
                                     {{ __('Log Out') }}
                                 </x-jet-dropdown-link>
                             </form>
@@ -185,7 +185,7 @@
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}"
-                    :active="request()->routeIs('profile.show')">
+                    :active="request()->routeIs('profile.show')" class="text-decoration-none">
                     {{ __('Profile') }}
                 </x-jet-responsive-nav-link>
 
@@ -200,7 +200,7 @@
                 <form method="POST" action="{{ route('logout') }}" x-data>
                     @csrf
 
-                    <x-jet-responsive-nav-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
+                    <x-jet-responsive-nav-link href="{{ route('logout') }}" @click.prevent="$root.submit();" class="text-decoration-none">
                         {{ __('Log Out') }}
                     </x-jet-responsive-nav-link>
                 </form>

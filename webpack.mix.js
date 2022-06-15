@@ -22,6 +22,10 @@ mix.js('resources/js/app.js', 'public/js')
         'resources/js/Delete_message',
         'resources/js/Restore_message'
     ], 'public/js/app_jquery.js')
+    .js([
+        
+    ],
+)
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),
