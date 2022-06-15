@@ -17,10 +17,10 @@ on: push
 
 jobs:
   slackNotification:
-    - name: Slack Notification TEST
-      id: slack
-      uses: slackapi/slack-github-action@v1.18.0
-      with:
+    name: Slack Notification TEST
+    id: slack
+    uses: slackapi/slack-github-action@v1.18.0
+    with:
 
       payload: |
         {
