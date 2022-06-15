@@ -1,3 +1,10 @@
+<!--
+    ログイン後右上のプロフィールページ
+    アカウント削除の項目
+    デザインするときは慎重に
+    {{ __('〇〇') }}は，resources/lang/ja.jsonとリンク
+-->
+
 <x-jet-action-section>
     <x-slot name="title">
         {{ __('Delete Account') }}

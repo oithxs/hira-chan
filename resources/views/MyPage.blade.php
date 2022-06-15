@@ -1,18 +1,25 @@
+<!--
+    マイページのファイル（ログイン後右上「ユーザ名」->「マイページ」で移動）
+    {{ __('〇〇') }}は，resources/lang/ja.jsonとリンク
+-->
+
 <x-app-layout>
+    <!-- ここからデザイン（いいねが押された数などを取得予定・取得していないので今は放置） -->
+
+    <!-- ここからタイトル（ページのヘッダではない） -->
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{__('My page')}}
         </h2>
     </x-slot>
+    <!-- ここまでタイトル（ページのヘッダではない） -->
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
-                <!-- my area begin -->
-                <!-- my area end -->
-
             </div>
         </div>
     </div>
+    <!-- ここまでデザイン -->
 </x-app-layout>
