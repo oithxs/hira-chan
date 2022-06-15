@@ -1,3 +1,10 @@
+<!--
+    ログイン後右上のプロフィールページ
+    パスワード更新の項目
+    デザインするときは慎重に
+    {{ __('〇〇') }}は，resources/lang/ja.jsonとリンク
+-->
+
 <x-jet-form-section submit="updatePassword">
     <x-slot name="title">
         {{ __('Update Password') }}

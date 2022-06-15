@@ -5,6 +5,9 @@ if ((location.href).includes('hub/thread_name=')) {
 
 function reload() {
     var displayArea = document.getElementById("displayArea");
+    var user;
+    var msg;
+    var show;
 
     $.ajaxSetup({
         headers: {
@@ -21,15 +24,18 @@ function reload() {
         displayArea.innerHTML = "<br>";
         for (var item in data) {
             if (data[item]['is_validity']) {
+                // 通常
                 user = data[item]['name'];
                 msg = data[item]['message'];
             } else {
+                // 管理者によって削除されていた場合
                 user = "-----";
                 msg = "<br>この投稿は管理者によって削除されました";
             }
 
             if (data[item]['user_like'] == 1) {
-                displayArea.insertAdjacentHTML('afterbegin',
+                // いいねが押されていた場合
+                show = "" +
                     data[item]['no'] + ": " + user + " " + data[item]['time'] +
                     "<br>" +
                     "<p style='overflow-wrap: break-word;'>" +
@@ -37,9 +43,10 @@ function reload() {
                     "</p>" +
                     "<br>" +
                     "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['no'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] +
-                    "<hr>");
+                    "<hr>"
             } else {
-                displayArea.insertAdjacentHTML('afterbegin',
+                // いいねが押されていない場合
+                show = "" +
                     data[item]['no'] + ": " + user + " " + data[item]['time'] +
                     "<br>" +
                     "<p style='overflow-wrap: break-word;'>" +
@@ -47,8 +54,10 @@ function reload() {
                     "</p>" +
                     "<br>" +
                     "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['no'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] +
-                    "<hr>");
+                    "<hr>";
             }
+
+            displayArea.insertAdjacentHTML('afterbegin', show);
         }
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
         console.log(XMLHttpRequest.status);

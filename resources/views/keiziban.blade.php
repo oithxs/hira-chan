@@ -1,4 +1,13 @@
+<!--
+    掲示板のファイル
+    {{ __('〇〇') }}は，resources/lang/ja.jsonとリンク
+-->
+
 <x-app-layout>
+    <!-- ここからデザイン -->
+
+    <!-- ここからタイトル（ページのヘッダではない） -->
+    <!-- タイトルは「$title」 -->
     <x-slot name="header">
         <?php
         $title = str_replace("&slash;", "/", $thread_name);
@@ -9,11 +18,11 @@
             {{ $title }}
         </h2>
     </x-slot>
+    <!-- ここまでタイトル（ページのヘッダではない） -->
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <!-- my area begin -->
 
                 <head>
                     <meta charset="utf-8" />
@@ -25,6 +34,7 @@
                         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
                         crossorigin="anonymous" />
 
+                    <!-- ここからデザイン関係なし -->
                     <!-- jQuery -->
                     <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 
@@ -86,6 +96,7 @@
                             }
                         }
                     </script>
+                    <!-- ここまでデザイン関係なし -->
                 </head>
 
                 <body>
@@ -97,10 +108,13 @@
                         <br />
                         <br />
 
+                        <!-- ここからスレッドが存在したとき -->
                         @if ($result == 1)
                         <div class="row">
                             <hr />
                             <div class="col-sm-4 col-xs-12">
+
+                                <!-- ここから管理者のみに表示 -->
                                 @if (Auth::user()->is_admin)
                                 <form id="message_actions_form">
                                     <div class="mb-2">
@@ -131,8 +145,9 @@
                                         </ul>
                                     </div>
                                 </form>
-
                                 @endif
+                                <!-- ここまで管理者のみに表示 -->
+
                                 <form id="sendMessage">
                                     <div class="mb-2">
                                         <label class="form-label">コメント</label>
@@ -149,14 +164,22 @@
                                 </button>
                             </div>
 
+                            <!--
+                                ここから非同期通信で掲示板の表示
+                                表示はresources/js/GetallRow.js
+                            -->
                             <div id="displayArea" class="col-sm-8 col-xs-12" style="
                                     height: 70vh;
                                     width: 100;
                                     overflow-y: scroll;
                                     overflow-x: hidden;
                                 "></div>
-                        </div>
+                            <!-- ここまで非同期通信で掲示板の表示 -->
 
+                        </div>
+                        <!-- ここまでスレッドが存在したとき -->
+
+                        <!-- ここからスレッドが存在しなかったとき -->
                         @else
                         <div class="mt-4">
                             <h1 class="text-danger">※スレッドが存在しません</h1>
@@ -164,9 +187,12 @@
                         <br />
                         <br />
                         @endif
+                        <!-- ここまでスレッドが存在しなかったとき -->
                     </div>
 
+                    <!-- ここから管理者のみに表示 -->
                     <!-- Modal -->
+                    @if (Auth::user()->is_admin)
                     <div class="modal fade" id="DeleteMessageModal" tabindex="-1"
                         aria-labelledby="DeleteMessageModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -183,6 +209,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="modal fade" id="RestoreMessageModal" tabindex="-1"
                         aria-labelledby="RestoreMessageModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -199,6 +226,8 @@
                             </div>
                         </div>
                     </div>
+                    @endif
+                    <!-- ここまで管理者のみに表示 -->
 
                     <div>
                         <!-- Bootstrap用JavaScript -->
@@ -206,14 +235,16 @@
                             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
                             crossorigin="anonymous"></script>
 
+                        <!-- ここからデザイン関係なし -->
                         <!-- others -->
                         @if ($result == 1)
                         <script src="{{ mix('js/app_jquery.js') }}"></script>
                         @endif
+                        <!-- ここまでデザイン関係なし -->
                     </div>
                 </body>
-                <!-- my area end -->
             </div>
         </div>
     </div>
+    <!-- ここまでデザイン -->
 </x-app-layout>

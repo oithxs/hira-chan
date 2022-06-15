@@ -1,3 +1,10 @@
+<!--
+    ログイン後右上のプロフィールページ
+    ブラウザセッションの項目
+    デザインするときは慎重に
+    {{ __('〇〇') }}は，resources/lang/ja.jsonとリンク
+-->
+
 <x-jet-action-section>
     <x-slot name="title">
         {{ __('Browser Sessions') }}
