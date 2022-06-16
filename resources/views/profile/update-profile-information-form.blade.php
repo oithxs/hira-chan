@@ -1,3 +1,10 @@
+<!--
+    ログイン後右上のプロフィールページ
+    プロフィール情報の項目
+    デザインするときは慎重に
+    {{ __('〇〇') }}は，resources/lang/ja.jsonとリンク
+-->
+
 <x-jet-form-section submit="updateProfileInformation">
     <x-slot name="title">
         {{ __('Profile Information') }}
@@ -59,7 +66,7 @@
             <x-jet-input-error for="name" class="mt-2" />
         </div>
 
-        <!-- Email 
+        <!-- Email
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="email" value="{{ __('Email') }}" />
             <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
