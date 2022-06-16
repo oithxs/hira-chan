@@ -20,10 +20,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send GitHub Action trigger data to Slack workflow
-        uses: rtCamp/action-slack-notify@v2
+        uses: slackapi/slack-github-action@v1.19.0
+        with:
+          payload: |
+            {
+              "channel": "C03K24S52P9",
+              "attachments": [
+                {
+                  "color": "#2eb886",
+                  "text": "test"
+                }
+              ]
+            }
         env:
-          SLACK_CHANNEL: general
-          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-          SLACK_MESSAGE: 'Post Content :rocket:'
-          SLACK_TITLE: Post Title
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
