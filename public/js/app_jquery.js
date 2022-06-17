@@ -277,7 +277,9 @@ $('#page_thema').change(function () {
     data: {
       "page_thema": value
     }
-  }).done(function () {}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+  }).done(function () {
+    window.location.reload();
+  }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
     console.log(XMLHttpRequest.status);
     console.log(textStatus);
     console.log(errorThrown.message);

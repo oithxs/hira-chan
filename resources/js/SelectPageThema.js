@@ -22,6 +22,7 @@ $('#page_thema').change(function () {
             "page_thema": value
         },
     }).done(function () {
+        window.location.reload();
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
         console.log(XMLHttpRequest.status);
         console.log(textStatus);

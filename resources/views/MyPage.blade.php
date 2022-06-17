@@ -27,6 +27,16 @@
                     <option value="dark">ダークテーマ</option>
                 </select>
 
+                <!-- ここからテーマ取得例（不要になり次第削除） -->
+                <br>
+                <br>
+                @if (Auth::user()->thema == 0)
+                デフォルトテーマ
+                @elseif (Auth::user()->thema == 1)
+                ダークテーマ
+                @endif
+                <!-- ここまでテーマ取得例（不要になり次第削除） -->
+
                 <!-- デザイン関係なし -->
                 <!-- jQuery -->
                 <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
