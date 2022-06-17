@@ -40,22 +40,17 @@ jobs:
                     },
                     {
                       "title": "Number",
-                      "value": "${{ github.event.number }}",
+                      "value": "${{ github.event.pull_request.number }}",
                       "short": true
                     },
                     {
                       "title": "Event Type",
-                      "value": "${{ github.event.type }}",
+                      "value": "${{ github.event_name }}",
                       "short": true
                     },
                     {
                       "title": "title-4",
                       "value": "this is value-4",
-                      "short": true
-                    },
-                    {
-                      "title": "title-5",
-                      "value": "this is value-5",
                       "short": false
                     }
                   ]
