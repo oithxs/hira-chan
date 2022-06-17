@@ -1,6 +1,7 @@
 on:
   pull_request:
     branches:
+      - feature/test
       - develop
     types: [closed]
 
