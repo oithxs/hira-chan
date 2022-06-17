@@ -28,8 +28,11 @@ jobs:
               "attachments": [
                 {
                   "fallback": "Confirm merge Pull-Requests",
-                  "color": "#2eb886",
-                  "text": "test",
+                  "color": "good",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "**プルリクエストがマージされました**\n'git pull'を実行してローカルリポジトリを更新して下さい"
+                  }
                   "fields": [
                     {
                       "title": "title-1",
