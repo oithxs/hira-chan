@@ -10,6 +10,7 @@ use App\Models\Send;
 use App\Models\create_thread;
 use App\Models\Like;
 use App\Models\AdminActions;
+use App\Models\User;
 
 class jQuery_ajax extends Controller
 {
@@ -124,6 +125,17 @@ class jQuery_ajax extends Controller
 
         $admin_actions = new AdminActions;
         $admin_actions->restore_message_record($thread_id, $message_id);
+
+        return null;
+    }
+
+    public function page_thema(Request $request)
+    {
+        $page_thema = $request->page_thema;
+        $user = User::find($request->user()->id);
+
+        $user->thema = $page_thema;
+        $user->save();
 
         return null;
     }

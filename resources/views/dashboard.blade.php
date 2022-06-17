@@ -9,15 +9,7 @@
     <!-- ここからタイトル（ページのヘッダでなはい） -->
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-
-            @if (!Auth::user()->is_admin)
-            <!-- 一般ユーザのみに表示 -->
             {{ __("Top page") }}
-            @else
-            <!-- 管理者ユーザのみに表示 -->
-            管理者用ページ
-            @endif
-
         </h2>
     </x-slot>
     <!-- ここまでタイトル（ページのヘッダではない） -->
