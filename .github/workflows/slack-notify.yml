@@ -24,12 +24,12 @@ jobs:
         with:
           payload: |
             {
-              "channel": "C03K24S52P9",
+              "channel": "${{ secrets.SLACK_CHANNEL_ID }}",
               "attachments": [
                 {
                   "fallback": "Confirm merge Pull-Requests",
                   "color": "#2eb886",
-                  "text": "@channel test"
+                  "text": "test"
                 }
               ]
             }
