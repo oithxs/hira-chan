@@ -21,8 +21,8 @@ class AuthenticationTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->user = User::factory()->create();
-        $this->admin = User::factory()->admin()->create();
+        $this->user = User::factory()->make();
+        $this->admin = User::factory()->admin()->make();
     }
 
     public function test_dashboard_access()
