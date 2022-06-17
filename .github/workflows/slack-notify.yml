@@ -39,7 +39,7 @@ jobs:
                     },
                     {
                       "title": "Number",
-                      "value": "[${{ github.event.pull_request.number }}](${{ github.event.pull_request.html_url }})",
+                      "value": "<hxs-mini2#${{ github.event.pull_request.number }}|${{ github.event.pull_request.html_url }}>",
                       "short": true
                     },
                     {
