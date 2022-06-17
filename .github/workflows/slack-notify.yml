@@ -29,6 +29,7 @@ jobs:
                 {
                   "fallback": "Confirm merge Pull-Requests",
                   "color": "good",
+                  "type": "section",
                   "text": {
                     "type": "mrkdwn",
                     "text": "**プルリクエストがマージされました**\n'git pull'を実行してローカルリポジトリを更新して下さい"
