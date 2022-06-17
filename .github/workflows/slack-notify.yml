@@ -32,7 +32,7 @@ jobs:
                   "text": {
                     "type": "mrkdwn",
                     "text": "**プルリクエストがマージされました**\n'git pull'を実行してローカルリポジトリを更新して下さい"
-                  }
+                  },
                   "fields": [
                     {
                       "title": "title-1",
