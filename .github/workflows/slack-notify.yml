@@ -26,19 +26,19 @@ jobs:
             {
               "channel": "${{ secrets.SLACK_CHANNEL_ID }}",
               "blocks": [
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "**プルリクエストがマージされました**\n'git pull'を実行してローカルリポジトリを更新して下さい"
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*プルリクエストがマージされました*\n`git pull`を実行してローカルリポジトリを更新して下さい"
+                  }
                 }
-              }
               ],
               "attachments": [
                 {
                   "fallback": "Confirm merge Pull-Requests",
                   "color": "good",
-                  "pretext": "**プルリクエストがマージされました**\n'git pull'を実行してローカルリポジトリを更新して下さい",
+                  "pretext": "*プルリクエストがマージされました*\n`git pull`を実行してローカルリポジトリを更新して下さい",
                   "fields": [
                     {
                       "title": "title-1",
