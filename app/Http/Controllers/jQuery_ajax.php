@@ -11,7 +11,6 @@ use App\Models\create_thread;
 use App\Models\Like;
 use App\Models\AdminActions;
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
 
 class jQuery_ajax extends Controller
 {
