@@ -16,19 +16,19 @@ jobs:
           payload: |
             {
               "channel": "${{ secrets.SLACK_CHANNEL_ID }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "<!channel>\n**プルリクエストがマージされました**\n`git pull`を実行してローカルリポジトリを更新して下さい"
+                  }
+                }
+              ],
               "attachments": [
                 {
                   "fallback": "Confirm merge Pull-Requests",
                   "color": "good",
-                  "blocks": [
-                    {
-                      "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": "<!channel>\n**プルリクエストがマージされました**\n`git pull`を実行してローカルリポジトリを更新して下さい"
-                      }
-                    }
-                  ],
                   "author_name": "${{ github.actor }}",
                   "author_icon": "${{ github.event.sender.avatar_url }}",
                   "fields": [
