@@ -21,7 +21,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "<!channel>\n**プルリクエストがマージされました**\n`git pull`を実行してローカルリポジトリを更新して下さい"
+                    "text": "<!channel>\n*プルリクエストがマージされました*\n`git pull`を実行してローカルリポジトリを更新して下さい"
                   }
                 }
               ],
@@ -39,7 +39,7 @@ jobs:
                     },
                     {
                       "title": "Number",
-                      "value": "$[{{ github.event.pull_request.number }}](${{ github.event.pull_request.html_url }})",
+                      "value": "[${{ github.event.pull_request.number }}](${{ github.event.pull_request.html_url }})",
                       "short": true
                     },
                     {
