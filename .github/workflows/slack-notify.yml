@@ -1,23 +1,13 @@
-# プルリクのマージで実行
-#
-# on:
-#   pull_request:
-#     branches:
-#       - develop
-#     types: [closed]
-#
-# jobs:
-#   tag:
-#     runs-on: ubuntu-latest
-#     if: github.event.pull_request.merged == true
-
-name: Slack Notification
-
-on: push
+on:
+  pull_request:
+    branches:
+      - develop
+    types: [closed]
 
 jobs:
   slackNotification:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     steps:
       - name: Send GitHub Action trigger data to Slack workflow
         uses: slackapi/slack-github-action@v1.19.0
