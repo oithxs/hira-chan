@@ -115,7 +115,7 @@
                             <div class="col-sm-4 col-xs-12">
 
                                 <!-- ここから管理者のみに表示 -->
-                                @if (Auth::user()->is_admin)
+                                @if (Auth::user()->is_admin == 1)
                                 <form id="message_actions_form">
                                     <div class="mb-2">
                                         <label class="form-label">対象：コメントID</label>
@@ -192,7 +192,7 @@
 
                     <!-- ここから管理者のみに表示 -->
                     <!-- Modal -->
-                    @if (Auth::user()->is_admin)
+                    @if (Auth::user()->is_admin == 1)
                     <div class="modal fade" id="DeleteMessageModal" tabindex="-1"
                         aria-labelledby="DeleteMessageModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
