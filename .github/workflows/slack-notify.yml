@@ -55,7 +55,7 @@ jobs:
                       "value": "this is value-5",
                       "short": true,
                     }
-                  ]
+                  ],
                   "text": "test",
                 }
               ]
