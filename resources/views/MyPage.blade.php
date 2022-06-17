@@ -18,6 +18,25 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
+                <meta name="csrf-token" content="{{ csrf_token() }}" />
+
+                <p>ページテーマ</p>
+                <select id="page_thema">
+                    <option value="">選択して下さい</option>
+                    <option value="default">デフォルト</option>
+                    <option value="dark">ダークテーマ</option>
+                </select>
+
+                <!-- デザイン関係なし -->
+                <!-- jQuery -->
+                <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+
+                <script src="{{ mix('js/app_jquery.js') }}"></script>
+                <script>
+                    const url = "{{ url('/') }}";
+                </script>
+                <!-- デザイン関係なし -->
+
             </div>
         </div>
     </div>
