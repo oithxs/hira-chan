@@ -29,14 +29,7 @@ jobs:
                 {
                   "fallback": "Confirm merge Pull-Requests",
                   "color": "#2eb886",
-                  "text": "test",
-                  "fields": [
-                    {
-                      "title": "title-1",
-                      "value": "this is value-1",
-                      "short": true
-                    }
-                  ]
+                  "text": "test"
                 }
               ]
             }
