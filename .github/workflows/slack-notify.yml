@@ -29,24 +29,24 @@ jobs:
                 {
                   "fallback": "Confirm merge Pull-Requests",
                   "color": "good",
-                  "pretext": "*プルリクエストがマージされました*\n`git pull`を実行してローカルリポジトリを更新して下さい",
+                  "pretext": "<!channel>\n*プルリクエストがマージされました*\n`git pull`を実行してローカルリポジトリを更新して下さい",
                   "author_name": "${{ github.actor }}",
                   "author_icon": "${{ github.event.sender.avatar_url }}",
                   "fields": [
                     {
-                      "title": "title-1",
-                      "value": "this is value-1",
-                      "short": true
-                    },
-                    {
-                      "title": "title-2",
-                      "value": "this is value-2",
-                      "short": true
-                    },
-                    {
-                      "title": "title-3",
-                      "value": "this is value-3",
+                      "title": "Pull request Title",
+                      "value": "${{ github.event.pull_request.title }}",
                       "short": false
+                    },
+                    {
+                      "title": "Number",
+                      "value": "${{ github.event.number }}",
+                      "short": true
+                    },
+                    {
+                      "title": "Event Type",
+                      "value": "${{ github.event.type }}",
+                      "short": true
                     },
                     {
                       "title": "title-4",
@@ -56,7 +56,7 @@ jobs:
                     {
                       "title": "title-5",
                       "value": "this is value-5",
-                      "short": true
+                      "short": false
                     }
                   ]
                 }
