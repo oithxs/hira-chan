@@ -1,8 +1,8 @@
 on:
   pull_request:
     branches:
-      - feature/test
       - develop
+      - main
     types: [closed]
 
 jobs:
@@ -34,7 +34,7 @@ jobs:
                   "fields": [
                     {
                       "title": "Pull request Title",
-                      "value": "${{ github.event.pull_request.title }}",
+                      "value": "${{ github.event.pull_request.title }}\n",
                       "short": false
                     },
                     {
