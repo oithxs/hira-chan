@@ -20,13 +20,7 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')"
                         class="text-decoration-none">
-                        @if (!Auth::user()->is_admin)
-                        <!-- 一般ユーザのみに表示 -->
                         {{__('Top page')}}
-                        @else
-                        <!-- 管理者ユーザのみに表示 -->
-                        管理者用ページ
-                        @endif
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('hub') }}" :active="request()->routeIs('hub')"
                         class="text-decoration-none">

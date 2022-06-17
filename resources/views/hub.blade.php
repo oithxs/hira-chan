@@ -44,7 +44,7 @@
                         <br /><br />
 
                         <!-- ここから管理者のみに表示 -->
-                        @if (Auth::user()->is_admin)
+                        @if (Auth::user()->is_admin == 1)
                         <form id="thread_actions_form">
                             <label class="form-label">対象：スレッドID</label>
                             <input id="thread_id" class="form-control" type="text" />
@@ -85,7 +85,7 @@
                                         <td>{{ __("Create time") }}</td>
 
                                         <!-- ここから管理者のみに表示 -->
-                                        @if (Auth::user()->is_admin)
+                                        @if (Auth::user()->is_admin == 1)
                                         <td>
                                             {{ __("Thread ID") }}
                                         </td>
@@ -117,7 +117,7 @@
                                         </td>
 
                                         <!-- ここから管理者のみに表示 -->
-                                        @if (Auth::user()->is_admin)
+                                        @if (Auth::user()->is_admin == 1)
                                         <td>
                                             {{ $tableInfo["thread_id"] }}
                                         </td>
@@ -134,7 +134,7 @@
 
                     <!-- ここから管理者のみに表示 -->
                     <!-- Modal -->
-                    @if (Auth::user()->is_admin)
+                    @if (Auth::user()->is_admin == 1)
                     <div class="modal fade" id="DeleteThreadModal" tabindex="-1"
                         aria-labelledby="DeleteThreadModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
