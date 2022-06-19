@@ -182,4 +182,56 @@ class HubViewTest extends TestCase
 
         $view->assertDontSee('hub_edit_thread_btn');
     }
+
+    public function test_hub_view_have_jQuery()
+    {
+        $TextView = (string) $this
+            ->actingAs($this->user)
+            ->view('hub', [
+                'tables' => $this->threads,
+                'url' => url('/')
+            ]);
+
+        if (strpos($TextView, '<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>') !== false) {
+            $this->assertAuthenticated($this->user = null);
+        } else {
+            $this->assertGuest($this->user = null);
+        }
+    }
+
+    public function test_hub_view_have_url()
+    {
+        $TextView = (string) $this
+            ->actingAs($this->user)
+            ->view('hub', [
+                'tables' => $this->threads,
+                'url' => url('/')
+            ]);
+
+        $text = 'const url = "'. (string) url('/') . '";';
+
+        if (strpos($TextView, $text) !== false) {
+            $this->assertAuthenticated($this->user = null);
+        } else {
+            $this->assertGuest($this->user = null);
+        }
+    }
+
+    public function test_hub_view_have_js()
+    {
+        $TextView = (string) $this
+            ->actingAs($this->user)
+            ->view('hub', [
+                'tables' => $this->threads,
+                'url' => url('/')
+            ]);
+
+        $text = `<script src="{{ mix('js/app_jquery.js') }}"></script>`;
+
+        if (strpos($TextView, $text) !== false) {
+            $this->assertAuthenticated($this->user = null);
+        } else {
+            $this->assertGuest($this->user = null);
+        }
+    }
 }
