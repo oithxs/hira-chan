@@ -25,7 +25,7 @@ class AdminHubViewTest extends TestCase
 
         $this->threads = [
             array(
-                'id' => 0,
+                'id' => 1,
                 'thread_id' => 'hogehoge',
                 'thread_name' => 'hoge',
                 'user_email' => 'hoge@example.com',
@@ -33,7 +33,7 @@ class AdminHubViewTest extends TestCase
                 'updated_at' => null
             ),
             array(
-                'id' => 1,
+                'id' => 2,
                 'thread_id' => 'fugafuga',
                 'thread_name' => 'fuga',
                 'user_email' => 'fuga@example.com',
@@ -41,7 +41,7 @@ class AdminHubViewTest extends TestCase
                 'updated_at' => null
             ),
             array(
-                'id' => 2,
+                'id' => 3,
                 'thread_id' => 'piyopiyo',
                 'thread_name' => 'piyo',
                 'user_email' => 'piyo@example.com',
