@@ -116,10 +116,11 @@
 
                                 <!-- ここから管理者のみに表示 -->
                                 @if (Auth::user()->is_admin == 1)
-                                <form id="message_actions_form">
+                                <form id="keiziban_message_actions_form">
                                     <div class="mb-2">
                                         <label class="form-label">対象：コメントID</label>
-                                        <input id="message_id" value="1" min="1" class="form-control" type="number">
+                                        <input id="keiziban_message_id_number" value="1" min="1" class="form-control"
+                                            type="number">
 
                                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                             <li class="nav-item dropdown">
@@ -131,12 +132,13 @@
                                                     <li>
                                                         <!-- actions -->
                                                         <button type="button" class="dropdown-item"
-                                                            data-bs-toggle="modal" data-bs-target="#DeleteMessageModal">
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#keiziban_DeleteMessage_Modal">
                                                             {{ __('Delete') }}
                                                         </button>
                                                         <button type="button" class="dropdown-item"
                                                             data-bs-toggle="modal"
-                                                            data-bs-target="#RestoreMessageModal">
+                                                            data-bs-target="#keiziban_RestoreMessage_Modal">
                                                             {{ __('Restore') }}
                                                         </button>
                                                     </li>
@@ -148,18 +150,19 @@
                                 @endif
                                 <!-- ここまで管理者のみに表示 -->
 
-                                <form id="sendMessage">
+                                <form id="keiziban_sendMessage_form">
                                     <div class="mb-2">
                                         <label class="form-label">コメント</label>
-                                        <textarea class="form-control" name="message" rows="4"></textarea>
+                                        <textarea class="form-control" id="keiziban_message_textarea"
+                                            rows="4"></textarea>
                                         <br />
                                         <div class="form-text">
                                             入力欄の右下にマウスカーソルを移動させると，高さを変えることができます
                                         </div>
-                                        <div id="sendAlertArea"></div>
+                                        <div id="keiziban_sendAlertArea"></div>
                                     </div>
                                 </form>
-                                <button id="sendMessageBtn" class="btn btn-primary">
+                                <button id="keiziban_sendMessage_btn" class="btn btn-primary">
                                     {{ __("Write forum") }}
                                 </button>
                             </div>
@@ -168,7 +171,7 @@
                                 ここから非同期通信で掲示板の表示
                                 表示はresources/js/GetallRow.js
                             -->
-                            <div id="displayArea" class="col-sm-8 col-xs-12" style="
+                            <div id="keiziban_displayArea" class="col-sm-8 col-xs-12" style="
                                     height: 70vh;
                                     width: 100;
                                     overflow-y: scroll;
@@ -193,7 +196,7 @@
                     <!-- ここから管理者のみに表示 -->
                     <!-- Modal -->
                     @if (Auth::user()->is_admin == 1)
-                    <div class="modal fade" id="DeleteMessageModal" tabindex="-1"
+                    <div class="modal fade" id="keiziban_DeleteMessage_Modal" tabindex="-1"
                         aria-labelledby="DeleteMessageModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -203,14 +206,14 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
-                                    <button id="delete_messageBtn" type="button" class="btn btn-primary"
+                                    <button id="keiziban_delete_message_btn" type="button" class="btn btn-primary"
                                         data-bs-dismiss="modal">Save changes</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="modal fade" id="RestoreMessageModal" tabindex="-1"
+                    <div class="modal fade" id="keiziban_RestoreMessage_Modal" tabindex="-1"
                         aria-labelledby="RestoreMessageModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -220,7 +223,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
-                                    <button id="restore_messageBtn" type="button" class="btn btn-primary"
+                                    <button id="keiziban_restore_message_btn" type="button" class="btn btn-primary"
                                         data-bs-dismiss="modal">Save changes</button>
                                 </div>
                             </div>

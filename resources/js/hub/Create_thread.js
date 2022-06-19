@@ -1,9 +1,7 @@
-$('#edit_threadBtn').click(function () {
-    var formElm = document.getElementById("thread_actions_form");
-    var thread_id = formElm.thread_id.value;
-
-    var formElm = document.getElementById("edit_thread_form");
-    var thread_name = formElm.ThreadNameText.value;
+$('#hub_create_thread_btn').click(function () {
+    const formElm = document.getElementById("hub_CreateThread_form");
+    const threadName = formElm.hub_new_threadName_text.value;
+    formElm.hub_new_threadName_text.value = "";
 
     $.ajaxSetup({
         headers: {
@@ -13,10 +11,9 @@ $('#edit_threadBtn').click(function () {
 
     $.ajax({
         type: "POST",
-        url: url + "/jQuery.ajax/admin/edit_thread",
+        url: url + "/jQuery.ajax/create_thread",
         data: {
-            "thread_id": thread_id,
-            "thread_name": thread_name
+            "table": threadName
         },
     }).done(function () {
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {

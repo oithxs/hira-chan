@@ -1,6 +1,6 @@
-$('#restore_messageBtn').click(function () {
-    var formElm = document.getElementById("message_actions_form");
-    var message_id = formElm.message_id.value;
+$('#hub_delete_thread_btn').click(function () {
+    var formElm = document.getElementById("hub_thread_actions_form");
+    var thread_id = formElm.hub_thread_id_text.value;
 
     $.ajaxSetup({
         headers: {
@@ -10,12 +10,12 @@ $('#restore_messageBtn').click(function () {
 
     $.ajax({
         type: "POST",
-        url: url + "/jQuery.ajax/admin/restore_message",
+        url: url + "/jQuery.ajax/admin/delete_thread",
         data: {
-            "thread_id": thread_id,
-            "message_id": message_id
+            "thread_id": thread_id
         },
     }).done(function () {
+        window.location.reload()
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
         console.log(XMLHttpRequest.status);
         console.log(textStatus);

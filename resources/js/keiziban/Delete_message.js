@@ -1,7 +1,6 @@
-$('#create_threadBtn').click(function () {
-    const formElm = document.getElementById("createThread");
-    const threadName = formElm.threadName.value;
-    formElm.threadName.value = "";
+$('#keiziban_delete_message_btn').click(function () {
+    var formElm = document.getElementById("keiziban_message_actions_form");
+    var message_id = formElm.keiziban_message_id_number.value;
 
     $.ajaxSetup({
         headers: {
@@ -11,9 +10,10 @@ $('#create_threadBtn').click(function () {
 
     $.ajax({
         type: "POST",
-        url: url + "/jQuery.ajax/create_thread",
+        url: url + "/jQuery.ajax/admin/delete_message",
         data: {
-            "table": threadName
+            "thread_id": thread_id,
+            "message_id": message_id
         },
     }).done(function () {
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
