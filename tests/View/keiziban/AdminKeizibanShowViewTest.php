@@ -297,7 +297,7 @@ class AdminKeizibanShowViewTest extends TestCase
                 'url' => url('/')
             ]);
 
-        $text = `<script src="{{ mix('js/app_jquery.js') }}"></script>`;
+        $text = '<script src="/js/app_jquery.js"></script>';
 
         if (strpos($TextView, $text) !== false) {
             $this->assertAuthenticated($this->admin = null);
