@@ -15,6 +15,7 @@ $('#hub_delete_thread_btn').click(function () {
             "thread_id": thread_id
         },
     }).done(function () {
+        window.location.reload()
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
         console.log(XMLHttpRequest.status);
         console.log(textStatus);

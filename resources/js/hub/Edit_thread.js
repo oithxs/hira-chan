@@ -19,6 +19,7 @@ $('#hub_edit_thread_btn').click(function () {
             "thread_name": thread_name
         },
     }).done(function () {
+        window.location.reload()
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
         console.log(XMLHttpRequest.status);
         console.log(textStatus);
