@@ -73,7 +73,7 @@ class CreateThreadTest extends TestCase
     public function test_admin_post_access_create_thread()
     {
         $response = $this
-            ->actingAs($this->user)
+            ->actingAs($this->admin)
             ->post('jQuery.ajax/create_thread', [
                 'table' => 'TestThread'
             ]);
