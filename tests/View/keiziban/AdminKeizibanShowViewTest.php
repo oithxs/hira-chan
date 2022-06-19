@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Feature\keiziban;
+namespace Tests\View\keiziban;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class AdminKeizibanNotShowViewTest extends TestCase
+class AdminKeizibanShowViewTest extends TestCase
 {
     /**
      * A basic feature test example.
@@ -28,7 +28,7 @@ class AdminKeizibanNotShowViewTest extends TestCase
         $TextView = (string) $this
             ->actingAs($this->admin)
             ->view('keiziban', [
-                'result' => 0,
+                'result' => 1,
                 'thread_name' => 'ThreadTestName',
                 'thread_id' => 'ThreadTestID',
                 'username' => 'TestUser',
@@ -47,7 +47,7 @@ class AdminKeizibanNotShowViewTest extends TestCase
         $TextView = (string) $this
             ->actingAs($this->admin)
             ->view('keiziban', [
-                'result' => 0,
+                'result' => 1,
                 'thread_name' => 'ThreadTestName',
                 'thread_id' => 'ThreadTestID',
                 'username' => 'TestUser',
@@ -68,7 +68,7 @@ class AdminKeizibanNotShowViewTest extends TestCase
         $TextView = (string) $this
             ->actingAs($this->admin)
             ->view('keiziban', [
-                'result' => 0,
+                'result' => 1,
                 'thread_name' => 'ThreadTestName',
                 'thread_id' => 'ThreadTestID',
                 'username' => 'TestUser',
@@ -89,7 +89,7 @@ class AdminKeizibanNotShowViewTest extends TestCase
         $TextView = (string) $this
             ->actingAs($this->admin)
             ->view('keiziban', [
-                'result' => 0,
+                'result' => 1,
                 'thread_name' => 'ThreadTestName',
                 'thread_id' => 'ThreadTestID',
                 'username' => 'TestUser',
@@ -105,124 +105,124 @@ class AdminKeizibanNotShowViewTest extends TestCase
         }
     }
 
-    public function test_keiziban_view_not_have_likes_function()
+    public function test_keiziban_view_have_likes_function()
     {
         $view = $this
             ->actingAs($this->admin)
             ->view('keiziban', [
-                'result' => 0,
+                'result' => 1,
                 'thread_name' => 'ThreadTestName',
                 'thread_id' => 'ThreadTestID',
                 'username' => 'TestUser',
                 'url' => url('/')
             ]);
 
-        $view->assertDontSee('function likes(message_id, user_like)');
+        $view->assertSee('function likes(message_id, user_like)');
     }
 
-    public function test_keiziban_view_not_have_keiziban_message_actions_form()
+    public function test_keiziban_view_have_keiziban_message_actions_form()
     {
         $view = $this
             ->actingAs($this->admin)
             ->view('keiziban', [
-                'result' => 0,
+                'result' => 1,
                 'thread_name' => 'ThreadTestName',
                 'thread_id' => 'ThreadTestID',
                 'username' => 'TestUser',
                 'url' => url('/')
             ]);
 
-        $view->assertDontSee('keiziban_message_actions_form');
+        $view->assertSee('keiziban_message_actions_form');
     }
 
-    public function test_keiziban_view_not_have_keiziban_message_id_number()
+    public function test_keiziban_view_have_keiziban_message_id_number()
     {
         $view = $this
             ->actingAs($this->admin)
             ->view('keiziban', [
-                'result' => 0,
+                'result' => 1,
                 'thread_name' => 'ThreadTestName',
                 'thread_id' => 'ThreadTestID',
                 'username' => 'TestUser',
                 'url' => url('/')
             ]);
 
-        $view->assertDontSee('keiziban_message_id_number');
+        $view->assertSee('keiziban_message_id_number');
     }
 
-    public function test_keiziban_view_not_have_keiziban_sendMessage_form()
+    public function test_keiziban_view_have_keiziban_sendMessage_form()
     {
         $view = $this
             ->actingAs($this->admin)
             ->view('keiziban', [
-                'result' => 0,
+                'result' => 1,
                 'thread_name' => 'ThreadTestName',
                 'thread_id' => 'ThreadTestID',
                 'username' => 'TestUser',
                 'url' => url('/')
             ]);
 
-        $view->assertDontSee('keiziban_sendMessage_form');
+        $view->assertSee('keiziban_sendMessage_form');
     }
 
-    public function test_keiziban_view__not_have_keiziban_message_textarea()
+    public function test_keiziban_view_have_keiziban_message_textarea()
     {
         $view = $this
             ->actingAs($this->admin)
             ->view('keiziban', [
-                'result' => 0,
+                'result' => 1,
                 'thread_name' => 'ThreadTestName',
                 'thread_id' => 'ThreadTestID',
                 'username' => 'TestUser',
                 'url' => url('/')
             ]);
 
-        $view->assertDontSee('keiziban_message_textarea');
+        $view->assertSee('keiziban_message_textarea');
     }
 
-    public function test_keiziban_view_not_have_keiziban_sendAlertArea()
+    public function test_keiziban_view_have_keiziban_sendAlertArea()
     {
         $view = $this
             ->actingAs($this->admin)
             ->view('keiziban', [
-                'result' => 0,
+                'result' => 1,
                 'thread_name' => 'ThreadTestName',
                 'thread_id' => 'ThreadTestID',
                 'username' => 'TestUser',
                 'url' => url('/')
             ]);
 
-        $view->assertDontSee('keiziban_sendAlertArea');
+        $view->assertSee('keiziban_sendAlertArea');
     }
 
-    public function test_keiziban_view_not_have_keiziban_sendMessage_btn()
+    public function test_keiziban_view_have_keiziban_sendMessage_btn()
     {
         $view = $this
             ->actingAs($this->admin)
             ->view('keiziban', [
-                'result' => 0,
+                'result' => 1,
                 'thread_name' => 'ThreadTestName',
                 'thread_id' => 'ThreadTestID',
                 'username' => 'TestUser',
                 'url' => url('/')
             ]);
 
-        $view->assertDontSee('keiziban_sendMessage_btn');
+        $view->assertSee('keiziban_sendMessage_btn');
     }
 
-    public function test_keiziban_view_not_have_keiziban_displayArea()
+    public function test_keiziban_view_have_keiziban_displayArea()
     {
         $view = $this
             ->actingAs($this->admin)
             ->view('keiziban', [
-                'result' => 0,
+                'result' => 1,
                 'thread_name' => 'ThreadTestName',
                 'thread_id' => 'ThreadTestID',
                 'username' => 'TestUser',
                 'url' => url('/')
             ]);
 
-        $view->assertDontSee('keiziban_displayArea');
+        $view->assertSee('keiziban_displayArea');
     }
 
     public function test_keiziban_view_have_keiziban_DeleteMessage_Modal()
@@ -230,7 +230,7 @@ class AdminKeizibanNotShowViewTest extends TestCase
         $view = $this
             ->actingAs($this->admin)
             ->view('keiziban', [
-                'result' => 0,
+                'result' => 1,
                 'thread_name' => 'ThreadTestName',
                 'thread_id' => 'ThreadTestID',
                 'username' => 'TestUser',
@@ -245,7 +245,7 @@ class AdminKeizibanNotShowViewTest extends TestCase
         $view = $this
             ->actingAs($this->admin)
             ->view('keiziban', [
-                'result' => 0,
+                'result' => 1,
                 'thread_name' => 'ThreadTestName',
                 'thread_id' => 'ThreadTestID',
                 'username' => 'TestUser',
@@ -260,7 +260,7 @@ class AdminKeizibanNotShowViewTest extends TestCase
         $view = $this
             ->actingAs($this->admin)
             ->view('keiziban', [
-                'result' => 0,
+                'result' => 1,
                 'thread_name' => 'ThreadTestName',
                 'thread_id' => 'ThreadTestID',
                 'username' => 'TestUser',
@@ -275,7 +275,7 @@ class AdminKeizibanNotShowViewTest extends TestCase
         $view = $this
             ->actingAs($this->admin)
             ->view('keiziban', [
-                'result' => 0,
+                'result' => 1,
                 'thread_name' => 'ThreadTestName',
                 'thread_id' => 'ThreadTestID',
                 'username' => 'TestUser',
@@ -290,7 +290,7 @@ class AdminKeizibanNotShowViewTest extends TestCase
         $TextView = (string) $this
             ->actingAs($this->admin)
             ->view('keiziban', [
-                'result' => 0,
+                'result' => 1,
                 'thread_name' => 'ThreadTestName',
                 'thread_id' => 'ThreadTestID',
                 'username' => 'TestUser',

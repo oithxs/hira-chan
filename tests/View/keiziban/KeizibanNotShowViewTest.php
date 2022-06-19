@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\keiziban;
+namespace Tests\View\keiziban;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
