@@ -11,7 +11,7 @@ if (location.href.includes('hub/thread_name=')) {
 }
 
 function reload() {
-  var displayArea = document.getElementById("displayArea");
+  var displayArea = document.getElementById("keiziban_displayArea");
   var user;
   var msg;
   var show;
@@ -64,21 +64,21 @@ function reload() {
 /*!**********************************!*\
   !*** ./resources/js/Send_Row.js ***!
   \**********************************/
-$('#sendMessageBtn').click(function () {
+$('#keiziban_sendMessage_btn').click(function () {
   var rows_limit = 20;
   var bytes_limit = 300;
-  var sendAlertArea = document.getElementById("sendAlertArea");
-  var formElm = document.getElementById("sendMessage");
-  var message = formElm.message.value;
+  var sendAlertArea = document.getElementById("keiziban_sendAlertArea");
+  var formElm = document.getElementById("keiziban_sendMessage_form");
+  var message = formElm.keiziban_message_textarea.value;
 
   if (message.trim() == 0) {
-    sendAlertArea.innerHTML = "<div class='alert alert-danger'>書き込みなし・空白・改行のみの投稿は出来ません</div>";
+    keiziban_sendAlertArea.innerHTML = "<div class='alert alert-danger'>書き込みなし・空白・改行のみの投稿は出来ません</div>";
   } else if (message.rows() > rows_limit) {
-    sendAlertArea.innerHTML = "<div class='alert alert-danger'>入力は" + rows_limit + "行以内にして下さい</div>";
+    keiziban_sendAlertArea.innerHTML = "<div class='alert alert-danger'>入力は" + rows_limit + "行以内にして下さい</div>";
   } else if (message.bytes() > bytes_limit) {
-    sendAlertArea.innerHTML = "<div class='alert alert-danger'>入力は" + bytes_limit / 3 + "文字(英数字は " + bytes_limit + "文字)以内にして下さい</div>";
+    keiziban_sendAlertArea.innerHTML = "<div class='alert alert-danger'>入力は" + bytes_limit / 3 + "文字(英数字は " + bytes_limit + "文字)以内にして下さい</div>";
   } else {
-    sendAlertArea.innerHTML = "";
+    keiziban_sendAlertArea.innerHTML = "";
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -96,7 +96,7 @@ $('#sendMessageBtn').click(function () {
       console.log(textStatus);
       console.log(errorThrown.message);
     });
-    formElm.message.value = '';
+    formElm.keiziban_message_textarea.value = '';
   }
 });
 
@@ -114,10 +114,10 @@ String.prototype.rows = function () {
 /*!***************************************!*\
   !*** ./resources/js/Create_thread.js ***!
   \***************************************/
-$('#create_threadBtn').click(function () {
-  var formElm = document.getElementById("createThread");
-  var threadName = formElm.threadName.value;
-  formElm.threadName.value = "";
+$('#hub_create_thread_btn').click(function () {
+  var formElm = document.getElementById("hub_CreateThread_form");
+  var threadName = formElm.hub_new_threadName_text.value;
+  formElm.hub_new_threadName_text.value = "";
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -142,9 +142,9 @@ $('#create_threadBtn').click(function () {
 /*!***************************************!*\
   !*** ./resources/js/Delete_thread.js ***!
   \***************************************/
-$('#delete_threadBtn').click(function () {
-  var formElm = document.getElementById("thread_actions_form");
-  var thread_id = formElm.thread_id.value;
+$('#hub_delete_thread_btn').click(function () {
+  var formElm = document.getElementById("hub_thread_actions_form");
+  var thread_id = formElm.hub_thread_id_text.value;
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -169,11 +169,11 @@ $('#delete_threadBtn').click(function () {
 /*!*************************************!*\
   !*** ./resources/js/Edit_thread.js ***!
   \*************************************/
-$('#edit_threadBtn').click(function () {
-  var formElm = document.getElementById("thread_actions_form");
-  var thread_id = formElm.thread_id.value;
-  var formElm = document.getElementById("edit_thread_form");
-  var thread_name = formElm.ThreadNameText.value;
+$('#hub_edit_thread_btn').click(function () {
+  var formElm = document.getElementById("hub_thread_actions_form");
+  var thread_id = formElm.hub_thread_id_text.value;
+  var formElm = document.getElementById("hub_edit_thread_form");
+  var thread_name = formElm.hub_edit_ThreadName_text.value;
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -199,9 +199,9 @@ $('#edit_threadBtn').click(function () {
 /*!****************************************!*\
   !*** ./resources/js/Delete_message.js ***!
   \****************************************/
-$('#delete_messageBtn').click(function () {
-  var formElm = document.getElementById("message_actions_form");
-  var message_id = formElm.message_id.value;
+$('#keiziban_delete_message_btn').click(function () {
+  var formElm = document.getElementById("keiziban_message_actions_form");
+  var message_id = formElm.keiziban_message_id_number.value;
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -227,9 +227,9 @@ $('#delete_messageBtn').click(function () {
 /*!*****************************************!*\
   !*** ./resources/js/Restore_message.js ***!
   \*****************************************/
-$('#restore_messageBtn').click(function () {
-  var formElm = document.getElementById("message_actions_form");
-  var message_id = formElm.message_id.value;
+$('#keiziban_restore_message_btn').click(function () {
+  var formElm = document.getElementById("keiziban_message_actions_form");
+  var message_id = formElm.keiziban_message_id_number.value;
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -255,7 +255,7 @@ $('#restore_messageBtn').click(function () {
 /*!*****************************************!*\
   !*** ./resources/js/SelectPageThema.js ***!
   \*****************************************/
-$('#page_thema').change(function () {
+$('#mypage_page_thema_select').change(function () {
   var value = $('option:selected').val();
 
   if (value == '') {

@@ -1,6 +1,6 @@
-$('#delete_threadBtn').click(function () {
-    var formElm = document.getElementById("thread_actions_form");
-    var thread_id = formElm.thread_id.value;
+$('#hub_delete_thread_btn').click(function () {
+    var formElm = document.getElementById("hub_thread_actions_form");
+    var thread_id = formElm.hub_thread_id_text.value;
 
     $.ajaxSetup({
         headers: {

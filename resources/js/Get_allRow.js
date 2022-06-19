@@ -4,7 +4,7 @@ if ((location.href).includes('hub/thread_name=')) {
 }
 
 function reload() {
-    var displayArea = document.getElementById("displayArea");
+    var displayArea = document.getElementById("keiziban_displayArea");
     var user;
     var msg;
     var show;

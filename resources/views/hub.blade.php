@@ -31,12 +31,12 @@
 
                 <body>
                     <div class="container-fluid">
-                        <form id="createThread" class="col-sm">
+                        <form id="hub_CreateThread_form" class="col-sm">
                             <div class="mb-2">
                                 <label class="form-label">スレッド名</label>
-                                <input class="form-control" type="text" name="threadName" />
+                                <input class="form-control" type="text" id="hub_new_threadName_text" />
                             </div>
-                            <button id="create_threadBtn" class="btn btn-primary">
+                            <button id="hub_create_thread_btn" class="btn btn-primary">
                                 {{ __("Create new thread") }}
                             </button>
                         </form>
@@ -45,9 +45,9 @@
 
                         <!-- ここから管理者のみに表示 -->
                         @if (Auth::user()->is_admin == 1)
-                        <form id="thread_actions_form">
+                        <form id="hub_thread_actions_form">
                             <label class="form-label">対象：スレッドID</label>
-                            <input id="thread_id" class="form-control" type="text" />
+                            <input id="hub_thread_id_text" class="form-control" type="text" />
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -58,11 +58,11 @@
                                         <li>
                                             <!-- actions -->
                                             <button type="button" class="dropdown-item" data-bs-toggle="modal"
-                                                data-bs-target="#DeleteThreadModal">
+                                                data-bs-target="#hub_DeleteThread_Modal">
                                                 {{ __("Delete") }}
                                             </button>
                                             <button type="button" class="dropdown-item" data-bs-toggle="modal"
-                                                data-bs-target="#EditThreadModal">
+                                                data-bs-target="#hub_EditThread_Modal">
                                                 {{ __("Edit") }}
                                             </button>
                                         </li>
@@ -135,7 +135,7 @@
                     <!-- ここから管理者のみに表示 -->
                     <!-- Modal -->
                     @if (Auth::user()->is_admin == 1)
-                    <div class="modal fade" id="DeleteThreadModal" tabindex="-1"
+                    <div class="modal fade" id="hub_DeleteThread_Modal" tabindex="-1"
                         aria-labelledby="DeleteThreadModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -146,7 +146,7 @@
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                         Close
                                     </button>
-                                    <button id="delete_threadBtn" type="button" class="btn btn-primary"
+                                    <button id="hub_delete_thread_btn" type="button" class="btn btn-primary"
                                         data-bs-dismiss="modal">
                                         Save changes
                                     </button>
@@ -155,19 +155,20 @@
                         </div>
                     </div>
 
-                    <div class="modal fade" id="EditThreadModal" tabindex="-1" aria-labelledby="EditThreadModalLabel"
-                        aria-hidden="true">
+                    <div class="modal fade" id="hub_EditThread_Modal" tabindex="-1"
+                        aria-labelledby="EditThreadModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     {{ __("Edit thread") }}
                                 </div>
                                 <div class="modal-body">
-                                    <form id="edit_thread_form">
+                                    <form id="hub_edit_thread_form">
                                         <div class="mb-3">
-                                            <label for="thread-name" class="col-form-label">{{ __("Thread name")
-                                                }}</label>
-                                            <input id="ThreadNameText" type="text" class="form-control" />
+                                            <label for="thread-name" class="col-form-label">
+                                                {{ __("Thread name")}}
+                                            </label>
+                                            <input id="hub_edit_ThreadName_text" type="text" class="form-control" />
                                         </div>
                                     </form>
                                 </div>
@@ -175,7 +176,7 @@
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                         Close
                                     </button>
-                                    <button id="edit_threadBtn" type="button" class="btn btn-primary"
+                                    <button id="hub_edit_thread_btn" type="button" class="btn btn-primary"
                                         data-bs-dismiss="modal">
                                         Save changes
                                     </button>

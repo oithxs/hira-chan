@@ -1,4 +1,4 @@
-$('#page_thema').change(function () {
+$('#mypage_page_thema_select').change(function () {
     var value = $('option:selected').val();
 
     if (value == '') {

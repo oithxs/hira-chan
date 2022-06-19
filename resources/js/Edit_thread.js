@@ -1,9 +1,9 @@
-$('#edit_threadBtn').click(function () {
-    var formElm = document.getElementById("thread_actions_form");
-    var thread_id = formElm.thread_id.value;
+$('#hub_edit_thread_btn').click(function () {
+    var formElm = document.getElementById("hub_thread_actions_form");
+    var thread_id = formElm.hub_thread_id_text.value;
 
-    var formElm = document.getElementById("edit_thread_form");
-    var thread_name = formElm.ThreadNameText.value;
+    var formElm = document.getElementById("hub_edit_thread_form");
+    var thread_name = formElm.hub_edit_ThreadName_text.value;
 
     $.ajaxSetup({
         headers: {

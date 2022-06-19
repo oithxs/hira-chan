@@ -1,6 +1,6 @@
-$('#restore_messageBtn').click(function () {
-    var formElm = document.getElementById("message_actions_form");
-    var message_id = formElm.message_id.value;
+$('#keiziban_restore_message_btn').click(function () {
+    var formElm = document.getElementById("keiziban_message_actions_form");
+    var message_id = formElm.keiziban_message_id_number.value;
 
     $.ajaxSetup({
         headers: {
