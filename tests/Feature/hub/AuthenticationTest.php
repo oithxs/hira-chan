@@ -25,7 +25,7 @@ class AuthenticationTest extends TestCase
         $this->admin = User::factory()->admin()->make();
     }
 
-    public function test_hub_access()
+    public function test_hub_not_login_access()
     {
         $response = $this->get('/hub');
 

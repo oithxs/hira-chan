@@ -25,7 +25,7 @@ class AuthenticationTest extends TestCase
         $this->admin = User::factory()->admin()->make();
     }
 
-    public function test_dashboard_access()
+    public function test_dashboard_not_login_access()
     {
         $response = $this->get('/dashboard');
 
