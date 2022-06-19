@@ -51,7 +51,7 @@ class HubViewTest extends TestCase
         ];
     }
 
-    public function test_hub_view_have_create_threadBtn()
+    public function test_hub_view_have_hub_CreateThread_form()
     {
         $view = $this
             ->actingAs($this->user)
@@ -60,10 +60,10 @@ class HubViewTest extends TestCase
                 'url' => url('/')
             ]);
 
-        $view->assertSee('create_threadBtn');
+        $view->assertSee('hub_CreateThread_form');
     }
 
-    public function test_hub_view_have_createThread()
+    public function test_hub_view_have_hub_new_threadName_text()
     {
         $view = $this
             ->actingAs($this->user)
@@ -72,10 +72,10 @@ class HubViewTest extends TestCase
                 'url' => url('/')
             ]);
 
-        $view->assertSee('createThread');
+        $view->assertSee('hub_new_threadName_text');
     }
 
-    public function test_hub_view_have_threadName()
+    public function test_hub_view_have_hub_create_thread_btn()
     {
         $view = $this
             ->actingAs($this->user)
@@ -84,10 +84,10 @@ class HubViewTest extends TestCase
                 'url' => url('/')
             ]);
 
-        $view->assertSee('threadName');
+        $view->assertSee('hub_create_thread_btn');
     }
 
-    public function test_hub_view_not_have_thread_actions_form()
+    public function test_hub_view_not_have_hub_thread_actions_form()
     {
         $view = $this
             ->actingAs($this->user)
@@ -96,10 +96,10 @@ class HubViewTest extends TestCase
                 'url' => url('/')
             ]);
 
-        $view->assertDontSee('thread_actions_form');
+        $view->assertDontSee('hub_thread_actions_form');
     }
 
-    public function test_hub_view_not_have_thread_id()
+    public function test_hub_view_not_have_hub_thread_id_text()
     {
         $view = $this
             ->actingAs($this->user)
@@ -108,10 +108,10 @@ class HubViewTest extends TestCase
                 'url' => url('/')
             ]);
 
-        $view->assertDontSee('thread_id');
+        $view->assertDontSee('hub_thread_id_text');
     }
 
-    public function test_hub_view_not_have_navbarDropdown()
+    public function test_hub_view_not_have_hub_DeleteThread_Modal()
     {
         $view = $this
             ->actingAs($this->user)
@@ -120,11 +120,10 @@ class HubViewTest extends TestCase
                 'url' => url('/')
             ]);
 
-        $view->assertDontSee('navbarDropdown');
+        $view->assertDontSee('hub_DeleteThread_Modal');
     }
 
-
-    public function test_hub_view_not_have_DeleteThreadModlBtn()
+    public function test_hub_view_not_have_hub_delete_thread_btn()
     {
         $view = $this
             ->actingAs($this->user)
@@ -133,11 +132,10 @@ class HubViewTest extends TestCase
                 'url' => url('/')
             ]);
 
-        $view->assertDontSee('#DeleteThreadModal');
+        $view->assertDontSee('hub_delete_thread_btn');
     }
 
-
-    public function test_hub_view_not_have_EditThreadModalBtn()
+    public function test_hub_view_not_have_hub_EditThread_Modal()
     {
         $view = $this
             ->actingAs($this->user)
@@ -146,11 +144,10 @@ class HubViewTest extends TestCase
                 'url' => url('/')
             ]);
 
-        $view->assertDontSee('#EditThreadModal');
+        $view->assertDontSee('hub_EditThread_Modal');
     }
 
-
-    public function test_hub_view_not_have_DeleteThreadModal()
+    public function test_hub_view_not_have_hub_edit_thread_form()
     {
         $view = $this
             ->actingAs($this->user)
@@ -159,11 +156,10 @@ class HubViewTest extends TestCase
                 'url' => url('/')
             ]);
 
-        $view->assertDontSee('DeleteThreadModal');
+        $view->assertDontSee('hub_edit_thread_form');
     }
 
-
-    public function test_hub_view_not_have_delete_threadBtn()
+    public function test_hub_view_not_have_hub_edit_ThreadName_text()
     {
         $view = $this
             ->actingAs($this->user)
@@ -172,11 +168,10 @@ class HubViewTest extends TestCase
                 'url' => url('/')
             ]);
 
-        $view->assertDontSee('delete_threadBtn');
+        $view->assertDontSee('hub_edit_ThreadName_text');
     }
 
-
-    public function test_hub_view_not_have_EditThreadModal()
+    public function test_hub_view_not_have_hub_edit_thread_btn()
     {
         $view = $this
             ->actingAs($this->user)
@@ -185,45 +180,6 @@ class HubViewTest extends TestCase
                 'url' => url('/')
             ]);
 
-        $view->assertDontSee('EditThreadModal');
-    }
-
-
-    public function test_hub_view_not_have_edit_thread_form()
-    {
-        $view = $this
-            ->actingAs($this->user)
-            ->view('hub', [
-                'tables' => $this->threads,
-                'url' => url('/')
-            ]);
-
-        $view->assertDontSee('edit_thread_form');
-    }
-
-
-    public function test_hub_view_not_have_ThreadNameText()
-    {
-        $view = $this
-            ->actingAs($this->user)
-            ->view('hub', [
-                'tables' => $this->threads,
-                'url' => url('/')
-            ]);
-
-        $view->assertDontSee('ThreadNameText');
-    }
-
-
-    public function test_hub_view_not_have_edit_threadBtn()
-    {
-        $view = $this
-            ->actingAs($this->user)
-            ->view('hub', [
-                'tables' => $this->threads,
-                'url' => url('/')
-            ]);
-
-        $view->assertDontSee('edit_threadBtn');
+        $view->assertDontSee('hub_edit_thread_btn');
     }
 }
