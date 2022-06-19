@@ -262,12 +262,12 @@ String.prototype.rows = function () {
 $('#mypage_page_thema_select').change(function () {
   var value = $('option:selected').val();
 
-  if (value == '') {
-    return;
-  } else if (value == 'default') {
+  if (value == 'default') {
     value = 0;
   } else if (value == 'dark') {
     value = 1;
+  } else {
+    return;
   }
 
   $.ajaxSetup({
