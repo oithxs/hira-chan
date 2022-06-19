@@ -21,7 +21,7 @@
                 <meta name="csrf-token" content="{{ csrf_token() }}" />
 
                 <p>ページテーマ</p>
-                <select id="page_thema">
+                <select id="mypage_page_thema_select">
                     <option value="">選択して下さい</option>
                     <option value="default">デフォルト</option>
                     <option value="dark">ダークテーマ</option>

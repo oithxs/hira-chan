@@ -1,6 +1,6 @@
-$('#delete_threadBtn').click(function () {
-    var formElm = document.getElementById("thread_actions_form");
-    var thread_id = formElm.thread_id.value;
+$('#keiziban_restore_message_btn').click(function () {
+    var formElm = document.getElementById("keiziban_message_actions_form");
+    var message_id = formElm.keiziban_message_id_number.value;
 
     $.ajaxSetup({
         headers: {
@@ -10,9 +10,10 @@ $('#delete_threadBtn').click(function () {
 
     $.ajax({
         type: "POST",
-        url: url + "/jQuery.ajax/admin/delete_thread",
+        url: url + "/jQuery.ajax/admin/restore_message",
         data: {
-            "thread_id": thread_id
+            "thread_id": thread_id,
+            "message_id": message_id
         },
     }).done(function () {
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
