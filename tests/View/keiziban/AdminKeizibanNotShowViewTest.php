@@ -20,7 +20,7 @@ class AdminKeizibanNotShowViewTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->admin = User::factory()->admin()->make();
+        $this->admin = User::factory()->admin()->create();
     }
 
     public function test_keiziban_view_have_jQuery()

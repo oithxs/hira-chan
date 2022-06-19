@@ -21,7 +21,7 @@ class DashboardViewTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->user = User::factory()->make();
+        $this->user = User::factory()->create();
 
         $this->access_ranking = [
             array(

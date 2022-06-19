@@ -20,7 +20,7 @@ class MyPageViewTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->user = User::factory()->make();
+        $this->user = User::factory()->create();
     }
 
     public function test_mypage_view_have_mypage_page_thema_select()

@@ -23,8 +23,8 @@ class ThreadUnlikeTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->user = User::factory()->make();
-        $this->admin = User::factory()->admin()->make();
+        $this->user = User::factory()->create();
+        $this->admin = User::factory()->admin()->create();
 
         try {
             $create = new create_thread;

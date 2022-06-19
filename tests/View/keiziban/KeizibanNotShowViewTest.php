@@ -20,7 +20,7 @@ class KeizibanNotShowViewTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->user = User::factory()->make();
+        $this->user = User::factory()->create();
     }
 
     public function test_keiziban_view_have_jQuery()

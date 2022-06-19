@@ -21,7 +21,7 @@ class AdminHubViewTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->admin = User::factory()->admin()->make();
+        $this->admin = User::factory()->admin()->create();
 
         $this->threads = [
             array(

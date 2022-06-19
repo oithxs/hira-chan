@@ -21,8 +21,8 @@ class CreateThreadTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->user = User::factory()->make();
-        $this->admin = User::factory()->admin()->make();
+        $this->user = User::factory()->create();
+        $this->admin = User::factory()->admin()->create();
     }
 
     public function test_not_login_get_access_create_thread()
