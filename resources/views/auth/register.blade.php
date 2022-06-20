@@ -28,12 +28,16 @@
 
             <div class="mt-4">
                 <x-jet-label for="email" value="{{__('Email register')}}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email')" required />
+                </div>
+                <div class ="input-group mt-4">
+                <x-jet-input id="email" class="form-control" type="text" name="email" :value="old('email')" placeholder="（例）e1n11111" aria-describedby="basic-addon2" required />
+                <span class="input-group-text" id="basic-addon2">@st.oit.ac.jp</span>
             </div>
 
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Password') }}{{ __('Password register notice') }}" />
                 <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+
             </div>
 
             <div class="mt-4">
