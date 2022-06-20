@@ -37,7 +37,12 @@
 
             <div>
                 <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+            </div>
+
+            <div class="input-group mt-3">
+                <x-jet-input id="email" class="form-control" type="email" name="email" placeholder="（例）e1n11111"
+                    aria-label="（例）e1n11111" aria-describedby="basic-addon2" required autofocus />
+                <span class="input-group-text" id="basic-addon2">@st.oit.ac.jp</span>
             </div>
 
             <div class="mt-4">
