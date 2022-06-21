@@ -9,11 +9,7 @@ use Tests\TestCase;
 
 class AdminKeizibanNotShowViewTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+    use RefreshDatabase;
 
     private $admin;
 

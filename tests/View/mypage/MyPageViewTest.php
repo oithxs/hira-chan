@@ -9,11 +9,7 @@ use Tests\TestCase;
 
 class MyPageViewTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+    use RefreshDatabase;
 
     private $user;
 

@@ -11,11 +11,7 @@ use Tests\TestCase;
 
 class GetMessageTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+    use RefreshDatabase;
 
     private $user;
     private $admin;

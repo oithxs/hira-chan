@@ -13,11 +13,7 @@ use Tests\TestCase;
 
 class RegistrationCancelTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+    use RefreshDatabase;
 
     public function test_email_can_be_regstration_cancel()
     {

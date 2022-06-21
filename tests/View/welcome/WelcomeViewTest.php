@@ -8,11 +8,7 @@ use Tests\TestCase;
 
 class WelcomeViewTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+    use RefreshDatabase;
     public function test_welcome_view_have_hub_link()
     {
         $view = $this->view('welcome');

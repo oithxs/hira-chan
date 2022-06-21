@@ -9,11 +9,7 @@ use Tests\TestCase;
 
 class KeizibanShowViewTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+    use RefreshDatabase;
 
     private $user;
 
