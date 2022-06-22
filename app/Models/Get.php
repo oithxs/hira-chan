@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\DB;
 
 class Get extends Model {
 	public function showTables() {
-		switch($_SESSION["sort"]=$id){
+		switch($id=2){
 			case'1':
 				$sql = <<<EOF
 		SELECT
