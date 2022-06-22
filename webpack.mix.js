@@ -1,5 +1,6 @@
-const { js } = require('laravel-mix');
+const { js, babelConfig } = require('laravel-mix');
 const mix = require('laravel-mix');
+const glob = require('glob');
 
 /*
  |--------------------------------------------------------------------------
@@ -13,23 +14,18 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .js([
-        'resources/js/hub/Create_thread.js',
-        'resources/js/hub/Delete_thread.js',
-        'resources/js/hub/Edit_thread.js',
-        'resources/js/keiziban/Delete_message.js',
-        'resources/js/keiziban/Get_allRow.js',
-        'resources/js/keiziban/Restore_message.js',
-        'resources/js/keiziban/Send_Row.js',
-        'resources/js/mypage/SelectPageThema.js',
-        'resources/js/dashboard/Create_thread.js'
-    ], 'public/js/app_jquery.js')
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),
-    ])
-    .postCss('resources/css/welcome.css', 'public/css/design.css')
-    .postCss('resources/css/normalize.css', 'public/css/design.css');
+    ]);
+
+glob.sync('resources/js/*/*.js').map(function (file) {
+    mix.js(file, 'public/js/app_jquery.js').version()
+});
+
+glob.sync('resources/css/*/*.css').map(function (file) {
+    mix.postCss(file, 'public/css/design.css').version()
+});
 
 if (mix.inProduction()) {
     mix.version();

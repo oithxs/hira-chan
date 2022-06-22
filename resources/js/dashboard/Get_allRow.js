@@ -1,10 +1,10 @@
-if ((location.href).includes('hub/thread_name=')) {
+if ((location.href).includes('dashboard/thread_name=')) {
     reload();
     setInterval(reload, 1000);
 }
 
 function reload() {
-    var displayArea = document.getElementById("keiziban_displayArea");
+    var displayArea = document.getElementById("dashboard_displayArea");
     var user;
     var msg;
     var show;
