@@ -26,19 +26,23 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', 'App\Http\Controllers\DashboardController@top')->name('dashboard');
 
-    Route::get('/dashboard/thread_name={thread_name}/id={thread_id}', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('dashboard');
-    Route::get('/dashboard/thread_name=/id={thread_id}', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('dashboard');
-    Route::get('/dashboard/thread_name={thread_name}/id=', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('dashboard');
-    Route::get('/dashboard/thread_name=/id=', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('dashboard');
-
-    Route::get('/hub', 'App\Http\Controllers\showTablesCTL')->name('hub');
-
-    Route::get('hub/thread_name={thread_name}/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
-    Route::get('hub/thread_name=/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
-    Route::get('hub/thread_name={thread_name}/id=', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
-    Route::get('hub/thread_name=/id=', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
+    Route::get('/dashboard/thread_name={thread_name}/id={thread_id}', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('thread');
+    Route::get('/dashboard/thread_name=/id={thread_id}', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('thread');
+    Route::get('/dashboard/thread_name={thread_name}/id=', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('thread');
+    Route::get('/dashboard/thread_name=/id=', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('thread');
 
     Route::get('/mypage', 'App\Http\Controllers\MyPage')->name('mypage');
+
+    Route::middleware([
+        'Is_Admin'
+    ])->group(function () {
+        Route::get('/hub', 'App\Http\Controllers\showTablesCTL')->name('hub');
+
+        Route::get('hub/thread_name={thread_name}/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
+        Route::get('hub/thread_name=/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
+        Route::get('hub/thread_name={thread_name}/id=', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
+        Route::get('hub/thread_name=/id=', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
+    });
 });
 
 // データ処理
