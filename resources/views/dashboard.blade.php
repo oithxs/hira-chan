@@ -8,7 +8,7 @@
 
     <!-- ここからタイトル（ページのヘッダでなはい） -->
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl leading-tight">
             {{ __("Top page") }}
         </h2>
     </x-slot>
@@ -18,10 +18,7 @@
         <div class="row">
             <div class="py-12 col-lg-8 col-md-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div
-                        class="bg-white overflow-hidden shadow-xl sm:rounded-lg"
-                    >
-
+                    <div class="overflow-hidden shadow-xl sm:rounded-lg">
                         <!--　ここから掲示板へのリンクとコメント -->
                         <div
                             class="p-6 border-t border-gray-200 md:border-t-0 md:border-l"
@@ -47,16 +44,14 @@
                                 >
                                     <a
                                         href="{{ url('hub') }}"
-                                        class="underline text-gray-900 text-decoration-none"
+                                        class="underline text-decoration-none"
                                         >掲示板</a
                                     >
                                 </div>
                             </div>
 
                             <div class="ml-12">
-                                <div
-                                    class="mt-2 text-gray-600 dark:text-gray-400 text-sm"
-                                >
+                                <div class="mt-2 dark:text-gray-400 text-sm">
                                     HxSコンピュータ部が提供する掲示板です．利用には学内ネットワーク・ログインが必要です．
                                 </div>
                             </div>
@@ -86,16 +81,14 @@
                                     <a
                                         href="https://twitter.com/hxs_"
                                         target="_blank"
-                                        class="underline text-gray-900 text-decoration-none"
+                                        class="underline text-decoration-none"
                                         >Twitter</a
                                     >
                                 </div>
                             </div>
 
                             <div class="ml-12">
-                                <div
-                                    class="mt-2 text-gray-600 dark:text-gray-400 text-sm"
-                                >
+                                <div class="mt-2 dark:text-gray-400 text-sm">
                                     大阪工業大学
                                     HxSコンピュータ部の非公式アカウントです。ハードウェア（Hardware）とソフトウェア（Software）の両面からスキルアップを図る事を目標とした部活です。活動内容・イベント宣伝等をつぶやきます。
                                 </div>
@@ -195,16 +188,14 @@
                                     <a
                                         href="https://github.com/oithxs"
                                         target="_blank"
-                                        class="underline text-gray-900 text-decoration-none"
+                                        class="underline text-decoration-none"
                                         >Github</a
                                     >
                                 </div>
                             </div>
 
                             <div class="ml-12">
-                                <div
-                                    class="mt-2 text-gray-600 dark:text-gray-400 text-sm"
-                                >
+                                <div class="mt-2 dark:text-gray-400 text-sm">
                                     大阪工業大学情報科学部HxSコンピュータ部の組織アカウントです。
                                 </div>
                             </div>
@@ -216,6 +207,7 @@
 
             <!-- ここからTwitterの表示 -->
             <div class="py-12 col-lg-4 col-md-12 text-center">
+                @if (Auth::user()->thema == 0)
                 <a
                     class="twitter-timeline"
                     data-chrome="nofooter"
@@ -225,6 +217,18 @@
                     href="https://twitter.com/hxs_?ref_src=twsrc%5Etfw"
                     >Tweets by hxs_</a
                 >
+                @elseif (Auth::user()->thema == 1)
+                <a
+                    class="twitter-timeline"
+                    data-chrome="nofooter"
+                    data-width="400"
+                    data-height="550"
+                    data-theme="dark"
+                    href="https://twitter.com/hxs_?ref_src=twsrc%5Etfw"
+                    >Tweets by hxs_</a
+                >
+                @endif
+
                 <script
                     async
                     src="https://platform.twitter.com/widgets.js"
