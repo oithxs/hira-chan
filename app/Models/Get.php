@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+/*
 <<<<<<< HEAD
 class Get extends Model {
 	public function showTables() {
@@ -46,6 +47,7 @@ class Get extends Model {
 	}
 
 =======
+*/
 class Get extends Model
 {
     public function showTables()
@@ -98,7 +100,7 @@ class Get extends Model
 
         return $stmt;
     }
->>>>>>> develop
+// >>>>>>> develop
 
     public function access_ranking()
     {
