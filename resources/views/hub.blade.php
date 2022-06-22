@@ -115,6 +115,9 @@
                                         <td>
                                             {{ $tableInfo["created_at"] }}
                                         </td>
+                                        <td>
+                                            {{__('Access number')}}
+                                        </td>
 
                                         <!-- ここから管理者のみに表示 -->
                                         @if (Auth::user()->is_admin == 1)

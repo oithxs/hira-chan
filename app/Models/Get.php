@@ -5,6 +5,49 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+/*
+<<<<<<< HEAD
+class Get extends Model {
+	public function showTables() {
+		switch($id=1){
+			case'1':
+				$sql = <<<EOF
+		SELECT
+			hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access 
+		FROM
+			hub
+		LEFT OUTER JOIN
+			access_logs
+		ON
+			hub.thread_id = access_logs.thread_id
+		GROUP BY hub.thread_id 
+		ORDER BY hub.created_at DESC;
+		EOF;
+		break;
+			case'2':
+			$sql = <<<EOF
+			SELECT
+				hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access 
+			FROM
+				hub
+			LEFT OUTER JOIN
+				access_logs
+			ON
+				hub.thread_id = access_logs.thread_id
+			GROUP BY hub.thread_id 
+			ORDER BY COUNT(access_logs.access_log) DESC,
+			hub.created_at DESC;
+			EOF;
+			break;
+		}
+		$stmt = json_decode(json_encode(
+			DB::connection('mysql_keiziban')->select($sql),
+		), true);
+		return $stmt;
+	}
+
+=======
+*/
 class Get extends Model
 {
     public function showTables()
@@ -57,6 +100,7 @@ class Get extends Model
 
         return $stmt;
     }
+// >>>>>>> develop
 
     public function access_ranking()
     {

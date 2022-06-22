@@ -27,6 +27,7 @@ Route::middleware([
     Route::get('/dashboard', 'App\Http\Controllers\DashboardController')->name('dashboard');
     Route::get('/hub', 'App\Http\Controllers\showTablesCTL')->name('hub');
     Route::get('hub/thread_name={thread_name}/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
+    Route::get('hub/thread_name=/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
     Route::get('hub/thread_name={thread_name}/id=', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
     Route::get('hub/thread_name=/id=', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
     Route::get('/mypage', 'App\Http\Controllers\MyPage')->name('mypage');
