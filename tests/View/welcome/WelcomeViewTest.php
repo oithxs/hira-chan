@@ -13,7 +13,7 @@ class WelcomeViewTest extends TestCase
     {
         $view = $this->view('welcome');
 
-        $view->assertSee('/hub');
+        $view->assertSee('/dashboard');
     }
 
     public function test_welcome_view_have_twitter_link()
