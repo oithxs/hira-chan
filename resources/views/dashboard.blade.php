@@ -28,6 +28,11 @@
                             crossorigin="anonymous" />
 
                         <!-- ここからデザイン関係なし -->
+                        <!-- データ処理で使う変数 -->
+                        <script>
+                            const url = "{{ url('') }}";
+                        </script>
+
                         <!-- jQuery -->
                         <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
                         <!-- ここまでデザイン関係なし -->
@@ -181,7 +186,6 @@
                             @elseif ($type == 'thread')
                             <!-- ここからデザイン関係なし -->
                             <script>
-                                const url = "{{ url('') }}";
                                 const table = "{{ $thread_name }}";
                                 const thread_id = "{{ $thread_id }}";
                             </script>
@@ -244,6 +248,7 @@
                             <div class="row">
                                 <hr />
                                 <div class="col-sm-4 col-xs-12">
+                                    <a href="/dashboard">トップページへ</a>
                                     <form id="dashboard_sendMessage_form">
                                         <div class="mb-2">
                                             <label class="form-label">コメント</label>
@@ -299,6 +304,7 @@
                 </div>
                 <!-- ここまでTwitterの表示 -->
 
+                <!-- ここからスレッド作成時に表示されるモーダル -->
                 <div class="modal fade" id="CreateThread_Moda" tabindex="-1" aria-labelledby="CreateThreadModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -323,7 +329,9 @@
                         </div>
                     </div>
                 </div>
+                <!-- ここまでスレッド作成時に表示されるモーダル -->
 
+                <!-- Bootstrap JS -->
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
                     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
                     crossorigin="anonymous"></script>
