@@ -16,6 +16,7 @@ $('#dashboard_create_thread_btn').click(function () {
             "table": threadName
         },
     }).done(function () {
+        window.location.reload()
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
         console.log(XMLHttpRequest.status);
         console.log(textStatus);
