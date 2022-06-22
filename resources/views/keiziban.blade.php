@@ -45,6 +45,7 @@
                         const thread_id = "{{ $thread_id }}";
                     </script>
 
+                    @if ($result == 1)
                     <script>
                         function likes(message_id, user_like) {
                             $.ajaxSetup({
@@ -96,6 +97,7 @@
                             }
                         }
                     </script>
+                    @endif
                     <!-- ここまでデザイン関係なし -->
                 </head>
 
