@@ -24,12 +24,20 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', 'App\Http\Controllers\DashboardController')->name('dashboard');
+    Route::get('/dashboard', 'App\Http\Controllers\DashboardController@top')->name('dashboard');
+
+    Route::get('/dashboard/thread_name={thread_name}/id={thread_id}', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('dashboard');
+    Route::get('/dashboard/thread_name=/id={thread_id}', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('dashboard');
+    Route::get('/dashboard/thread_name={thread_name}/id=', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('dashboard');
+    Route::get('/dashboard/thread_name=/id=', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('dashboard');
+
     Route::get('/hub', 'App\Http\Controllers\showTablesCTL')->name('hub');
+
     Route::get('hub/thread_name={thread_name}/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
     Route::get('hub/thread_name=/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
     Route::get('hub/thread_name={thread_name}/id=', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
     Route::get('hub/thread_name=/id=', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
+
     Route::get('/mypage', 'App\Http\Controllers\MyPage')->name('mypage');
 });
 

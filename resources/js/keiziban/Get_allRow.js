@@ -1,4 +1,6 @@
-if ((location.href).includes('hub/thread_name=')) {
+if (
+    (location.href).includes('hub/thread_name=')
+) {
     reload();
     setInterval(reload, 1000);
 }

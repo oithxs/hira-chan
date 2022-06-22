@@ -154,18 +154,101 @@
                         </div>
                         <!-- ここまでHxS GitHubへのリンクとコメント -->
 
+                        <!-- ここから掲示板へのリンク -->
+                        <div class="p-6 border-t border-gray-200 md:border-t-0 md:border-l">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#CreateThread_Moda">
+                                {{ __('Create new thread') }}
+                            </button>
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>{{ __("Thread name") }}</th>
+                                        <td>{{ __("Create time") }}</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- スレッド名使う時は「$tableName」 -->
+                                    @foreach($tables as $tableInfo)
+                                    <?php
+										$tableName = str_replace('/', '&slash;', $tableInfo['thread_name']);
+										$tableName = str_replace('\\', '&backSlash;' , $tableName);
+										$tableName = str_replace('#', '&hash;', $tableName);
+									?>
+                                    <tr>
+                                        <th>
+                                            <a href="dashboard/thread_name={{
+                                                    $tableName
+                                                }}/id={{
+                                                    $tableInfo['thread_id']
+                                                }}" class="text-decoration-none">{{
+                                                $tableInfo["thread_name"]
+                                                }}</a>
+                                        </th>
+                                        <td>
+                                            {{ $tableInfo["created_at"] }}
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            </dvi>
+                        </div>
+                        <!-- ここまで掲示板へのリンク -->
                     </div>
                 </div>
-            </div>
 
-            <!-- ここからTwitterの表示 -->
-            <div class="py-12 col-lg-4 col-md-12 text-center">
-                <a class="twitter-timeline" data-chrome="nofooter" data-width="400" data-height="550" data-theme="light"
-                    href="https://twitter.com/hxs_?ref_src=twsrc%5Etfw">Tweets by hxs_</a>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <!-- ここからTwitterの表示 -->
+                <div class="py-12 col-lg-4 col-md-12 text-center">
+                    <a class="twitter-timeline" data-chrome="nofooter" data-width="400" data-height="550"
+                        data-theme="light" href="https://twitter.com/hxs_?ref_src=twsrc%5Etfw">Tweets by hxs_</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+                <!-- ここまでTwitterの表示 -->
+
+                <div class="modal fade" id="CreateThread_Moda" tabindex="-1" aria-labelledby="CreateThreadModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <form id="dashboard_create_thread_form">
+                                    <label for="thread-name" class="" col-form-label>
+                                        {{ __("Thread name") }}
+                                    </label>
+                                    <input id="dashboard_create_thread_text" type="text" class="form-control">
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <button id="dashboard_create_thread_btn" type="button" class="btn btn-primary"
+                                    data-bs-dismiss="modal">
+                                    Save changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+                    crossorigin="anonymous"></script>
+
+                <!-- ここからデザイン関係なし -->
+                <!-- jQuery -->
+                <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+
+                <!-- グローバル変数 -->
+                <script>
+                    const url = "{{ url('') }}";
+                </script>
+
+                <!-- others -->
+                <script src="{{ mix('js/app_jquery.js') }}"></script>
+                <!-- ここまでデザイン関係なし -->
             </div>
-            <!-- ここまでTwitterの表示 -->
         </div>
-    </div>
-    <!-- ここまでデザイン -->
+        <!-- ここまでデザイン -->
 </x-app-layout>
