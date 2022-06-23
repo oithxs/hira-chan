@@ -8,7 +8,7 @@
 
     <!-- ここからタイトル（ページのヘッダでなはい） -->
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl leading-tight">
             {{ __("Top page") }}
         </h2>
     </x-slot>
@@ -19,13 +19,6 @@
             <div class="py-12 col-lg-8 col-md-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                        <meta charset="utf-8" />
-                        <meta name="viewport" content="width=device-width, initial-scale=1" />
-                        <!-- Bootstrap CSS -->
-                        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-                            rel="stylesheet"
-                            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-                            crossorigin="anonymous" />
 
                         <!-- ここからデザイン関係なし -->
                         <!-- データ処理で使う変数 -->
@@ -49,12 +42,12 @@
                                 </svg>
                                 <div class="ml-4 text-lg leading-7 font-semibold">
                                     <a href="https://twitter.com/hxs_" target="_blank"
-                                        class="underline text-gray-900 text-decoration-none">Twitter</a>
+                                        class="underline text-decoration-none">Twitter</a>
                                 </div>
                             </div>
 
                             <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                                <div class="mt-2 dark:text-gray-400 text-sm">
                                     大阪工業大学
                                     HxSコンピュータ部の非公式アカウントです。ハードウェア（Hardware）とソフトウェア（Software）の両面からスキルアップを図る事を目標とした部活です。活動内容・イベント宣伝等をつぶやきます。
                                 </div>
@@ -128,12 +121,12 @@
 
                                 <div class="ml-4 text-lg leading-7 font-semibold">
                                     <a href="https://github.com/oithxs" target="_blank"
-                                        class="underline text-gray-900 text-decoration-none">Github</a>
+                                        class="underline text-decoration-none">Github</a>
                                 </div>
                             </div>
 
                             <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                                <div class="mt-2 dark:text-gray-400 text-sm">
                                     大阪工業大学情報科学部HxSコンピュータ部の組織アカウントです。
                                 </div>
                             </div>
@@ -298,8 +291,14 @@
 
                 <!-- ここからTwitterの表示 -->
                 <div class="py-12 col-lg-4 col-md-12 text-center">
+                    @if (Auth::user()->thema == 0)
                     <a class="twitter-timeline" data-chrome="nofooter" data-width="400" data-height="550"
                         data-theme="light" href="https://twitter.com/hxs_?ref_src=twsrc%5Etfw">Tweets by hxs_</a>
+                    @elseif (Auth::user()->thema == 1)
+                    <a class="twitter-timeline" data-chrome="nofooter" data-width="400" data-height="550"
+                        data-theme="dark" href="https://twitter.com/hxs_?ref_src=twsrc%5Etfw">Tweets by hxs_</a>
+                    @endif
+
                     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
                 <!-- ここまでTwitterの表示 -->
