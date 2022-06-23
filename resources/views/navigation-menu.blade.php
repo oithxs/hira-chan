@@ -22,10 +22,12 @@
                         class="text-decoration-none">
                         {{__('Top page')}}
                     </x-jet-nav-link>
+                    @if (Auth::user()->is_admin == 1)
                     <x-jet-nav-link href="{{ route('hub') }}" :active="request()->routeIs('hub')"
                         class="text-decoration-none">
                         {{__('Forum Hub')}}
                     </x-jet-nav-link>
+                    @endif
                 </div>
                 <!-- ここまでトップページや掲示板ハブにほ表示されるヘッダ部分 -->
 

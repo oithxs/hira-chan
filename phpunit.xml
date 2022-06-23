@@ -15,7 +15,7 @@
         <testsuite name="View">
             <directory suffix="Test.php">./tests/View</directory>
         </testsuite>
-        -->
+         -->
     </testsuites>
     <coverage processUncoveredFiles="true">
         <include>

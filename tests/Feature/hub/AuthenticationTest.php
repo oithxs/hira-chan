@@ -25,7 +25,7 @@ class AuthenticationTest extends TestCase
     {
         $response = $this->get('/hub');
 
-        $response->assertRedirect('/login');
+        $response->assertStatus(404);
     }
 
     public function test_hub_user_access()
@@ -34,7 +34,7 @@ class AuthenticationTest extends TestCase
             ->actingAs($this->user)
             ->get('/hub');
 
-        $response->assertStatus(200);
+        $response->assertStatus(404);
     }
 
     public function test_hub_admin_access()

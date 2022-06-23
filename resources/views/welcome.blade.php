@@ -50,7 +50,8 @@
                                     d="M3 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0-5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-1z" />
                             </svg>
                             <div class="ml-4 text-lg leading-7 font-semibold">
-                                <a href="{{ url('hub') }}" class="underline text-gray-900 text-decoration-none">掲示板</a>
+                                <a href="{{ url('dashboard') }}"
+                                    class="underline text-gray-900 text-decoration-none">掲示板</a>
                             </div>
                         </div>
 
