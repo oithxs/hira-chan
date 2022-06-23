@@ -616,9 +616,10 @@
     "Zambia": "Zambia",
     "Zimbabwe": "Zimbabwe",
 
-    "Email register": "学生番号：(e1~... @以下不要) 確認メールが送信されます", 
+    "Email register": "学生番号：(e1~... @以下不要) 確認メールが送信されます",
+    "Email login": "学生番号：（e1~...@以下不要）",
     "Forum Hub": "掲示板ハブ",
-    "Go hub": "掲示板ハブへ戻る", 
+    "Go hub": "掲示板ハブへ戻る",
     "Write forum": "書き込み",
     "Create new thread": "新規スレッドの作成",
     "Thread name": "スレッド名",

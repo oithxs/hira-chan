@@ -11,10 +11,8 @@
         </x-slot>
 
         <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-        crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
         <x-jet-validation-errors class="mb-4" />
 
@@ -23,39 +21,58 @@
 
             <div>
                 <x-jet-label for="name" value="{{ __('Name') }}" />
-                <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
+                    autofocus autocomplete="name" />
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="email" value="{{__('Email register')}}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email')" required />
+                <x-jet-label for="email" value="{{ __('Email register') }}" />
+            </div>
+
+            <div class="input-group mt-4">
+                <x-jet-input id="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="text"
+                    name="email" :value="old('email')" placeholder="（例）{{ config('AddConfig.mail.example') }}"
+                    aria-describedby="basic-addon2" required />
+                <span class="input-group-text" id="basic-addon2">@st.oit.ac.jp</span>
+                @if ($errors->has('email'))
+                <span class="invalid-feedback" role="alert">
+                    {{ $errors->first('email') }}
+                </span>
+                @endif
             </div>
 
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Password') }}{{ __('Password register notice') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required
+                    autocomplete="new-password" />
+
             </div>
 
             <div class="mt-4">
                 <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+                <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password"
+                    name="password_confirmation" required autocomplete="new-password" />
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
-                    <x-jet-label for="terms">
-                        <div class="flex items-center">
-                            <x-jet-checkbox name="terms" id="terms"/>
+            <div class="mt-4">
+                <x-jet-label for="terms">
+                    <div class="flex items-center">
+                        <x-jet-checkbox name="terms" id="terms" />
 
-                            <div class="ml-2">
-                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Privacy Policy').'</a>',
-                                ]) !!}
-                            </div>
+                        <div class="ml-2">
+                            {!! __('I agree to the :terms_of_service and :privacy_policy', [
+                            'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'"
+                                class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Terms of
+                                Service').'</a>',
+                            'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'"
+                                class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Privacy
+                                Policy').'</a>',
+                            ]) !!}
                         </div>
-                    </x-jet-label>
-                </div>
+                    </div>
+                </x-jet-label>
+            </div>
             @endif
 
             <div class="mt-4">
