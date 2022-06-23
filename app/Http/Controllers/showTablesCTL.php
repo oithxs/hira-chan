@@ -10,13 +10,13 @@ class showTablesCTL extends Controller
 {
     public function __invoke(Request $request)
     {
-        $type = $request->type;
-        if ($type == NULL) {
-            $type = 'new_create';
+        $sort = $request->sort;
+        if ($sort == NULL) {
+            $sort = 'new_create';
         }
 
         $get = new Get;
-        $stmt = $get->showTables($type);
+        $stmt = $get->showTables($sort);
 
         $response['tables'] = $stmt;
         $response['url'] = url('/');

@@ -26,7 +26,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard?type=', 'App\Http\Controllers\DashboardController@top');
+    Route::get('/dashboard?sort=', 'App\Http\Controllers\DashboardController@top');
     Route::get('/dashboard', 'App\Http\Controllers\DashboardController@top')->name('dashboard');
 
     Route::get('/dashboard/thread_name={thread_name}/id={thread_id}', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('thread');
@@ -41,7 +41,7 @@ Route::middleware([
     'Is_Admin',
 ])->group(function () {
     Route::get('/hub', 'App\Http\Controllers\showTablesCTL')->name('hub');
-    Route::get('/hub?type=', 'App\Http\Controllers\showTablesCTL')->name('hub');
+    Route::get('/hub?sort=', 'App\Http\Controllers\showTablesCTL')->name('hub');
 
     Route::get('hub/thread_name={thread_name}/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
     Route::get('hub/thread_name=/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');

@@ -142,12 +142,12 @@
                                     <tr>
                                         <th>{{ __("Thread name") }}</th>
                                         <th>
-                                            <button onclick="location.href='dashboard?type=new_create'">
+                                            <button onclick="location.href='dashboard?sort=new_create'">
                                                 {{ __("Create time") }}
                                             </button>
                                         </th>
                                         <th>
-                                            <button onclick="location.href='dashboard?type=access_count'">
+                                            <button onclick="location.href='dashboard?sort=access_count'">
                                                 {{ __("Access number") }}
                                             </button>
                                         </th>

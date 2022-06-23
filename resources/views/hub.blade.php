@@ -80,12 +80,12 @@
                                     <tr>
                                         <th>{{ __("Thread name") }}</th>
                                         <th>
-                                            <button onclick="location.href='hub?type=new_create'">
+                                            <button onclick="location.href='hub?sort=new_create'">
                                                 {{ __("Create time") }}
                                             </button>
                                         </th>
                                         <th>
-                                            <button onclick="location.href='hub?type=access_count'">
+                                            <button onclick="location.href='hub?sort=access_count'">
                                                 {{ __("Access number") }}
                                             </button>
                                         </th>
