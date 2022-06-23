@@ -8,7 +8,17 @@ var __webpack_exports__ = {};
 $('#dashboard_create_thread_btn').click(function () {
   var formElm = document.getElementById("dashboard_create_thread_form");
   var threadName = formElm.dashboard_create_thread_text.value;
+  var thread_category = formElm.dashboard_thread_category_select.value;
   formElm.dashboard_create_thread_text.value = "";
+
+  if (threadName == '') {
+    return;
+  }
+
+  if (thread_category == '') {
+    return;
+  }
+
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

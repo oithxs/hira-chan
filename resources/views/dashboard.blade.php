@@ -314,6 +314,17 @@
                                         {{ __("Thread name") }}
                                     </label>
                                     <input id="dashboard_create_thread_text" type="text" class="form-control">
+                                    <label for="thread-category" class="" col-form-label>
+                                        {{ __('Thread category') }}
+                                    </label>
+                                    <select id="dashboard_thread_category_select">
+                                        <option value="">選択して下さい</option>
+                                        <option value="IS">IS科</option>
+                                        <option vlaue="IN">IN科</option>
+                                        <option value="IC">IC科</option>
+                                        <option value="ID">ID科</option>
+                                        <option value="IM">IM科</option>
+                                    </select>
                                 </form>
                             </div>
                             <div class="modal-footer">
