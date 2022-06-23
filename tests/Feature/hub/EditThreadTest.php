@@ -67,7 +67,7 @@ class EditThreadTest extends TestCase
             'thread_name' => 'EditThreadTestName_After'
         ]);
 
-        $response->assertStatus(500);
+        $response->assertStatus(404);
     }
 
     public function test_user_post_access_admin_edit_thread()
@@ -79,7 +79,7 @@ class EditThreadTest extends TestCase
                 'thread_name' => 'EditThreadTestName_After'
             ]);
 
-        $response->assertStatus(403);
+        $response->assertStatus(404);
     }
 
     public function test_admin_post_access_admin_edit_thread()

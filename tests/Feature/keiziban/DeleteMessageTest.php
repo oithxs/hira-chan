@@ -74,7 +74,7 @@ class DeleteMessageTest extends TestCase
             'message_id' => 1
         ]);
 
-        $response->assertStatus(403);
+        $response->assertStatus(404);
     }
 
     public function test_user_post_access_delete_message()
@@ -86,7 +86,7 @@ class DeleteMessageTest extends TestCase
                 'message_id' => 1
             ]);
 
-        $response->assertStatus(403);
+        $response->assertStatus(404);
     }
 
     public function test_admin_post_access_delete_message()

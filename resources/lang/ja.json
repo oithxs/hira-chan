@@ -400,7 +400,7 @@
     "Please provide your name.": "Please provide your name.",
     "Poland": "Poland",
     "Portugal": "Portugal",
-    "Press \/ to search": "Press \/ to search",
+    "Press / to search": "Press / to search",
     "Preview": "Preview",
     "Previous": "Previous",
     "Privacy Policy": "Privacy Policy",
@@ -615,7 +615,9 @@
     "Your email address is not verified.": "Your email address is not verified.",
     "Zambia": "Zambia",
     "Zimbabwe": "Zimbabwe",
+
     "Email register": "学生番号：(e1~... @以下不要) 確認メールが送信されます",
+    "Email login": "学生番号：（e1~...@以下不要）",
     "Forum Hub": "掲示板ハブ",
     "Go hub": "掲示板ハブへ戻る",
     "Write forum": "書き込み",
