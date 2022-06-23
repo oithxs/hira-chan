@@ -83,15 +83,8 @@
                                     <tr>
                                         <th>{{ __("Thread name") }}</th>
                                         <td>{{ __("Create time") }}</td>
-
-                                        <!-- ここから管理者のみに表示 -->
-                                        @if (Auth::user()->is_admin == 1)
-                                        <td>
-                                            {{ __("Thread ID") }}
-                                        </td>
-                                        @endif
-                                        <!-- ここまで管理者のみに表示 -->
-
+                                        <td>{{__('Access number')}}</td>
+                                        <td>{{ __("Thread ID") }}</td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -116,7 +109,7 @@
                                             {{ $tableInfo["created_at"] }}
                                         </td>
                                         <td>
-                                            {{__('Access number')}}
+                                            {{ $tableInfo['Access'] }}
                                         </td>
 
                                         <!-- ここから管理者のみに表示 -->
