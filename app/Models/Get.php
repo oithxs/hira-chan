@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class Get extends Model
 {
-    public function showTables()
+    public function showTables($type)
     {
-        switch ($id = 1) {
-            case 1:
+        switch ($type) {
+            case 'new_create':
                 $sql = <<<EOF
                 SELECT
                     hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access
@@ -24,7 +24,7 @@ class Get extends Model
                 ORDER BY hub.created_at DESC;
                 EOF;
                 break;
-            case 2:
+            case 'access_count':
                 $sql = <<<EOF
                 SELECT
                     hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access
