@@ -41,6 +41,7 @@ Route::middleware([
     'Is_Admin',
 ])->group(function () {
     Route::get('/hub', 'App\Http\Controllers\showTablesCTL')->name('hub');
+    Route::get('/hub?type=', 'App\Http\Controllers\showTablesCTL')->name('hub');
 
     Route::get('hub/thread_name={thread_name}/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
     Route::get('hub/thread_name=/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');

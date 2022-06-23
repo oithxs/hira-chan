@@ -79,8 +79,16 @@
                                 <thead>
                                     <tr>
                                         <th>{{ __("Thread name") }}</th>
-                                        <th>{{ __("Create time") }}</th>
-                                        <th>{{__('Access number')}}</td>
+                                        <th>
+                                            <button onclick="location.href='hub?type=new_create'">
+                                                {{ __("Create time") }}
+                                            </button>
+                                        </th>
+                                        <th>
+                                            <button onclick="location.href='hub?type=access_count'">
+                                                {{ __("Access number") }}
+                                            </button>
+                                        </th>
                                         <th>{{ __("Thread ID") }}</th>
                                     </tr>
                                 </thead>
