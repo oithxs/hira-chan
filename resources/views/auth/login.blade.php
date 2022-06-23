@@ -32,7 +32,7 @@
             @csrf
 
             <div>
-                <x-jet-label for="email" value="{{ __('Email') }}" />
+                <x-jet-label for="email" value="{{ __('Email login') }}" />
             </div>
 
             <div class="input-group mt-3">
