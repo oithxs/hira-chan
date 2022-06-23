@@ -138,7 +138,7 @@
 
                             @if ($type == 'top')
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#CreateThread_Moda">
+                                data-bs-target="#CreateThread_Modal">
                                 {{ __('Create new thread') }}
                             </button>
 
@@ -304,7 +304,7 @@
                 <!-- ここまでTwitterの表示 -->
 
                 <!-- ここからスレッド作成時に表示されるモーダル -->
-                <div class="modal fade" id="CreateThread_Moda" tabindex="-1" aria-labelledby="CreateThreadModalLabel"
+                <div class="modal fade" id="CreateThread_Modal" tabindex="-1" aria-labelledby="CreateThreadModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
