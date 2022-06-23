@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\_laravel;
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -20,10 +20,13 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_authenticate_using_the_login_screen()
     {
-        $user = User::factory()->create();
+        // テストが通るようにemail修正
+        $user = User::factory()->create([
+            'email' => config('AddConfig.mail.example') . '@st.oit.ac.jp'
+        ]);
 
         $response = $this->post('/login', [
-            'email' => $user->email,
+            'email' => strstr($user->email, '@', true),
             'password' => 'password',
         ]);
 
@@ -33,10 +36,13 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_not_authenticate_with_invalid_password()
     {
-        $user = User::factory()->create();
+        // テストが通るようにemail修正
+        $user = User::factory()->create([
+            'email' => config('AddConfig.mail.example') . '@st.oit.ac.jp'
+        ]);
 
         $this->post('/login', [
-            'email' => $user->email,
+            'email' => strstr($user->email, '@', true),
             'password' => 'wrong-password',
         ]);
 

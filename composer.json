@@ -2,7 +2,10 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
@@ -30,7 +33,15 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "exclude-from-classmap": [
+            "vendor\\laravel\\fortify\\src\\Http\\Controllers\\AuthenticatedSessionController.php",
+            "vendor\\laravel\\fortify\\src\\Http\\Requests\\LoginRequest.php"
+        ],
+        "files": [
+            "app\\laravel\\fortify\\src\\Http\\Controllers\\AuthenticatedSessionController.php",
+            "app\\laravel\\fortify\\src\\Http\\Requests\\LoginRequest.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
