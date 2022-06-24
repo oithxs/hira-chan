@@ -142,12 +142,12 @@
                                     <tr>
                                         <th>{{ __("Thread name") }}</th>
                                         <th>
-                                            <button onclick="location.href='dashboard?sort=new_create'">
+                                            <button onclick="location.href='/test/dashboard?sort=new_create'">
                                                 {{ __("Create time") }}
                                             </button>
                                         </th>
                                         <th>
-                                            <button onclick="location.href='dashboard?sort=access_count'">
+                                            <button onclick="location.href='/test/dashboard?sort=access_count'">
                                                 {{ __("Access number") }}
                                             </button>
                                         </th>
@@ -163,7 +163,7 @@
 									?>
                                     <tr>
                                         <td>
-                                            <a href="dashboard/thread_name={{
+                                            <a href="/test/dashboard/thread_name={{
                                                     $tableName
                                                 }}/id={{
                                                     $tableInfo['thread_id']
@@ -244,7 +244,7 @@
                             <div class="row">
                                 <hr />
                                 <div class="col-sm-4 col-xs-12">
-                                    <a href="/dashboard">トップページへ</a>
+                                    <a href="/test/dashboard">トップページへ</a>
                                     <form id="dashboard_sendMessage_form">
                                         <div class="mb-2">
                                             <label class="form-label">コメント</label>
