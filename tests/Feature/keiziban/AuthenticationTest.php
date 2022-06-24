@@ -39,28 +39,28 @@ class AuthenticationTest extends TestCase
     {
         $response = $this->get('/hub/thread_name=ThreadTestName/id=ThreadTestID');
 
-        $response->assertRedirect('/login');
+        $response->assertStatus(404);
     }
 
     public function test_keiziban_not_login_access_thread_name1_id0()
     {
         $response = $this->get('/hub/thread_name=ThreadTestName/id=');
 
-        $response->assertRedirect('/login');
+        $response->assertStatus(404);
     }
 
     public function test_keiziban_not_login_access_thread_name0_id1()
     {
         $response = $this->get('/hub/thread_name=/id=ThreadTestID');
 
-        $response->assertRedirect('/login');
+        $response->assertStatus(404);
     }
 
     public function test_keiziban_not_login_access_thread_name0_id0()
     {
         $response = $this->get('/hub/thread_name=/id=');
 
-        $response->assertRedirect('/login');
+        $response->assertStatus(404);
     }
 
     public function test_keiziban_user_access_thread_name1_id1()
@@ -69,7 +69,7 @@ class AuthenticationTest extends TestCase
             ->actingAs($this->user)
             ->get('/hub/thread_name=ThreadTestName/id=ThreadTestID');
 
-        $response->assertStatus(200);
+        $response->assertStatus(404);
     }
 
     public function test_keiziban_user_access_thread_name1_id0()
@@ -78,7 +78,7 @@ class AuthenticationTest extends TestCase
             ->actingAs($this->user)
             ->get('/hub/thread_name=ThreadTestName/id=');
 
-        $response->assertStatus(200);
+        $response->assertStatus(404);
     }
 
     public function test_keiziban_user_access_thread_name0_id1()
@@ -87,7 +87,7 @@ class AuthenticationTest extends TestCase
             ->actingAs($this->user)
             ->get('/hub/thread_name=/id=ThreadTestID');
 
-        $response->assertStatus(200);
+        $response->assertStatus(404);
     }
 
     public function test_keiziban_user_access_thread_name0_id0()
@@ -96,7 +96,7 @@ class AuthenticationTest extends TestCase
             ->actingAs($this->user)
             ->get('/hub/thread_name=/id=');
 
-        $response->assertStatus(200);
+        $response->assertStatus(404);
     }
 
     public function test_keiziban_admin_access_thread_name1_id1()

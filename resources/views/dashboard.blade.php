@@ -8,7 +8,7 @@
 
     <!-- ここからタイトル（ページのヘッダでなはい） -->
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl leading-tight">
             {{ __("Top page") }}
         </h2>
     </x-slot>
@@ -19,39 +19,18 @@
             <div class="py-12 col-lg-8 col-md-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                        <meta charset="utf-8" />
-                        <meta name="viewport" content="width=device-width, initial-scale=1" />
-                        <!-- Bootstrap CSS -->
-                        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-                            rel="stylesheet"
-                            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-                            crossorigin="anonymous" />
+
+                        <!-- ここからデザイン関係なし -->
+                        <!-- データ処理で使う変数 -->
+                        <script>
+                            const url = "{{ url('') }}";
+                        </script>
+
+                        <!-- jQuery -->
+                        <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+                        <!-- ここまでデザイン関係なし -->
 
                         <div></div>
-
-                        <!--　ここから掲示板へのリンクとコメント -->
-                        <div class="p-6 border-t border-gray-200 md:border-t-0 md:border-l">
-                            <div class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                                    class="bi bi-card-heading" viewBox="0 0 16 16">
-                                    <path
-                                        d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
-                                    <path
-                                        d="M3 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0-5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-1z" />
-                                </svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold">
-                                    <a href="{{ url('hub') }}"
-                                        class="underline text-gray-900 text-decoration-none">掲示板</a>
-                                </div>
-                            </div>
-
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    HxSコンピュータ部が提供する掲示板です．利用には学内ネットワーク・ログインが必要です．
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ここまで掲示板へのリンクとコメント -->
 
                         <!-- ここからHxS Twitterへのリンクとコメント -->
                         <div class="p-6 border-t border-gray-200 md:border-t-0 md:border-l">
@@ -63,12 +42,12 @@
                                 </svg>
                                 <div class="ml-4 text-lg leading-7 font-semibold">
                                     <a href="https://twitter.com/hxs_" target="_blank"
-                                        class="underline text-gray-900 text-decoration-none">Twitter</a>
+                                        class="underline text-decoration-none">Twitter</a>
                                 </div>
                             </div>
 
                             <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                                <div class="mt-2 dark:text-gray-400 text-sm">
                                     大阪工業大学
                                     HxSコンピュータ部の非公式アカウントです。ハードウェア（Hardware）とソフトウェア（Software）の両面からスキルアップを図る事を目標とした部活です。活動内容・イベント宣伝等をつぶやきます。
                                 </div>
@@ -142,30 +121,224 @@
 
                                 <div class="ml-4 text-lg leading-7 font-semibold">
                                     <a href="https://github.com/oithxs" target="_blank"
-                                        class="underline text-gray-900 text-decoration-none">Github</a>
+                                        class="underline text-decoration-none">Github</a>
                                 </div>
                             </div>
 
                             <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                                <div class="mt-2 dark:text-gray-400 text-sm">
                                     大阪工業大学情報科学部HxSコンピュータ部の組織アカウントです。
                                 </div>
                             </div>
                         </div>
                         <!-- ここまでHxS GitHubへのリンクとコメント -->
 
+                        <!-- ここから掲示板へのリンク -->
+                        <div class="p-6 border-t border-gray-200 md:border-t-0 md:border-l">
+
+                            @if ($type == 'top')
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#CreateThread_Modal">
+                                {{ __('Create new thread') }}
+                            </button>
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>{{ __("Thread name") }}</th>
+                                        <td>{{ __("Create time") }}</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- スレッド名使う時は「$tableName」 -->
+                                    @foreach($tables as $tableInfo)
+                                    <?php
+										$tableName = str_replace('/', '&slash;', $tableInfo['thread_name']);
+										$tableName = str_replace('\\', '&backSlash;' , $tableName);
+										$tableName = str_replace('#', '&hash;', $tableName);
+									?>
+                                    <tr>
+                                        <th>
+                                            <a href="dashboard/thread_name={{
+                                                    $tableName
+                                                }}/id={{
+                                                    $tableInfo['thread_id']
+                                                }}" class="text-decoration-none">{{
+                                                $tableInfo["thread_name"]
+                                                }}</a>
+                                        </th>
+                                        <td>
+                                            {{ $tableInfo["created_at"] }}
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            </dvi>
+
+                            @elseif ($type == 'thread')
+                            <!-- ここからデザイン関係なし -->
+                            <script>
+                                const table = "{{ $thread_name }}";
+                                const thread_id = "{{ $thread_id }}";
+                            </script>
+
+                            <script>
+                                function likes(message_id, user_like) {
+                                    $.ajaxSetup({
+                                        headers: {
+                                            "X-CSRF-TOKEN": $(
+                                                'meta[name="csrf-token"]'
+                                            ).attr("content"),
+                                        },
+                                    });
+
+                                    if (user_like == 1) {
+                                        $.ajax({
+                                            type: "POST",
+                                            url: url + "/jQuery.ajax/unlike",
+                                            data: {
+                                                thread_id: thread_id,
+                                                message_id: message_id,
+                                            },
+                                        })
+                                            .done(function () { })
+                                            .fail(function (
+                                                XMLHttpRequest,
+                                                textStatus,
+                                                errorThrown
+                                            ) {
+                                                console.log(XMLHttpRequest.status);
+                                                console.log(textStatus);
+                                                console.log(errorThrown.message);
+                                            });
+                                    } else {
+                                        $.ajax({
+                                            type: "POST",
+                                            url: url + "/jQuery.ajax/like",
+                                            data: {
+                                                thread_id: thread_id,
+                                                message_id: message_id,
+                                            },
+                                        })
+                                            .done(function () { })
+                                            .fail(function (
+                                                XMLHttpRequest,
+                                                textStatus,
+                                                errorThrown
+                                            ) {
+                                                console.log(XMLHttpRequest.status);
+                                                console.log(textStatus);
+                                                console.log(errorThrown.message);
+                                            });
+                                    }
+                                }
+                            </script>
+                            <!-- ここまでデザイン関係なし -->
+
+                            <!-- ここからスレッドが存在したとき -->
+                            @if ($result == 1)
+                            <div class="row">
+                                <hr />
+                                <div class="col-sm-4 col-xs-12">
+                                    <a href="/dashboard">トップページへ</a>
+                                    <form id="dashboard_sendMessage_form">
+                                        <div class="mb-2">
+                                            <label class="form-label">コメント</label>
+                                            <textarea class="form-control" id="dashboard_message_textarea"
+                                                rows="4"></textarea>
+                                            <br />
+                                            <div class="form-text">
+                                                入力欄の右下にマウスカーソルを移動させると，高さを変えることができます
+                                            </div>
+                                            <div id="dashboard_sendAlertArea"></div>
+                                        </div>
+                                    </form>
+                                    <button id="dashboard_sendMessage_btn" class="btn btn-primary">
+                                        {{ __("Write forum") }}
+                                    </button>
+                                </div>
+
+                                <!--
+                                ここから非同期通信で掲示板の表示
+                                表示はresources/js/GetallRow.js
+                                -->
+                                <div id="dashboard_displayArea" class="col-sm-8 col-xs-12" style="
+                                    height: 70vh;
+                                    width: 100;
+                                    overflow-y: scroll;
+                                    overflow-x: hidden;
+                                "></div>
+                                <!-- ここまで非同期通信で掲示板の表示 -->
+
+                            </div>
+                            <!-- ここまでスレッドが存在したとき -->
+
+                            <!-- ここからスレッドが存在しなかったとき -->
+                            @else
+                            <div class="mt-4">
+                                <h1 class="text-danger">※スレッドが存在しません</h1>
+                            </div>
+                            <br />
+                            <br />
+                            @endif
+                            <!-- ここまでスレッドが存在しなかったとき -->
+                            @endif
+                        </div>
+                        <!-- ここまで掲示板へのリンク -->
                     </div>
                 </div>
-            </div>
 
-            <!-- ここからTwitterの表示 -->
-            <div class="py-12 col-lg-4 col-md-12 text-center">
-                <a class="twitter-timeline" data-chrome="nofooter" data-width="400" data-height="550" data-theme="light"
-                    href="https://twitter.com/hxs_?ref_src=twsrc%5Etfw">Tweets by hxs_</a>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <!-- ここからTwitterの表示 -->
+                <div class="py-12 col-lg-4 col-md-12 text-center">
+                    @if (Auth::user()->thema == 0)
+                    <a class="twitter-timeline" data-chrome="nofooter" data-width="400" data-height="550"
+                        data-theme="light" href="https://twitter.com/hxs_?ref_src=twsrc%5Etfw">Tweets by hxs_</a>
+                    @elseif (Auth::user()->thema == 1)
+                    <a class="twitter-timeline" data-chrome="nofooter" data-width="400" data-height="550"
+                        data-theme="dark" href="https://twitter.com/hxs_?ref_src=twsrc%5Etfw">Tweets by hxs_</a>
+                    @endif
+
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+                <!-- ここまでTwitterの表示 -->
+
+                <!-- ここからスレッド作成時に表示されるモーダル -->
+                <div class="modal fade" id="CreateThread_Modal" tabindex="-1" aria-labelledby="CreateThreadModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <form id="dashboard_create_thread_form">
+                                    <label for="thread-name" class="" col-form-label>
+                                        {{ __("Thread name") }}
+                                    </label>
+                                    <input id="dashboard_create_thread_text" type="text" class="form-control">
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <button id="dashboard_create_thread_btn" type="button" class="btn btn-primary"
+                                    data-bs-dismiss="modal">
+                                    Save changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ここまでスレッド作成時に表示されるモーダル -->
+
+                <!-- Bootstrap JS -->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+                    crossorigin="anonymous"></script>
+
+                <!-- ここからデザイン関係なし -->
+                <script src="{{ mix('js/app_jquery.js') }}"></script>
+                <!-- ここまでデザイン関係なし -->
             </div>
-            <!-- ここまでTwitterの表示 -->
         </div>
-    </div>
-    <!-- ここまでデザイン -->
+        <!-- ここまでデザイン -->
 </x-app-layout>

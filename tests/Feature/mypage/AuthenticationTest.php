@@ -21,14 +21,14 @@ class AuthenticationTest extends TestCase
         $this->admin = User::factory()->admin()->create();
     }
 
-    public function test_hub_not_login_access()
+    public function test_mypage_not_login_access()
     {
         $response = $this->get('/mypage');
 
         $response->assertRedirect('/login');
     }
 
-    public function test_hub_user_access()
+    public function test_mypage_user_access()
     {
         $response = $this
             ->actingAs($this->user)
@@ -37,7 +37,7 @@ class AuthenticationTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_hub_admin_access()
+    public function test_mypage_admin_access()
     {
         $response = $this
             ->actingAs($this->admin)
