@@ -16,11 +16,13 @@
                 rel="stylesheet"
                 integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
                 crossorigin="anonymous" />
+                <link rel="stylesheet" href="{{ mix('css/design.css') }}">
                 @elseif (Auth::user()->thema == 1)
                 <link rel="stylesheet"
                 href="https://cdn.jsdelivr.net/npm/bootstrap-dark-5@1.1.2/dist/css/bootstrap-night.min.css"
                 integrity="sha384-RvY1VEsYg2mun1QUZIdkZHhMcwhsQnHOoxD8MBfRlSyIXcnukm039Qx28Ap+LCox"
                 crossorigin="anonymous">
+                <link rel="stylesheet" href="{{ mix('css/design-dark.css') }}">
                 @endif
 
 
