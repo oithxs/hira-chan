@@ -10,9 +10,14 @@ class DashboardController extends Controller
 {
     public function top(Request $request)
     {
+        $sort = $request->sort;
+        if ($sort == NULL) {
+            $sort = 'new_create';
+        }
+
         $get = new Get;
         $access_ranking = $get->access_ranking();
-        $threads = $get->showTables();
+        $threads = $get->showTables($sort);
 
         $response['type'] = 'top';
         $response['access_ranking'] = $access_ranking;

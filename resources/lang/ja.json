@@ -400,7 +400,7 @@
     "Please provide your name.": "Please provide your name.",
     "Poland": "Poland",
     "Portugal": "Portugal",
-    "Press \/ to search": "Press \/ to search",
+    "Press / to search": "Press / to search",
     "Preview": "Preview",
     "Previous": "Previous",
     "Privacy Policy": "Privacy Policy",
@@ -637,5 +637,6 @@
     "Thread ID": "スレッドID",
     "Do you really want to delete it?": "本当に削除しますか？",
     "Do you really want to restore it?": "本当に復元しますか？",
-    "Edit thread": "スレッドの編集"
+    "Edit thread": "スレッドの編集",
+    "Access number": "閲覧回数"
 }

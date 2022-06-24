@@ -1,5 +1,6 @@
 <!--
     掲示板のファイル
+    このページは管理者のみに表示されます
     {{ __('〇〇') }}は，resources/lang/ja.jsonとリンク
 -->
 
@@ -115,9 +116,6 @@
                         <div class="row">
                             <hr />
                             <div class="col-sm-4 col-xs-12">
-
-                                <!-- ここから管理者のみに表示 -->
-                                @if (Auth::user()->is_admin == 1)
                                 <form id="keiziban_message_actions_form">
                                     <div class="mb-2">
                                         <label class="form-label">対象：コメントID</label>
@@ -149,8 +147,6 @@
                                         </ul>
                                     </div>
                                 </form>
-                                @endif
-                                <!-- ここまで管理者のみに表示 -->
 
                                 <form id="keiziban_sendMessage_form">
                                     <div class="mb-2">
@@ -195,9 +191,7 @@
                         <!-- ここまでスレッドが存在しなかったとき -->
                     </div>
 
-                    <!-- ここから管理者のみに表示 -->
                     <!-- Modal -->
-                    @if (Auth::user()->is_admin == 1)
                     <div class="modal fade" id="keiziban_DeleteMessage_Modal" tabindex="-1"
                         aria-labelledby="DeleteMessageModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -231,8 +225,6 @@
                             </div>
                         </div>
                     </div>
-                    @endif
-                    <!-- ここまで管理者のみに表示 -->
 
                     <div>
                         <!-- Bootstrap用JavaScript -->
