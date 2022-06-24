@@ -1,5 +1,6 @@
 <!--
     トップページのファイル
+    このページはログインユーザ全てに表示されます
     {{ __('〇〇') }}は，resources/lang/ja.jsonとリンク
 -->
 
@@ -135,13 +136,9 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>
-                                                    {{ __("Access Ranking") }}
-                                                </th>
-                                                <td>
-                                                    {{ __("Access count") }}
-                                                </td>
-                                                <td>{{ __("Thread name") }}</td>
+                                                <th>{{ __("Access Ranking") }}</th>
+                                                <th>{{ __("Access count") }}</th>
+                                                <th>{{__('Thread name')}}</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -154,10 +151,8 @@
                                             $title = str_replace("&hash;", "#", $title);
                                             ?>
                                             <tr>
-                                                <th>{{ $count++ }}</th>
-                                                <td>
-                                                    {{ $row["access_count"] }}
-                                                </td>
+                                                <td>{{ $count++ }}</td>
+                                                <td>{{ $row["access_count"] }}</td>
                                                 <td>{{ $title }}</td>
                                             </tr>
                                             @endforeach
@@ -181,7 +176,16 @@
                                 <thead>
                                     <tr>
                                         <th>{{ __("Thread name") }}</th>
-                                        <td>{{ __("Create time") }}</td>
+                                        <th>
+                                            <button onclick="location.href='dashboard?sort=new_create'">
+                                                {{ __("Create time") }}
+                                            </button>
+                                        </th>
+                                        <th>
+                                            <button onclick="location.href='dashboard?sort=access_count'">
+                                                {{ __("Access number") }}
+                                            </button>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -193,7 +197,7 @@
 										$tableName = str_replace('#', '&hash;', $tableName);
 									?>
                                     <tr>
-                                        <th>
+                                        <td>
                                             <a href="dashboard/thread_name={{
                                                     $tableName
                                                 }}/id={{
@@ -201,10 +205,9 @@
                                                 }}" class="text-decoration-none">{{
                                                 $tableInfo["thread_name"]
                                                 }}</a>
-                                        </th>
-                                        <td>
-                                            {{ $tableInfo["created_at"] }}
                                         </td>
+                                        <td>{{ $tableInfo["created_at"] }}</td>
+                                        <td>{{ $tableInfo['Access'] }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

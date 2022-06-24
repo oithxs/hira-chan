@@ -1,5 +1,6 @@
 <!--
     掲示板ハブのファイル（掲示板へのリンクがはってるところ）
+    このページは管理者のみに表示されます
     {{ __('〇〇') }}は，resources/lang/ja.jsonとリンク
 -->
 
@@ -43,8 +44,6 @@
 
                         <br /><br />
 
-                        <!-- ここから管理者のみに表示 -->
-                        @if (Auth::user()->is_admin == 1)
                         <form id="hub_thread_actions_form">
                             <label class="form-label">対象：スレッドID</label>
                             <input id="hub_thread_id_text" class="form-control" type="text" />
@@ -70,8 +69,6 @@
                                 </li>
                             </ul>
                         </form>
-                        @endif
-                        <!-- ここまで管理者のみに表示 -->
 
                         <br />
                         <br />
@@ -82,16 +79,17 @@
                                 <thead>
                                     <tr>
                                         <th>{{ __("Thread name") }}</th>
-                                        <td>{{ __("Create time") }}</td>
-
-                                        <!-- ここから管理者のみに表示 -->
-                                        @if (Auth::user()->is_admin == 1)
-                                        <td>
-                                            {{ __("Thread ID") }}
-                                        </td>
-                                        @endif
-                                        <!-- ここまで管理者のみに表示 -->
-
+                                        <th>
+                                            <button onclick="location.href='hub?sort=new_create'">
+                                                {{ __("Create time") }}
+                                            </button>
+                                        </th>
+                                        <th>
+                                            <button onclick="location.href='hub?sort=access_count'">
+                                                {{ __("Access number") }}
+                                            </button>
+                                        </th>
+                                        <th>{{ __("Thread ID") }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -103,7 +101,7 @@
 										$tableName = str_replace('#', '&hash;', $tableName);
 									?>
                                     <tr>
-                                        <th>
+                                        <td>
                                             <a href="hub/thread_name={{
                                                     $tableName
                                                 }}/id={{
@@ -111,18 +109,10 @@
                                                 }}" class="text-decoration-none">{{
                                                 $tableInfo["thread_name"]
                                                 }}</a>
-                                        </th>
-                                        <td>
-                                            {{ $tableInfo["created_at"] }}
                                         </td>
-
-                                        <!-- ここから管理者のみに表示 -->
-                                        @if (Auth::user()->is_admin == 1)
-                                        <td>
-                                            {{ $tableInfo["thread_id"] }}
-                                        </td>
-                                        @endif
-                                        <!-- ここまで管理者のみに表示 -->
+                                        <td>{{ $tableInfo["created_at"] }}</td>
+                                        <td>{{ $tableInfo['Access'] }}</td>
+                                        <td>{{ $tableInfo["thread_id"] }}</td>
 
                                     </tr>
                                     @endforeach
@@ -132,9 +122,7 @@
                         </div>
                     </div>
 
-                    <!-- ここから管理者のみに表示 -->
                     <!-- Modal -->
-                    @if (Auth::user()->is_admin == 1)
                     <div class="modal fade" id="hub_DeleteThread_Modal" tabindex="-1"
                         aria-labelledby="DeleteThreadModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -184,8 +172,6 @@
                             </div>
                         </div>
                     </div>
-                    @endif
-                    <!-- ここまで管理者のみに表示 -->
 
                     <div>
                         <!-- Bootstrap用JavaScript -->
