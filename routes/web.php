@@ -26,9 +26,17 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('dashboard', 'App\Http\Controllers\dashboard\DashboardController')->name('dashboard');
-    Route::get('dashboard?sort=', 'App\Http\Controllers\dashboard\DashboardController');
-    Route::get('dashboard?thread_name=&threead_id=', 'App\Http\Controllers\dashboard\DashboardController');
+    Route::get('dashboard', 'App\Http\Controllers\dashboard\DashboardController@threads')->name('dashboard');
+    Route::get('dashboard?sort=', 'App\Http\Controllers\dashboard\DashboardController@threads');
+
+    Route::middleware([
+        'Access_log'
+    ])->group(function () {
+        Route::get('dashboard/thread/name={thread_name}&id={thread_id}', 'App\Http\Controllers\dashboard\DashboardController@messages');
+        Route::get('dashboard/thread/name={thread_name}&id=', 'App\Http\Controllers\dashboard\DashboardController@messages');
+        Route::get('dashboard/thread/name=&id={thread_id}', 'App\Http\Controllers\dashboard\DashboardController@messages');
+        Route::get('dashboard/thread/name=&id=', 'App\Http\Controllers\dashboard\DashboardController@messages');
+    });
 
     Route::get('/mypage', 'App\Http\Controllers\MyPage')->name('mypage');
 });

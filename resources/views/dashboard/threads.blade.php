@@ -30,13 +30,10 @@
             ?>
             <tr>
                 <td>
-                    <a href="/dashboard?thread_name={{
-                            $tableName
-                        }}&thread_id={{
-                            $tableInfo['thread_id']
-                        }}" class="text-decoration-none">{{
-                        $tableInfo["thread_name"]
-                        }}</a>
+                    <a href="/dashboard/thread/name={{ $tableInfo['thread_name'] }}&id={{ $tableInfo['thread_id'] }}"
+                        class="text-decoration-none">
+                        {{$tableInfo["thread_name"]}}
+                    </a>
                 </td>
                 <td>{{ $tableInfo["created_at"] }}</td>
                 <td>{{ $tableInfo['Access'] }}</td>

@@ -34,11 +34,12 @@
             <div class="py-12 col-lg-8 col-md-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                        <!-- if (トップページの場合) -->
+                        @if ($main_type == 'threads')
                         @livewire('dashboard.threads')
-                        <!-- elseif (スレにアクセスしている状態) -->
+                        @elseif ($main_type == 'messages')
+                        @livewire('dashboard.messages')
                         <!-- elseif (カテゴリ別) -->
-                        <!-- endif -->
+                        @endif
                     </div>
                 </div>
             </div>
