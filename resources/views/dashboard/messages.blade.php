@@ -79,10 +79,7 @@
         </button>
     </div>
 
-    <!--
-                                ここから非同期通信で掲示板の表示
-                                表示はresources/js/GetallRow.js
-                                -->
+    <!-- ここから非同期通信で掲示板の表示 -->
     <div id="dashboard_displayArea" class="col-sm-8 col-xs-12" style="
                                     height: 70vh;
                                     width: 100;
@@ -103,3 +100,8 @@
 <br />
 @endif
 <!-- ここまでスレッドが存在しなかったとき -->
+
+<script>
+    const url = "{{ url('') }}";
+</script>
+<script src="{{ mix('js/app_jquery.js') }}"></script>
