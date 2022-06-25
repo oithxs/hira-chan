@@ -1,2 +1,28 @@
 /* resources/css/dark/dashboard/nomal.css */
 @charset "utf-8";
+
+
+/* バックグラウンドカラー */
+.bg-user-color {
+    background-color: black;
+}
+
+/* コンテンツ・バックグラウンドカラー */
+.ct-user-color {
+    background-color: #667580;
+}
+
+/* サブ　コンテンツ・バックグラウンドカラー */
+.ctsub-user-color {
+    background-color: #888;
+}
+
+/* テキストカラー */
+.tx-user-color {
+    color: #F5F8FA;
+}
+
+/* サブテキストカラー */
+.txsub-user-color {
+    color: dimgray;
+}
