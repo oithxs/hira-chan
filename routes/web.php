@@ -27,6 +27,7 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('dashboard', 'App\Http\Controllers\dashboard\DashboardController')->name('dashboard');
+    Route::get('dashboard?sort=', 'App\Http\Controllers\dashboard\DashboardController');
 
     Route::get('/mypage', 'App\Http\Controllers\MyPage')->name('mypage');
 });

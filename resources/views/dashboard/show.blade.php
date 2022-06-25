@@ -34,7 +34,11 @@
             <div class="py-12 col-lg-8 col-md-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                        @livewire('dashboard.main-display')
+                        <!-- if (トップページの場合) -->
+                        @livewire('dashboard.threads')
+                        <!-- elseif (スレにアクセスしている状態) -->
+                        <!-- elseif (カテゴリ別) -->
+                        <!-- endif -->
                     </div>
                 </div>
             </div>
