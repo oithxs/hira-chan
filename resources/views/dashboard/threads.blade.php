@@ -30,9 +30,9 @@
             ?>
             <tr>
                 <td>
-                    <a href="/dashboard/thread_name={{
+                    <a href="/dashboard?thread_name={{
                             $tableName
-                        }}/id={{
+                        }}&thread_id={{
                             $tableInfo['thread_id']
                         }}" class="text-decoration-none">{{
                         $tableInfo["thread_name"]
@@ -45,3 +45,34 @@
         </tbody>
     </table>
 </div>
+
+<!-- ここからスレッド作成時に表示されるモーダル -->
+<div class="modal fade" id="CreateThread_Modal" tabindex="-1" aria-labelledby="CreateThreadModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="dashboard_create_thread_form">
+                    <label for="thread-name" class="" col-form-label>
+                        {{ __("Thread name") }}
+                    </label>
+                    <input id="dashboard_create_thread_text" type="text" class="form-control">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+                <button id="dashboard_create_thread_btn" type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                    Save changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ここまでスレッド作成時に表示されるモーダル -->
+
+<script>
+    const url = "{{ url('') }}";
+</script>
+<script src="{{ mix('js/app_jquery.js') }}"></script>

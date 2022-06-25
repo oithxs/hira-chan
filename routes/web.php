@@ -28,6 +28,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('dashboard', 'App\Http\Controllers\dashboard\DashboardController')->name('dashboard');
     Route::get('dashboard?sort=', 'App\Http\Controllers\dashboard\DashboardController');
+    Route::get('dashboard?thread_name=&threead_id=', 'App\Http\Controllers\dashboard\DashboardController');
 
     Route::get('/mypage', 'App\Http\Controllers\MyPage')->name('mypage');
 });
