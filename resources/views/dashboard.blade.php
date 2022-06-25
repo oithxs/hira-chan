@@ -69,30 +69,6 @@
                 </div>
                 <!-- ここまでHxS Twitterへのリンクとコメント -->
 
-                <!--　ここから掲示板へのリンクとコメント -->
-                <div class="p-6 border-t border-gray-200 md:border-t-0 md:border-l">
-                    <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                            class="bi bi-card-heading" viewBox="0 0 16 16">
-                            <path
-                                d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
-                            <path
-                                d="M3 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0-5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-1z" />
-                        </svg>
-                        <div class="ml-4 text-lg leading-7 font-semibold">
-                            <a href="{{ url('hub') }}"
-                                class="underline text-gray-900 text-decoration-none">掲示板</a>
-                        </div>
-                    </div>
-
-                    <div class="ml-12">
-                        <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                            HxSコンピュータ部が提供する掲示板です．利用には学内ネットワーク・ログインが必要です．
-                        </div>
-                    </div>
-                </div>
-                <!-- ここまで掲示板へのリンクとコメント -->
-
             </div>
             <!-- ここまでが左側のフレーム -->
 
@@ -167,11 +143,6 @@
                         <div class="p-6 border-t border-gray-200 md:border-t-0 md:border-l">
 
                             @if ($type == 'top')
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#CreateThread_Modal">
-                                {{ __('Create new thread') }}
-                            </button>
-
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
@@ -343,13 +314,13 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                <button type="button" class="btn btn-white" data-bs-dismiss="modal">
                                     Close
                                 </button>
-                                <button id="dashboard_create_thread_btn" type="button" class="btn btn-primary"
+                                <x-jet-danger-button id="dashboard_create_thread_btn" type="button" class="btn btn-danger"
                                     data-bs-dismiss="modal">
                                     Save changes
-                                </button>
+                                </x-jet-danger-button>
                             </div>
                         </div>
                     </div>
@@ -365,7 +336,7 @@
                 <script src="{{ mix('js/app_jquery.js') }}"></script>
                 <!-- ここまでデザイン関係なし -->
             </div>
-            
+
             <!-- ここからTwitterの表示 -->
             <div class="py-12 col-lg-3 col-md-12 text-center">
                 @if (Auth::user()->thema == 0)
