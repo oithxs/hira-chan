@@ -1,3 +1,14 @@
+<?php
+    $count = 0;
+    $flag = 0;
+    if ($page == NULL) {
+        $page = 1;
+    }
+
+    $max = $page * 10;
+    $min = ($page - 1) * 10;
+?>
+
 <div class="p-6 border-t border-gray-200 md:border-t-0 md:border-l">
 
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreateThread_Modal">
@@ -24,10 +35,20 @@
             <!-- スレッド名使う時は「$tableName」 -->
             @foreach($tables as $tableInfo)
             <?php
+                if ($count < $min) {
+                    $flag = 0;
+                } else if ($max <= $count) {
+                    break;
+                } else {
+                    $flag = 1;
+                }
+
+                $count++;
                 $tableName = str_replace('/', '&slash;', $tableInfo['thread_name']);
                 $tableName = str_replace('\\', '&backSlash;' , $tableName);
                 $tableName = str_replace('#', '&hash;', $tableName);
             ?>
+            @if ($flag == 1)
             <tr>
                 <td>
                     <a href="/dashboard/thread/name={{ $tableInfo['thread_name'] }}&id={{ $tableInfo['thread_id'] }}"
@@ -38,6 +59,7 @@
                 <td>{{ $tableInfo["created_at"] }}</td>
                 <td>{{ $tableInfo['Access'] }}</td>
             </tr>
+            @endif
             @endforeach
         </tbody>
     </table>

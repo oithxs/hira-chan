@@ -35,7 +35,7 @@
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         @if ($main_type == 'threads')
-                        @livewire('dashboard.threads')
+                        @livewire('dashboard.threads', ['page' => $page])
                         @elseif ($main_type == 'messages')
                         @livewire('dashboard.messages')
                         <!-- elseif (カテゴリ別) -->
@@ -62,6 +62,7 @@
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         @if ($main_type == 'threads')
+                        @livewire('dashboard.select-thread-pages')
                         @elseif ($main_type == 'messages')
                         @livewire('dashboard.send-comment')
                         <!-- elseif (カテゴリ別) -->

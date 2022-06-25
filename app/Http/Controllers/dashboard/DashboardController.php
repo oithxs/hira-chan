@@ -10,7 +10,8 @@ class DashboardController extends Controller
     public function threads(Request $request)
     {
         return view('dashboard.show', [
-            'main_type' => 'threads'
+            'main_type' => 'threads',
+            'page' => $request->page
         ]);
     }
 
