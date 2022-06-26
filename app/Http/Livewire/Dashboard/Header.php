@@ -4,8 +4,7 @@ namespace App\Http\Livewire\Dashboard;
 
 use Illuminate\Http\Request;
 use Livewire\Component;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use App\Models\ThreadCategorys;
 
 class Header extends Component
 {
@@ -14,10 +13,10 @@ class Header extends Component
 
     public function mount(Request $request)
     {
-        $this->categorys = DB::connection('mysql')->table('thread_categorys')->get();
-        $this->category_types = DB::connection('mysql')->table('thread_categorys')->select('category_type')->distinct('category_type')->get();
-
-        Log::debug($this->category_types);
+        $this->categorys = ThreadCategorys::get();
+        $this->category_types = ThreadCategorys::select('category_type')
+            ->distinct('category_type')
+            ->get();
     }
 
     public function render()
