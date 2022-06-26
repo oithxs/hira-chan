@@ -16,27 +16,27 @@ class ThreadCategorySeeder extends Seeder
     {
         ThreadCategory::create([
             'category_name' => 'IS科',
-            'category_type' => 'Department'
+            'category_type' => '学科'
         ]);
 
         ThreadCategory::create([
             'category_name' => 'IN科',
-            'category_type' => 'Department'
+            'category_type' => '学科'
         ]);
 
         ThreadCategory::create([
             'category_name' => 'IC科',
-            'category_type' => 'Department'
+            'category_type' => '学科'
         ]);
 
         ThreadCategory::create([
             'category_name' => 'ID科',
-            'category_type' => 'Department'
+            'category_type' => '学科'
         ]);
 
         ThreadCategory::create([
             'category_name' => 'IM科',
-            'category_type' => 'Department'
+            'category_type' => '学科'
         ]);
     }
 }
