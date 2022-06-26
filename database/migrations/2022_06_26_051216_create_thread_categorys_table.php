@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHubTable extends Migration
+class CreateThreadCategorysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateHubTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_keiziban')->create('hub', function (Blueprint $table) {
+        Schema::create('thread_categorys', function (Blueprint $table) {
             $table->id();
-            $table->string('thread_id');
-            $table->string('thread_name');
-            $table->string('thread_category');
-            $table->string('user_email');
+            $table->string('category_name')->unique();
+            $table->string('category_type');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateHubTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hub');
+        Schema::dropIfExists('thread_categorys');
     }
 }

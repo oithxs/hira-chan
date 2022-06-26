@@ -33,7 +33,7 @@
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         @if ($main_type == 'threads')
-                        @livewire('dashboard.threads', ['page' => $page])
+                        @livewire('dashboard.threads')
                         @elseif ($main_type == 'messages')
                         @livewire('dashboard.messages')
                         <!-- elseif (カテゴリ別) -->

@@ -27,9 +27,6 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('dashboard', 'App\Http\Controllers\dashboard\DashboardController@threads')->name('dashboard');
-    Route::get('dashboard?sort=', 'App\Http\Controllers\dashboard\DashboardController@threads');
-    Route::get('dashboard?page=', 'App\Http\Controllers\dashboard\DashboardController@threads');
-    Route::get('dashboard?page=&sort=', 'App\Http\Controllers\dashboard\DashboardController@threads');
 
     Route::middleware([
         'Access_log'
@@ -47,7 +44,6 @@ Route::middleware([
     'Is_Admin',
 ])->group(function () {
     Route::get('/hub', 'App\Http\Controllers\showTablesCTL')->name('hub');
-    Route::get('/hub?sort=', 'App\Http\Controllers\showTablesCTL')->name('hub');
 
     Route::get('hub/thread_name={thread_name}/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
     Route::get('hub/thread_name=/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');

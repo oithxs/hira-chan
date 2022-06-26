@@ -47,6 +47,7 @@ class jQuery_ajax extends Controller
         $uuid = str_replace("-", "", Str::uuid());
         $create->insertTable(
             $request->post('table'),
+            $request->thread_category,
             $uuid,
             $request->user()->email
         );

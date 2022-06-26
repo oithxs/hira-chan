@@ -23,19 +23,21 @@ class create_thread extends Model
         return null;
     }
 
-    public function insertTable($tableName, $thread_id, $user_email)
+    public function insertTable($tableName, $thread_category, $thread_id, $user_email)
     {
         $query = <<<EOF
         INSERT INTO
             hub(
                 thread_id,
                 thread_name,
+                thread_category,
                 user_email,
                 created_at
             )
         VALUES(
             :thread_id,
             :thread_name,
+            :thread_category,
             :user_email,
             NOW()
         )
@@ -46,6 +48,7 @@ class create_thread extends Model
             [
                 'thread_id' => $thread_id,
                 'thread_name' => $tableName,
+                'thread_category' => $thread_category,
                 'user_email' => $user_email
             ]
         );

@@ -11,6 +11,7 @@ class DashboardController extends Controller
     {
         return view('dashboard.show', [
             'main_type' => 'threads',
+            'category' => $request->category,
             'page' => $request->page
         ]);
     }
