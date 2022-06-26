@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 // ページ移動（非ログイン）
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware([
+    config('jetstream.auth_session')
+]);
 
 // ページ移動（要ログイン）
 Route::middleware([
@@ -24,12 +26,19 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', 'App\Http\Controllers\DashboardController@top')->name('dashboard');
+    Route::get('dashboard', 'App\Http\Controllers\dashboard\DashboardController@threads')->name('dashboard');
+    Route::get('dashboard?sort=', 'App\Http\Controllers\dashboard\DashboardController@threads');
+    Route::get('dashboard?page=', 'App\Http\Controllers\dashboard\DashboardController@threads');
+    Route::get('dashboard?page=&sort=', 'App\Http\Controllers\dashboard\DashboardController@threads');
 
-    Route::get('/dashboard/thread_name={thread_name}/id={thread_id}', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('thread');
-    Route::get('/dashboard/thread_name=/id={thread_id}', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('thread');
-    Route::get('/dashboard/thread_name={thread_name}/id=', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('thread');
-    Route::get('/dashboard/thread_name=/id=', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('thread');
+    Route::middleware([
+        'Access_log'
+    ])->group(function () {
+        Route::get('dashboard/thread/name={thread_name}&id={thread_id}', 'App\Http\Controllers\dashboard\DashboardController@messages');
+        Route::get('dashboard/thread/name={thread_name}&id=', 'App\Http\Controllers\dashboard\DashboardController@messages');
+        Route::get('dashboard/thread/name=&id={thread_id}', 'App\Http\Controllers\dashboard\DashboardController@messages');
+        Route::get('dashboard/thread/name=&id=', 'App\Http\Controllers\dashboard\DashboardController@messages');
+    });
 
     Route::get('/mypage', 'App\Http\Controllers\MyPage')->name('mypage');
 });
@@ -38,6 +47,7 @@ Route::middleware([
     'Is_Admin',
 ])->group(function () {
     Route::get('/hub', 'App\Http\Controllers\showTablesCTL')->name('hub');
+    Route::get('/hub?sort=', 'App\Http\Controllers\showTablesCTL')->name('hub');
 
     Route::get('hub/thread_name={thread_name}/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
     Route::get('hub/thread_name=/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');

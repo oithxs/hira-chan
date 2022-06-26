@@ -45,7 +45,7 @@ $('#dashboard_create_thread_btn').click(function () {
 /*!**********************************************!*\
   !*** ./resources/js/dashboard/Get_allRow.js ***!
   \**********************************************/
-if (location.href.includes('dashboard/thread_name=')) {
+if (location.href.includes('dashboard/thread/name=')) {
   reload();
   setInterval(reload, 1000);
 }
