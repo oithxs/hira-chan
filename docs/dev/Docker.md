@@ -22,7 +22,7 @@ sudo apt install -y uidmap
 
 ### 2.2 ワンライナーでの Docker のインストール
 
--   root 以外のユーザーで実行して下さい
+root 以外のユーザーで実行して下さい
 
 ```bash
 curl -fsSL https://get.docker.com/rootless | sh
