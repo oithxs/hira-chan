@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
 {
-    //use RefreshDatabase;
+    use RefreshDatabase;
 
     private $user;
     private $admin;
