@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Get;
-use App\Models\Send;
 use App\Models\Like;
 use App\Models\AdminActions;
 use App\Models\User;
@@ -31,17 +30,28 @@ class jQuery_ajax extends Controller
 
     public function send_Row(Request $request)
     {
-        $send = new Send;
-        $message = $request->post('message');
-        if (isset($message)) {
-            $send->insertComment(
-                $request->post('table'),
-                $request->user()->name,
-                $request->user()->email,
-                $request->post('message')
-            );
+        $special_character_set = array(
+            "&" => "&amp;",
+            "<" => "&lt;",
+            ">" => "&gt;",
+            " " => "&ensp;",
+            "　" => "&emsp;",
+            "\n" => "<br>",
+            "\t" => "&ensp;&ensp;"
+        );
+
+        foreach ($special_character_set as $key => $value) {
+            $message = str_replace($key, $value, $request->message);
         }
-        return null;
+
+        DB::connection('mysql_keiziban')
+            ->table($request->table)
+            ->insert([
+                'name' => $request->user()->name,
+                'user_email' => $request->user()->email,
+                'message' => $message,
+                'time' => now()
+            ]);
     }
 
     public function create_thread(Request $request)
