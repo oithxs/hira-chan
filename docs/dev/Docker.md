@@ -2,25 +2,32 @@
 
 最終更新日：2022/06/26
 
-## 1 以下の OS では環境構築が出来る事を確認しています
+## 以下の OS では環境構築が出来ることを確認しています
 
 -   Docker と Docker Compose を導入した OS
 
+## 目次
+
+1. [Docker のインストール](#1-docker-rootless-モードのインストール)
+2. [Docker Compose のインストール](#2-docker-compose-のインストール)
+3. [必要なファイルを配置](#3-必要なファイルを配置)
+4. [コンテナを構築する](#4-コンテナを構築・作成・起動・アタッチする)
+
 ---
 
-これから Linux の場合の環境構築を説明します
+これから Debian 系のディストリビューションの場合の環境構築を説明します
 
-## 2 Docker (Rootless モード)のインストール
+## 1 Docker (Rootless モード)のインストール
 
 これにより、Docker デーモンとコンテナを root 以外のユーザが実行できるようになります。
 
-### 2.1 uidmap のインストール
+### 1.1 uidmap のインストール
 
 ```bash
 sudo apt install -y uidmap
 ```
 
-### 2.2 ワンライナーでの Docker のインストール
+### 1.2 ワンライナーでの Docker のインストール
 
 root 以外のユーザーで実行して下さい
 
@@ -28,7 +35,7 @@ root 以外のユーザーで実行して下さい
 curl -fsSL https://get.docker.com/rootless | sh
 ```
 
-### 2.3 Docker コマンドを使えるようにする
+### 1.3 Docker コマンドを使えるようにする
 
 以下の 2 つのコマンドを実行して下さい
 
@@ -40,7 +47,7 @@ export PATH=/home/$USER/bin:$PATH
 export DOCKER_HOST=unix:///run/user/1000/docker.sock
 ```
 
-### 2.4 インストールを確認
+### 1.4 インストールを確認
 
 ```bash
 docker -v
@@ -50,23 +57,23 @@ docker -v
 docker ps
 ```
 
-## 3 Docker Compose のインストール
+## 2 Docker Compose のインストール
 
 以下のコマンドは例ですので[Compose リポジトリのリリースページ](https://github.com/docker/compose/releases)を確認して、URL を修正して下さい
 
-### 3.1 Docker Compose の最新版をダウンロード (v2.6.1 の場合)
+### 2.1 Docker Compose の最新版をダウンロード (v2.6.1 の場合)
 
 ```bash
 sudo curl -L https://github.com/docker/compose/releases/download/v2.6.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 ```
 
-### 3.2 バイナリに対して実行権限を付与する
+### 2.2 バイナリに対して実行権限を付与する
 
 ```bash
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-### 3.3 インストールを確認
+### 2.3 インストールを確認
 
 ```bash
 docker-compose -v
@@ -74,11 +81,11 @@ docker-compose -v
 
 ---
 
-## 4 必要なファイルを配置
+## 3 必要なファイルを配置
 
 今回はホームディレクトリ直下に`docker-laravel`ディレクトリを作り、そこで作業する。
 
-1. `docker-laravel`ディレクトリに`Laravel_Forum-B`をクローンする
+1. `docker-laravel`ディレクトリに`Laravel_Forum-B`のリポジトリをクローンする
 2. `Laravel_Forum-B/docs/dev/docker-sample/`にある、`dockerフォルダ`と`docker-compose.yml`を全て`docker-laravel`直下に移動させる
 3. 以下のような構造になっていたら準備は完了
 
@@ -96,7 +103,7 @@ docker-laravel
 └── docker-compose.yml
 ```
 
-## 5 コンテナを起動
+## 4 コンテナを構築・作成・起動・アタッチする
 
 `docker-laravel`ディレクトリで以下のコマンドを実行
 
