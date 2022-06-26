@@ -7,10 +7,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Get;
 use App\Models\Send;
-use App\Models\create_thread;
 use App\Models\Like;
 use App\Models\AdminActions;
 use App\Models\User;
+use App\Models\Hub;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class jQuery_ajax extends Controller
 {
@@ -43,16 +46,26 @@ class jQuery_ajax extends Controller
 
     public function create_thread(Request $request)
     {
-        $create = new create_thread;
-        $uuid = str_replace("-", "", Str::uuid());
-        $create->insertTable(
-            $request->post('table'),
-            $request->thread_category,
+        $uuid = str_replace('-', '', Str::uuid());
+
+        Schema::connection('mysql_keiziban')->create(
             $uuid,
-            $request->user()->email
+            function (Blueprint $table) {
+                $table->id('no');
+                $table->text('name');
+                $table->text('user_email');
+                $table->text('message');
+                $table->text('time');
+                $table->boolean('is_validity')->default(true);
+            }
         );
-        $create->create_thread($uuid);
-        return null;
+
+        Hub::create([
+            'thread_id' => $uuid,
+            'thread_name' => $request->table,
+            'thread_category' => $request->thread_category,
+            'user_email' => $request->user()->email
+        ]);
     }
 
     public function like(Request $request)
