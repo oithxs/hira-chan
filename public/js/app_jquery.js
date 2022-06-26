@@ -28,7 +28,8 @@ $('#dashboard_create_thread_btn').click(function () {
     type: "POST",
     url: url + "/jQuery.ajax/create_thread",
     data: {
-      "table": threadName
+      "table": threadName,
+      'thread_category': thread_category
     }
   }).done(function () {
     window.location.reload();
