@@ -34,7 +34,9 @@ curl -fsSL https://get.docker.com/rootless | sh
 
 ```bash
 export PATH=/home/$USER/bin:$PATH
+```
 
+```bash
 export DOCKER_HOST=unix:///run/user/1000/docker.sock
 ```
 
@@ -42,7 +44,9 @@ export DOCKER_HOST=unix:///run/user/1000/docker.sock
 
 ```bash
 docker -v
+```
 
+```bash
 docker ps
 ```
 
