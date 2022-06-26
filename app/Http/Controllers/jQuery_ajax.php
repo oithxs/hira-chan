@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Get;
-use App\Models\Like;
 use App\Models\AdminActions;
 use App\Models\User;
 use App\Models\Hub;
+use App\Models\Likes;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
@@ -80,20 +80,15 @@ class jQuery_ajax extends Controller
 
     public function like(Request $request)
     {
-        $thread_id = $request->thread_id;
-        $message_id = $request->message_id;
-        $user_email = $request->user()->email;
-
-        $like = new Like;
-        $like->like(
-            $thread_id,
-            $message_id,
-            $user_email
-        );
-
-        return null;
+        Likes::insertOrIgnore([
+            'thread_id' => $request->thread_id,
+            'message_id' => $request->message_id,
+            'user_email' => $request->user()->email,
+            'created_at' => now(),
+        ]);
     }
 
+    /*
     public function unlike(Request $request)
     {
         $thread_id = $request->thread_id;
@@ -107,6 +102,15 @@ class jQuery_ajax extends Controller
             $user_email
         );
         return null;
+    }
+*/
+
+    public function unlike(Request $request)
+    {
+        Likes::where('thread_id', '=', $request->thread_id)
+            ->where('message_id', '=', $request->message_id)
+            ->where('user_email', '=', $request->user()->email)
+            ->delete();
     }
 
     public function delete_thread(Request $request)
