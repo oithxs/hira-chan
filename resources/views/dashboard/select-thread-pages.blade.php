@@ -4,8 +4,8 @@
 
 <table class="table table-striped">
     <tr>
-        @for ($i = 1; $i <= $max_page; $i++)
-        <th> <a href="/dashboard/{{ $i }}">{{ $i }}</a></td>
-        @endfor
+        <!-- @for ($i = 1; $i <= $max_page; $i++) -->
+        <th> <a href="/dashboard?page={{ $i }}&sort={{ $sort }}">{{ $i }}</a></th>
+        <!-- @endfor -->
     </tr>
 </table>

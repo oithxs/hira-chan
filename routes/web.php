@@ -28,8 +28,8 @@ Route::middleware([
 ])->group(function () {
     Route::get('dashboard', 'App\Http\Controllers\dashboard\DashboardController@threads')->name('dashboard');
     Route::get('dashboard?sort=', 'App\Http\Controllers\dashboard\DashboardController@threads');
-    Route::get('dashboard/{page}', 'App\Http\Controllers\dashboard\DashboardController@threads');
-    Route::get('dashboard?sort=/{page}', 'App\Http\Controllers\dashboard\DashboardController@threads');
+    Route::get('dashboard?page=', 'App\Http\Controllers\dashboard\DashboardController@threads');
+    Route::get('dashboard?page=&sort=', 'App\Http\Controllers\dashboard\DashboardController@threads');
 
     Route::middleware([
         'Access_log'
