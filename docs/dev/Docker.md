@@ -71,3 +71,33 @@ sudo chmod +x /usr/local/bin/docker-compose
 ```bash
 docker-compose -v
 ```
+
+---
+
+## 4 必要なファイルを配置
+
+今回はホームディレクトリ直下に`docker-laravel`ディレクトリを作り、そこで作業する。
+
+1. `docker-laravel`ディレクトリに`Laravel_Forum-B`をクローンする
+2. `Laravel_Forum-B/docs/dev/docker-sample/`にある、`dockerフォルダ`と`docker-compose.yml`を全て`docker-laravel`直下に移動させる
+3. 以下のような構造になっていたら準備は完了
+
+```bash
+docker-laravel
+|
+├── Laravel_Forum-B
+│   └── 省略
+├── docker
+│   ├── nginx
+│   │   └── default.conf
+│   └── php
+│       ├── Dockerfile
+│       └── php.ini
+└── docker-compose.yml
+```
+
+## 5 コンテナを起動
+`docker-laravel`ディレクトリで以下のコマンドを実行
+```bash
+docker-compose up -d
+```
