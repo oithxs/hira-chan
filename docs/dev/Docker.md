@@ -88,7 +88,7 @@ docker-compose -v
 今回はホームディレクトリ直下に`docker-laravel`ディレクトリを作り、そこで作業する。
 
 1. `docker-laravel`ディレクトリに`Laravel_Forum-B`のリポジトリをクローンする
-2. `Laravel_Forum-B/docs/dev/docker-sample/`にある、`dockerフォルダ`と`docker-compose.yml`を全て`docker-laravel`直下に移動させる
+2. [Laravel_Forum-B/docs/dev/docker-sample/](./docker-sample/)にある、`dockerフォルダ`と`docker-compose.yml`を全て`docker-laravel`直下に移動させる
 3. 以下のような構造になっていたら準備は完了
 
 ```
