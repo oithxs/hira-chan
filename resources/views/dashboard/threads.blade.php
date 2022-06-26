@@ -24,26 +24,16 @@
 
                 <!-- ここからソートのためのリンク -->
                 <th>
-                    @if ($page == NULL)
-                    <button onclick="location.href='/dashboard?sort=new_create'">
+                    <button
+                        onclick="location.href='/dashboard?category={{ $category }}&page={{ $page }}&sort=new_create'">
                         {{ __("Create time") }}
                     </button>
-                    @else
-                    <button onclick="location.href='/dashboard?page={{ $page }}&sort=new_create'">
-                        {{ __("Create time") }}
-                    </button>
-                    @endif
                 </th>
                 <th>
-                    @if ($page == NULL)
-                    <button onclick="location.href='/dashboard?sort=access_count'">
-                        {{ __("Access number") }}
-                    </button>
-                    @else
-                    <button onclick="location.href='/dashboard?page={{ $page }}&sort=access_count'">
+                    <button
+                        onclick="location.href='/dashboard?category={{ $category }}&page={{ $page }}&sort=access_count'">
                         {{ __('Access number') }}
                     </button>
-                    @endif
                 </th>
                 <!-- ここまでソートのためのリンク -->
 

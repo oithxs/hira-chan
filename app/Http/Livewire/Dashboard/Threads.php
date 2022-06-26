@@ -22,6 +22,7 @@ class Threads extends Component
     public function render(Request $request)
     {
         $response['tables'] = $this->threads;
+        $response['category'] = $request->category;
         $response['page'] = $request->page;
 
         return view('dashboard.threads', $response);
