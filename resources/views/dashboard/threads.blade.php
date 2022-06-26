@@ -99,11 +99,9 @@
                     </label>
                     <select id="dashboard_thread_category_select">
                         <option value="">選択して下さい</option>
-                        <option value="IS">IS科</option>
-                        <option vlaue="IN">IN科</option>
-                        <option value="IC">IC科</option>
-                        <option value="ID">ID科</option>
-                        <option value="IM">IM科</option>
+                        @foreach ($categorys as $category)
+                        <option value="{{ $category->category_name }}">{{ $category->category_name }}</option>
+                        @endforeach
                     </select>
                 </form>
             </div>
