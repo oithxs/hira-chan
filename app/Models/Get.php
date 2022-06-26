@@ -7,48 +7,44 @@ use Illuminate\Support\Facades\DB;
 
 class Get extends Model
 {
-    public function showTables($type)
+    public function showTables($type, $category)
     {
+        $sql = <<<EOF
+        SELECT
+            hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access
+        FROM
+            hub
+        LEFT OUTER JOIN
+            access_logs
+        ON
+            hub.thread_id = access_logs.thread_id
+
+        EOF;
+
+        if (!$category == NULL) {
+            $sql .= <<<EOF
+            WHERE
+                hub.thread_category = '$category'
+
+            EOF;
+        }
+
         switch ($type) {
             case 'new_create':
-                $sql = <<<EOF
-                SELECT
-                    hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access
-                FROM
-                    hub
-                LEFT OUTER JOIN
-                    access_logs
-                ON
-                    hub.thread_id = access_logs.thread_id
+                $sql .= <<<EOF
                 GROUP BY hub.thread_id
                 ORDER BY hub.created_at DESC;
                 EOF;
                 break;
             case 'access_count':
-                $sql = <<<EOF
-                SELECT
-                    hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access
-                FROM
-                    hub
-                LEFT OUTER JOIN
-                    access_logs
-                ON
-                    hub.thread_id = access_logs.thread_id
+                $sql .= <<<EOF
                 GROUP BY hub.thread_id
                 ORDER BY COUNT(access_logs.access_log) DESC,
                 hub.created_at DESC;
                 EOF;
                 break;
             default:
-                $sql = <<<EOF
-                SELECT
-                    hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access
-                FROM
-                    hub
-                LEFT OUTER JOIN
-                    access_logs
-                ON
-                    hub.thread_id = access_logs.thread_id
+                $sql .= <<<EOF
                 GROUP BY hub.thread_id
                 ORDER BY hub.created_at DESC;
                 EOF;

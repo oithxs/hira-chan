@@ -15,7 +15,7 @@ class Threads extends Component
     public function mount(Request $request)
     {
         $get = new Get;
-        $this->threads = $get->showTables($request->sort);
+        $this->threads = $get->showTables($request->sort, $request->category);
         $this->categorys = DB::connection('mysql')->table('thread_categorys')->get();
     }
 
@@ -30,12 +30,12 @@ class Threads extends Component
     public function new_create()
     {
         $get = new Get;
-        $this->threads = $get->showTables('new_create');
+        $this->threads = $get->showTables('new_create', NULL);
     }
 
     public function access_count()
     {
         $get = new Get;
-        $this->threads = $get->showTables('access_count');
+        $this->threads = $get->showTables('access_count', NULL);
     }
 }
