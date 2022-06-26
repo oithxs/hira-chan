@@ -46,17 +46,6 @@ Route::middleware([
 Route::middleware([
     'Is_Admin',
 ])->group(function () {
-    // test
-    Route::get('test/dashboard?sort=', 'App\Http\Controllers\DashboardController@top');
-    Route::get('test/dashboard', 'App\Http\Controllers\DashboardController@top');
-
-    Route::get('test/dashboard/thread_name={thread_name}/id={thread_id}', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('thread');
-    Route::get('test/dashboard/thread_name=/id={thread_id}', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('thread');
-    Route::get('test/dashboard/thread_name={thread_name}/id=', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('thread');
-    Route::get('test/dashboard/thread_name=/id=', 'App\Http\Controllers\DashboardController@thread')->middleware('Access_log')->name('thread');
-    // test
-
-
     Route::get('/hub', 'App\Http\Controllers\showTablesCTL')->name('hub');
     Route::get('/hub?sort=', 'App\Http\Controllers\showTablesCTL')->name('hub');
 

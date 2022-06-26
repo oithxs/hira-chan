@@ -1,3 +1,7 @@
+<!--
+    PVランキング部分のファイイル
+ -->
+
 <div class="p-6 border-t border-gray-200 md:border-t-0 md:border-l">
     <div class="flex items-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"

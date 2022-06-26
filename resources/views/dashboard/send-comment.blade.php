@@ -1,3 +1,7 @@
+<!--
+    スレッドへ書き込むための部分
+ -->
+
 <div class="col-sm-4 col-xs-12">
     <a href="/dashboard">トップページへ</a>
     <form id="dashboard_sendMessage_form">
@@ -16,7 +20,9 @@
     </button>
 </div>
 
+<!-- ここからデザイン関係なし -->
 <script>
     const url = "{{ url('') }}";
 </script>
 <script src="{{ mix('js/app_jquery.js') }}"></script>
+<!-- ここまでデザイン関係なし -->

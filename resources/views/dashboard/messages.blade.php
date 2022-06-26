@@ -83,7 +83,9 @@
 @endif
 <!-- ここまでスレッドが存在しなかったとき -->
 
+<!-- ここからデザイン関係なし -->
 <script>
     const url = "{{ url('') }}";
 </script>
 <script src="{{ mix('js/app_jquery.js') }}"></script>
+<!-- ここまでデザイン関係なし -->

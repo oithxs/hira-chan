@@ -1,3 +1,9 @@
+<!--
+    スレッド一覧を表示する部分
+    php部分で1ページに何個スレッドを表示させるかを決められる
+    1ページに表示するスレッド数を変えた際はここも変更する
+ -->
+
 <?php
     $count = 0;
     $flag = 0;
@@ -11,14 +17,12 @@
 
 <div class="p-6 border-t border-gray-200 md:border-t-0 md:border-l">
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreateThread_Modal">
-        {{ __('Create new thread') }}
-    </button>
-
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>{{ __("Thread name") }}</th>
+
+                <!-- ここからソートのためのリンク -->
                 <th>
                     @if ($page == NULL)
                     <button onclick="location.href='/dashboard?sort=new_create'">
@@ -41,6 +45,8 @@
                     </button>
                     @endif
                 </th>
+                <!-- ここまでソートのためのリンク -->
+
             </tr>
         </thead>
         <tbody>
@@ -103,7 +109,9 @@
 </div>
 <!-- ここまでスレッド作成時に表示されるモーダル -->
 
+<!-- ここからデザイン関係なし -->
 <script>
     const url = "{{ url('') }}";
 </script>
 <script src="{{ mix('js/app_jquery.js') }}"></script>
+<!-- ここまでデザイン関係なし -->
