@@ -82,7 +82,7 @@ docker-compose -v
 2. `Laravel_Forum-B/docs/dev/docker-sample/`にある、`dockerフォルダ`と`docker-compose.yml`を全て`docker-laravel`直下に移動させる
 3. 以下のような構造になっていたら準備は完了
 
-```bash
+```
 docker-laravel
 |
 ├── Laravel_Forum-B
@@ -97,7 +97,9 @@ docker-laravel
 ```
 
 ## 5 コンテナを起動
+
 `docker-laravel`ディレクトリで以下のコマンドを実行
+
 ```bash
 docker-compose up -d
 ```
