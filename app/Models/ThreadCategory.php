@@ -9,6 +9,37 @@ class ThreadCategory extends Model
 {
     use HasFactory;
 
+    /**
+     * Database to be connected
+     *
+     * @var string
+     */
     protected $connection = 'mysql';
+
+    /**
+     * Tables to be associated
+     *
+     * @var string
+     */
     protected $table = 'thread_categorys';
+
+    /**
+     * The attributes that are mass assignable
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'category_name',
+        'category_type',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'created_at' => 'datetime',
+        'update_at' => 'datetime',
+    ];
 }
