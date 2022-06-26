@@ -57,6 +57,8 @@ docker -v
 docker ps
 ```
 
+---
+
 ## 2 Docker Compose のインストール
 
 以下のコマンドは例ですので[Compose リポジトリのリリースページ](https://github.com/docker/compose/releases)を確認して、URL を修正して下さい
