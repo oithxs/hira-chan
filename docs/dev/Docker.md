@@ -93,7 +93,7 @@ docker-compose -v
 
 ```
 docker-laravel
-|
+│
 ├── Laravel_Forum-B
 │   └── 省略
 ├── docker
