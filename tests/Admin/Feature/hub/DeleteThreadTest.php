@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\keiziban;
+namespace Tests\Admin\Feature\hub;
 
 use App\Models\User;
 use App\Models\create_thread;
@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class GetMessageTest extends TestCase
+class DeleteThreadTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -24,10 +24,10 @@ class GetMessageTest extends TestCase
 
         try {
             $create = new create_thread;
-            $create->create_thread('ThreadTestID');
+            $create->create_thread('DeleteThreadTestID');
             $create->insertTable(
-                'ThreadTestName',
-                'ThreadTestID',
+                'DeleteThreadTestName',
+                'DeleteThreadTestID',
                 'test@example.com'
             );
         } catch (QueryException $error) {
@@ -35,57 +35,57 @@ class GetMessageTest extends TestCase
         }
     }
 
-    public function test_not_login_get_access_get_message()
+    public function test_not_login_get_access_admin_delete_thread()
     {
-        $response = $this->get('jQuery.ajax/getRow');
+        $response = $this->get('jQuery.ajax/admin/delete_thread');
 
         $response->assertStatus(404);
     }
 
-    public function test_user_get_access_get_message()
+    public function test_user_get_access_admin_delete_thread()
     {
         $response = $this
             ->actingAs($this->user)
-            ->get('jQuery.ajax/getRow');
+            ->get('jQuery.ajax/admin/delete_thread');
 
         $response->assertStatus(404);
     }
 
-    public function test_admin_get_access_get_message()
+    public function test_admin_get_access_admin_delete_thread()
     {
         $response = $this
             ->actingAs($this->admin)
-            ->get('jQuery.ajax/getRow');
+            ->get('jQuery.ajax/admin/delete_thread');
 
         $response->assertStatus(404);
     }
 
-    public function test_not_login_post_access_get_message()
+    public function test_not_login_post_access_admin_delete_thread()
     {
-        $response = $this->post('jQuery.ajax/getRow', [
-            'table' => 'ThreadTestID'
+        $response = $this->post('jQuery.ajax/admin/delete_thread', [
+            'thread_id' => 'DeleteThreadTestID'
         ]);
 
-        $response->assertStatus(500);
+        $response->assertStatus(404);
     }
 
-    public function test_user_post_access_get_message()
+    public function test_user_post_access_admin_delete_thread()
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('jQuery.ajax/getRow', [
-                'table' => 'ThreadTestID'
+            ->post('jQuery.ajax/admin/delete_thread', [
+                'thread_id' => 'DeleteThreadTestID'
             ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(404);
     }
 
-    public function test_admin_post_access_get_message()
+    public function test_admin_post_access_admin_delete_thread()
     {
         $response = $this
             ->actingAs($this->admin)
-            ->post('jQuery.ajax/getRow', [
-                'table' => 'ThreadTestID'
+            ->post('jQuery.ajax/admin/delete_thread', [
+                'thread_id' => 'DeleteThreadTestID'
             ]);
 
         $response->assertStatus(200);

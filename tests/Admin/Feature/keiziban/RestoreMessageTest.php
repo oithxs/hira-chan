@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\keiziban;
+namespace Tests\Admin\Feature\keiziban;
 
 use App\Models\User;
 use App\Models\create_thread;
@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class ThreadLikeTest extends TestCase
+class RestoreMessageTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -35,69 +35,65 @@ class ThreadLikeTest extends TestCase
         }
 
         $this
-            ->actingAs($this->user)
-            ->post('/jQuery.ajax/sendRow', [
-                'table' => 'ThreadTestID',
-                'message' => 'This is test comment!'
-            ]);
+        ->actingAs($this->user)
+        ->post('/jQuery.ajax/sendRow', [
+            'table' => 'ThreadTestID',
+            'message' => 'This is test comment!'
+        ]);
     }
 
-    public function test_not_login_get_access_thread_like()
+    public function test_not_login_get_access_restore_message()
     {
-        $response = $this->get('/jQuery.ajax/like');
+        $response = $this->get('/jQuery.ajax/admin/restore_message');
 
         $response->assertStatus(404);
     }
 
-    public function test_user_get_access_thread_like()
+    public function test_user_get_access_restore_message()
     {
         $response = $this
             ->actingAs($this->user)
-            ->get('/jQuery.ajax/like');
+            ->get('/jQuery.ajax/admin/restore_message');
 
         $response->assertStatus(404);
     }
 
-    public function test_admin_get_access_thread_like()
+    public function test_admin_get_access_restore_message()
     {
         $response = $this
             ->actingAs($this->admin)
-            ->get('/jQuery.ajax/like');
+            ->get('/jQuery.ajax/admin/restore_message');
 
         $response->assertStatus(404);
     }
 
-    /*
-     * ログインしていない状態でのpost通信が防げない...
-     * この状態でpost通信は出来ないでしょうということでこのままで
-    */
-    public function test_not_login_post_access_thread_like()
+    public function test_not_login_post_access_restore_message()
     {
-        $response = $this->post('/jQuery.ajax/like', [
+        $response = $this->post('/jQuery.ajax/admin/restore_message', [
             'thread_id' => 'ThreadTestID',
             'message_id' => 1
         ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(404);
     }
 
-    public function test_user_post_access_thread_like()
+    public function test_user_post_access_restore_message()
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/jQuery.ajax/like', [
+            ->post('/jQuery.ajax/admin/restore_message', [
                 'thread_id' => 'ThreadTestID',
                 'message_id' => 1
             ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(404);
     }
 
-    public function test_admin_post_access_thread_like()
+    public function test_admin_post_access_restore_message()
     {
         $response = $this
             ->actingAs($this->admin)
-            ->post('/jQuery.ajax/like', [
+            ->post('/jQuery.ajax/admin/restore_message', [
                 'thread_id' => 'ThreadTestID',
                 'message_id' => 1
             ]);
