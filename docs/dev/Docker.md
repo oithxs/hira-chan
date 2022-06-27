@@ -37,13 +37,11 @@ curl -fsSL https://get.docker.com/rootless | sh
 
 ### 1.3 Docker コマンドを使えるようにする
 
-以下の 2 つのコマンドを実行して下さい
+スクリプトが終了すると下のようなものを`.bashrc`にコピペするよう促されるので`~/.bashrc`ファイルの最後に追加する  
+以下は例です
 
 ```bash
 export PATH=/home/$USER/bin:$PATH
-```
-
-```bash
 export DOCKER_HOST=unix:///run/user/1000/docker.sock
 ```
 
