@@ -27,6 +27,10 @@ glob.sync('resources/css/*/*.css').map(function (file) {
     mix.postCss(file, 'public/css/design.css')
 });
 
+glob.sync('resources/css/dark/*/*.css').map(function (file) {
+    mix.postCss(file, 'public/css/design-dark.css').version()
+});
+
 if (mix.inProduction()) {
     mix.version();
 }

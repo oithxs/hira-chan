@@ -1,0 +1,28 @@
+/* resources/css/dark/dashboard/dark.css */
+@charset "utf-8";
+
+
+/* バックグラウンドカラー */
+.bg-user-color {
+    background-color: white;
+}
+
+/* コンテンツ・バックグラウンドカラー */
+.ct-user-color {
+    background-color: whitesmoke;
+}
+
+/* サブ　コンテンツ・バックグラウンドカラー */
+.ctsub-user-color {
+    background-color: gainsboro;
+}
+
+/* テキストカラー */
+.tx-user-color {
+    color: black;
+}
+
+/* サブテキストカラー */
+.txsub-user-color {
+    color: dimgray;
+}
