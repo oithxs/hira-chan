@@ -20,11 +20,11 @@ mix.js('resources/js/app.js', 'public/js')
     ]);
 
 glob.sync('resources/js/*/*.js').map(function (file) {
-    mix.js(file, 'public/js/app_jquery.js').version()
+    mix.js(file, 'public/js/app_jquery.js')
 });
 
 glob.sync('resources/css/*/*.css').map(function (file) {
-    mix.postCss(file, 'public/css/design.css').version()
+    mix.postCss(file, 'public/css/design.css')
 });
 
 glob.sync('resources/css/dark/*/*.css').map(function (file) {
