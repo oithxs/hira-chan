@@ -80,7 +80,9 @@ docker ps
 ### 2.1 Docker Compose の最新版をダウンロード (v2.6.1 の場合)
 
 ```bash
-sudo curl -L https://github.com/docker/compose/releases/download/v2.6.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+sudo curl \
+    -L https://github.com/docker/compose/releases/download/v2.6.1/docker-compose-`uname -s`-`uname -m` \
+    -o /usr/local/bin/docker-compose
 ```
 
 ### 2.2 バイナリに対して実行権限を付与する
