@@ -45,7 +45,23 @@ export PATH=/home/$USER/bin:$PATH
 export DOCKER_HOST=unix:///run/user/1000/docker.sock
 ```
 
-### 1.4 インストールを確認
+### 1.4 コマンドライン補完のインストール
+
+```bash
+sudo curl \
+    -L https://raw.githubusercontent.com/docker/cli/master/contrib/completion/bash/docker \
+    -o /etc/bash_completion.d/docker
+```
+
+### 1.5 ターミナルを再読込する
+
+ターミナルを閉じて新しいものを開くか、現在のターミナルで以下のコマンドを実行して下さい
+
+```bash
+source ~/.bashrc
+```
+
+### 1.6 インストールを確認
 
 ```bash
 docker -v
