@@ -34,9 +34,9 @@ class Get extends Model
         GROUP BY $tableName.no;
         EOF;
 
-        $exists = DB::connection('mysql_keiziban')->select("SELECT * FROM hub WHERE thread_id = '$tableName'");
+        $exists = DB::select("SELECT * FROM hub WHERE thread_id = '$tableName'");
         if ($exists) {
-            $stmt = DB::connection('mysql_keiziban')->select($sql);
+            $stmt = DB::select($sql);
         } else {
             $stmt = 0;
         }
@@ -62,7 +62,7 @@ class Get extends Model
         EOF;
 
         $stmt = json_decode(json_encode(
-            DB::connection('mysql_keiziban')->select($sql),
+            DB::select($sql),
         ), true);
         return $stmt;
     }

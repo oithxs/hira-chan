@@ -14,7 +14,7 @@ class AccessLogs extends Model
      *
      * @var string
      */
-    protected $connection = 'mysql_keiziban';
+    protected $connection = 'mysql';
 
     /**
      * Tables to be associated

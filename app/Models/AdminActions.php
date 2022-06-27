@@ -13,7 +13,7 @@ class AdminActions extends Model
 		DROP TABLE $thread_id
 		EOF;
 
-        DB::connection('mysql_keiziban')->statement($query);
+        DB::statement($query);
         return null;
     }
 
@@ -27,7 +27,7 @@ class AdminActions extends Model
 			hub.thread_id = '$thread_id'
 		EOF;
 
-        DB::connection('mysql_keiziban')->statement($query);
+        DB::statement($query);
         return null;
     }
 
@@ -42,7 +42,7 @@ class AdminActions extends Model
 			hub.thread_id = '$thread_id'
 		EOF;
 
-        DB::connection('mysql_keiziban')->statement($query);
+        DB::statement($query);
         return null;
     }
 
@@ -57,7 +57,7 @@ class AdminActions extends Model
 			$thread_id.no = '$message_id'
 		EOF;
 
-        DB::connection('mysql_keiziban')->statement($query);
+        DB::statement($query);
         return null;
     }
 
@@ -72,7 +72,7 @@ class AdminActions extends Model
 			$thread_id.no = '$message_id'
 		EOF;
 
-        DB::connection('mysql_keiziban')->statement($query);
+        DB::statement($query);
         return null;
     }
 }

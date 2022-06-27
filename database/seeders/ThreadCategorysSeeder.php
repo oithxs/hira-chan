@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\ThreadCategory;
+use App\Models\ThreadCategorys;
 
-class ThreadCategorySeeder extends Seeder
+class ThreadCategorysSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,27 +14,27 @@ class ThreadCategorySeeder extends Seeder
      */
     public function run()
     {
-        ThreadCategory::create([
+        ThreadCategorys::create([
             'category_name' => 'IS科',
             'category_type' => '学科'
         ]);
 
-        ThreadCategory::create([
+        ThreadCategorys::create([
             'category_name' => 'IN科',
             'category_type' => '学科'
         ]);
 
-        ThreadCategory::create([
+        ThreadCategorys::create([
             'category_name' => 'IC科',
             'category_type' => '学科'
         ]);
 
-        ThreadCategory::create([
+        ThreadCategorys::create([
             'category_name' => 'ID科',
             'category_type' => '学科'
         ]);
 
-        ThreadCategory::create([
+        ThreadCategorys::create([
             'category_name' => 'IM科',
             'category_type' => '学科'
         ]);

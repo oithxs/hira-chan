@@ -44,8 +44,7 @@ class jQuery_ajax extends Controller
             $message = str_replace($key, $value, $request->message);
         }
 
-        DB::connection('mysql_keiziban')
-            ->table($request->table)
+        DB::table($request->table)
             ->insert([
                 'name' => $request->user()->name,
                 'user_email' => $request->user()->email,
@@ -58,7 +57,7 @@ class jQuery_ajax extends Controller
     {
         $uuid = str_replace('-', '', Str::uuid());
 
-        Schema::connection('mysql_keiziban')->create(
+        Schema::create(
             $uuid,
             function (Blueprint $table) {
                 $table->id('no');
@@ -87,23 +86,6 @@ class jQuery_ajax extends Controller
             'created_at' => now(),
         ]);
     }
-
-    /*
-    public function unlike(Request $request)
-    {
-        $thread_id = $request->thread_id;
-        $message_id = $request->message_id;
-        $user_email = $request->user()->email;
-
-        $like = new Like;
-        $like->unlike(
-            $thread_id,
-            $message_id,
-            $user_email
-        );
-        return null;
-    }
-*/
 
     public function unlike(Request $request)
     {

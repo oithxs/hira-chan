@@ -16,6 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(AdminInstallSeeder::class);
         $this->call(UserPageThemasSeeder::class);
-        $this->call(ThreadCategorySeeder::class);
+        $this->call(ThreadCategorysSeeder::class);
     }
 }
