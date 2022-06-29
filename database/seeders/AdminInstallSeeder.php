@@ -14,14 +14,14 @@ class AdminInstallSeeder extends Seeder
      */
     public function run()
     {
-        AdminMenu::create([
+        AdminMenu::updateOrCreate([
             'parent_id' => 0,
             'order' => 8,
             'title' => 'General',
             'icon' => 'fa-street-view'
         ]);
 
-        AdminMenu::create([
+        AdminMenu::updateOrCreate([
             'parent_id' => 8,
             'order' => 9,
             'title' => 'Users',

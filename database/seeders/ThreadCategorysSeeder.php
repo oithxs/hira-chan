@@ -14,27 +14,27 @@ class ThreadCategorysSeeder extends Seeder
      */
     public function run()
     {
-        ThreadCategorys::create([
+        ThreadCategorys::updateOrCreate([
             'category_name' => 'IS科',
             'category_type' => '学科'
         ]);
 
-        ThreadCategorys::create([
+        ThreadCategorys::updateOrCreate([
             'category_name' => 'IN科',
             'category_type' => '学科'
         ]);
 
-        ThreadCategorys::create([
+        ThreadCategorys::updateOrCreate([
             'category_name' => 'IC科',
             'category_type' => '学科'
         ]);
 
-        ThreadCategorys::create([
+        ThreadCategorys::updateOrCreate([
             'category_name' => 'ID科',
             'category_type' => '学科'
         ]);
 
-        ThreadCategorys::create([
+        ThreadCategorys::updateOrCreate([
             'category_name' => 'IM科',
             'category_type' => '学科'
         ]);

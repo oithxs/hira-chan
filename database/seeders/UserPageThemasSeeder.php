@@ -14,12 +14,12 @@ class UserPageThemasSeeder extends Seeder
      */
     public function run()
     {
-        UserPageThemas::create([
+        UserPageThemas::updateOrCreate([
             'thema_id' => 0,
             'thema_name' => 'default'
         ]);
 
-        UserPageThemas::create([
+        UserPageThemas::updateOrCreate([
             'thema_id' => 1,
             'thema_name' => 'dark'
         ]);
