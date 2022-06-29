@@ -34,14 +34,14 @@ class jQuery_ajax extends Controller
             )
             ->leftjoin('likes AS likes1', function ($join) {
                 $join
-                    ->where('likes1.thread_id', '=', $this->thread_id) // OK
-                    ->whereColumn('likes1.message_id', '=', $this->message_id); // OK;
+                    ->where('likes1.thread_id', '=', $this->thread_id)
+                    ->whereColumn('likes1.message_id', '=', $this->message_id);
             })
             ->leftjoin('likes AS likes2', function ($join) {
                 $join
                     ->where('likes2.user_email', '=', $this->user_email)
-                    ->where('likes2.thread_id', '=', $this->thread_id) // OK
-                    ->whereColumn('likes2.message_id', '=', $this->message_id); // OK;
+                    ->where('likes2.thread_id', '=', $this->thread_id)
+                    ->whereColumn('likes2.message_id', '=', $this->message_id);
             })
             ->groupBy($this->thread_id . '.no')
             ->get();
@@ -118,44 +118,42 @@ class jQuery_ajax extends Controller
 
     public function delete_thread(Request $request)
     {
-        $thread_id = $request->thread_id;
-
-        $admin_actions = new AdminActions;
-        $admin_actions->delete_thread($thread_id);
-        $admin_actions->delete_thread_record($thread_id);
+        DB::statement('DROP TABLE ?', [$request->thread_id]);
+        Hub::where('thread_id', '=', $request->thread_id)->delete();
 
         return null;
     }
 
     public function edit_thread(Request $request)
     {
-        $thread_id = $request->thread_id;
-        $thread_name = $request->thread_name;
-
-        $admin_actions = new AdminActions;
-        $admin_actions->edit_thread_record($thread_id, $thread_name);
+        Hub::where('threead_id', '=', $request->thread_id)
+            ->update([
+                'thread_name' => $request->thread_name
+            ]);
 
         return null;
     }
 
     public function delete_message(Request $request)
     {
-        $thread_id = $request->thread_id;
-        $message_id = $request->message_id;
-
-        $admin_actions = new AdminActions;
-        $admin_actions->delete_message_record($thread_id, $message_id);
+        DB::connection('mysql')
+            ->table($request->thread_id)
+            ->where('no', '=', $request->message_id)
+            ->update([
+                'is_validity' => 0
+            ]);
 
         return null;
     }
 
     public function restore_message(Request $request)
     {
-        $thread_id = $request->thread_id;
-        $message_id = $request->message_id;
-
-        $admin_actions = new AdminActions;
-        $admin_actions->restore_message_record($thread_id, $message_id);
+        DB::connection('mysql')
+            ->table($request->threead_id)
+            ->where('no', '=', $request->message_id)
+            ->update([
+                'is_validity' => 1
+            ]);
 
         return null;
     }
@@ -164,7 +162,6 @@ class jQuery_ajax extends Controller
     {
         $page_thema = $request->page_thema;
         $user = User::find($request->user()->id);
-
         $user->thema = $page_thema;
         $user->save();
 
