@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Models\Get;
 use App\Models\AdminActions;
 use App\Models\User;
 use App\Models\Hub;
@@ -16,14 +15,36 @@ use Illuminate\Support\Facades\DB;
 
 class jQuery_ajax extends Controller
 {
+    public $thread_id;
+    public $message_id;
+    public $user_email;
+
     public function get_allRow(Request $request)
     {
-        $get = new Get;
-        $tableName = $request->post('table');
-        $stmt = $get->allRow(
-            $tableName,
-            $request->user()->email
-        );
+        $this->user_email = $request->user()->email;
+        $this->thread_id = $request->table;
+        $this->message_id = $this->thread_id . '.no';
+
+        $stmt = DB::connection('mysql')
+            ->table($this->thread_id)
+            ->select(
+                $this->thread_id . '.*',
+                DB::raw('COUNT(likes1.user_email) AS count_user'),
+                DB::raw('COALESCE((likes2.user_email), 0) AS user_like')
+            )
+            ->leftjoin('likes AS likes1', function ($join) {
+                $join
+                    ->where('likes1.thread_id', '=', $this->thread_id) // OK
+                    ->whereColumn('likes1.message_id', '=', $this->message_id); // OK;
+            })
+            ->leftjoin('likes AS likes2', function ($join) {
+                $join
+                    ->where('likes2.user_email', '=', $this->user_email)
+                    ->where('likes2.thread_id', '=', $this->thread_id) // OK
+                    ->whereColumn('likes2.message_id', '=', $this->message_id); // OK;
+            })
+            ->groupBy($this->thread_id . '.no')
+            ->get();
 
         return json_encode($stmt);
     }
