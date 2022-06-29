@@ -4,22 +4,18 @@ namespace App\Http\Livewire\Dashboard;
 
 use Livewire\Component;
 use Illuminate\Http\Request;
-use App\Models\Get;
+use App\Models\Hub;
 
 class Messages extends Component
 {
     public function render(Request $request)
     {
-        $get = new Get;
-        $messages = $get->allRow(
-            $request->thread_id,
-            $request->user()->email
-        );
+        $exists = Hub::where('thread_id', '=', $request->thread_id)->get();
 
-        if ($messages == 0) {
-            $response['result'] = 0;
-        } else {
+        if ($exists) {
             $response['result'] = 1;
+        } else {
+            $response['result'] = 0;
         }
 
         $response['thread_name'] = $request->thread_name;

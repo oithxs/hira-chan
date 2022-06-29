@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\keiziban;
+namespace Tests\Admin\Feature\keiziban;
 
 use App\Models\User;
 use App\Models\create_thread;

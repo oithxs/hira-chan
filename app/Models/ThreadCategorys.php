@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserPageThemas extends Model
+class ThreadCategorys extends Model
 {
     use HasFactory;
 
@@ -21,7 +21,7 @@ class UserPageThemas extends Model
      *
      * @var string
      */
-    protected $table = 'user_page_themas';
+    protected $table = 'thread_categorys';
 
     /**
      * The attributes that are mass assignable
@@ -29,8 +29,8 @@ class UserPageThemas extends Model
      * @var string[]
      */
     protected $fillable = [
-        'thema_id',
-        'thema_name',
+        'category_name',
+        'category_type',
     ];
 
     /**

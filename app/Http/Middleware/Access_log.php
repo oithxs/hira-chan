@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\Record_AccessLog;
+use App\Models\AccessLogs;
 
 class Access_log
 {
@@ -17,17 +17,13 @@ class Access_log
      */
     public function handle(Request $request, Closure $next)
     {
-        $thread_name = $request->thread_name;
-        $thread_id = $request->thread_id;
-        $user_email = $request->user()->email;
-        $ip = $request->ip();
-        $save = new Record_AccessLog;
-        $save->func(
-            $thread_name,
-            $thread_id,
-            $user_email,
-            $ip
-        );
+        AccessLogs::create([
+            'user_email' => $request->user()->email,
+            'thread_name' => $request->thread_name,
+            'thread_id' => $request->thread_id,
+            'access_log' => $request->ip()
+        ]);
+
         return $next($request);
     }
 }

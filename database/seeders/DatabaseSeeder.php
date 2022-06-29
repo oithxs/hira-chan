@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\UserPageThemas;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,6 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(AdminInstallSeeder::class);
         $this->call(UserPageThemasSeeder::class);
-        $this->call(ThreadCategorySeeder::class);
+        $this->call(ThreadCategorysSeeder::class);
     }
 }

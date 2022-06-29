@@ -4,8 +4,8 @@ namespace App\Http\Livewire\Dashboard;
 
 use Livewire\Component;
 use Illuminate\Http\Request;
-use App\Models\Get;
-use Illuminate\Support\Facades\DB;
+use App\Models\ThreadCategorys;
+use App\Models\Hub;
 
 class Threads extends Component
 {
@@ -14,9 +14,65 @@ class Threads extends Component
 
     public function mount(Request $request)
     {
-        $get = new Get;
-        $this->threads = $get->showTables($request->sort, $request->category);
-        $this->categorys = DB::connection('mysql')->table('thread_categorys')->get();
+        $category = $request->category;
+        $sort = $request->sort;
+
+        if ($category == NULL) {
+            if ($sort == 'new_create') {
+                $this->threads = Hub::selectRaw('hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access')
+                    ->leftJoin('access_logs', function ($join) {
+                        $join->on('hub.thread_id', '=', 'access_logs.thread_id');
+                    })
+                    ->groupBy('hub.thread_id')
+                    ->orderByRaw('hub.created_at DESC')
+                    ->get();
+            } else if ($sort == 'access_count') {
+                $this->threads = Hub::selectRaw('hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access')
+                    ->leftJoin('access_logs', function ($join) {
+                        $join->on('hub.thread_id', '=', 'access_logs.thread_id');
+                    })
+                    ->groupBy('hub.thread_id')
+                    ->orderByRaw('COUNT(access_logs.access_log) DESC')
+                    ->get();
+            } else {
+                $this->threads = Hub::selectRaw('hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access')
+                    ->leftJoin('access_logs', function ($join) {
+                        $join->on('hub.thread_id', '=', 'access_logs.thread_id');
+                    })
+                    ->groupBy('hub.thread_id')
+                    ->get();
+            }
+        } else {
+            if ($sort == 'new_create') {
+                $this->threads = Hub::selectRaw('hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access')
+                    ->leftJoin('access_logs', function ($join) {
+                        $join->on('hub.thread_id', '=', 'access_logs.thread_id');
+                    })
+                    ->where('hub.thread_category', '=', $category)
+                    ->groupBy('hub.thread_id')
+                    ->orderByRaw('hub.created_at DESC')
+                    ->get();
+            } else if ($sort == 'access_count') {
+                $this->threads = Hub::selectRaw('hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access')
+                    ->leftJoin('access_logs', function ($join) {
+                        $join->on('hub.thread_id', '=', 'access_logs.thread_id');
+                    })
+                    ->where('hub.thread_category', '=', $category)
+                    ->groupBy('hub.thread_id')
+                    ->orderByRaw('COUNT(access_logs.access_log) DESC')
+                    ->get();
+            } else {
+                $this->threads = Hub::selectRaw('hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access')
+                    ->leftJoin('access_logs', function ($join) {
+                        $join->on('hub.thread_id', '=', 'access_logs.thread_id');
+                    })
+                    ->where('hub.thread_category', '=', $category)
+                    ->groupBy('hub.thread_id')
+                    ->get();
+            }
+        }
+
+        $this->categorys = ThreadCategorys::get();
     }
 
     public function render(Request $request)
@@ -30,13 +86,23 @@ class Threads extends Component
 
     public function new_create()
     {
-        $get = new Get;
-        $this->threads = $get->showTables('new_create', NULL);
+        $this->threads = Hub::selectRaw('hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access')
+            ->leftJoin('access_logs', function ($join) {
+                $join->on('hub.thread_id', '=', 'access_logs.thread_id');
+            })
+            ->groupBy('hub.thread_id')
+            ->orderByRaw('hub.created_at DESC')
+            ->get();
     }
 
     public function access_count()
     {
-        $get = new Get;
-        $this->threads = $get->showTables('access_count', NULL);
+        $this->threads = Hub::selectRaw('hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access')
+            ->leftJoin('access_logs', function ($join) {
+                $join->on('hub.thread_id', '=', 'access_logs.thread_id');
+            })
+            ->groupBy('hub.thread_id')
+            ->orderByRaw('COUNT(access_logs.access_log) DESC')
+            ->get();
     }
 }
