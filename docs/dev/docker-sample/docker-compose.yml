@@ -1,14 +1,16 @@
 version: '3'
 services:
   app:
-    container_name: laravel2-app
+    container_name: laravel-app
     build: ./docker/php
     volumes:
       - .:/var/www
+    depends_on:
+      - db
 
   nginx:
     image: nginx
-    container_name: laravel2-nginx
+    container_name: laravel-nginx
     ports:
       - 8000:80
     volumes:
@@ -20,11 +22,11 @@ services:
 
   db:
     image: mysql:5.7
-    container_name: laravel2-db
+    container_name: laravel-db
     environment:
-      MYSQL_DATABASE: db
+      MYSQL_DATABASE: forum
       MYSQL_USER: user
-      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_ROOT_PASSWORD: rootpass
       MYSQL_PASSWORD: pass
       TZ: 'Asia/Tokyo'
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
@@ -37,12 +39,13 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    container_name: laravel-phpmyadmin
     environment:
       - PMA_ARBITRARY=1
       - PMA_HOST=db
       - PMA_USER=root
-      - PMA_PASSWORD=pass
+      - PMA_PASSWORD=rootpass
     ports:
       - 4040:80
     volumes:
-      - ./phpmyadmin/sessions:/sessions
+      - ./docker/phpmyadmin/sessions:/sessions
