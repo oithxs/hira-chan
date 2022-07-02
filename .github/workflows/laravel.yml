@@ -19,7 +19,6 @@ jobs:
           - 3306:3306
         env:
           MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: main
         options: >-
           --health-cmd "mysqladmin ping"
           --health-interval 10s
@@ -39,10 +38,9 @@ jobs:
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
       - name: Create Database
-        run: mysql --protocol=tcp -h localhost -P 3306 -u root -ppassword -e "CREATE DATABASE forum"
+        run: mysql --protocol=tcp -h localhost -P 3306 -u root -ppassword -e "CREATE DATABASE main"
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         env:
           DB_DATABASE: main
-          DB_DATABASE_KEIZIBAN: forum
           DB_PASSWORD: password
         run: vendor/bin/phpunit
