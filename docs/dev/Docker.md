@@ -121,6 +121,8 @@ docker-laravel
 └── docker-compose.yml
 ```
 
+---
+
 ## 4 コンテナを構築 作成 起動 アタッチする
 
 `docker-laravel`ディレクトリで以下のコマンドを実行
@@ -128,6 +130,8 @@ docker-laravel
 ```bash
 docker-compose up -d
 ```
+
+---
 
 ## 5 コンテナの初期設定
 
