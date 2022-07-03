@@ -45,4 +45,5 @@ jobs:
           DB_DATABASE: main
           DB_DATABASE_KEIZIBAN: forum
           DB_PASSWORD: password
+          MAIL_FROM_ADDRESS: from@example.com
         run: vendor/bin/phpunit
