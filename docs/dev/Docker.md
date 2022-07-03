@@ -19,7 +19,7 @@
 
 ## 1 Docker (Rootless モード)のインストール
 
-これにより、Docker デーモンとコンテナを root 以外のユーザが実行できるようになります。
+これにより、Docker デーモンとコンテナを root 以外のユーザが実行できるようになります
 
 ### 1.1 uidmap のインストール
 
@@ -101,7 +101,7 @@ docker-compose -v
 
 ## 3 必要なファイルを配置
 
-今回はホームディレクトリ直下に`docker-laravel`ディレクトリを作り、そこで作業する。
+今回はホームディレクトリ直下に`docker-laravel`ディレクトリを作り、そこで作業する
 
 1. `docker-laravel`ディレクトリに`Laravel_Forum-B`のリポジトリをクローンする
 2. [Laravel_Forum-B/docs/dev/docker-sample/](./docker-sample/)にある、`dockerフォルダ`と`docker-compose.yml`を全て`docker-laravel`直下に移動させる
@@ -127,4 +127,49 @@ docker-laravel
 
 ```bash
 docker-compose up -d
+```
+
+## 5 コンテナの初期設定
+
+### 5.1 env ファイルの設定
+
+#### 5.1.1 env ファイルをコピー
+
+```bash
+cp Laravel_Forum-B/.env.example Laravel_Forum-B/.env
+```
+
+#### 5.1.2 env ファイルに以下を記述
+
+```text
+DB_CONNECTION=mysql
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=forum
+DB_USERNAME=root
+DB_PASSWORD=rootpass
+```
+
+### 5.2 権限を設定
+
+```bash
+sudo chmod -R 777 Laravel_Forum-B/storage/
+```
+
+### 5.3 vendar ディレクトリの作成
+
+```bash
+docker-compose exec app composer install
+```
+
+### 5.4 アプリケーションキーを生成
+
+```bash
+docker-compose exec app php artisan key:generate
+```
+
+### 5.5 テーブルの作成
+
+```bash
+docker-compose exec app php artisan migrate
 ```
