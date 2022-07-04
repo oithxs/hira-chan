@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Models\AdminActions;
 use App\Models\User;
 use App\Models\Hub;
+use App\Models\ThreadCategorys;
 use App\Models\Likes;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class jQuery_ajax extends Controller
 {
@@ -90,10 +91,13 @@ class jQuery_ajax extends Controller
             }
         );
 
+        $category = ThreadCategorys::where('category_name', '=', 'IS科')->first();
+
         Hub::create([
             'thread_id' => $uuid,
             'thread_name' => $request->table,
             'thread_category' => $request->thread_category,
+            'thread_category_type' => $category->category_type,
             'user_email' => $request->user()->email
         ]);
     }
