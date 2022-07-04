@@ -32,6 +32,7 @@ class Hub extends Model
         'thread_id',
         'thread_name',
         'thread_category',
+        'thread_category_type',
         'user_email',
     ];
 
