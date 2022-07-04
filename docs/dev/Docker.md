@@ -138,13 +138,13 @@ docker-compose up -d
 
 ### 5.1 env ファイルの設定
 
-#### 5.1.1 env ファイルをコピー
+1. env ファイルをコピー
 
 ```bash
 cp Laravel_Forum-B/.env.example Laravel_Forum-B/.env
 ```
 
-#### 5.1.2 env ファイルに以下を記述
+2. env ファイルに以下を記述
 
 ```text
 DB_CONNECTION=mysql
