@@ -11,7 +11,8 @@
 1. [Docker のインストール](#1-docker-rootless-モードのインストール)
 2. [Docker Compose のインストール](#2-docker-compose-のインストール)
 3. [必要なファイルを配置](#3-必要なファイルを配置)
-4. [コンテナを構築する](#4-コンテナを構築-作成-起動-アタッチする)
+4. [コンテナの構築](#4-コンテナを構築-作成-起動-アタッチする)
+5. [コンテナの初期設定](#5-コンテナの初期設定)
 
 ---
 
@@ -177,3 +178,10 @@ docker-compose exec app php artisan key:generate
 ```bash
 docker-compose exec app php artisan migrate
 ```
+
+## 参考サイト
+
+-   [Docker で Laravel の環境構築をする手順をまとめてみた](https://www.engilaboo.com/how-to-use-docker-for-laravel/)
+-   [docker-compose で Laravel の開発環境を整える方法とその解説](https://www.membersedge.co.jp/blog/laravel-development-environment-with-docker-compose/)
+-   [【超入門】20 分で Laravel 開発環境を爆速構築する Docker ハンズオン](https://qiita.com/ucan-lab/items/56c9dc3cf2e6762672f4)
+-   [DEBIAN_FRONTEND=noninteractive](https://zenn.dev/flyingbarbarian/scraps/1275681132babd)
