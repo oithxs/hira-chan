@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hub extends Model
+class JobHuntingThreads extends Model
 {
     use HasFactory;
 
@@ -21,7 +21,7 @@ class Hub extends Model
      *
      * @var string
      */
-    protected $table = 'hub';
+    protected $table = 'job_hunting_threads';
 
     /**
      * The attributes that are mass assignable
@@ -30,10 +30,10 @@ class Hub extends Model
      */
     protected $fillable = [
         'thread_id',
-        'thread_name',
-        'thread_category',
-        'thread_category_type',
+        'message_id',
+        'user_name',
         'user_email',
+        'message',
     ];
 
     /**
@@ -51,7 +51,7 @@ class Hub extends Model
      * @var array
      */
     protected $casts = [
-        'created_at' => 'datetime',
-        'update_at' => 'datetime',
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'update_at' => 'datetime:Y-m-d H:i:s',
     ];
 }
