@@ -8,14 +8,13 @@ use App\Models\CollegeYearThreads;
 use App\Models\ClubThreads;
 use App\Models\LectureThreads;
 use App\Models\JobHuntingThreads;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Hub;
 use App\Models\ThreadCategorys;
 use App\Models\Likes;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class jQuery_ajax extends Controller
 {
@@ -158,7 +157,6 @@ class jQuery_ajax extends Controller
         }
 
         $thread = Hub::where('thread_id', '=', $request->table)->first();
-        Log::debug($thread->thread_category_type);
 
         switch ($thread->thread_category_type) {
             case '学科':
