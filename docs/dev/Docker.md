@@ -134,6 +134,8 @@ docker-compose up -d
 
 ## 5 コンテナの初期設定
 
+ワーキングディレクトリを`docker-laravel`とする
+
 ### 5.1 env ファイルの設定
 
 1. env ファイルをコピー
@@ -241,7 +243,8 @@ exit
 5. Postfix を再起動
 
 ```bash
-docker-compose exec app /etc/init.d/postfix restart
+docker-compose exec app \
+    /etc/init.d/postfix restart
 ```
 
 6. env ファイルの編集
@@ -258,7 +261,12 @@ MAIL_FROM_NAME="${APP_NAME}"
 MAIL_EXAMPLE_ADDRESS=e1n11111
 ```
 
-## 参考サイト
+## 6 アクセスする
+
+-   掲示板のポート番号は`8080`
+-   phpmyadmin のポート番号は`4040`
+
+## 参考にした記事
 
 -   [Docker で Laravel の環境構築をする手順をまとめてみた](https://www.engilaboo.com/how-to-use-docker-for-laravel/)
 -   [docker-compose で Laravel の開発環境を整える方法とその解説](https://www.membersedge.co.jp/blog/laravel-development-environment-with-docker-compose/)
