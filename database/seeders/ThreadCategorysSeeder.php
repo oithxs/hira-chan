@@ -38,5 +38,40 @@ class ThreadCategorysSeeder extends Seeder
             'category_name' => 'IM科',
             'category_type' => '学科'
         ]);
+
+        ThreadCategorys::updateOrCreate([
+            'category_name' => '1年生',
+            'category_type' => '学年'
+        ]);
+
+        ThreadCategorys::updateOrCreate([
+            'category_name' => '2年生',
+            'category_type' => '学年'
+        ]);
+
+        ThreadCategorys::updateOrCreate([
+            'category_name' => '3年生',
+            'category_type' => '学年'
+        ]);
+
+        ThreadCategorys::updateOrCreate([
+            'category_name' => '4年生',
+            'category_type' => '学年'
+        ]);
+
+        ThreadCategorys::updateOrCreate([
+            'category_name' => 'HxSコンピュータ部',
+            'category_type' => '部活'
+        ]);
+
+        ThreadCategorys::updateOrCreate([
+            'category_name' => 'キャリア科目',
+            'category_type' => '授業'
+        ]);
+
+        ThreadCategorys::updateOrCreate([
+            'category_name' => '2022年度',
+            'category_type' => '就職'
+        ]);
     }
 }
