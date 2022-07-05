@@ -261,6 +261,16 @@ MAIL_FROM_NAME="${APP_NAME}"
 MAIL_EXAMPLE_ADDRESS=e1n11111
 ```
 
+7. 追加で権限を変更
+
+```bash
+sudo chmod -R 777 Laravel_Forum-B/bootstrap/cache
+```
+
+```bash
+sudo chmod 777 -R public/uploads
+```
+
 ## 6 アクセスする
 
 -   掲示板のポート番号は`8080`
