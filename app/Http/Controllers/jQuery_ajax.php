@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\DepartmentThreads;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\User;
@@ -12,42 +13,38 @@ use App\Models\Likes;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class jQuery_ajax extends Controller
 {
     public $thread_id;
-    public $message_id;
     public $user_email;
 
     public function get_allRow(Request $request)
     {
         $this->user_email = $request->user()->email;
         $this->thread_id = $request->table;
-        $this->message_id = $this->thread_id . '.no';
 
-        $stmt = DB::connection('mysql')
-            ->table($this->thread_id)
-            ->select(
-                $this->thread_id . '.*',
-                DB::raw('COUNT(likes1.user_email) AS count_user'),
-                DB::raw('COALESCE((likes2.user_email), 0) AS user_like')
-            )
+        $stmt = DepartmentThreads::select(
+            'department_threads.*',
+            DB::raw('COUNT(likes1.user_email) AS count_user'),
+            DB::raw('COALESCE((likes2.user_email), 0) AS user_like')
+        )
             ->leftjoin('likes AS likes1', function ($join) {
                 $join
                     ->where('likes1.thread_id', '=', $this->thread_id)
-                    ->whereColumn('likes1.message_id', '=', $this->message_id);
+                    ->whereColumn('likes1.message_id', '=', 'department_threads.message_id');
             })
             ->leftjoin('likes AS likes2', function ($join) {
                 $join
-                    ->where('likes2.user_email', '=', $this->user_email)
                     ->where('likes2.thread_id', '=', $this->thread_id)
-                    ->whereColumn('likes2.message_id', '=', $this->message_id);
+                    ->where('likes2.user_email', '=', $this->user_email)
+                    ->where('likes2.message_id', '=', 'department_threads.message_id');
             })
-            ->groupBy($this->thread_id . '.no')
+            ->where('department_threads.thread_id', '=', $this->thread_id)
+            ->groupBy('department_threads.message_id')
             ->get();
 
-        return json_encode($stmt);
+        return $stmt;
     }
 
     public function send_Row(Request $request)
@@ -66,30 +63,23 @@ class jQuery_ajax extends Controller
             $message = str_replace($key, $value, $request->message);
         }
 
-        DB::table($request->table)
-            ->insert([
-                'name' => $request->user()->name,
-                'user_email' => $request->user()->email,
-                'message' => $message,
-                'time' => now()
-            ]);
+        $message_id = DepartmentThreads::where('thread_id', '=', $request->table)->max('message_id');
+        if ($message_id == NULL) {
+            $message_id = 0;
+        }
+
+        DepartmentThreads::create([
+            'thread_id' => $request->table,
+            'message_id' => $message_id + 1,
+            'user_name' => $request->user()->name,
+            'user_email' => $request->user()->email,
+            'message' => $message
+        ]);
     }
 
     public function create_thread(Request $request)
     {
         $uuid = str_replace('-', '', Str::uuid());
-
-        Schema::create(
-            $uuid,
-            function (Blueprint $table) {
-                $table->id('no');
-                $table->text('name');
-                $table->text('user_email');
-                $table->text('message');
-                $table->text('time');
-                $table->boolean('is_validity')->default(true);
-            }
-        );
 
         $category = ThreadCategorys::where('category_name', '=', 'IS科')->first();
 
