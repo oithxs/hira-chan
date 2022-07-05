@@ -10,8 +10,6 @@ use App\Models\User;
 use App\Models\Hub;
 use App\Models\ThreadCategorys;
 use App\Models\Likes;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
 class jQuery_ajax extends Controller
@@ -38,7 +36,7 @@ class jQuery_ajax extends Controller
                 $join
                     ->where('likes2.thread_id', '=', $this->thread_id)
                     ->where('likes2.user_email', '=', $this->user_email)
-                    ->where('likes2.message_id', '=', 'department_threads.message_id');
+                    ->whereColumn('likes2.message_id', '=', 'department_threads.message_id');
             })
             ->where('department_threads.thread_id', '=', $this->thread_id)
             ->groupBy('department_threads.message_id')
