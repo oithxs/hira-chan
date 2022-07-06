@@ -268,7 +268,7 @@ sudo chmod -R 777 Laravel_Forum-B/bootstrap/cache
 ```
 
 ```bash
-sudo chmod 777 -R public/uploads
+sudo chmod -R 777 Laravel_Forum-B/public/uploads
 ```
 
 ## 6 アクセスする
