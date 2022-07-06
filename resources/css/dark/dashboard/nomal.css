@@ -1,25 +1,25 @@
-/* resources/css/dark/dashboard/nomal.css */
+/* resources/css/dark/dashboard/dark.css */
 @charset "utf-8";
 
 
 /* バックグラウンドカラー */
 .bg-user-color {
-    background-color: black;
+    background-color: white;
 }
 
 /* コンテンツ・バックグラウンドカラー */
 .ct-user-color {
-    background-color: #667580;
+    background-color: whitesmoke;
 }
 
 /* サブ　コンテンツ・バックグラウンドカラー */
 .ctsub-user-color {
-    background-color: #888;
+    background-color: gainsboro;
 }
 
 /* テキストカラー */
 .tx-user-color {
-    color: #F5F8FA;
+    color: black;
 }
 
 /* サブテキストカラー */
