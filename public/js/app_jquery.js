@@ -102,6 +102,29 @@ function reload() {
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
+/*!*************************************************!*\
+  !*** ./resources/js/dashboard/Search_thread.js ***!
+  \*************************************************/
+$('#dashboard_threads_search_thread').keyup(function () {
+  var input = $(this).val();
+  $('#dashboard_threads_threads_table tbody tr').each(function () {
+    var text = $(this).find("td:eq(0)").html();
+
+    if (text.match(input) != null) {
+      $(this).show();
+    } else {
+      $(this).hide();
+    }
+  });
+});
+$('#dashboard_threads_show_all_threads_button').click(function () {
+  $('#dashboard_threads_search_thread').val('');
+  $('#dashboard_threads_threads_table tr').show();
+});
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
 /*!********************************************!*\
   !*** ./resources/js/dashboard/Send_Row.js ***!
   \********************************************/
