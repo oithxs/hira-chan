@@ -8,15 +8,20 @@ use App\Models\Hub;
 
 class Rankings extends Component
 {
-    public function render(Request $request)
+    public $access_ranking;
+
+    public function mount(Request $request)
     {
-        $response['access_ranking'] = Hub::selectRaw('*, COUNT(*) AS access_count')
+        $this->access_ranking = Hub::selectRaw('*, COUNT(*) AS access_count')
             ->rightjoin('access_logs', 'access_logs.thread_id', '=', 'hub.thread_id')
             ->whereNotNull('hub.thread_name')
             ->groupBy('hub.thread_id')
             ->orderByRaw('COUNT(*) DESC')
             ->get();
+    }
 
-        return view('dashboard.rankings', $response);
+    public function render(Request $request)
+    {
+        return view('dashboard.rankings');
     }
 }

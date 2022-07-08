@@ -11,6 +11,7 @@ class Threads extends Component
 {
     public $threads;
     public $categorys;
+    public $category_types;
 
     public function mount(Request $request)
     {
@@ -73,6 +74,9 @@ class Threads extends Component
         }
 
         $this->categorys = ThreadCategorys::get();
+        $this->category_types = ThreadCategorys::select('category_type')
+            ->distinct('category_type')
+            ->get();
     }
 
     public function render(Request $request)

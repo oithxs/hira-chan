@@ -20,7 +20,30 @@
     <div class="mb-2">
         <label>スレッド検索</label>
         <input type="text" id="dashboard_threads_search_thread">
+
         <input type="button" value="全て表示" id="dashboard_threads_show_all_threads_button">
+
+        <select id="dashboard_threads_category_type_select">
+            <option value="">
+                未選択
+            </option>
+            @foreach ($category_types as $category_type)
+            <option value="{{ $category_type->category_type }}">
+                {{ $category_type->category_type }}
+            </option>
+            @endforeach
+        </select>
+
+        <select id="dashboard_threads_category_select">
+            <option value="">
+                未選択
+            </option>
+            @foreach ($categorys as $category)
+            <option value="{{ $category->category_name }}" data-val="{{ $category->category_type }}">
+                {{ $category->category_name }}
+            </option>
+            @endforeach
+        </select>
     </div>
 
     <table id="dashboard_threads_threads_table" class="table table-striped">
@@ -72,6 +95,8 @@
                 </td>
                 <td>{{ $tableInfo["created_at"] }}</td>
                 <td>{{ $tableInfo['Access'] }}</td>
+                <td class="hidden">{{ $tableInfo['thread_category'] }}</td>
+                <td class="hidden">{{ $tableInfo['thread_category_type'] }}</td>
             </tr>
             @endif
             @endforeach
