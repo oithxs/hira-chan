@@ -207,6 +207,48 @@ String.prototype.bytes = function () {
 String.prototype.rows = function () {
   if (this.match(/\n/g)) return this.match(/\n/g).length + 1;else return 1;
 };
+
+$('#dashboard_send_comment_upload_img').change(function (e) {
+  var fileset = $(this).val();
+
+  if (fileset !== '' && e.target.files[0].type.indexOf('image') < 0) {
+    dashboard_sendAlertArea.innerHTML = "<div class='alert alert-danger'>画像ファイルを指定してください</div>";
+    $('#dashboard_send_commnet_img_preview').attr('src', '');
+    $(this).val('');
+    return false;
+  } else if (file_size_check('dashboard_send_comment_upload_img')) {
+    dashboard_sendAlertArea.innerHTML = "<div class='alert alert-danger'>ファイルのサイズは1MB以内にしてください</div>";
+    $('#dashboard_send_commnet_img_preview').attr('src', '');
+    $(this).val('');
+    return false;
+  } else {
+    dashboard_sendAlertArea.innerHTML = "";
+
+    if (fileset === '') {
+      $('#dashboard_send_commnet_img_preview').attr('src', '');
+    } else {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#dashboard_send_commnet_img_preview').attr('src', e.target.result);
+      };
+
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  }
+});
+
+function file_size_check(idname) {
+  var fileset = $('#' + idname).prop('files')[0];
+
+  if (fileset) {
+    if (1048576 <= fileset.size) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
