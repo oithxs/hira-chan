@@ -152,8 +152,9 @@ class jQuery_ajax extends Controller
             "\t" => "&ensp;&ensp;"
         );
 
+        $message = $request->message;
         foreach ($special_character_set as $key => $value) {
-            $message = str_replace($key, $value, $request->message);
+            $message = str_replace($key, $value, $message);
         }
 
         $thread = Hub::where('thread_id', '=', $request->table)->first();
