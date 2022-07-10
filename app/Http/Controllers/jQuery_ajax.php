@@ -16,7 +16,6 @@ use App\Models\ThreadImagePaths;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class jQuery_ajax extends Controller
 {
@@ -163,10 +162,7 @@ class jQuery_ajax extends Controller
 
         switch ($thread->thread_category_type) {
             case '学科':
-                $message_id = DepartmentThreads::where('thread_id', '=', $request->table)->max('message_id');
-                if ($message_id == NULL) {
-                    $message_id = 0;
-                }
+                $message_id = DepartmentThreads::where('thread_id', '=', $request->table)->max('message_id') ?? 0;
                 DepartmentThreads::create([
                     'thread_id' => $request->table,
                     'message_id' => $message_id + 1,
@@ -177,10 +173,7 @@ class jQuery_ajax extends Controller
                 break;
 
             case '学年':
-                $message_id = CollegeYearThreads::where('thread_id', '=', $request->table)->max('message_id');
-                if ($message_id == NULL) {
-                    $message_id = 0;
-                }
+                $message_id = CollegeYearThreads::where('thread_id', '=', $request->table)->max('message_id') ?? 0;
                 CollegeYearThreads::create([
                     'thread_id' => $request->table,
                     'message_id' => $message_id + 1,
@@ -191,10 +184,7 @@ class jQuery_ajax extends Controller
                 break;
 
             case '部活':
-                $message_id = ClubThreads::where('thread_id', '=', $request->table)->max('message_id');
-                if ($message_id == NULL) {
-                    $message_id = 0;
-                }
+                $message_id = ClubThreads::where('thread_id', '=', $request->table)->max('message_id') ?? 0;
                 ClubThreads::create([
                     'thread_id' => $request->table,
                     'message_id' => $message_id + 1,
@@ -205,10 +195,7 @@ class jQuery_ajax extends Controller
                 break;
 
             case '授業':
-                $message_id = LectureThreads::where('thread_id', '=', $request->table)->max('message_id');
-                if ($message_id == NULL) {
-                    $message_id = 0;
-                }
+                $message_id = LectureThreads::where('thread_id', '=', $request->table)->max('message_id') ?? 0;
                 LectureThreads::create([
                     'thread_id' => $request->table,
                     'message_id' => $message_id + 1,
@@ -219,10 +206,7 @@ class jQuery_ajax extends Controller
                 break;
 
             case '就職':
-                $message_id = JobHuntingThreads::where('thread_id', '=', $request->table)->max('message_id');
-                if ($message_id == NULL) {
-                    $message_id = 0;
-                }
+                $message_id = JobHuntingThreads::where('thread_id', '=', $request->table)->max('message_id') ?? 0;
                 JobHuntingThreads::create([
                     'thread_id' => $request->table,
                     'message_id' => $message_id + 1,
@@ -239,20 +223,30 @@ class jQuery_ajax extends Controller
 
     public function img_upload(Request $request)
     {
-        Log::debug($request->all());
-        Log::debug($request->post('thread_id'));
-        Log::debug($request->thread_id);
-        Log::debug($request->file('img')->store('img/thread_message', 'public'));
-
-        /*
+        $thread = Hub::where('thread_id', '=', $request->thread_id)->first();
+        $message_id = 0;
+        switch ($thread->thread_category_type) {
+            case '学科':
+                $message_id = DepartmentThreads::where('thread_id', '=', $request->thread_id)->max('message_id');
+                break;
+            case '学年':
+                $message_id = CollegeYearThreads::where('thread_id', '=', $request->thread_id)->max('message_id');
+                break;
+            case '部活':
+                $message_id = ClubThreads::where('thread_id', '=', $request->thread_id)->max('message_id');
+                break;
+            case '授業':
+                $message_id = LectureThreads::where('thread_id', '=', $request->thread_id)->max('message_id');
+                break;
+            case '就職':
+                $message_id = JobHuntingThreads::where('thread_id', '=', $request->thread_id)->max('message_id');
+                break;
+        }
         // 画像情報があれば，保存処理を実行
-        if ($request->file('img') != null) {
-            $img = $request->img;
-            Log::debug($img);
-            Log::debug($request->file('img')->store('img', 'public'));
-
+        if ($request->file('img')) {
+            $img = $request->file('img');
             $size = $img->getSize();
-            $path = $img->store('img', 'public');
+            $path = $img->store('img/thread_messages', 'public');
 
             // 画像サイズが1MB以下かどうか（js時点でバリデーション出来ているはずだけど一応）
             if (1048576 <= $size) {
@@ -264,14 +258,13 @@ class jQuery_ajax extends Controller
             if ($path) {
                 ThreadImagePaths::create([
                     'thread_id' => $request->thread_id,
-                    'message_id' => $request->message_id,
+                    'message_id' => $message_id,
                     'user_email' => $request->user()->email,
                     'img_path' => $path,
                     'img_size' => $size
                 ]);
             }
         }
-        */
     }
 
     public function create_thread(Request $request)

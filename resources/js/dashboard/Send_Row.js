@@ -3,12 +3,6 @@ $('#dashboard_sendMessage_btn').click(function () {
     var bytes_limit = 300;
     var formElm = document.getElementById("dashboard_sendMessage_form");
     var message = formElm.dashboard_message_textarea.value;
-    let $form = $('#dashboard_send_comment_upload_img');
-    var formData = new FormData();
-    //formData.append('formData', $('#dashboard_send_comment_upload_img').prop('files')[0]);
-    formData.append('thread_id', thread_id);
-    formData.append('message', message);
-    formData.append('img', $('#dashboard_send_comment_upload_img').prop('files')[0]);
 
     if (message.trim() == 0) {
         dashboard_sendAlertArea.innerHTML = "<div class='alert alert-danger'>書き込みなし・空白・改行のみの投稿は出来ません</div>";
@@ -17,7 +11,6 @@ $('#dashboard_sendMessage_btn').click(function () {
     } else if (message.bytes() > bytes_limit) {
         dashboard_sendAlertArea.innerHTML = "<div class='alert alert-danger'>入力は" + bytes_limit / 3 + "文字(英数字は " + bytes_limit + "文字)以内にして下さい</div>";
     } else {
-        dashboard_sendAlertArea.innerHTML = "";
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -31,29 +24,35 @@ $('#dashboard_sendMessage_btn').click(function () {
                 "message": message,
             },
         }).done(function () {
+            if (formElm.dashboard_send_comment_upload_img.value != null) {
+                var formData = new FormData();
+                formData.append('thread_id', thread_id);
+                formData.append('message', message);
+                formData.append('img', $('#dashboard_send_comment_upload_img').prop('files')[0]);
+
+                $.ajax({
+                    type: "POST",
+                    url: url + "/jQuery.ajax/img_upload",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                }).done(function () {
+                }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(XMLHttpRequest.status);
+                    console.log(textStatus);
+                    console.log(errorThrown.message);
+                });
+                $('#dashboard_send_comment_upload_img').val('');
+            }
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
             console.log(XMLHttpRequest.status);
             console.log(textStatus);
             console.log(errorThrown.message);
         });
 
-        console.log(formData);
-        $.ajax({
-            type: "POST",
-            url: url + "/jQuery.ajax/img_upload",
-            data: formData,
-            processData: false,
-            contentType: false,
-        }).done(function () {
-        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-            console.log(XMLHttpRequest.status);
-            console.log(textStatus);
-            console.log(errorThrown.message);
-        });
-
+        dashboard_sendAlertArea.innerHTML = "";
         formElm.dashboard_message_textarea.value = '';
         $('#dashboard_send_commnet_img_preview').attr('src', '');
-        $('#dashboard_send_comment_upload_img').val('');
     }
 });
 
