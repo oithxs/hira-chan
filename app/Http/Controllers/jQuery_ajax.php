@@ -12,9 +12,11 @@ use App\Models\User;
 use App\Models\Hub;
 use App\Models\ThreadCategorys;
 use App\Models\Likes;
+use App\Models\ThreadImagePaths;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class jQuery_ajax extends Controller
 {
@@ -233,6 +235,43 @@ class jQuery_ajax extends Controller
             default:
                 break;
         }
+    }
+
+    public function img_upload(Request $request)
+    {
+        Log::debug($request->all());
+        Log::debug($request->post('thread_id'));
+        Log::debug($request->thread_id);
+        Log::debug($request->file('img')->store('img/thread_message', 'public'));
+
+        /*
+        // 画像情報があれば，保存処理を実行
+        if ($request->file('img') != null) {
+            $img = $request->img;
+            Log::debug($img);
+            Log::debug($request->file('img')->store('img', 'public'));
+
+            $size = $img->getSize();
+            $path = $img->store('img', 'public');
+
+            // 画像サイズが1MB以下かどうか（js時点でバリデーション出来ているはずだけど一応）
+            if (1048576 <= $size) {
+                abort(400);
+                return;
+            }
+
+            // store処理が実行出来ればDBにPathなどを保存
+            if ($path) {
+                ThreadImagePaths::create([
+                    'thread_id' => $request->thread_id,
+                    'message_id' => $request->message_id,
+                    'user_email' => $request->user()->email,
+                    'img_path' => $path,
+                    'img_size' => $size
+                ]);
+            }
+        }
+        */
     }
 
     public function create_thread(Request $request)
