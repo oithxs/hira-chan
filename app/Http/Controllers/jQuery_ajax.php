@@ -34,7 +34,8 @@ class jQuery_ajax extends Controller
                 return DepartmentThreads::select(
                     'department_threads.*',
                     DB::raw('COUNT(likes1.user_email) AS count_user'),
-                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like')
+                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like'),
+                    'thread_image_paths.img_path'
                 )
                     ->leftjoin('likes AS likes1', function ($join) {
                         $join
@@ -47,6 +48,11 @@ class jQuery_ajax extends Controller
                             ->where('likes2.user_email', '=', $this->user_email)
                             ->whereColumn('likes2.message_id', '=', 'department_threads.message_id');
                     })
+                    ->leftjoin('thread_image_paths', function ($join) {
+                        $join
+                            ->whereColumn('thread_image_paths.thread_id', '=', 'department_threads.thread_id')
+                            ->whereColumn('thread_image_paths.message_id', '=', 'department_threads.message_id');
+                    })
                     ->where('department_threads.thread_id', '=', $this->thread_id)
                     ->groupBy('department_threads.message_id')
                     ->get();
@@ -55,7 +61,8 @@ class jQuery_ajax extends Controller
                 return CollegeYearThreads::select(
                     'college_year_threads.*',
                     DB::raw('COUNT(likes1.user_email) AS count_user'),
-                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like')
+                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like'),
+                    'thread_image_paths.img_path'
                 )
                     ->leftjoin('likes AS likes1', function ($join) {
                         $join
@@ -68,6 +75,11 @@ class jQuery_ajax extends Controller
                             ->where('likes2.user_email', '=', $this->user_email)
                             ->whereColumn('likes2.message_id', '=', 'college_year_threads.message_id');
                     })
+                    ->leftjoin('thread_image_paths', function ($join) {
+                        $join
+                            ->whereColumn('thread_image_paths.thread_id', '=', 'college_year_threads.thread_id')
+                            ->whereColumn('thread_image_paths.message_id', '=', 'college_year_threads.message_id');
+                    })
                     ->where('college_year_threads.thread_id', '=', $this->thread_id)
                     ->groupBy('college_year_threads.message_id')
                     ->get();
@@ -76,7 +88,8 @@ class jQuery_ajax extends Controller
                 return ClubThreads::select(
                     'club_threads.*',
                     DB::raw('COUNT(likes1.user_email) AS count_user'),
-                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like')
+                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like'),
+                    'thread_image_paths.img_path'
                 )
                     ->leftjoin('likes AS likes1', function ($join) {
                         $join
@@ -89,6 +102,11 @@ class jQuery_ajax extends Controller
                             ->where('likes2.user_email', '=', $this->user_email)
                             ->whereColumn('likes2.message_id', '=', 'club_threads.message_id');
                     })
+                    ->leftjoin('thread_image_paths', function ($join) {
+                        $join
+                            ->whereColumn('thread_image_paths.thread_id', '=', 'club_threads.thread_id')
+                            ->whereColumn('thread_image_paths.message_id', '=', 'club_threads.message_id');
+                    })
                     ->where('club_threads.thread_id', '=', $this->thread_id)
                     ->groupBy('club_threads.message_id')
                     ->get();
@@ -97,7 +115,8 @@ class jQuery_ajax extends Controller
                 return LectureThreads::select(
                     'lecture_threads.*',
                     DB::raw('COUNT(likes1.user_email) AS count_user'),
-                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like')
+                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like'),
+                    'thread_image_paths.img_path'
                 )
                     ->leftjoin('likes AS likes1', function ($join) {
                         $join
@@ -110,6 +129,11 @@ class jQuery_ajax extends Controller
                             ->where('likes2.user_email', '=', $this->user_email)
                             ->whereColumn('likes2.message_id', '=', 'lecture_threads.message_id');
                     })
+                    ->leftjoin('thread_image_paths', function ($join) {
+                        $join
+                            ->whereColumn('thread_image_paths.thread_id', '=', 'lecture_threads.thread_id')
+                            ->whereColumn('thread_image_paths.message_id', '=', 'lecture_threads.message_id');
+                    })
                     ->where('lecture_threads.thread_id', '=', $this->thread_id)
                     ->groupBy('lecture_threads.message_id')
                     ->get();
@@ -118,7 +142,8 @@ class jQuery_ajax extends Controller
                 return JobHuntingThreads::select(
                     'job_hunting_threads.*',
                     DB::raw('COUNT(likes1.user_email) AS count_user'),
-                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like')
+                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like'),
+                    'thread_image_paths.img_path'
                 )
                     ->leftjoin('likes AS likes1', function ($join) {
                         $join
@@ -130,6 +155,11 @@ class jQuery_ajax extends Controller
                             ->where('likes2.thread_id', '=', $this->thread_id)
                             ->where('likes2.user_email', '=', $this->user_email)
                             ->whereColumn('likes2.message_id', '=', 'job_hunting_threads.message_id');
+                    })
+                    ->leftjoin('thread_image_paths', function ($join) {
+                        $join
+                            ->whereColumn('thread_image_paths.thread_id', '=', 'job_hunting_threads.thread_id')
+                            ->whereColumn('thread_image_paths.message_id', '=', 'job_hunting_threads.message_id');
                     })
                     ->where('job_hunting_threads.thread_id', '=', $this->thread_id)
                     ->groupBy('job_hunting_threads.message_id')

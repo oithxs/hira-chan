@@ -48,7 +48,7 @@ $('#dashboard_create_thread_btn').click(function () {
   \**********************************************/
 if (location.href.includes('dashboard/thread/name=')) {
   reload();
-  setInterval(reload, 1000);
+  setInterval(reload, 5000);
 }
 
 function reload() {
@@ -84,10 +84,22 @@ function reload() {
 
       if (data[item]['user_like'] == 0) {
         // いいねが押されていた場合
-        show = "" + data[item]['message_id'] + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>" + "<br>" + "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['message_id'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] + "<hr>";
+        show = "" + data[item]['message_id'] + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>";
+
+        if (data[item]['img_path'] != null) {
+          show += "" + "<p>" + "<img src='" + url + "/storage/" + data[item]['img_path'] + "'>" + "</p>";
+        }
+
+        show += "" + "<p>" + "</p>" + "<br>" + "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['message_id'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] + "<hr>";
       } else {
         // いいねが押されていない場合
-        show = "" + data[item]['message_id'] + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>" + "<br>" + "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['message_id'] + ", " + 1 + ")'>like</button> " + data[item]['count_user'] + "<hr>";
+        show = "" + data[item]['message_id'] + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>";
+
+        if (data[item]['img_path'] != null) {
+          show += "" + "<p>" + "<img src='" + url + "/storage/" + data[item]['img_path'] + "'>" + "</p>";
+        }
+
+        show += "" + "<p>" + "</p>" + "<br>" + "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['message_id'] + ", " + 1 + ")'>like</button> " + data[item]['count_user'] + "<hr>";
       }
 
       displayArea.insertAdjacentHTML('afterbegin', show);
