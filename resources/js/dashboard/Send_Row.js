@@ -3,6 +3,11 @@ $('#dashboard_sendMessage_btn').click(function () {
     var bytes_limit = 300;
     var formElm = document.getElementById("dashboard_sendMessage_form");
     var message = formElm.dashboard_message_textarea.value;
+    var formData = new FormData();
+    formData.append('table', thread_id);
+    formData.append('message', message);
+    formData.append('img', $('#dashboard_send_comment_upload_img').prop('files')[0]);
+
 
     if (message.trim() == 0) {
         dashboard_sendAlertArea.innerHTML = "<div class='alert alert-danger'>書き込みなし・空白・改行のみの投稿は出来ません</div>";
@@ -19,31 +24,10 @@ $('#dashboard_sendMessage_btn').click(function () {
         $.ajax({
             type: "POST",
             url: url + "/jQuery.ajax/sendRow",
-            data: {
-                "table": thread_id,
-                "message": message,
-            },
+            data: formData,
+            processData: false,
+            contentType: false,
         }).done(function () {
-            if (formElm.dashboard_send_comment_upload_img.value != null) {
-                var formData = new FormData();
-                formData.append('thread_id', thread_id);
-                formData.append('message', message);
-                formData.append('img', $('#dashboard_send_comment_upload_img').prop('files')[0]);
-
-                $.ajax({
-                    type: "POST",
-                    url: url + "/jQuery.ajax/img_upload",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                }).done(function () {
-                }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                    console.log(XMLHttpRequest.status);
-                    console.log(textStatus);
-                    console.log(errorThrown.message);
-                });
-                $('#dashboard_send_comment_upload_img').val('');
-            }
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
             console.log(XMLHttpRequest.status);
             console.log(textStatus);
@@ -53,6 +37,7 @@ $('#dashboard_sendMessage_btn').click(function () {
         dashboard_sendAlertArea.innerHTML = "";
         formElm.dashboard_message_textarea.value = '';
         $('#dashboard_send_commnet_img_preview').attr('src', '');
+        $('#dashboard_send_comment_upload_img').val('');
     }
 });
 

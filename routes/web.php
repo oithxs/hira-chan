@@ -57,7 +57,6 @@ Route::middleware([
 ])->group(function () {
     Route::match(['get', 'post'], 'jQuery.ajax/getRow', "App\Http\Controllers\jQuery_ajax@get_allRow");
     Route::match(['get', 'post'], 'jQuery.ajax/sendRow', "App\Http\Controllers\jQuery_ajax@send_Row");
-    Route::match(['get', 'post'], 'jQuery.ajax/img_upload', 'App\Http\Controllers\jQuery_ajax@img_upload');
     Route::match(['get', 'post'], 'jQuery.ajax/create_thread', "App\Http\Controllers\jQuery_ajax@create_thread");
     Route::match(['get', 'post'], 'jQuery.ajax/like', "App\Http\Controllers\jQuery_ajax@like");
     Route::match(['get', 'post'], 'jQuery.ajax/unlike', "App\Http\Controllers\jQuery_ajax@unlike");

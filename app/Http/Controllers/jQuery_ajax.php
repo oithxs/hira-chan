@@ -29,7 +29,6 @@ class jQuery_ajax extends Controller
 
         $thread = Hub::where('thread_id', '=', $this->thread_id)->first();
 
-
         switch ($thread->thread_category_type) {
             case '学科':
                 return DepartmentThreads::select(
@@ -159,13 +158,14 @@ class jQuery_ajax extends Controller
         }
 
         $thread = Hub::where('thread_id', '=', $request->table)->first();
+        $message_id = 0;
 
         switch ($thread->thread_category_type) {
             case '学科':
-                $message_id = DepartmentThreads::where('thread_id', '=', $request->table)->max('message_id') ?? 0;
+                $message_id = DepartmentThreads::where('thread_id', '=', $request->table)->max('message_id') + 1 ?? 0;
                 DepartmentThreads::create([
                     'thread_id' => $request->table,
-                    'message_id' => $message_id + 1,
+                    'message_id' => $message_id,
                     'user_name' => $request->user()->name,
                     'user_email' => $request->user()->email,
                     'message' => $message
@@ -173,10 +173,10 @@ class jQuery_ajax extends Controller
                 break;
 
             case '学年':
-                $message_id = CollegeYearThreads::where('thread_id', '=', $request->table)->max('message_id') ?? 0;
+                $message_id = CollegeYearThreads::where('thread_id', '=', $request->table)->max('message_id') + 1 ?? 0;
                 CollegeYearThreads::create([
                     'thread_id' => $request->table,
-                    'message_id' => $message_id + 1,
+                    'message_id' => $message_id,
                     'user_name' => $request->user()->name,
                     'user_email' => $request->user()->email,
                     'message' => $message
@@ -184,10 +184,10 @@ class jQuery_ajax extends Controller
                 break;
 
             case '部活':
-                $message_id = ClubThreads::where('thread_id', '=', $request->table)->max('message_id') ?? 0;
+                $message_id = ClubThreads::where('thread_id', '=', $request->table)->max('message_id') + 1 ?? 0;
                 ClubThreads::create([
                     'thread_id' => $request->table,
-                    'message_id' => $message_id + 1,
+                    'message_id' => $message_id,
                     'user_name' => $request->user()->name,
                     'user_email' => $request->user()->email,
                     'message' => $message
@@ -195,10 +195,10 @@ class jQuery_ajax extends Controller
                 break;
 
             case '授業':
-                $message_id = LectureThreads::where('thread_id', '=', $request->table)->max('message_id') ?? 0;
+                $message_id = LectureThreads::where('thread_id', '=', $request->table)->max('message_id') + 1 ?? 0;
                 LectureThreads::create([
                     'thread_id' => $request->table,
-                    'message_id' => $message_id + 1,
+                    'message_id' => $message_id,
                     'user_name' => $request->user()->name,
                     'user_email' => $request->user()->email,
                     'message' => $message
@@ -206,10 +206,10 @@ class jQuery_ajax extends Controller
                 break;
 
             case '就職':
-                $message_id = JobHuntingThreads::where('thread_id', '=', $request->table)->max('message_id') ?? 0;
+                $message_id = JobHuntingThreads::where('thread_id', '=', $request->table)->max('message_id') + 1 ?? 0;
                 JobHuntingThreads::create([
                     'thread_id' => $request->table,
-                    'message_id' => $message_id + 1,
+                    'message_id' => $message_id,
                     'user_name' => $request->user()->name,
                     'user_email' => $request->user()->email,
                     'message' => $message
@@ -219,29 +219,7 @@ class jQuery_ajax extends Controller
             default:
                 break;
         }
-    }
 
-    public function img_upload(Request $request)
-    {
-        $thread = Hub::where('thread_id', '=', $request->thread_id)->first();
-        $message_id = 0;
-        switch ($thread->thread_category_type) {
-            case '学科':
-                $message_id = DepartmentThreads::where('thread_id', '=', $request->thread_id)->max('message_id');
-                break;
-            case '学年':
-                $message_id = CollegeYearThreads::where('thread_id', '=', $request->thread_id)->max('message_id');
-                break;
-            case '部活':
-                $message_id = ClubThreads::where('thread_id', '=', $request->thread_id)->max('message_id');
-                break;
-            case '授業':
-                $message_id = LectureThreads::where('thread_id', '=', $request->thread_id)->max('message_id');
-                break;
-            case '就職':
-                $message_id = JobHuntingThreads::where('thread_id', '=', $request->thread_id)->max('message_id');
-                break;
-        }
         // 画像情報があれば，保存処理を実行
         if ($request->file('img')) {
             $img = $request->file('img');
@@ -257,7 +235,7 @@ class jQuery_ajax extends Controller
             // store処理が実行出来ればDBにPathなどを保存
             if ($path) {
                 ThreadImagePaths::create([
-                    'thread_id' => $request->thread_id,
+                    'thread_id' => $request->table,
                     'message_id' => $message_id,
                     'user_email' => $request->user()->email,
                     'img_path' => $path,
