@@ -256,12 +256,6 @@ class jQuery_ajax extends Controller
             $size = $img->getSize();
             $path = $img->store('img/thread_messages', 'public');
 
-            // 画像サイズが1MB以下かどうか（js時点でバリデーション出来ているはずだけど一応）
-            if (1048576 <= $size) {
-                abort(400);
-                return;
-            }
-
             // store処理が実行出来ればDBにPathなどを保存
             if ($path) {
                 ThreadImagePaths::create([

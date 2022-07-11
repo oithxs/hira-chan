@@ -79,7 +79,8 @@ $('#dashboard_send_comment_upload_img').change(function (e) {
 function file_size_check(idname) {
     var fileset = $('#' + idname).prop('files')[0];
     if (fileset) {
-        if (1048576 <= fileset.size) {
+        // 画像サイズ3MBまで
+        if (3145728 <= fileset.size) {
             return true;
         } else {
             return false;
