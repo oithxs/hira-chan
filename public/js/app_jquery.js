@@ -233,7 +233,7 @@ $('#dashboard_send_comment_upload_img').change(function (e) {
     $(this).val('');
     return false;
   } else if (file_size_check('dashboard_send_comment_upload_img')) {
-    dashboard_sendAlertArea.innerHTML = "<div class='alert alert-danger'>ファイルのサイズは1MB以内にしてください</div>";
+    dashboard_sendAlertArea.innerHTML = "<div class='alert alert-danger'>ファイルのサイズは3MB以内にしてください</div>";
     $('#dashboard_send_commnet_img_preview').attr('src', '');
     $(this).val('');
     return false;
