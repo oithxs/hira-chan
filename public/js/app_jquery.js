@@ -87,7 +87,7 @@ function reload() {
         show = "" + data[item]['message_id'] + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>";
 
         if (data[item]['img_path'] != null) {
-          show += "" + "<p>" + "<img src='" + url + "/storage/" + data[item]['img_path'] + "'>" + "</p>";
+          show += "" + "<p>" + "<img src='" + url + data[item]['img_path'].replace('public', '/storage') + "'>" + "</p>";
         }
 
         show += "" + "<p>" + "</p>" + "<br>" + "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['message_id'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] + "<hr>";
@@ -96,7 +96,7 @@ function reload() {
         show = "" + data[item]['message_id'] + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>";
 
         if (data[item]['img_path'] != null) {
-          show += "" + "<p>" + "<img src='" + url + "/storage/" + data[item]['img_path'] + "'>" + "</p>";
+          show += "" + "<p>" + "<img src='" + url + data[item]['img_path'].replace('public', 'storage') + "'>" + "</p>";
         }
 
         show += "" + "<p>" + "</p>" + "<br>" + "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['message_id'] + ", " + 1 + ")'>like</button> " + data[item]['count_user'] + "<hr>";

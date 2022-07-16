@@ -16,6 +16,8 @@ use App\Models\ThreadImagePaths;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class jQuery_ajax extends Controller
 {
@@ -252,9 +254,11 @@ class jQuery_ajax extends Controller
 
         // 画像情報があれば，保存処理を実行
         if ($request->file('img')) {
-            $img = $request->file('img');
-            $size = $img->getSize();
-            $path = $img->store('img/thread_messages', 'public');
+            $img = Image::make($request->file('img'))->encode('jpg')->save();
+
+            $size = $img->filesize();
+            $path = 'public/images/thread_message/' . str_replace('-', '', Str::uuid()) . '.jpg';
+            Storage::put($path, $img);
 
             // store処理が実行出来ればDBにPathなどを保存
             if ($path) {
@@ -266,6 +270,8 @@ class jQuery_ajax extends Controller
                     'img_size' => $size
                 ]);
             }
+
+            $img->destroy();
         }
     }
 

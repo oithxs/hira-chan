@@ -44,7 +44,7 @@ function reload() {
                 if (data[item]['img_path'] != null) {
                     show += "" +
                         "<p>" +
-                        "<img src='" + url + "/storage/" + data[item]['img_path'] + "'>" +
+                        "<img src='" + url + data[item]['img_path'].replace('public', '/storage') + "'>" +
                         "</p>";
                 }
                 show += "" +
@@ -64,7 +64,7 @@ function reload() {
                 if (data[item]['img_path'] != null) {
                     show += "" +
                         "<p>" +
-                        "<img src='" + url + "/storage/" + data[item]['img_path'] + "'>" +
+                        "<img src='" + url + data[item]['img_path'].replace('public', 'storage') + "'>" +
                         "</p>";
                 }
                 show += "" +
