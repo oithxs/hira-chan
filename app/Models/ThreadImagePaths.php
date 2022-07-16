@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserPageThemas extends Model
+class ThreadImagePaths extends Model
 {
     use HasFactory;
 
@@ -21,7 +21,7 @@ class UserPageThemas extends Model
      *
      * @var string
      */
-    protected $table = 'user_page_themas';
+    protected $table = 'thread_image_paths';
 
     /**
      * The attributes that are mass assignable
@@ -29,8 +29,22 @@ class UserPageThemas extends Model
      * @var string[]
      */
     protected $fillable = [
-        'thema_id',
-        'thema_name',
+        'thread_id',
+        'message_id',
+        'user_email',
+        'img_path',
+        'img_size',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'thread_id',
+        'img_path',
+        'img_size'
     ];
 
     /**
@@ -39,7 +53,7 @@ class UserPageThemas extends Model
      * @var array
      */
     protected $casts = [
-        'created_at' => 'datetime:Y-m-d H:i:s',
-        'update_at' => 'datetime:Y-m-d H:i:s',
+        'created_at' => 'datetime',
+        'update_at' => 'datetime',
     ];
 }

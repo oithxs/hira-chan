@@ -12,9 +12,12 @@ use App\Models\User;
 use App\Models\Hub;
 use App\Models\ThreadCategorys;
 use App\Models\Likes;
+use App\Models\ThreadImagePaths;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class jQuery_ajax extends Controller
 {
@@ -28,13 +31,13 @@ class jQuery_ajax extends Controller
 
         $thread = Hub::where('thread_id', '=', $this->thread_id)->first();
 
-
         switch ($thread->thread_category_type) {
             case '学科':
                 return DepartmentThreads::select(
                     'department_threads.*',
                     DB::raw('COUNT(likes1.user_email) AS count_user'),
-                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like')
+                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like'),
+                    'thread_image_paths.img_path'
                 )
                     ->leftjoin('likes AS likes1', function ($join) {
                         $join
@@ -47,6 +50,11 @@ class jQuery_ajax extends Controller
                             ->where('likes2.user_email', '=', $this->user_email)
                             ->whereColumn('likes2.message_id', '=', 'department_threads.message_id');
                     })
+                    ->leftjoin('thread_image_paths', function ($join) {
+                        $join
+                            ->whereColumn('thread_image_paths.thread_id', '=', 'department_threads.thread_id')
+                            ->whereColumn('thread_image_paths.message_id', '=', 'department_threads.message_id');
+                    })
                     ->where('department_threads.thread_id', '=', $this->thread_id)
                     ->groupBy('department_threads.message_id')
                     ->get();
@@ -55,7 +63,8 @@ class jQuery_ajax extends Controller
                 return CollegeYearThreads::select(
                     'college_year_threads.*',
                     DB::raw('COUNT(likes1.user_email) AS count_user'),
-                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like')
+                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like'),
+                    'thread_image_paths.img_path'
                 )
                     ->leftjoin('likes AS likes1', function ($join) {
                         $join
@@ -68,6 +77,11 @@ class jQuery_ajax extends Controller
                             ->where('likes2.user_email', '=', $this->user_email)
                             ->whereColumn('likes2.message_id', '=', 'college_year_threads.message_id');
                     })
+                    ->leftjoin('thread_image_paths', function ($join) {
+                        $join
+                            ->whereColumn('thread_image_paths.thread_id', '=', 'college_year_threads.thread_id')
+                            ->whereColumn('thread_image_paths.message_id', '=', 'college_year_threads.message_id');
+                    })
                     ->where('college_year_threads.thread_id', '=', $this->thread_id)
                     ->groupBy('college_year_threads.message_id')
                     ->get();
@@ -76,7 +90,8 @@ class jQuery_ajax extends Controller
                 return ClubThreads::select(
                     'club_threads.*',
                     DB::raw('COUNT(likes1.user_email) AS count_user'),
-                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like')
+                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like'),
+                    'thread_image_paths.img_path'
                 )
                     ->leftjoin('likes AS likes1', function ($join) {
                         $join
@@ -89,6 +104,11 @@ class jQuery_ajax extends Controller
                             ->where('likes2.user_email', '=', $this->user_email)
                             ->whereColumn('likes2.message_id', '=', 'club_threads.message_id');
                     })
+                    ->leftjoin('thread_image_paths', function ($join) {
+                        $join
+                            ->whereColumn('thread_image_paths.thread_id', '=', 'club_threads.thread_id')
+                            ->whereColumn('thread_image_paths.message_id', '=', 'club_threads.message_id');
+                    })
                     ->where('club_threads.thread_id', '=', $this->thread_id)
                     ->groupBy('club_threads.message_id')
                     ->get();
@@ -97,7 +117,8 @@ class jQuery_ajax extends Controller
                 return LectureThreads::select(
                     'lecture_threads.*',
                     DB::raw('COUNT(likes1.user_email) AS count_user'),
-                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like')
+                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like'),
+                    'thread_image_paths.img_path'
                 )
                     ->leftjoin('likes AS likes1', function ($join) {
                         $join
@@ -110,6 +131,11 @@ class jQuery_ajax extends Controller
                             ->where('likes2.user_email', '=', $this->user_email)
                             ->whereColumn('likes2.message_id', '=', 'lecture_threads.message_id');
                     })
+                    ->leftjoin('thread_image_paths', function ($join) {
+                        $join
+                            ->whereColumn('thread_image_paths.thread_id', '=', 'lecture_threads.thread_id')
+                            ->whereColumn('thread_image_paths.message_id', '=', 'lecture_threads.message_id');
+                    })
                     ->where('lecture_threads.thread_id', '=', $this->thread_id)
                     ->groupBy('lecture_threads.message_id')
                     ->get();
@@ -118,7 +144,8 @@ class jQuery_ajax extends Controller
                 return JobHuntingThreads::select(
                     'job_hunting_threads.*',
                     DB::raw('COUNT(likes1.user_email) AS count_user'),
-                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like')
+                    DB::raw('COALESCE((likes2.user_email), 0) AS user_like'),
+                    'thread_image_paths.img_path'
                 )
                     ->leftjoin('likes AS likes1', function ($join) {
                         $join
@@ -130,6 +157,11 @@ class jQuery_ajax extends Controller
                             ->where('likes2.thread_id', '=', $this->thread_id)
                             ->where('likes2.user_email', '=', $this->user_email)
                             ->whereColumn('likes2.message_id', '=', 'job_hunting_threads.message_id');
+                    })
+                    ->leftjoin('thread_image_paths', function ($join) {
+                        $join
+                            ->whereColumn('thread_image_paths.thread_id', '=', 'job_hunting_threads.thread_id')
+                            ->whereColumn('thread_image_paths.message_id', '=', 'job_hunting_threads.message_id');
                     })
                     ->where('job_hunting_threads.thread_id', '=', $this->thread_id)
                     ->groupBy('job_hunting_threads.message_id')
@@ -152,21 +184,20 @@ class jQuery_ajax extends Controller
             "\t" => "&ensp;&ensp;"
         );
 
+        $message = $request->message;
         foreach ($special_character_set as $key => $value) {
-            $message = str_replace($key, $value, $request->message);
+            $message = str_replace($key, $value, $message);
         }
 
         $thread = Hub::where('thread_id', '=', $request->table)->first();
+        $message_id = 0;
 
         switch ($thread->thread_category_type) {
             case '学科':
-                $message_id = DepartmentThreads::where('thread_id', '=', $request->table)->max('message_id');
-                if ($message_id == NULL) {
-                    $message_id = 0;
-                }
+                $message_id = DepartmentThreads::where('thread_id', '=', $request->table)->max('message_id') + 1 ?? 0;
                 DepartmentThreads::create([
                     'thread_id' => $request->table,
-                    'message_id' => $message_id + 1,
+                    'message_id' => $message_id,
                     'user_name' => $request->user()->name,
                     'user_email' => $request->user()->email,
                     'message' => $message
@@ -174,13 +205,10 @@ class jQuery_ajax extends Controller
                 break;
 
             case '学年':
-                $message_id = CollegeYearThreads::where('thread_id', '=', $request->table)->max('message_id');
-                if ($message_id == NULL) {
-                    $message_id = 0;
-                }
+                $message_id = CollegeYearThreads::where('thread_id', '=', $request->table)->max('message_id') + 1 ?? 0;
                 CollegeYearThreads::create([
                     'thread_id' => $request->table,
-                    'message_id' => $message_id + 1,
+                    'message_id' => $message_id,
                     'user_name' => $request->user()->name,
                     'user_email' => $request->user()->email,
                     'message' => $message
@@ -188,13 +216,10 @@ class jQuery_ajax extends Controller
                 break;
 
             case '部活':
-                $message_id = ClubThreads::where('thread_id', '=', $request->table)->max('message_id');
-                if ($message_id == NULL) {
-                    $message_id = 0;
-                }
+                $message_id = ClubThreads::where('thread_id', '=', $request->table)->max('message_id') + 1 ?? 0;
                 ClubThreads::create([
                     'thread_id' => $request->table,
-                    'message_id' => $message_id + 1,
+                    'message_id' => $message_id,
                     'user_name' => $request->user()->name,
                     'user_email' => $request->user()->email,
                     'message' => $message
@@ -202,13 +227,10 @@ class jQuery_ajax extends Controller
                 break;
 
             case '授業':
-                $message_id = LectureThreads::where('thread_id', '=', $request->table)->max('message_id');
-                if ($message_id == NULL) {
-                    $message_id = 0;
-                }
+                $message_id = LectureThreads::where('thread_id', '=', $request->table)->max('message_id') + 1 ?? 0;
                 LectureThreads::create([
                     'thread_id' => $request->table,
-                    'message_id' => $message_id + 1,
+                    'message_id' => $message_id,
                     'user_name' => $request->user()->name,
                     'user_email' => $request->user()->email,
                     'message' => $message
@@ -216,13 +238,10 @@ class jQuery_ajax extends Controller
                 break;
 
             case '就職':
-                $message_id = JobHuntingThreads::where('thread_id', '=', $request->table)->max('message_id');
-                if ($message_id == NULL) {
-                    $message_id = 0;
-                }
+                $message_id = JobHuntingThreads::where('thread_id', '=', $request->table)->max('message_id') + 1 ?? 0;
                 JobHuntingThreads::create([
                     'thread_id' => $request->table,
-                    'message_id' => $message_id + 1,
+                    'message_id' => $message_id,
                     'user_name' => $request->user()->name,
                     'user_email' => $request->user()->email,
                     'message' => $message
@@ -231,6 +250,28 @@ class jQuery_ajax extends Controller
 
             default:
                 break;
+        }
+
+        // 画像情報があれば，保存処理を実行
+        if ($request->file('img')) {
+            $img = Image::make($request->file('img'))->encode('jpg')->orientate()->save();
+
+            $size = $img->filesize();
+            $path = 'public/images/thread_message/' . str_replace('-', '', Str::uuid()) . '.jpg';
+            Storage::put($path, $img);
+
+            // store処理が実行出来ればDBにPathなどを保存
+            if ($path) {
+                ThreadImagePaths::create([
+                    'thread_id' => $request->table,
+                    'message_id' => $message_id,
+                    'user_email' => $request->user()->email,
+                    'img_path' => $path,
+                    'img_size' => $size
+                ]);
+            }
+
+            $img->destroy();
         }
     }
 

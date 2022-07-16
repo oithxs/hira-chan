@@ -50,7 +50,7 @@ class AccessLogs extends Model
      * @var array
      */
     protected $casts = [
-        'created_at' => 'datetime',
-        'update_at' => 'datetime',
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'update_at' => 'datetime:Y-m-d H:i:s',
     ];
 }

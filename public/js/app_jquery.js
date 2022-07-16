@@ -48,7 +48,7 @@ $('#dashboard_create_thread_btn').click(function () {
   \**********************************************/
 if (location.href.includes('dashboard/thread/name=')) {
   reload();
-  setInterval(reload, 1000);
+  setInterval(reload, 5000);
 }
 
 function reload() {
@@ -84,10 +84,22 @@ function reload() {
 
       if (data[item]['user_like'] == 0) {
         // いいねが押されていた場合
-        show = "" + data[item]['message_id'] + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>" + "<br>" + "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['message_id'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] + "<hr>";
+        show = "" + data[item]['message_id'] + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>";
+
+        if (data[item]['img_path'] != null) {
+          show += "" + "<p>" + "<img src='" + url + data[item]['img_path'].replace('public', '/storage') + "'>" + "</p>";
+        }
+
+        show += "" + "<p>" + "</p>" + "<br>" + "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['message_id'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] + "<hr>";
       } else {
         // いいねが押されていない場合
-        show = "" + data[item]['message_id'] + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>" + "<br>" + "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['message_id'] + ", " + 1 + ")'>like</button> " + data[item]['count_user'] + "<hr>";
+        show = "" + data[item]['message_id'] + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>";
+
+        if (data[item]['img_path'] != null) {
+          show += "" + "<p>" + "<img src='" + url + data[item]['img_path'].replace('public', 'storage') + "'>" + "</p>";
+        }
+
+        show += "" + "<p>" + "</p>" + "<br>" + "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['message_id'] + ", " + 1 + ")'>like</button> " + data[item]['count_user'] + "<hr>";
       }
 
       displayArea.insertAdjacentHTML('afterbegin', show);
@@ -167,9 +179,12 @@ $('#dashboard_threads_category_select').change(search_thread);
 $('#dashboard_sendMessage_btn').click(function () {
   var rows_limit = 20;
   var bytes_limit = 300;
-  var sendAlertArea = document.getElementById("dashboard_sendAlertArea");
   var formElm = document.getElementById("dashboard_sendMessage_form");
   var message = formElm.dashboard_message_textarea.value;
+  var formData = new FormData();
+  formData.append('table', thread_id);
+  formData.append('message', message);
+  formData.append('img', $('#dashboard_send_comment_upload_img').prop('files')[0]);
 
   if (message.trim() == 0) {
     dashboard_sendAlertArea.innerHTML = "<div class='alert alert-danger'>書き込みなし・空白・改行のみの投稿は出来ません</div>";
@@ -178,7 +193,6 @@ $('#dashboard_sendMessage_btn').click(function () {
   } else if (message.bytes() > bytes_limit) {
     dashboard_sendAlertArea.innerHTML = "<div class='alert alert-danger'>入力は" + bytes_limit / 3 + "文字(英数字は " + bytes_limit + "文字)以内にして下さい</div>";
   } else {
-    dashboard_sendAlertArea.innerHTML = "";
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -187,16 +201,18 @@ $('#dashboard_sendMessage_btn').click(function () {
     $.ajax({
       type: "POST",
       url: url + "/jQuery.ajax/sendRow",
-      data: {
-        "table": thread_id,
-        "message": message
-      }
+      data: formData,
+      processData: false,
+      contentType: false
     }).done(function () {}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
       console.log(XMLHttpRequest.status);
       console.log(textStatus);
       console.log(errorThrown.message);
     });
+    dashboard_sendAlertArea.innerHTML = "";
     formElm.dashboard_message_textarea.value = '';
+    $('#dashboard_send_commnet_img_preview').attr('src', '');
+    $('#dashboard_send_comment_upload_img').val('');
   }
 });
 
@@ -207,6 +223,49 @@ String.prototype.bytes = function () {
 String.prototype.rows = function () {
   if (this.match(/\n/g)) return this.match(/\n/g).length + 1;else return 1;
 };
+
+$('#dashboard_send_comment_upload_img').change(function (e) {
+  var fileset = $(this).val();
+
+  if (fileset !== '' && e.target.files[0].type.indexOf('image') < 0) {
+    dashboard_sendAlertArea.innerHTML = "<div class='alert alert-danger'>画像ファイルを指定してください</div>";
+    $('#dashboard_send_commnet_img_preview').attr('src', '');
+    $(this).val('');
+    return false;
+  } else if (file_size_check('dashboard_send_comment_upload_img')) {
+    dashboard_sendAlertArea.innerHTML = "<div class='alert alert-danger'>ファイルのサイズは3MB以内にしてください</div>";
+    $('#dashboard_send_commnet_img_preview').attr('src', '');
+    $(this).val('');
+    return false;
+  } else {
+    dashboard_sendAlertArea.innerHTML = "";
+
+    if (fileset === '') {
+      $('#dashboard_send_commnet_img_preview').attr('src', '');
+    } else {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#dashboard_send_commnet_img_preview').attr('src', e.target.result);
+      };
+
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  }
+});
+
+function file_size_check(idname) {
+  var fileset = $('#' + idname).prop('files')[0];
+
+  if (fileset) {
+    // 画像サイズ3MBまで
+    if (3145728 <= fileset.size) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.

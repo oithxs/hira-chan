@@ -1,6 +1,6 @@
 if ((location.href).includes('dashboard/thread/name=')) {
     reload();
-    setInterval(reload, 1000);
+    setInterval(reload, 5000);
 }
 
 function reload() {
@@ -40,6 +40,15 @@ function reload() {
                     "<br>" +
                     "<p style='overflow-wrap: break-word;'>" +
                     msg +
+                    "</p>";
+                if (data[item]['img_path'] != null) {
+                    show += "" +
+                        "<p>" +
+                        "<img src='" + url + data[item]['img_path'].replace('public', '/storage') + "'>" +
+                        "</p>";
+                }
+                show += "" +
+                    "<p>" +
                     "</p>" +
                     "<br>" +
                     "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['message_id'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] +
@@ -51,6 +60,15 @@ function reload() {
                     "<br>" +
                     "<p style='overflow-wrap: break-word;'>" +
                     msg +
+                    "</p>";
+                if (data[item]['img_path'] != null) {
+                    show += "" +
+                        "<p>" +
+                        "<img src='" + url + data[item]['img_path'].replace('public', 'storage') + "'>" +
+                        "</p>";
+                }
+                show += "" +
+                    "<p>" +
                     "</p>" +
                     "<br>" +
                     "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['message_id'] + ", " + 1 + ")'>like</button> " + data[item]['count_user'] +
