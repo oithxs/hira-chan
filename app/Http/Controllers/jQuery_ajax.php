@@ -254,7 +254,7 @@ class jQuery_ajax extends Controller
 
         // 画像情報があれば，保存処理を実行
         if ($request->file('img')) {
-            $img = Image::make($request->file('img'))->encode('jpg')->save();
+            $img = Image::make($request->file('img'))->encode('jpg')->orientate()->save();
 
             $size = $img->filesize();
             $path = 'public/images/thread_message/' . str_replace('-', '', Str::uuid()) . '.jpg';
