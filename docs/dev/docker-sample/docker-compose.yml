@@ -5,6 +5,7 @@ services:
     build: ./docker/php
     volumes:
       - .:/var/www
+      - ./docker/php/postfix:/etc/postfix/sasl
     depends_on:
       - db
 
