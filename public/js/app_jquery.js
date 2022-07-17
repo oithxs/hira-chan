@@ -82,26 +82,23 @@ function reload() {
         msg = "<br>この投稿は管理者によって削除されました";
       }
 
-      if (data[item]['user_like'] == 0) {
-        // いいねが押されていた場合
-        show = "" + data[item]['message_id'] + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>";
+      show = "" + data[item]['message_id'] + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>";
 
-        if (data[item]['img_path'] != null) {
-          show += "" + "<p>" + "<img src='" + url + data[item]['img_path'].replace('public', '/storage') + "'>" + "</p>";
-        }
-
-        show += "" + "<p>" + "</p>" + "<br>" + "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['message_id'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] + "<hr>";
-      } else {
-        // いいねが押されていない場合
-        show = "" + data[item]['message_id'] + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>";
-
-        if (data[item]['img_path'] != null) {
-          show += "" + "<p>" + "<img src='" + url + data[item]['img_path'].replace('public', 'storage') + "'>" + "</p>";
-        }
-
-        show += "" + "<p>" + "</p>" + "<br>" + "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['message_id'] + ", " + 1 + ")'>like</button> " + data[item]['count_user'] + "<hr>";
+      if (data[item]['img_path'] != null) {
+        show += "" + "<p>" + "<img src='" + url + data[item]['img_path'].replace('public', '/storage') + "'>" + "</p>";
       }
 
+      show += "" + "<p>" + "</p>" + "<br>";
+
+      if (data[item]['user_like'] == 0) {
+        // いいねが押されていない場合
+        show += "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['message_id'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'];
+      } else {
+        // いいねが押されていた場合
+        show += "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['message_id'] + ", " + 1 + ")'>like</button> " + data[item]['count_user'];
+      }
+
+      show += "<hr>";
       displayArea.insertAdjacentHTML('afterbegin', show);
     }
   }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
