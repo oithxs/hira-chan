@@ -33,9 +33,10 @@ function reload() {
                 msg = "<br>この投稿は管理者によって削除されました";
             }
 
-
             show = "" +
-                data[item]['message_id'] + ": " + user + " " + data[item]['created_at'] +
+                "<p>" +
+                "<a href='#dashboard_send_comment_label' type='button' onClick='reply(" + data[item]['message_id'] + ")'>" + data[item]['message_id'] + "</a>" + ": " + user + " " + data[item]['created_at'] +
+                "</p>" +
                 "<br>" +
                 "<p style='overflow-wrap: break-word;'>" +
                 msg +
@@ -69,5 +70,3 @@ function reload() {
         console.log(errorThrown.message);
     });
 }
-
-
