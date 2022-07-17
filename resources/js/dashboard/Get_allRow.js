@@ -35,7 +35,7 @@ function reload() {
 
             show = "" +
                 "<p>" +
-                "<a href='#dashboard_send_comment_label' type='button' onClick='reply(" + data[item]['message_id'] + ")'>" + data[item]['message_id'] + "</a>" + ": " + user + " " + data[item]['created_at'] +
+                "<a id='thread_message_id_" + data[item]['message_id'] + "' href='#dashboard_send_comment_label' type='button' onClick='reply(" + data[item]['message_id'] + ")'>" + data[item]['message_id'] + "</a>" + ": " + user + " " + data[item]['created_at'] +
                 "</p>" +
                 "<br>" +
                 "<p style='overflow-wrap: break-word;'>" +

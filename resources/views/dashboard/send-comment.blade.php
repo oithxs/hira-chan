@@ -2,10 +2,13 @@
     スレッドへ書き込むための部分
  -->
 
-<div class="col-sm-4 col-xs-12">
-    <a href="/dashboard">トップページへ</a>
+ <div class="col-sm-4 col-xs-12">
+    <a class="h4" href="/dashboard">トップページへ</a>
     <form id="dashboard_sendMessage_form" enctype="multipart/form-data">
         <div class="mb-2">
+            <a id="dashboard_send_comment_reply_source" href="#!">
+                <input class="form-control" type="text" id="dashboard_send_comment_reply_disabled_text" disabled>
+            </a>
             <label id="dashboard_send_comment_label" class="form-label">コメント</label>
             <textarea class="form-control" id="dashboard_message_textarea" rows="4"></textarea>
             <br />
@@ -25,6 +28,12 @@
 <!-- ここからデザイン関係なし -->
 <script>
     const url = "{{ url('') }}";
+</script>
+<script>
+    function reply(message_id) {
+        $('#dashboard_send_comment_reply_disabled_text').val(">>> " + message_id);
+        $('#dashboard_send_comment_reply_source').attr('href', '#thread_message_id_' + message_id);
+    }
 </script>
 <script src="{{ mix('js/app_jquery.js') }}"></script>
 <!-- ここまでデザイン関係なし -->
