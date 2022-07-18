@@ -188,7 +188,15 @@ docker-compose exec app \
 docker-compose exec app \
     php artisan db:seed
 ```
-### 5.7 メールの設定
+
+### 5.7 シンボリックリンクの作成
+
+```bash
+docker-compose exec app \
+    php atrisan storage:link
+```
+
+### 5.8 メールの設定
 
 1. `ACCOUNT_NAME`と`APP_PASSWORD`を任意のものに変更して実行する
 
