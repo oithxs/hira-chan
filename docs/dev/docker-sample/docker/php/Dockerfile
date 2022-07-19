@@ -5,11 +5,13 @@ COPY php.ini /usr/local/etc/php/
 RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     libzip-dev \
+    libpng-dev \
     vim \
     bsd-mailx \
     libsasl2-modules \
-    default-mysql-client \
-    && docker-php-ext-install mysqli pdo_mysql zip opcache
+    default-mysql-client
+
+RUN docker-php-ext-install mysqli pdo_mysql zip opcache gd
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install postfix -y
 
