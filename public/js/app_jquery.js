@@ -112,6 +112,17 @@ function reload() {
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
 /*!*************************************************!*\
+  !*** ./resources/js/dashboard/Reply_message.js ***!
+  \*************************************************/
+$("#dashboard_send_comment_replay_clear").click(function () {
+  $('#dashboard_send_comment_reply_disabled_text').val('');
+  $('#dashboard_send_comment_reply_source').attr('href', '#!');
+});
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!*************************************************!*\
   !*** ./resources/js/dashboard/Search_thread.js ***!
   \*************************************************/
 $('#dashboard_threads_search_thread').keyup(search_thread);
