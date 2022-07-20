@@ -82,13 +82,13 @@ function reload() {
         msg = "<br>この投稿は管理者によって削除されました";
       }
 
-      show = "" + "<p>" + "<a id='thread_message_id_" + data[item]['message_id'] + "' href='#dashboard_send_comment_label' type='button' onClick='reply(" + data[item]['message_id'] + ")'>" + data[item]['message_id'] + "</a>" + ": " + user + " " + data[item]['created_at'] + "</p>" + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>";
+      show = "" + "<a id='thread_message_id_" + data[item]['message_id'] + "' href='#dashboard_send_comment_label' type='button' onClick='reply(" + data[item]['message_id'] + ")'>" + data[item]['message_id'] + "</a>" + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>";
 
       if (data[item]['img_path'] != null) {
         show += "" + "<p>" + "<img src='" + url + data[item]['img_path'].replace('public', '/storage') + "'>" + "</p>";
       }
 
-      show += "" + "<p>" + "</p>" + "<br>";
+      show += "<br>";
 
       if (data[item]['user_like'] == 0) {
         // いいねが押されていない場合
@@ -189,9 +189,11 @@ $('#dashboard_sendMessage_btn').click(function () {
   var bytes_limit = 300;
   var formElm = document.getElementById("dashboard_sendMessage_form");
   var message = formElm.dashboard_message_textarea.value;
+  var reply = formElm.dashboard_send_comment_reply_disabled_text.value;
   var formData = new FormData();
   formData.append('table', thread_id);
   formData.append('message', message);
+  formData.append('reply', reply);
   formData.append('img', $('#dashboard_send_comment_upload_img').prop('files')[0]);
 
   if (message.trim() == 0) {
@@ -221,6 +223,8 @@ $('#dashboard_sendMessage_btn').click(function () {
     formElm.dashboard_message_textarea.value = '';
     $('#dashboard_send_commnet_img_preview').attr('src', '');
     $('#dashboard_send_comment_upload_img').val('');
+    $('#dashboard_send_comment_reply_disabled_text').val('');
+    $('#dashboard_send_comment_reply_source').attr('href', '#!');
   }
 });
 
