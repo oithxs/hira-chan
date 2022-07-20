@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserPageThemas extends Model
+class ClubThreads extends Model
 {
     use HasFactory;
 
@@ -21,7 +21,7 @@ class UserPageThemas extends Model
      *
      * @var string
      */
-    protected $table = 'user_page_themas';
+    protected $table = 'club_threads';
 
     /**
      * The attributes that are mass assignable
@@ -29,8 +29,20 @@ class UserPageThemas extends Model
      * @var string[]
      */
     protected $fillable = [
-        'thema_id',
-        'thema_name',
+        'thread_id',
+        'message_id',
+        'user_name',
+        'user_email',
+        'message',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'thread_id',
     ];
 
     /**

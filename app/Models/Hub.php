@@ -32,6 +32,7 @@ class Hub extends Model
         'thread_id',
         'thread_name',
         'thread_category',
+        'thread_category_type',
         'user_email',
     ];
 
@@ -50,7 +51,7 @@ class Hub extends Model
      * @var array
      */
     protected $casts = [
-        'created_at' => 'datetime',
-        'update_at' => 'datetime',
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'update_at' => 'datetime:Y-m-d H:i:s',
     ];
 }
