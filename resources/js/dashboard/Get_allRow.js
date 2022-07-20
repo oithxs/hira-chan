@@ -33,9 +33,8 @@ function reload() {
                 msg = "<br>この投稿は管理者によって削除されました";
             }
 
-
             show = "" +
-                data[item]['message_id'] + ": " + user + " " + data[item]['created_at'] +
+                "<a id='thread_message_id_" + data[item]['message_id'] + "' href='#dashboard_send_comment_label' type='button' onClick='reply(" + data[item]['message_id'] + ")'>" + data[item]['message_id'] + "</a>" + ": " + user + " " + data[item]['created_at'] +
                 "<br>" +
                 "<p style='overflow-wrap: break-word;'>" +
                 msg +
@@ -46,10 +45,7 @@ function reload() {
                     "<img src='" + url + data[item]['img_path'].replace('public', '/storage') + "'>" +
                     "</p>";
             }
-            show += "" +
-                "<p>" +
-                "</p>" +
-                "<br>";
+            show += "<br>";
 
             if (data[item]['user_like'] == 0) {
                 // いいねが押されていない場合
@@ -69,5 +65,3 @@ function reload() {
         console.log(errorThrown.message);
     });
 }
-
-

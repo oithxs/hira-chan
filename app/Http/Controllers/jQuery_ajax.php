@@ -189,6 +189,11 @@ class jQuery_ajax extends Controller
             $message = str_replace($key, $value, $message);
         }
 
+        if ($request->reply != null) {
+            $reply = '<a class="bg-info" href="#thread_message_id_' . str_replace('>>> ', '', $request->reply) . '">' . $request->reply . '</a>';
+            $message = $reply . '<br>' . $message;
+        }
+
         $thread = Hub::where('thread_id', '=', $request->table)->first();
         $message_id = 0;
 
