@@ -1,4 +1,4 @@
-if ((location.href).includes('dashboard/thread/name=') || (location.href).includes('public/dashboard/thread/name=')) {
+if ((location.href).includes('public/dashboard/thread/name=')) {
     reload();
     setInterval(reload, 5000);
 }
