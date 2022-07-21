@@ -88,7 +88,7 @@
             @if ($flag == 1)
             <tr>
                 <td>
-                    <a href="/dashboard/thread/name={{ $tableName }}&id={{ $tableInfo['thread_id'] }}"
+                    <a href="dashboard/thread/name={{ $tableName }}&id={{ $tableInfo['thread_id'] }}"
                         class="text-decoration-none">
                         {{$tableInfo["thread_name"]}}
                     </a>

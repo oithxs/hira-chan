@@ -3,7 +3,7 @@
  -->
 
 <div class="col-sm-4 col-xs-12">
-    <a class="h4" href="/dashboard">トップページへ</a>
+    <a class="h4" href="dashboard">トップページへ</a>
     <form id="dashboard_sendMessage_form" enctype="multipart/form-data">
         <div class="mb-2">
             <div class="row">
