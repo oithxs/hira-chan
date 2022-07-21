@@ -54,13 +54,13 @@
                 <!-- ここからソートのためのリンク -->
                 <th>
                     <button
-                        onclick="location.href='/dashboard?category={{ $category }}&page={{ $page }}&sort=new_create'">
+                        onclick="location.href='dashboard?category={{ $category_name }}&page={{ $page }}&sort=new_create'">
                         {{ __("Create time") }}
                     </button>
                 </th>
                 <th>
                     <button
-                        onclick="location.href='/dashboard?category={{ $category }}&page={{ $page }}&sort=access_count'">
+                        onclick="location.href='dashboard?category={{ $category_name }}&page={{ $page }}&sort=access_count'">
                         {{ __('Access number') }}
                     </button>
                 </th>

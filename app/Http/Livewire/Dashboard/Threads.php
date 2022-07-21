@@ -82,31 +82,9 @@ class Threads extends Component
     public function render(Request $request)
     {
         $response['tables'] = $this->threads;
-        $response['category'] = $request->category;
+        $response['category_name'] = $request->category;
         $response['page'] = $request->page;
 
         return view('dashboard.threads', $response);
-    }
-
-    public function new_create()
-    {
-        $this->threads = Hub::selectRaw('hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access')
-            ->leftJoin('access_logs', function ($join) {
-                $join->on('hub.thread_id', '=', 'access_logs.thread_id');
-            })
-            ->groupBy('hub.thread_id')
-            ->orderByRaw('hub.created_at DESC')
-            ->get();
-    }
-
-    public function access_count()
-    {
-        $this->threads = Hub::selectRaw('hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access')
-            ->leftJoin('access_logs', function ($join) {
-                $join->on('hub.thread_id', '=', 'access_logs.thread_id');
-            })
-            ->groupBy('hub.thread_id')
-            ->orderByRaw('COUNT(access_logs.access_log) DESC')
-            ->get();
     }
 }
