@@ -43,5 +43,5 @@
         $('#dashboard_send_comment_reply_source').attr('href', '#thread_message_id_' + message_id);
     }
 </script>
-<script src="{{ mix('js/app_jquery.js') }}"></script>
+<script src="{{ asset('js/app_jquery.js') }}"></script>
 <!-- ここまでデザイン関係なし -->

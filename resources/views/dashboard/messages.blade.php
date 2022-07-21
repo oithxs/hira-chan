@@ -87,5 +87,5 @@
 <script>
     const url = "{{ url('') }}";
 </script>
-<script src="{{ mix('js/app_jquery.js') }}"></script>
+<script src="{{ asset('js/app_jquery.js') }}"></script>
 <!-- ここまでデザイン関係なし -->
