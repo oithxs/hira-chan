@@ -235,7 +235,7 @@
                         <!-- ここからデザイン関係なし -->
                         <!-- others -->
                         @if ($result == 1)
-                        <script src="{{ mix('js/app_jquery.js') }}"></script>
+                        <script src="{{ asset('js/app_jquery.js') }}"></script>
                         @endif
                         <!-- ここまでデザイン関係なし -->
                     </div>

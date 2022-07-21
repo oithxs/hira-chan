@@ -3,7 +3,7 @@
  -->
 
 <div class="col-sm-4 col-xs-12">
-    <a class="h4" href="/dashboard">トップページへ</a>
+    <a class="h4" href="dashboard">トップページへ</a>
     <form id="dashboard_sendMessage_form" enctype="multipart/form-data">
         <div class="mb-2">
             <div class="row">
@@ -43,5 +43,5 @@
         $('#dashboard_send_comment_reply_source').attr('href', '#thread_message_id_' + message_id);
     }
 </script>
-<script src="{{ mix('js/app_jquery.js') }}"></script>
+<script src="{{ asset('js/app_jquery.js') }}"></script>
 <!-- ここまでデザイン関係なし -->

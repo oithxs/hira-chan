@@ -189,7 +189,7 @@
                         </script>
 
                         <!-- others -->
-                        <script src="{{ mix('js/app_jquery.js') }}"></script>
+                        <script src="{{ asset('js/app_jquery.js') }}"></script>
                         <!-- ここまでデザイン関係なし -->
                     </div>
                 </body>
