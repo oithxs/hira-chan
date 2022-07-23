@@ -182,21 +182,23 @@ docker-compose exec app \
     php artisan migrate
 ```
 
-### 5.6 シーダーの作成
+### 5.6 Node.js・npm のセットアップ
+
+1. n コマンドの導入
 
 ```bash
 docker-compose exec app \
-    php artisan db:seed
+    npm install n -g
 ```
 
-### 5.7 シンボリックリンクの作成
+2. 推奨版（lts）のインストール
 
 ```bash
 docker-compose exec app \
-    php atrisan storage:link
+    n lts
 ```
 
-### 5.8 メールの設定
+### 5.7 メールの設定
 
 1. `ACCOUNT_NAME`と`APP_PASSWORD`を任意のものに変更して実行する
 
