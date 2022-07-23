@@ -11,7 +11,7 @@ services:
     tty: true
 
   nginx:
-    image: nginx
+    image: nginx:alpine
     container_name: laravel-nginx
     ports:
       - 8080:80
