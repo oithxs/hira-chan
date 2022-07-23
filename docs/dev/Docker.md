@@ -138,21 +138,10 @@ docker-compose up -d
 
 ### 5.1 env ファイルの設定
 
-1. env ファイルをコピー
+env ファイルをコピー
 
 ```bash
-cp Laravel_Forum-B/.env.example Laravel_Forum-B/.env
-```
-
-2. env ファイルに以下を記述
-
-```text
-DB_CONNECTION=mysql
-DB_HOST=db
-DB_PORT=3306
-DB_DATABASE=forum
-DB_USERNAME=root
-DB_PASSWORD=rootpass
+cp Laravel_Forum-B/docs/dev/docker-sample/.env.docker Laravel_Forum-B/.env
 ```
 
 ### 5.2 権限を設定
