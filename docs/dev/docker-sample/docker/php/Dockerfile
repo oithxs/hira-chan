@@ -9,9 +9,14 @@ RUN apt-get update && apt-get install -y \
     vim \
     bsd-mailx \
     libsasl2-modules \
-    default-mysql-client
+    default-mysql-client \
+    gnupg
 
 RUN docker-php-ext-install mysqli pdo_mysql zip opcache gd
+
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+
+RUN apt-get install -y nodejs
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install postfix -y
 
