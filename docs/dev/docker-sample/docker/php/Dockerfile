@@ -18,11 +18,13 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 
 RUN apt-get install -y nodejs
 
+RUN npm install npm@latest -g
+
 RUN DEBIAN_FRONTEND=noninteractive apt-get install postfix -y
 
 WORKDIR /var/www
 
-COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.3 /usr/bin/composer /usr/bin/composer
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
