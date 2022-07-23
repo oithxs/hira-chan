@@ -157,6 +157,13 @@ docker-compose exec app \
     composer install
 ```
 
+composer update を実行するよう促され場合は以下のコマンドを実行して下さい
+
+```bash
+docker-compose exec app \
+    composer update
+```
+
 ### 5.4 アプリケーションキーを生成
 
 ```bash
