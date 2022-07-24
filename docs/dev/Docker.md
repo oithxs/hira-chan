@@ -138,21 +138,10 @@ docker-compose up -d
 
 ### 5.1 env ファイルの設定
 
-1. env ファイルをコピー
+env ファイルをコピー
 
 ```bash
-cp Laravel_Forum-B/.env.example Laravel_Forum-B/.env
-```
-
-2. env ファイルに以下を記述
-
-```text
-DB_CONNECTION=mysql
-DB_HOST=db
-DB_PORT=3306
-DB_DATABASE=forum
-DB_USERNAME=root
-DB_PASSWORD=rootpass
+cp Laravel_Forum-B/docs/dev/docker-sample/.env.docker Laravel_Forum-B/.env
 ```
 
 ### 5.2 権限を設定
@@ -166,6 +155,13 @@ sudo chmod -R 777 Laravel_Forum-B/storage/
 ```bash
 docker-compose exec app \
     composer install
+```
+
+composer update を実行するよう促され場合は以下のコマンドを実行して下さい
+
+```bash
+docker-compose exec app \
+    composer update
 ```
 
 ### 5.4 アプリケーションキーを生成
@@ -182,7 +178,23 @@ docker-compose exec app \
     php artisan migrate
 ```
 
-### 5.6 メールの設定
+### 5.6 Node.js・npm のセットアップ
+
+1. n コマンドの導入
+
+```bash
+docker-compose exec app \
+    npm install n -g
+```
+
+2. 推奨版（lts）のインストール
+
+```bash
+docker-compose exec app \
+    n lts
+```
+
+### 5.7 メールの設定
 
 1. `ACCOUNT_NAME`と`APP_PASSWORD`を任意のものに変更して実行する
 
