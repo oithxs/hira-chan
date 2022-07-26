@@ -10,6 +10,15 @@ services:
       - db
     tty: true
 
+  node:
+    container_name: laravel-node
+    build:
+      context: ./
+      dockerfile: ./node/Dockerfile
+    volumes:
+      - ../Laravel_Forum-B:/usr/local/src/Laravel_Forum-B
+    tty: true
+
   nginx:
     image: nginx:alpine
     container_name: laravel-nginx

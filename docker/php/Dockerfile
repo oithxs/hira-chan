@@ -18,12 +18,6 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
 RUN docker-php-ext-install mysqli pdo_mysql zip opcache gd exif
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
-
-RUN apt-get install -y nodejs
-
-RUN npm install npm@latest -g
-
 RUN DEBIAN_FRONTEND=noninteractive apt-get install postfix -y
 
 WORKDIR /var/www
