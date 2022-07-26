@@ -40,17 +40,6 @@ Route::middleware([
     Route::get('/mypage', 'App\Http\Controllers\MyPage')->name('mypage');
 });
 
-Route::middleware([
-    'Is_Admin',
-])->group(function () {
-    Route::get('/hub', 'App\Http\Controllers\showTablesCTL')->name('hub');
-
-    Route::get('hub/thread_name={thread_name}/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
-    Route::get('hub/thread_name=/id={thread_id}', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
-    Route::get('hub/thread_name={thread_name}/id=', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
-    Route::get('hub/thread_name=/id=', 'App\Http\Controllers\keizibanCTL')->middleware('Access_log')->name('keiziban');
-});
-
 // データ処理
 Route::middleware([
     'PostAccess_only',
@@ -61,16 +50,6 @@ Route::middleware([
     Route::match(['get', 'post'], 'jQuery.ajax/like', "App\Http\Controllers\jQuery_ajax@like");
     Route::match(['get', 'post'], 'jQuery.ajax/unlike', "App\Http\Controllers\jQuery_ajax@unlike");
     Route::match(['get', 'post'], 'jQuery.ajax/page_thema', "App\Http\Controllers\jQuery_ajax@page_thema");
-
-    // 管理者ユーザのみ
-    Route::middleware([
-        'Is_Admin'
-    ])->group(function () {
-        Route::match(['get', 'post'], 'jQuery.ajax/admin/delete_thread', "App\Http\Controllers\jQuery_ajax@delete_thread");
-        Route::match(['get', 'post'], 'jQuery.ajax/admin/edit_thread', "App\Http\Controllers\jQuery_ajax@edit_thread");
-        Route::match(['get', 'post'], 'jQuery.ajax/admin/delete_message', "App\Http\Controllers\jQuery_ajax@delete_message");
-        Route::match(['get', 'post'], 'jQuery.ajax/admin/restore_message', "App\Http\Controllers\jQuery_ajax@restore_message");
-    });
 });
 
 // アカウント登録キャンセル

@@ -313,47 +313,6 @@ class jQuery_ajax extends Controller
             ->delete();
     }
 
-    public function delete_thread(Request $request)
-    {
-        DB::statement('DROP TABLE ?', [$request->thread_id]);
-        Hub::where('thread_id', '=', $request->thread_id)->delete();
-
-        return null;
-    }
-
-    public function edit_thread(Request $request)
-    {
-        Hub::where('threead_id', '=', $request->thread_id)
-            ->update([
-                'thread_name' => $request->thread_name
-            ]);
-
-        return null;
-    }
-
-    public function delete_message(Request $request)
-    {
-        DB::connection('mysql')
-            ->table($request->thread_id)
-            ->where('no', '=', $request->message_id)
-            ->update([
-                'is_validity' => 0
-            ]);
-
-        return null;
-    }
-
-    public function restore_message(Request $request)
-    {
-        DB::connection('mysql')
-            ->table($request->threead_id)
-            ->where('no', '=', $request->message_id)
-            ->update([
-                'is_validity' => 1
-            ]);
-
-        return null;
-    }
 
     public function page_thema(Request $request)
     {

@@ -22,12 +22,6 @@
                         class="text-decoration-none">
                         {{__('Top page')}}
                     </x-jet-nav-link>
-                    @if (Auth::user()->is_admin == 1)
-                    <x-jet-nav-link href="{{ route('hub') }}" :active="request()->routeIs('hub')"
-                        class="text-decoration-none">
-                        {{__('Forum Hub')}}
-                    </x-jet-nav-link>
-                    @endif
                 </div>
                 <!-- ここまでトップページや掲示板ハブにほ表示されるヘッダ部分 -->
 
@@ -38,9 +32,9 @@
                 <!--　ここからがスレット作成ボタン -->
                 <div class="items-center px-3 py-2  ">
                     <x-jet-danger-button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                    data-bs-target="#CreateThread_Modal">
-                    {{ __('Create new thread') }}
-                    </x-jet-denger-button>
+                        data-bs-target="#CreateThread_Modal">
+                        {{ __('Create new thread') }}
+                        </x-jet-denger-button>
                 </div>
                 <!-- ここまでがスレット作成ボタン -->
 
