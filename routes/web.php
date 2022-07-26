@@ -37,7 +37,7 @@ Route::middleware([
         Route::get('dashboard/thread/name=&id=', 'App\Http\Controllers\dashboard\DashboardController@messages');
     });
 
-    Route::get('/mypage', 'App\Http\Controllers\MyPage')->name('mypage');
+    Route::get('/mypage', 'App\Http\Controllers\mypage\MyPageController')->name('mypage');
 });
 
 // データ処理

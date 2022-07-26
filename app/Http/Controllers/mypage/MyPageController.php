@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\mypage;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class MyPage extends Controller
+class MyPageController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -15,6 +16,6 @@ class MyPage extends Controller
     public function __invoke(Request $request)
     {
         $response['username'] = $request->user()->name;
-        return view('MyPage', $response);
+        return view('mypage.MyPage', $response);
     }
 }
