@@ -1,7 +1,7 @@
 version: "3"
 services:
-  fpm:
-    container_name: laravel-fpm
+  app:
+    container_name: laravel-app
     build: ./php
     volumes:
       - ../:/var/www
@@ -12,7 +12,7 @@ services:
 
   composer:
     image: composer:latest
-    container_name: composer
+    container_name: laravel-composer
     volumes:
       - ../Laravel_Forum-B:/usr/local/src/Laravel_Forum-B
     working_dir: /usr/local/src/Laravel_Forum-B
@@ -38,7 +38,7 @@ services:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     working_dir: /var/www
     depends_on:
-      - fpm
+      - app
     tty: true
 
   db:
