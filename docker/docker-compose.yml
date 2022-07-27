@@ -12,6 +12,7 @@ services:
 
   composer:
     image: composer:latest
+    user: "1000:1000"
     container_name: laravel-composer
     volumes:
       - ../Laravel_Forum-B:/usr/local/src/Laravel_Forum-B
