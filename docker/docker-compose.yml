@@ -18,6 +18,7 @@ services:
     working_dir: /usr/local/src/Laravel_Forum-B
     command: composer install
     tty: true
+    stdin_open: true
 
   node:
     image: node:16.16.0-alpine
@@ -25,8 +26,11 @@ services:
     volumes:
       - ../Laravel_Forum-B:/usr/local/src/Laravel_Forum-B
     working_dir: /usr/local/src/Laravel_Forum-B
-    command: npm install --update-binary --no-shrinkwrap && npm install
+    command: >
+      npm install --update-binary --no-shrinkwrap &&
+      npm install
     tty: true
+    stdin_open: true
 
   nginx:
     image: nginx:alpine
