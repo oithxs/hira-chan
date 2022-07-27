@@ -1,7 +1,7 @@
 version: "3"
 services:
-  app:
-    container_name: laravel-app
+  fpm:
+    container_name: laravel-fpm
     build: ./php
     volumes:
       - ../:/var/www
@@ -10,13 +10,22 @@ services:
       - db
     tty: true
 
-  node:
-    container_name: laravel-node
-    build:
-      context: ./
-      dockerfile: ./node/Dockerfile
+  composer:
+    image: composer:latest
+    container_name: composer
     volumes:
       - ../Laravel_Forum-B:/usr/local/src/Laravel_Forum-B
+    working_dir: /usr/local/src/Laravel_Forum-B
+    command: composer install
+    tty: true
+
+  node:
+    image: node:16.16.0-alpine
+    container_name: laravel-node
+    volumes:
+      - ../Laravel_Forum-B:/usr/local/src/Laravel_Forum-B
+    working_dir: /usr/local/src/Laravel_Forum-B
+    command: npm install --update-binary --no-shrinkwrap && npm install
     tty: true
 
   nginx:
@@ -29,7 +38,7 @@ services:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     working_dir: /var/www
     depends_on:
-      - app
+      - fpm
     tty: true
 
   db:

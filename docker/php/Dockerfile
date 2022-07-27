@@ -20,16 +20,4 @@ RUN docker-php-ext-install mysqli pdo_mysql zip opcache gd exif
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install postfix -y
 
-WORKDIR /var/www
-
-COPY --from=composer:2.3 /usr/bin/composer /usr/bin/composer
-
-ENV COMPOSER_ALLOW_SUPERUSER 1
-
-ENV COMPOSER_HOME /composer
-
-ENV PATH $PATH:/composer/vendor/bin
-
-RUN composer global require "laravel/installer"
-
 WORKDIR /var/www/Laravel_Forum-B
