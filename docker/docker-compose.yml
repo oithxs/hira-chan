@@ -5,7 +5,6 @@ services:
     build: ./php
     volumes:
       - ../:/var/www
-      - ./php/postfix:/etc/postfix/sasl
     depends_on:
       - db
     tty: true
@@ -32,6 +31,13 @@ services:
       npm install
     tty: true
     stdin_open: true
+
+  postfix:
+    container_name: laravel-postfix
+    build: ./postfix
+    volumes:
+      - ./postfix:/etc/postfix/sasl
+    tty: true
 
   nginx:
     image: nginx:alpine
