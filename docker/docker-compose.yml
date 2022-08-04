@@ -1,0 +1,88 @@
+version: "3"
+services:
+  app:
+    container_name: laravel-app
+    build: ./php
+    volumes:
+      - ../:/var/www
+    depends_on:
+      - db
+    tty: true
+
+  composer:
+    image: composer:latest
+    container_name: laravel-composer
+    volumes:
+      - ../Laravel_Forum-B:/usr/local/src/Laravel_Forum-B
+    working_dir: /usr/local/src/Laravel_Forum-B
+    command: tail -f /dev/null
+    tty: true
+    stdin_open: true
+
+  node:
+    image: node:16.16.0-alpine
+    container_name: laravel-node
+    volumes:
+      - ../Laravel_Forum-B:/usr/local/src/Laravel_Forum-B
+    working_dir: /usr/local/src/Laravel_Forum-B
+    tty: true
+    stdin_open: true
+
+  postfix:
+    container_name: laravel-postfix
+    build: ./postfix
+    volumes:
+      - ./postfix:/etc/postfix/sasl
+    tty: true
+
+  nginx:
+    image: nginx:alpine
+    container_name: laravel-nginx
+    ports:
+      - 8080:80
+    volumes:
+      - ../:/var/www
+      - phpmyadmin-fpm:/var/www/phpmyadmin
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    working_dir: /var/www
+    depends_on:
+      - app
+      - phpmyadmin
+    tty: true
+
+  db:
+    image: mysql:latest
+    container_name: laravel-db
+    environment:
+      MYSQL_DATABASE: forum
+      MYSQL_USER: user
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_PASSWORD: pass
+      TZ: "Asia/Tokyo"
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./db/data:/var/lib/mysql
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./db/sql:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
+    tty: true
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:fpm-alpine
+    container_name: laravel-phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=rootpass
+      - PMA_VERBOSE=phpmyadmin
+      - PMA_PORT=3306
+    volumes:
+      - phpmyadmin-fpm:/var/www/html
+    depends_on:
+      - db
+    tty: true
+
+volumes:
+  phpmyadmin-fpm:
