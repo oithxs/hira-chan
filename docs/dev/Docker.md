@@ -109,7 +109,20 @@ chmod +x ./bin/*
 
 ```sh
 ./bin/setup-docker.sh
+Account name (no @ or below required): <gmailの@より前の部分>
+Application Password: <アプリパスワード>
 ```
+
+※ メール送信は可能ですがメールによるユーザ認証は 403 エラーがでて出来ないので，admin からユーザ登録をして下さい．
+
+メール機能が不要であれば上記の入力は不要です．ただし，メールサーバ用コンテナは作成されます．
+手動でメール機能を有効にする場合や，メールアドレスを変更したい場合は，`.env` ファイルの
+
+-   `MAIL_USERNAME`
+-   `MAIL_PASSWORD`
+-   `MAIL_FROM_ADDRESS`
+
+部分を編集して下さい．
 
 ### アクセス
 
