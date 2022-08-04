@@ -11,11 +11,11 @@ services:
 
   composer:
     image: composer:latest
-    user: "1000:1000"
     container_name: laravel-composer
     volumes:
       - ../Laravel_Forum-B:/usr/local/src/Laravel_Forum-B
     working_dir: /usr/local/src/Laravel_Forum-B
+    command: tail -f /dev/null
     tty: true
     stdin_open: true
 
