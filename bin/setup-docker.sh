@@ -12,8 +12,8 @@ if [ $? -ne 0 ]; then
     exit 2
 fi
 
-if [ -e "$HOME/docker-Laravel_Forum-B/Laravel_Forum-B" ]; then
-    echo "\"$HOME/docker-Laravel_Forum-B/Laravel_Forum-B\" already exists."
+if [ -e "$HOME/docker-Laravel_Forum-B" ]; then
+    echo "\"$HOME/docker-Laravel_Forum-B\" already exists."
     exit 3
 fi
 
@@ -55,4 +55,3 @@ docker-compose exec app php artisan storage:link
 rm ../Laravel_Forum-B/.enve
 
 exit 0
-
