@@ -36,6 +36,8 @@ cd ~/docker-Laravel_Forum-B/Laravel_Forum-B
 cp ./docker/.env.docker ./.env
 sed -ie "s/<ACCOUNT_NAME>/$account_name/g" .env
 sed -ie "s/<APP_PASSWORD>/$Application_pass/g" .env
+mkdir storage/app/public/images
+mkdir storage/app/public/images/thread_message
 chmod -R 777 storage
 chmod -R 777 bootstrap/cache
 chmod -R 777 public/uploads
@@ -48,6 +50,7 @@ docker-compose exec app php artisan key:generate
 docker-compose exec app php artisan migrate
 docker-compose exec app php artisan admin:install
 docker-compose exec app php artisan db:seed
+docker-compose exec app php artisan storage:link
 
 rm ../Laravel_Forum-B/.enve
 
