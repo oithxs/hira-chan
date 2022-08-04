@@ -16,7 +16,6 @@ services:
     volumes:
       - ../Laravel_Forum-B:/usr/local/src/Laravel_Forum-B
     working_dir: /usr/local/src/Laravel_Forum-B
-    command: composer install
     tty: true
     stdin_open: true
 
@@ -26,9 +25,6 @@ services:
     volumes:
       - ../Laravel_Forum-B:/usr/local/src/Laravel_Forum-B
     working_dir: /usr/local/src/Laravel_Forum-B
-    command: >
-      npm install --update-binary --no-shrinkwrap &&
-      npm install
     tty: true
     stdin_open: true
 
