@@ -11,7 +11,7 @@ class AccountDelete extends Controller
     public function __invoke(Request $request)
     {
         if (!$request->hasValidSignature()) {
-            abort(401);
+            abort(403);
         } else {
             $ctl = new DeleteUser;
             $ctl->delete($request->user());
