@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Likes;
 use Illuminate\Http\Request;
 
-class LikesCController extends Controller
+class LikesController extends Controller
 {
     /**
      * Display a listing of the resource.
