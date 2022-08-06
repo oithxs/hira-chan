@@ -48,7 +48,11 @@ Route::middleware([
         Route::match(['get', 'post'], 'jQuery.ajax/getRow', 'show');
         Route::match(['get', 'post'], 'jQuery.ajax/sendRow', 'store');
     });
-    Route::match(['get', 'post'], 'jQuery.ajax/create_thread', "App\Http\Controllers\jQuery_ajax@create_thread");
+
+    Route::controller(\App\Http\Controllers\dashboard\HubController::class)->group(function () {
+        Route::match(['get', 'post'], 'jQuery.ajax/create_thread', 'store');
+    });
+
     Route::match(['get', 'post'], 'jQuery.ajax/like', "App\Http\Controllers\jQuery_ajax@like");
     Route::match(['get', 'post'], 'jQuery.ajax/unlike', "App\Http\Controllers\jQuery_ajax@unlike");
     Route::match(['get', 'post'], 'jQuery.ajax/page_thema', "App\Http\Controllers\jQuery_ajax@page_thema");

@@ -12,21 +12,6 @@ use Illuminate\Support\Str;
 
 class jQuery_ajax extends Controller
 {
-    public function create_thread(Request $request)
-    {
-        $uuid = str_replace('-', '', Str::uuid());
-
-        $category = ThreadCategorys::where('category_name', '=', $request->thread_category)->first();
-
-        Hub::create([
-            'thread_id' => $uuid,
-            'thread_name' => $request->table,
-            'thread_category' => $request->thread_category,
-            'thread_category_type' => $category->category_type,
-            'user_email' => $request->user()->email
-        ]);
-    }
-
     public function like(Request $request)
     {
         Likes::insertOrIgnore([
