@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// ページ移動（非ログイン）
+// ページ移動
 Route::get('/', function () {
     return view('welcome');
 })->middleware([
@@ -63,5 +63,7 @@ Route::middleware([
     });
 });
 
-// アカウント登録キャンセル
-Route::get('/account/delete/{id}/{hash}', 'App\Http\Controllers\AccountDelete')->middleware('auth')->name('account/delete');
+Route::controller(\App\Http\Controllers\mail\UsersController::class)->group(function () {
+    // アカウント登録キャンセル
+    Route::get('/account/delete/{id}/{hash}', 'destroy')->middleware('auth')->name('account/delete');
+});
