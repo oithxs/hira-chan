@@ -58,7 +58,7 @@ Route::middleware([
         Route::match(['get', 'post'], 'jQuery.ajax/unlike', 'destroy');
     });
 
-    Route::controller(\App\Http\Controllers\dashboard\UsersController::class)->group(function () {
+    Route::controller(\App\Http\Controllers\mypage\UsersController::class)->group(function () {
         Route::match(['get', 'post'], 'jQuery.ajax/page_thema', 'update');
     });
 });
