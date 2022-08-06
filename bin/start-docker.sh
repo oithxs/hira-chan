@@ -30,7 +30,7 @@ fi
 cd ~/docker-Laravel_Forum-B/docker
 docker-compose start
 docker-compose exec composer composer install
-docker-compose exec composer npm install
+docker-compose exec node npm install
 docker-compose exec app php artisan migrate
 docker-compose exec app php db:seed
 
