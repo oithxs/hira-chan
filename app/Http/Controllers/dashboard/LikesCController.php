@@ -81,11 +81,14 @@ class LikesCController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Likes  $likes
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Htt\Request $request
+     * @return void
      */
-    public function destroy(Likes $likes)
+    public function destroy(Request $request)
     {
-        //
+        Likes::where('thread_id', '=', $request->thread_id)
+            ->where('message_id', '=', $request->message_id)
+            ->where('user_email', '=', $request->user()->email)
+            ->delete();
     }
 }

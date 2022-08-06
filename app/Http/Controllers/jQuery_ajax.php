@@ -12,15 +12,6 @@ use Illuminate\Support\Str;
 
 class jQuery_ajax extends Controller
 {
-    public function unlike(Request $request)
-    {
-        Likes::where('thread_id', '=', $request->thread_id)
-            ->where('message_id', '=', $request->message_id)
-            ->where('user_email', '=', $request->user()->email)
-            ->delete();
-    }
-
-
     public function page_thema(Request $request)
     {
         $page_thema = $request->page_thema;
