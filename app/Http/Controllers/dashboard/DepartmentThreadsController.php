@@ -40,12 +40,24 @@ class DepartmentThreadsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param string $thread_id
+     * @param string $user_name
+     * @param string $user_email
+     * @param string $message
+     *
+     * @return int
      */
-    public function store(Request $request)
+    public function store(string $thread_id, string $user_name, string $user_email, string $message)
     {
-        //
+        $message_id = DepartmentThreads::where('thread_id', '=', $thread_id)->max('message_id') + 1 ?? 0;
+        DepartmentThreads::create([
+            'thread_id' => $thread_id,
+            'message_id' => $message_id,
+            'user_name' => $user_name,
+            'user_email' => $user_email,
+            'message' => $message
+        ]);
+        return $message_id;
     }
 
     /**

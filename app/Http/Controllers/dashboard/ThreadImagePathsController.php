@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\ThreadImagePaths;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class ThreadImagePathsController extends Controller
 {
@@ -34,11 +37,31 @@ class ThreadImagePathsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param int $message_id
+     *
+     * @return void
      */
-    public function store(Request $request)
+    public function store(Request $request, int $message_id)
     {
-        //
+        if ($request->file('img')) {
+            $img = Image::make($request->file('img'))->encode('jpg')->orientate()->save();
+
+            $size = $img->filesize();
+            $path = 'public/images/thread_message/' . str_replace('-', '', Str::uuid()) . '.jpg';
+            Storage::put($path, $img);
+
+            if ($path) {
+                ThreadImagePaths::create([
+                    'thread_id' => $request->table,
+                    'message_id' => $message_id,
+                    'user_email' => $request->user()->email,
+                    'img_path' => $path,
+                    'img_size' => $size
+                ]);
+            }
+
+            $img->destroy();
+        }
     }
 
     /**

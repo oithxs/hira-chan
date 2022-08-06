@@ -44,8 +44,10 @@ Route::middleware([
 Route::middleware([
     'PostAccess_only',
 ])->group(function () {
-    Route::match(['get', 'post'], 'jQuery.ajax/getRow', "App\Http\Controllers\dashboard\ThreadsController@show");
-    Route::match(['get', 'post'], 'jQuery.ajax/sendRow', "App\Http\Controllers\jQuery_ajax@send_Row");
+    Route::controller(\App\Http\Controllers\dashboard\ThreadsController::class)->group(function () {
+        Route::match(['get', 'post'], 'jQuery.ajax/getRow', 'show');
+        Route::match(['get', 'post'], 'jQuery.ajax/sendRow', 'store');
+    });
     Route::match(['get', 'post'], 'jQuery.ajax/create_thread', "App\Http\Controllers\jQuery_ajax@create_thread");
     Route::match(['get', 'post'], 'jQuery.ajax/like', "App\Http\Controllers\jQuery_ajax@like");
     Route::match(['get', 'post'], 'jQuery.ajax/unlike', "App\Http\Controllers\jQuery_ajax@unlike");

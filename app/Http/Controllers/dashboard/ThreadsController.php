@@ -34,11 +34,52 @@ class ThreadsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function store(Request $request)
     {
-        //
+        $special_character_set = array(
+            "&" => "&amp;",
+            "<" => "&lt;",
+            ">" => "&gt;",
+            " " => "&ensp;",
+            "　" => "&emsp;",
+            "\n" => "<br>",
+            "\t" => "&ensp;&ensp;"
+        );
+
+        $message = $request->message;
+        foreach ($special_character_set as $key => $value) {
+            $message = str_replace($key, $value, $message);
+        }
+
+        if ($request->reply != null) {
+            $reply = '<a class="bg-info" href="#thread_message_id_' . str_replace('>>> ', '', $request->reply) . '">' . $request->reply . '</a>';
+            $message = $reply . '<br>' . $message;
+        }
+
+        $message_id = 0;
+        $thread = Hub::where('thread_id', '=', $request->table)->first();
+        switch ($thread->thread_category_type) {
+            case '学科':
+                $message_id = (new DepartmentThreadsController)->store($request->table, $request->user()->name, $request->user()->email, $message);
+                break;
+            case '学年':
+                $message_id = (new CollegeYearThreadsController)->store($request->table, $request->user()->name, $request->user()->email, $message);
+                break;
+            case '部活':
+                $message_id = (new ClubThreadsController)->store($request->table, $request->user()->name, $request->user()->email, $message);
+                break;
+            case '授業':
+                $message_id = (new LectureThreadsController)->store($request->table, $request->user()->name, $request->user()->email, $message);
+                break;
+            case '就職':
+                $message_id = (new JobHuntingThreadsController)->store($request->table, $request->user()->name, $request->user()->email, $message);
+            default:
+                break;
+        }
+
+        (new ThreadImagePathsController)->store($request, $message_id);
     }
 
     /**
