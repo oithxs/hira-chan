@@ -12,16 +12,6 @@ use Illuminate\Support\Str;
 
 class jQuery_ajax extends Controller
 {
-    public function like(Request $request)
-    {
-        Likes::insertOrIgnore([
-            'thread_id' => $request->thread_id,
-            'message_id' => $request->message_id,
-            'user_email' => $request->user()->email,
-            'created_at' => now(),
-        ]);
-    }
-
     public function unlike(Request $request)
     {
         Likes::where('thread_id', '=', $request->thread_id)

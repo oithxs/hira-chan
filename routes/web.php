@@ -53,7 +53,10 @@ Route::middleware([
         Route::match(['get', 'post'], 'jQuery.ajax/create_thread', 'store');
     });
 
-    Route::match(['get', 'post'], 'jQuery.ajax/like', "App\Http\Controllers\jQuery_ajax@like");
+    Route::controller(\App\Http\Controllers\dashboard\LikesCController::class)->group(function () {
+        Route::match(['get', 'post'], 'jQuery.ajax/like', 'store');
+    });
+
     Route::match(['get', 'post'], 'jQuery.ajax/unlike', "App\Http\Controllers\jQuery_ajax@unlike");
     Route::match(['get', 'post'], 'jQuery.ajax/page_thema', "App\Http\Controllers\jQuery_ajax@page_thema");
 });
