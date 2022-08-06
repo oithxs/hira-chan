@@ -58,7 +58,9 @@ Route::middleware([
         Route::match(['get', 'post'], 'jQuery.ajax/unlike', 'destroy');
     });
 
-    Route::match(['get', 'post'], 'jQuery.ajax/page_thema', "App\Http\Controllers\jQuery_ajax@page_thema");
+    Route::controller(\App\Http\Controllers\dashboard\UsersController::class)->group(function () {
+        Route::match(['get', 'post'], 'jQuery.ajax/page_thema', 'update');
+    });
 });
 
 // アカウント登録キャンセル
