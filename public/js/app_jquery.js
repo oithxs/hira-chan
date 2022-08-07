@@ -184,7 +184,14 @@ $('#dashboard_threads_category_select').change(search_thread);
 /*!********************************************!*\
   !*** ./resources/js/dashboard/Send_Row.js ***!
   \********************************************/
-$('#dashboard_sendMessage_btn').click(function () {
+$('#dashboard_sendMessage_btn').click(send_comment);
+$('#dashboard_message_textarea').keydown(function (e) {
+  if (event.ctrlKey && e.keyCode === 13 && $(this).val()) {
+    send_comment();
+  }
+});
+
+function send_comment() {
   var rows_limit = 20;
   var bytes_limit = 300;
   var formElm = document.getElementById("dashboard_sendMessage_form");
@@ -226,7 +233,7 @@ $('#dashboard_sendMessage_btn').click(function () {
     $('#dashboard_send_comment_reply_disabled_text').val('');
     $('#dashboard_send_comment_reply_source').attr('href', '#!');
   }
-});
+}
 
 String.prototype.bytes = function () {
   return encodeURIComponent(this).replace(/%../g, "x").length;
