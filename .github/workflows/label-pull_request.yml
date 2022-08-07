@@ -4,9 +4,6 @@ on:
     types:
       - closed
 
-permissions:
-  pull-requests: write
-
 jobs:
   label-pull_request:
     runs-on: ubuntu-latest
