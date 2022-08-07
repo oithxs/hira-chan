@@ -1,9 +1,6 @@
 name: Label Pull request
 on:
   pull_request:
-    branches:
-      - develop
-      - main
     types:
       - closed
 jobs:
