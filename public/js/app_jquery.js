@@ -186,7 +186,7 @@ $('#dashboard_threads_category_select').change(search_thread);
   \********************************************/
 $('#dashboard_sendMessage_btn').click(send_comment);
 $('#dashboard_message_textarea').keydown(function (e) {
-  if (event.ctrlKey && e.keyCode === 13 && $(this).val()) {
+  if (event.ctrlKey && e.keyCode === 13) {
     send_comment();
   }
 });
