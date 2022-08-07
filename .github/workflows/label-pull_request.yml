@@ -1,0 +1,25 @@
+name: Label Pull request
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+    types:
+      - closed
+jobs:
+  label-pull_request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merged
+        id: merged
+        if: github.event.pull_request.merged == true
+        uses: andymckay/labeler@e6c4322d0397f3240f0e7e30a33b5c5df2d39e90
+        with:
+          add-labels: "Close: Normal"
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Closed
+        if: "!(steps.merged.conclusion == 'success')"
+        uses: andymckay/labeler@e6c4322d0397f3240f0e7e30a33b5c5df2d39e90
+        with:
+          add-labels: "Close: invalid"
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
