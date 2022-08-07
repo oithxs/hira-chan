@@ -1,6 +1,9 @@
-name: Label Pull request
+name: Label pull_request
 on:
   pull_request:
+    types:
+      - closed
+  issues:
     types:
       - closed
 jobs:
