@@ -5,7 +5,14 @@ var __webpack_exports__ = {};
 /*!*************************************************!*\
   !*** ./resources/js/dashboard/Create_thread.js ***!
   \*************************************************/
-$('#dashboard_create_thread_btn').click(function () {
+$('#dashboard_create_thread_btn').click(create_thread);
+$('#dashboard_create_thread_text').keydown(function (e) {
+  if (e.keyCode === 13) {
+    create_thread();
+  }
+});
+
+function create_thread() {
   var formElm = document.getElementById("dashboard_create_thread_form");
   var threadName = formElm.dashboard_create_thread_text.value;
   var thread_category = formElm.dashboard_thread_category_select.value;
@@ -38,7 +45,7 @@ $('#dashboard_create_thread_btn').click(function () {
     console.log(textStatus);
     console.log(errorThrown.message);
   });
-});
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
