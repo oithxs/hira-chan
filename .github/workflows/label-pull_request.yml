@@ -1,11 +1,12 @@
-name: Label pull_request
+name: Label Pull request
 on:
   pull_request:
     types:
       - closed
-  issues:
-    types:
-      - closed
+
+permissions:
+  pull-requests: write
+
 jobs:
   label-pull_request:
     runs-on: ubuntu-latest
