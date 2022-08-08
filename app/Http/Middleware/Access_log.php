@@ -19,8 +19,8 @@ class Access_log
     {
         AccessLogs::create([
             'user_email' => $request->user()->email,
-            'thread_name' => $request->thread_name,
-            'thread_id' => $request->thread_id,
+            'thread_name' => $request->thread_name ?? "",
+            'thread_id' => $request->thread_id ?? "",
             'access_log' => $request->ip()
         ]);
 
