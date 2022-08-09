@@ -32,7 +32,7 @@ class LikesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return Illuminate\Support\Collection
+     * @return int
      */
     public function store(Request $request)
     {
@@ -86,7 +86,7 @@ class LikesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \Illuminate\Htt\Request $request
-     * @return Illuminate\Support\Collection
+     * @return int
      */
     public function destroy(Request $request)
     {
