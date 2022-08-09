@@ -1,4 +1,5 @@
-if ((location.href).includes('dashboard/thread/name=') || (location.href).includes('public/dashboard/thread/name=')) {
+if (show_thread_messages_flag === 1) {
+    show_thread_messages_flag = 0;
     reload();
     setInterval(reload, 5000);
 }

@@ -2,6 +2,7 @@
 <script>
     const table = "{{ $thread_name }}";
     const thread_id = "{{ $thread_id }}";
+    const max_message_id = 0;
 </script>
 
 <script>
@@ -86,6 +87,7 @@
 <!-- ここからデザイン関係なし -->
 <script>
     const url = "{{ url('') }}";
+    show_thread_messages_flag = 1;
 </script>
 <script src="{{ asset('js/app_jquery.js') }}"></script>
 <!-- ここまでデザイン関係なし -->
