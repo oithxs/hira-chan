@@ -52,10 +52,10 @@ function reload() {
 
             if (data[item]['user_like'] == 0) {
                 // いいねが押されていない場合
-                show += "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['message_id'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'];
+                show += "<button id='js_dashboard_Get_allRow_button_" + data[item]['message_id'] + "' type='button' class='btn btn-light' onClick='likes(" + data[item]['message_id'] + ", " + 0 + ")'>like</button> " + "<dev id='js_dashboard_Get_allRow_dev_" + data[item]['message_id'] + "'>" + data[item]['count_user'] + "</dev>";
             } else {
                 // いいねが押されていた場合
-                show += "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['message_id'] + ", " + 1 + ")'>like</button> " + data[item]['count_user'];
+                show += "<button id='js_dashboard_Get_allRow_button_" + data[item]['message_id'] + "' type='button' class='btn btn-dark' onClick='likes(" + data[item]['message_id'] + ", " + 1 + ")'>like</button> " + "<dev id='js_dashboard_Get_allRow_dev_" + data[item]['message_id'] + "'>" + data[item]['count_user'] + "</dev>";
             }
 
             show += "<hr>";
