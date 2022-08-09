@@ -1,7 +1,7 @@
 if (show_thread_messages_flag === 1) {
     show_thread_messages_flag = 0;
     reload();
-    setInterval(reload, 5000);
+    setInterval(reload, 1000);
 }
 
 function reload() {
@@ -20,9 +20,11 @@ function reload() {
         type: "POST",
         url: url + "/jQuery.ajax/getRow",
         dataType: "json",
-        data: { "table": thread_id }
+        data: {
+            "table": thread_id,
+            "max_message_id": max_message_id
+        }
     }).done(function (data) {
-        displayArea.innerHTML = "<br>";
         for (var item in data) {
             if (data[item]['is_validity']) {
                 // 通常
@@ -59,6 +61,7 @@ function reload() {
             show += "<hr>";
 
             displayArea.insertAdjacentHTML('afterbegin', show);
+            max_message_id = data[item]['message_id'];
         }
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
         console.log(XMLHttpRequest.status);

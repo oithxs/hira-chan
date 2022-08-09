@@ -93,15 +93,15 @@ class ThreadsController extends Controller
         $thread = Hub::where('thread_id', '=', $request->table)->first();
         switch ($thread->thread_category_type) {
             case '学科':
-                return (new DepartmentThreadsController)->show($request->user()->email, $request->table);
+                return (new DepartmentThreadsController)->show($request->user()->email, $request->table, $request->max_message_id);
             case '学年':
-                return (new CollegeYearThreadsController)->show($request->user()->email, $request->table);
+                return (new CollegeYearThreadsController)->show($request->user()->email, $request->table, $request->max_message_id);
             case '部活':
-                return (new ClubThreadsController)->show($request->user()->email, $request->table);
+                return (new ClubThreadsController)->show($request->user()->email, $request->table, $request->max_message_id);
             case '授業':
-                return (new LectureThreadsController)->show($request->user()->email, $request->table);
+                return (new LectureThreadsController)->show($request->user()->email, $request->table, $request->max_message_id);
             case '就職':
-                return (new JobHuntingThreadsController)->show($request->user()->email, $request->table);
+                return (new JobHuntingThreadsController)->show($request->user()->email, $request->table, $request->max_message_id);
             default:
                 return null;
         }

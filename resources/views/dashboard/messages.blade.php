@@ -2,7 +2,7 @@
 <script>
     const table = "{{ $thread_name }}";
     const thread_id = "{{ $thread_id }}";
-    const max_message_id = 0;
+    var max_message_id = 0;
 </script>
 
 <script>
