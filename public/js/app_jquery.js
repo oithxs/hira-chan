@@ -95,17 +95,17 @@ function reload() {
         show += "" + "<p>" + "<img src='" + url + data[item]['img_path'].replace('public', '/storage') + "'>" + "</p>";
       }
 
-      show += "<br>";
+      show += "" + "<br>" + "<button " + "id='js_dashboard_Get_allRow_button_" + data[item]['message_id'] + "' " + "type='button' ";
 
       if (data[item]['user_like'] == 0) {
         // いいねが押されていない場合
-        show += "" + "<button " + "id='js_dashboard_Get_allRow_button_" + data[item]['message_id'] + "' " + "type='button' " + "class='btn btn-light' " + "onClick='likes(" + data[item]['message_id'] + ", " + 0 + ")'>" + "like" + "</button> " + "<dev id='js_dashboard_Get_allRow_dev_" + data[item]['message_id'] + "'>" + data[item]['count_user'] + "</dev>";
+        show += "class='btn btn-light' onClick='likes(" + data[item]['message_id'] + ", " + 0 + ")'>";
       } else {
         // いいねが押されていた場合
-        show += "" + "<button " + "id='js_dashboard_Get_allRow_button_" + data[item]['message_id'] + "' " + "type='button' " + "class='btn btn-dark' onClick='likes(" + data[item]['message_id'] + ", " + 1 + ")'>" + "like" + "</button> " + "<dev id='js_dashboard_Get_allRow_dev_" + data[item]['message_id'] + "'>" + data[item]['count_user'] + "</dev>";
+        show += "class='btn btn-dark' onClick='likes(" + data[item]['message_id'] + ", " + 1 + ")'>";
       }
 
-      show += "<hr>";
+      show += "" + "like" + "</button> " + "<dev id='js_dashboard_Get_allRow_dev_" + data[item]['message_id'] + "'>" + data[item]['count_user'] + "</dev>" + "<hr>";
       displayArea.insertAdjacentHTML('afterbegin', show);
       max_message_id = data[item]['message_id'];
     }
