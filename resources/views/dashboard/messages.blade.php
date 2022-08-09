@@ -33,8 +33,9 @@
                 thread_id: thread_id,
                 message_id: message_id,
             },
-        }).done(function () {
+        }).done(function (data) {
             $('#js_dashboard_Get_allRow_button_' + message_id).prop('disabled', false);
+            $('#js_dashboard_Get_allRow_dev_' + message_id).html(data);
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
             console.log(XMLHttpRequest.status);
             console.log(textStatus);

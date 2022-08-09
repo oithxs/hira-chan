@@ -32,7 +32,7 @@ class LikesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return void
+     * @return Illuminate\Support\Collection
      */
     public function store(Request $request)
     {
@@ -42,6 +42,10 @@ class LikesController extends Controller
             'user_email' => $request->user()->email,
             'created_at' => now(),
         ]);
+
+        return Likes::where('thread_id', '=', $request->thread_id)
+            ->where('message_id', '=', $request->message_id)
+            ->count();
     }
 
     /**
@@ -82,7 +86,7 @@ class LikesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \Illuminate\Htt\Request $request
-     * @return void
+     * @return Illuminate\Support\Collection
      */
     public function destroy(Request $request)
     {
@@ -90,5 +94,9 @@ class LikesController extends Controller
             ->where('message_id', '=', $request->message_id)
             ->where('user_email', '=', $request->user()->email)
             ->delete();
+
+        return Likes::where('thread_id', '=', $request->thread_id)
+            ->where('message_id', '=', $request->message_id)
+            ->count();
     }
 }
