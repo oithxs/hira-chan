@@ -65,10 +65,11 @@ class LectureThreadsController extends Controller
      *
      * @param string $user_email
      * @param string $thread_id
+     * @param int $pre_max_message_id
      *
      * @return Illuminate\Support\Collection
      */
-    public function show(string $user_email, string $thread_id)
+    public function show(string $user_email, string $thread_id, int $pre_max_message_id)
     {
         $this->user_email = $user_email;
         $this->thread_id = $thread_id;
@@ -96,6 +97,7 @@ class LectureThreadsController extends Controller
                     ->whereColumn('thread_image_paths.message_id', '=', 'lecture_threads.message_id');
             })
             ->where('lecture_threads.thread_id', '=', $this->thread_id)
+            ->where('lecture_threads.message_id', '>', $pre_max_message_id)
             ->groupBy('lecture_threads.message_id')
             ->get();
     }
