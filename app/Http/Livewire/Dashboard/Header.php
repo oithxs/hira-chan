@@ -8,9 +8,18 @@ use App\Models\ThreadCategorys;
 
 class Header extends Component
 {
+    /** @var Illuminate\Support\Collection */
     public $categorys;
+
+    /** @var Illuminate\Support\Collection */
     public $category_types;
 
+    /**
+     * Storing data used on this page
+     *
+     * @param Illuminate\Http\Request $request
+     * @return void
+     */
     public function mount(Request $request)
     {
         $this->categorys = ThreadCategorys::get();
@@ -19,6 +28,11 @@ class Header extends Component
             ->get();
     }
 
+    /**
+     * Page Display
+     *
+     * @return Illuminate\Support\Facades\View
+     */
     public function render()
     {
         return view('dashboard.header');
