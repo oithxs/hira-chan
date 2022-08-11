@@ -1,13 +1,21 @@
-$('#dashboard_sendMessage_btn').click(function () {
+$('#dashboard_sendMessage_btn').click(send_comment);
+$('#dashboard_message_textarea').keydown(function (e) {
+    if (event.ctrlKey && e.keyCode === 13) {
+        send_comment();
+    }
+});
+
+function send_comment() {
     var rows_limit = 20;
     var bytes_limit = 300;
     var formElm = document.getElementById("dashboard_sendMessage_form");
     var message = formElm.dashboard_message_textarea.value;
+    var reply = formElm.dashboard_send_comment_reply_disabled_text.value;
     var formData = new FormData();
     formData.append('table', thread_id);
     formData.append('message', message);
+    formData.append('reply', reply);
     formData.append('img', $('#dashboard_send_comment_upload_img').prop('files')[0]);
-
 
     if (message.trim() == 0) {
         dashboard_sendAlertArea.innerHTML = "<div class='alert alert-danger'>書き込みなし・空白・改行のみの投稿は出来ません</div>";
@@ -38,8 +46,10 @@ $('#dashboard_sendMessage_btn').click(function () {
         formElm.dashboard_message_textarea.value = '';
         $('#dashboard_send_commnet_img_preview').attr('src', '');
         $('#dashboard_send_comment_upload_img').val('');
+        $('#dashboard_send_comment_reply_disabled_text').val('');
+        $('#dashboard_send_comment_reply_source').attr('href', '#!');
     }
-});
+}
 
 String.prototype.bytes = function () {
     return (encodeURIComponent(this).replace(/%../g, "x").length);

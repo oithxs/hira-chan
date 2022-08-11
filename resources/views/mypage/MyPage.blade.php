@@ -41,7 +41,7 @@
                 <!-- jQuery -->
                 <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 
-                <script src="{{ mix('js/app_jquery.js') }}"></script>
+                <script src="{{ asset('js/app_jquery.js') }}"></script>
                 <script>
                     const url = "{{ url('/') }}";
                 </script>

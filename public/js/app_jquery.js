@@ -5,7 +5,14 @@ var __webpack_exports__ = {};
 /*!*************************************************!*\
   !*** ./resources/js/dashboard/Create_thread.js ***!
   \*************************************************/
-$('#dashboard_create_thread_btn').click(function () {
+$('#dashboard_create_thread_btn').click(create_thread);
+$('#dashboard_create_thread_text').keydown(function (e) {
+  if (e.keyCode === 13) {
+    create_thread();
+  }
+});
+
+function create_thread() {
   var formElm = document.getElementById("dashboard_create_thread_form");
   var threadName = formElm.dashboard_create_thread_text.value;
   var thread_category = formElm.dashboard_thread_category_select.value;
@@ -38,7 +45,7 @@ $('#dashboard_create_thread_btn').click(function () {
     console.log(textStatus);
     console.log(errorThrown.message);
   });
-});
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
@@ -46,9 +53,10 @@ $('#dashboard_create_thread_btn').click(function () {
 /*!**********************************************!*\
   !*** ./resources/js/dashboard/Get_allRow.js ***!
   \**********************************************/
-if (location.href.includes('dashboard/thread/name=')) {
+if (show_thread_messages_flag === 1) {
+  show_thread_messages_flag = 0;
   reload();
-  setInterval(reload, 5000);
+  setInterval(reload, 1000);
 }
 
 function reload() {
@@ -66,11 +74,10 @@ function reload() {
     url: url + "/jQuery.ajax/getRow",
     dataType: "json",
     data: {
-      "table": thread_id
+      "table": thread_id,
+      "max_message_id": max_message_id
     }
   }).done(function (data) {
-    displayArea.innerHTML = "<br>";
-
     for (var item in data) {
       if (data[item]['is_validity']) {
         // 通常
@@ -82,24 +89,25 @@ function reload() {
         msg = "<br>この投稿は管理者によって削除されました";
       }
 
-      show = "" + data[item]['message_id'] + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>";
+      show = "" + "<a " + "id='thread_message_id_" + data[item]['message_id'] + "' " + "href='#dashboard_send_comment_label' " + "type='button' " + "onClick='reply(" + data[item]['message_id'] + ")'>" + data[item]['message_id'] + "</a>" + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>";
 
       if (data[item]['img_path'] != null) {
         show += "" + "<p>" + "<img src='" + url + data[item]['img_path'].replace('public', '/storage') + "'>" + "</p>";
       }
 
-      show += "" + "<p>" + "</p>" + "<br>";
+      show += "" + "<br>" + "<button " + "id='js_dashboard_Get_allRow_button_" + data[item]['message_id'] + "' " + "type='button' ";
 
       if (data[item]['user_like'] == 0) {
         // いいねが押されていない場合
-        show += "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['message_id'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'];
+        show += "class='btn btn-light' onClick='likes(" + data[item]['message_id'] + ", " + 0 + ")'>";
       } else {
         // いいねが押されていた場合
-        show += "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['message_id'] + ", " + 1 + ")'>like</button> " + data[item]['count_user'];
+        show += "class='btn btn-dark' onClick='likes(" + data[item]['message_id'] + ", " + 1 + ")'>";
       }
 
-      show += "<hr>";
+      show += "" + "like" + "</button> " + "<dev id='js_dashboard_Get_allRow_dev_" + data[item]['message_id'] + "'>" + data[item]['count_user'] + "</dev>" + "<hr>";
       displayArea.insertAdjacentHTML('afterbegin', show);
+      max_message_id = data[item]['message_id'];
     }
   }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
     console.log(XMLHttpRequest.status);
@@ -107,6 +115,17 @@ function reload() {
     console.log(errorThrown.message);
   });
 }
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!*************************************************!*\
+  !*** ./resources/js/dashboard/Reply_message.js ***!
+  \*************************************************/
+$("#dashboard_send_comment_replay_clear").click(function () {
+  $('#dashboard_send_comment_reply_disabled_text').val('');
+  $('#dashboard_send_comment_reply_source').attr('href', '#!');
+});
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
@@ -173,14 +192,23 @@ $('#dashboard_threads_category_select').change(search_thread);
 /*!********************************************!*\
   !*** ./resources/js/dashboard/Send_Row.js ***!
   \********************************************/
-$('#dashboard_sendMessage_btn').click(function () {
+$('#dashboard_sendMessage_btn').click(send_comment);
+$('#dashboard_message_textarea').keydown(function (e) {
+  if (event.ctrlKey && e.keyCode === 13) {
+    send_comment();
+  }
+});
+
+function send_comment() {
   var rows_limit = 20;
   var bytes_limit = 300;
   var formElm = document.getElementById("dashboard_sendMessage_form");
   var message = formElm.dashboard_message_textarea.value;
+  var reply = formElm.dashboard_send_comment_reply_disabled_text.value;
   var formData = new FormData();
   formData.append('table', thread_id);
   formData.append('message', message);
+  formData.append('reply', reply);
   formData.append('img', $('#dashboard_send_comment_upload_img').prop('files')[0]);
 
   if (message.trim() == 0) {
@@ -210,8 +238,10 @@ $('#dashboard_sendMessage_btn').click(function () {
     formElm.dashboard_message_textarea.value = '';
     $('#dashboard_send_commnet_img_preview').attr('src', '');
     $('#dashboard_send_comment_upload_img').val('');
+    $('#dashboard_send_comment_reply_disabled_text').val('');
+    $('#dashboard_send_comment_reply_source').attr('href', '#!');
   }
-});
+}
 
 String.prototype.bytes = function () {
   return encodeURIComponent(this).replace(/%../g, "x").length;
