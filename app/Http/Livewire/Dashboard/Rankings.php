@@ -23,7 +23,6 @@ class Rankings extends Component
      * @param Illuminate\Http\Request $request
      * @return void
      */
-
     public function mount(Request $request)
     {
         $week = Carbon::today()->subDay(7);
@@ -49,7 +48,6 @@ class Rankings extends Component
      *
      * @return Illuminate\Support\Facades\View
      */
-
     public function render()
     {
         return view('dashboard.rankings');
