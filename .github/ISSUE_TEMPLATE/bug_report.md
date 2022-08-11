@@ -2,7 +2,7 @@
 name: Bug report
 about: バグ改善のための報告用
 title: ''
-labels: 'Type: bug'
+labels: 'Type: bug, Type: Feature'
 assignees: ''
 
 ---
@@ -10,7 +10,7 @@ assignees: ''
 ## どのような不具合か
 
 <!-- 
-- 1つの問題につき，一つのIssueを作成してください 
+- タイトルでバグの概要，ここに詳細な不具合の内容を記載してください
 -->
 
 ## 不具合の再現手順
