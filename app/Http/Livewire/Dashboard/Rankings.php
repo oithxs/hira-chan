@@ -26,7 +26,7 @@ class Rankings extends Component
 
     public function mount(Request $request)
     {
-        $week = Carbon::today()->subDay(7);
+        $week = Carbon::today()->subDay(1);
 
         $this->access_ranking = Hub::selectRaw('*, COUNT(*) AS access_count')
             ->rightjoin('access_logs', 'access_logs.thread_id', '=', 'hub.thread_id')
@@ -42,6 +42,9 @@ class Rankings extends Component
             ->groupBy('hub.thread_id')
             ->orderByRaw('COUNT(*) DESC')
             ->get();
+
+        \Illuminate\Support\Facades\Log::debug($this->access_ranking);
+        \Illuminate\Support\Facades\Log::debug($this->weekly_access_ranking);
     }
 
     /**
