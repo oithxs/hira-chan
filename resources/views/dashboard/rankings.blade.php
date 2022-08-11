@@ -8,7 +8,7 @@
             <a href="#dashboard_rankings_access_ranking" class="nav-link active" data-bs-toggle="tab">アクセスランキング</a>
         </li>
         <li class="nav-item">
-            <a href="#dashboard_ranking_weekly_access_ranking" class="nav-link" data-bs-toggle="tab">週間アクセスランキング</a>
+            <a href="#dashboard_rankings_weekly_access_ranking" class="nav-link" data-bs-toggle="tab">週間アクセスランキング</a>
         </li>
     </ul>
 </div>
