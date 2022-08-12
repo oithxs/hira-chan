@@ -8,19 +8,42 @@ use App\Models\Hub;
 
 class Messages extends Component
 {
-    public function render(Request $request)
+    /** @var string */
+    public $thread_name;
+
+    /** @var string */
+    public $thread_id;
+
+    /** @var int */
+    public $result;
+
+    /**
+     * Storing data used on this page
+     *
+     * @param Illuminate\Http\Request $request
+     * @return void
+     */
+    public function mount(Request $request)
     {
         $exists = Hub::where('thread_id', '=', $request->thread_id)->get();
 
         if ($exists) {
-            $response['result'] = 1;
+            $this->result = 1;
         } else {
-            $response['result'] = 0;
+            $this->result = 0;
         }
 
-        $response['thread_name'] = $request->thread_name;
-        $response['thread_id'] = $request->thread_id;
+        $this->thread_name = $request->thread_name;
+        $this->thread_id = $request->thread_id;
+    }
 
-        return view('dashboard.messages', $response);
+    /**
+     * Page Display
+     *
+     * @return Illuminate\Support\Facades\View
+     */
+    public function render()
+    {
+        return view('dashboard.messages');
     }
 }
