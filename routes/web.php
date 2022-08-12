@@ -24,14 +24,7 @@ Route::middleware([
     config('jetstream.auth_session')
 ])->group(function () {
     Route::get('dashboard', 'App\Http\Controllers\dashboard\DashboardController@threads')->name('dashboard');
-});
 
-// ページ移動（要ログイン）
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
     Route::middleware([
         'Access_log'
     ])->group(function () {
@@ -40,7 +33,14 @@ Route::middleware([
         Route::get('dashboard/thread/name=&id={thread_id}', 'App\Http\Controllers\dashboard\DashboardController@messages');
         Route::get('dashboard/thread/name=&id=', 'App\Http\Controllers\dashboard\DashboardController@messages');
     });
+});
 
+// ページ移動（要ログイン）
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
     Route::get('/mypage', 'App\Http\Controllers\mypage\MyPageController')->name('mypage');
 });
 
