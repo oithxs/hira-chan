@@ -152,18 +152,23 @@
                             <div class="border-t border-gray-100"></div>
 
                             <!-- Authentication -->
+                            @if (Auth::check())
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                 @csrf
 
                                 <x-jet-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();"
                                     class="text-decoration-none">
-                                    @if (Auth::check())
                                     {{ __('Log Out') }}
-                                    @else
-                                    ウェルカムページへ
-                                    @endif
                                 </x-jet-dropdown-link>
                             </form>
+                            @else
+                            <x-jet-dropdown-link href="{{ route('login') }}" class="text-decoration-none">
+                                {{ __('Log in') }}
+                            </x-jet-dropdown-link>
+                            <x-jet-dropdown-link href="/" class="text-decoration-none">
+                                ウェルカムページへ
+                            </x-jet-dropdown-link>
+                            @endif
                         </x-slot>
                     </x-jet-dropdown>
                 </div>
