@@ -5,6 +5,7 @@
     var max_message_id = 0;
 </script>
 
+@if (Auth::check())
 <script>
     function likes(message_id) {
         var access = "";
@@ -43,6 +44,13 @@
         });
     }
 </script>
+@else
+<script>
+    function likes() {
+        window.location.href = "{{ route('login') }}";
+    }
+</script>
+@endif
 <!-- ここまでデザイン関係なし -->
 
 <!-- ここからスレッドが存在したとき -->
