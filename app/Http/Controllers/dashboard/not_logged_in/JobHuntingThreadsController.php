@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\dashboard;
+namespace App\Http\Controllers\dashboard\not_logged_in;
 
 use App\Http\Controllers\Controller;
 
@@ -11,12 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class JobHuntingThreadsController extends Controller
 {
-    /** @var string */
-    private $user_email;
-
-    /** @var string */
-    private $thread_id;
-
     /**
      * Display a listing of the resource.
      *
@@ -40,56 +34,36 @@ class JobHuntingThreadsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param string $thread_id
-     * @param string $user_name
-     * @param string $user_email
-     * @param string $message
-     *
-     * @return int
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    public function store(string $thread_id, string $user_name, string $user_email, string $message)
+    public function store(Request $request)
     {
-        $message_id = JobHuntingThreads::where('thread_id', '=', $thread_id)->max('message_id') + 1 ?? 0;
-        JobHuntingThreads::create([
-            'thread_id' => $thread_id,
-            'message_id' => $message_id,
-            'user_name' => $user_name,
-            'user_email' => $user_email,
-            'message' => $message
-        ]);
-        return $message_id;
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param string $user_email
      * @param string $thread_id
      * @param int $pre_max_message_id
      *
      * @return \Illuminate\Support\Collection
      */
-    public function show(string $user_email, string $thread_id, int $pre_max_message_id)
+    public function show(string $thread_id, int $pre_max_message_id)
     {
-        $this->user_email = $user_email;
         $this->thread_id = $thread_id;
 
         return JobHuntingThreads::select(
             'job_hunting_threads.*',
             DB::raw('COUNT(likes1.user_email) AS count_user'),
-            DB::raw('COALESCE((likes2.user_email), 0) AS user_like'),
+            DB::raw('0 AS user_like'),
             'thread_image_paths.img_path'
         )
             ->leftjoin('likes AS likes1', function ($join) {
                 $join
                     ->where('likes1.thread_id', '=', $this->thread_id)
                     ->whereColumn('likes1.message_id', '=', 'job_hunting_threads.message_id');
-            })
-            ->leftjoin('likes AS likes2', function ($join) {
-                $join
-                    ->where('likes2.thread_id', '=', $this->thread_id)
-                    ->where('likes2.user_email', '=', $this->user_email)
-                    ->whereColumn('likes2.message_id', '=', 'job_hunting_threads.message_id');
             })
             ->leftjoin('thread_image_paths', function ($join) {
                 $join

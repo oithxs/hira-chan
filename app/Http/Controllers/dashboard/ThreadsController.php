@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\dashboard\not_logged_in\ThreadsController as NotLoggedInThreadsController;
 
 use App\Models\Hub;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ThreadsController extends Controller
 {
@@ -85,11 +87,15 @@ class ThreadsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Illuminate\Http\Request $request
-     * @return Illuminate\Support\Collection | void
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Support\Collection | void
      */
     public function show(Request $request)
     {
+        if (!Auth::check()) {
+            return (new NotLoggedInThreadsController)->show($request->table, $request->max_message_id);
+        }
+
         $thread = Hub::where('thread_id', '=', $request->table)->first();
         switch ($thread->thread_category_type) {
             case '学科':

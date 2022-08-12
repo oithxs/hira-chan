@@ -12,7 +12,7 @@ class DashboardController extends Controller
      * For dashboard thread mode
      *
      * @param Request $request
-     * @return Illuminate\Support\Collection
+     * @return \Illuminate\Support\Collection
      */
     public function threads(Request $request)
     {
@@ -27,7 +27,7 @@ class DashboardController extends Controller
      * For dashboard messages mode
      *
      * @param Request $request
-     * @return Illuminate\Support\Collection
+     * @return \Illuminate\Support\Collection
      */
     public function messages(Request $request)
     {

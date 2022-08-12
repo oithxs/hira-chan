@@ -31,10 +31,16 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!--　ここからがスレット作成ボタン -->
                 <div class="items-center px-3 py-2  ">
+                    @if (Auth::check())
                     <x-jet-danger-button type="button" class="btn btn-danger" data-bs-toggle="modal"
                         data-bs-target="#CreateThread_Modal">
                         {{ __('Create new thread') }}
                         </x-jet-denger-button>
+                        @else
+                        <x-jet-danger-button type="button" class="btn btn-danger" onclick="location.href='/login'">
+                            {{ __('Create new thread') }}
+                            </x-jet-denger-button>
+                            @endif
                 </div>
                 <!-- ここまでがスレット作成ボタン -->
 
@@ -106,7 +112,11 @@
                             <span class="inline-flex rounded-md">
                                 <button type="button"
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md hover:text-gray-700 focus:outline-none transition">
+                                    @if (Auth::check())
                                     {{ Auth::user()->name }}
+                                    @else
+                                    未ログイン
+                                    @endif
 
                                     <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20" fill="currentColor">
@@ -142,6 +152,7 @@
                             <div class="border-t border-gray-100"></div>
 
                             <!-- Authentication -->
+                            @if (Auth::check())
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                 @csrf
 
@@ -150,6 +161,11 @@
                                     {{ __('Log Out') }}
                                 </x-jet-dropdown-link>
                             </form>
+                            @else
+                            <x-jet-dropdown-link href="{{ route('login') }}" class="text-decoration-none">
+                                {{ __('Log in') }}
+                            </x-jet-dropdown-link>
+                            @endif
                         </x-slot>
                     </x-jet-dropdown>
                 </div>
@@ -190,8 +206,20 @@
                 @endif
 
                 <div>
-                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                    <div class="font-medium text-base text-gray-800">
+                        @if (Auth::check())
+                        {{ Auth::user()->name }}
+                        @else
+                        未ログイン
+                        @endif
+                    </div>
+                    <div class="font-medium text-sm text-gray-500">
+                        @if (Auth::check())
+                        {{ Auth::user()->email }}
+                        @else
+                        未ログイン
+                        @endif
+                    </div>
                 </div>
             </div>
 

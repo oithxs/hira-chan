@@ -80,7 +80,7 @@
                             ここからTwitterの表示
                             配置のイメージがつかめなかったので応急処置的にここに書いています
                         -->
-                        @if (Auth::user()->thema == 0)
+                        @if (!Auth::check() || Auth::user()->thema == 0)
                         <a class="twitter-timeline" data-chrome="nofooter" data-width="400" data-height="550"
                             data-theme="light" href="https://twitter.com/hxs_?ref_src=twsrc%5Etfw">Tweets by
                             hxs_</a>
