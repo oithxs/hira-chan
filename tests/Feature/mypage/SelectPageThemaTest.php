@@ -52,7 +52,7 @@ class SelectPageThemaTest extends TestCase
             'page_thema' => 0,
         ]);
 
-        $response->assertStatus(500);
+        $response->assertRedirect('/login');
     }
 
     public function test_user_post_access_select_default_page_thema()
@@ -83,7 +83,7 @@ class SelectPageThemaTest extends TestCase
             'page_thema' => 1,
         ]);
 
-        $response->assertStatus(500);
+        $response->assertRedirect('/login');
     }
 
     public function test_user_post_access_select_dark_page_thema()
