@@ -20,14 +20,18 @@ Route::get('/', function () {
     config('jetstream.auth_session')
 ]);
 
+Route::middleware([
+    config('jetstream.auth_session')
+])->group(function () {
+    Route::get('dashboard', 'App\Http\Controllers\dashboard\DashboardController@threads')->name('dashboard');
+});
+
 // ページ移動（要ログイン）
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('dashboard', 'App\Http\Controllers\dashboard\DashboardController@threads')->name('dashboard');
-
     Route::middleware([
         'Access_log'
     ])->group(function () {
