@@ -165,9 +165,6 @@
                             <x-jet-dropdown-link href="{{ route('login') }}" class="text-decoration-none">
                                 {{ __('Log in') }}
                             </x-jet-dropdown-link>
-                            <x-jet-dropdown-link href="/" class="text-decoration-none">
-                                ウェルカムページへ
-                            </x-jet-dropdown-link>
                             @endif
                         </x-slot>
                     </x-jet-dropdown>
