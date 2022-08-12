@@ -31,10 +31,16 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!--　ここからがスレット作成ボタン -->
                 <div class="items-center px-3 py-2  ">
+                    @if (Auth::check())
                     <x-jet-danger-button type="button" class="btn btn-danger" data-bs-toggle="modal"
                         data-bs-target="#CreateThread_Modal">
                         {{ __('Create new thread') }}
                         </x-jet-denger-button>
+                        @else
+                        <x-jet-danger-button type="button" class="btn btn-danger" onclick="location.href='/login'">
+                            {{ __('Create new thread') }}
+                            </x-jet-denger-button>
+                            @endif
                 </div>
                 <!-- ここまでがスレット作成ボタン -->
 
