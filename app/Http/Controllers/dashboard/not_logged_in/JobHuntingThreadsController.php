@@ -48,7 +48,7 @@ class JobHuntingThreadsController extends Controller
      * @param string $thread_id
      * @param int $pre_max_message_id
      *
-     * @return Illuminate\Support\Collection
+     * @return \Illuminate\Support\Collection
      */
     public function show(string $thread_id, int $pre_max_message_id)
     {

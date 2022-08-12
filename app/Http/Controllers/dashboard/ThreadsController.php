@@ -87,8 +87,8 @@ class ThreadsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Illuminate\Http\Request $request
-     * @return Illuminate\Support\Collection | void
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Support\Collection | void
      */
     public function show(Request $request)
     {

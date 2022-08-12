@@ -11,16 +11,16 @@ use Illuminate\Http\Request;
 
 class Rankings extends Component
 {
-    /** @var Illuminate\Support\Collection */
+    /** @var \Illuminate\Support\Collection */
     public $access_ranking;
 
-    /** @var Illuminate\Support\Collection */
+    /** @var \Illuminate\Support\Collection */
     public $weekly_access_ranking;
 
     /**
      * Storing data used on this page
      *
-     * @param Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return void
      */
     public function mount(Request $request)
@@ -46,7 +46,7 @@ class Rankings extends Component
     /**
      * Page Display
      *
-     * @return Illuminate\Support\Facades\View
+     * @return \Illuminate\Support\Facades\View
      */
     public function render()
     {

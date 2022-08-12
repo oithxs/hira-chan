@@ -9,25 +9,25 @@ use App\Models\Hub;
 
 class Threads extends Component
 {
-    /** @var Illuminate\Support\Collection */
+    /** @var \Illuminate\Support\Collection */
     public $tables;
 
-    /** @var Illuminate\Support\Collection */
+    /** @var \Illuminate\Support\Collection */
     public $categorys;
 
-    /** @var Illuminate\Support\Collection */
+    /** @var \Illuminate\Support\Collection */
     public $category_types;
 
-    /** @var Illuminate\Support\Collection */
+    /** @var \Illuminate\Support\Collection */
     public $category_name;
 
-    /** @var Illuminate\Support\Collection */
+    /** @var \Illuminate\Support\Collection */
     public $page;
 
     /**
      * Storing data used on this page
      *
-     * @param Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return void
      */
     public function mount(Request $request)
@@ -101,7 +101,7 @@ class Threads extends Component
     /**
      * Page Display
      *
-     * @return Illuminate\Support\Facades\View
+     * @return \Illuminate\Support\Facades\View
      */
     public function render(Request $request)
     {
