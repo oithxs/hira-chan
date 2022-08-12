@@ -151,7 +151,11 @@
 
                                 <x-jet-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();"
                                     class="text-decoration-none">
+                                    @if (Auth::check())
                                     {{ __('Log Out') }}
+                                    @else
+                                    ウェルカムページへ
+                                    @endif
                                 </x-jet-dropdown-link>
                             </form>
                         </x-slot>
