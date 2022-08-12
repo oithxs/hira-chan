@@ -44,6 +44,7 @@
 </div>
 
 <!-- ここからデザイン関係なし -->
+@if (Auth::check())
 <script>
     const url = "{{ url('') }}";
 </script>
@@ -54,4 +55,5 @@
     }
 </script>
 <script src="{{ asset('js/app_jquery.js') }}"></script>
+@endif
 <!-- ここまでデザイン関係なし -->
