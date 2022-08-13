@@ -24,6 +24,7 @@ Route::middleware([
     config('jetstream.auth_session')
 ])->group(function () {
     Route::get('dashboard', 'App\Http\Controllers\dashboard\DashboardController@threads')->name('dashboard');
+    Route::get('Q_and_A', 'App\Http\Controllers\Q_and_A\Q_and_AController@Q_and_A')->name('Q_and_A');
 
     Route::middleware([
         'Access_log'
