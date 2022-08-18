@@ -43,6 +43,7 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/mypage', 'App\Http\Controllers\mypage\MyPageController')->name('mypage');
+    Route::get('/report/create', 'App\Http\Controllers\report\FormContactAdministratorsController@create')->name('report.create');
 });
 
 // データ処理
@@ -69,6 +70,10 @@ Route::middleware([
 
         Route::controller(\App\Http\Controllers\mypage\UsersController::class)->group(function () {
             Route::match(['get', 'post'], 'jQuery.ajax/page_thema', 'update');
+        });
+
+        Route::controller(\App\Http\Controllers\report\FormContactAdministratorsController::class)->group(function () {
+            Route::match(['get', 'post'], 'report/store', 'store')->name('report.store');
         });
     });
 
