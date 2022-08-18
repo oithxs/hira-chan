@@ -36,6 +36,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script>
+        var show_thread_messages_flag = 0;
+    </script>
 </head>
 
 <body class="font-sans antialiased">
