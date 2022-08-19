@@ -6,7 +6,7 @@
     <dev class="container row">
         <a class="h4" href="dashboard">トップページへ</a>
     </dev>
-    @if (Auth::check())
+    @if (Auth::check() && Auth::user()->hasVerifiedEmail())
     <dev class="container row">
         <form id="dashboard_sendMessage_form" enctype="multipart/form-data">
             <div class="mb-2">
@@ -44,7 +44,7 @@
 </div>
 
 <!-- ここからデザイン関係なし -->
-@if (Auth::check())
+@if (Auth::check() && Auth::user()->hasVerifiedEmail())
 <script>
     const url = "{{ url('') }}";
 </script>
