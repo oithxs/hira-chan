@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'PostAccess_only' => \App\Http\Middleware\PostAccess_only::class,
         'Access_log' => \App\Http\Middleware\Access_log::class,
         'Is_Admin' => \App\Http\Middleware\IsAdmin::class,
+        'login.must_verified' => \App\Http\Middleware\MustAuthVerified::class
     ];
 
     /**
