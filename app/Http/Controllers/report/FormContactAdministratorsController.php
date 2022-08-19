@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\report;
 
 use App\Http\Controllers\Controller;
-use App\Models\ContactAdministrators;
 use App\Http\Requests\report\FormContactAdministratorsRequest;
+
+use App\Models\ContactAdministrators;
 
 use Illuminate\Http\Request;
 
@@ -34,11 +35,15 @@ class FormContactAdministratorsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\report\FormContactAdministratorsRequest $request
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function store(FormContactAdministratorsRequest $request)
     {
-        //
+        ContactAdministrators::create([
+            'type' => $request->radio_1,
+            'report_email' => $request->user()->email,
+            'message' => $request->report_form_textarea
+        ]);
     }
 
     /**

@@ -20,32 +20,32 @@
                             <div class="mb-2">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" id="report_form_radio_1_1"
-                                        name="radio_1" value="1">
+                                        name="radio_1" value="不快なコンテンツ">
                                     <label class="form-check-label" for="report_form_radio_1_1">不快なコンテンツ</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" id="report_form_radio_1_2"
-                                        name="radio_1" value="2">
+                                        name="radio_1" value="嫌がらせ，いじめ">
                                     <label class="form-check-label" for="report_form_radio_1_2">嫌がらせ，いじめ</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" id="report_form_radio_1_3"
-                                        name="radio_1" value="3">
+                                        name="radio_1" value="権利の侵害">
                                     <label class="form-check-label" for="report_form_radio_1_3">権利の侵害</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" id="report_form_radio_1_4"
-                                        name="radio_1" value="4">
+                                        name="radio_1" value="スパムまたは誤解を招く内容">
                                     <label class="form-check-label" for="report_form_radio_1_4">スパムまたは誤解を招く内容</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" id="report_form_radio_1_5"
-                                        name="radio_1" value="5">
+                                        name="radio_1" value="掲示板サイトのバグ・脆弱性">
                                     <label class="form-check-label" for="report_form_radio_1_5">掲示板サイトのバグ・脆弱性</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" id="report_form_radio_1_6"
-                                        name="radio_1" value="6">
+                                        name="radio_1" value="その他">
                                     <label class="form-check-label" for="report_form_radio_1_6">その他</label>
                                 </div>
                                 <div name="radio_1_error"></div>
