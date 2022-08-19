@@ -31,7 +31,7 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!--　ここからがスレット作成ボタン -->
                 <div class="items-center px-3 py-2  ">
-                    @if (Auth::check())
+                    @if (Auth::check() && Auth::user()->hasVerifiedEmail())
                     <x-jet-danger-button type="button" class="btn btn-danger" data-bs-toggle="modal"
                         data-bs-target="#CreateThread_Modal">
                         {{ __('Create new thread') }}
@@ -112,7 +112,7 @@
                             <span class="inline-flex rounded-md">
                                 <button type="button"
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md hover:text-gray-700 focus:outline-none transition">
-                                    @if (Auth::check())
+                                    @if (Auth::check() && Auth::user()->hasVerifiedEmail())
                                     {{ Auth::user()->name }}
                                     @else
                                     未ログイン
@@ -152,7 +152,7 @@
                             <div class="border-t border-gray-100"></div>
 
                             <!-- Authentication -->
-                            @if (Auth::check())
+                            @if (Auth::check() && Auth::user()->hasVerifiedEmail())
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                 @csrf
 
@@ -207,14 +207,14 @@
 
                 <div>
                     <div class="font-medium text-base text-gray-800">
-                        @if (Auth::check())
+                        @if (Auth::check() && Auth::user()->hasVerifiedEmail())
                         {{ Auth::user()->name }}
                         @else
                         未ログイン
                         @endif
                     </div>
                     <div class="font-medium text-sm text-gray-500">
-                        @if (Auth::check())
+                        @if (Auth::check() && Auth::user()->hasVerifiedEmail())
                         {{ Auth::user()->email }}
                         @else
                         未ログイン

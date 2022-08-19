@@ -5,7 +5,7 @@
     var max_message_id = 0;
 </script>
 
-@if (Auth::check())
+@if (Auth::check() && Auth::user()->hasVerifiedEmail())
 <script>
     function likes(message_id) {
         var access = "";
