@@ -10,10 +10,6 @@
         <h2 class="font-semibold text-xl leading-tight">
             @livewire('dashboard.header')
         </h2>
-
-        <script>
-            var show_thread_messages_flag = 0;
-        </script>
     </x-slot>
     <!-- ここまでカテゴリ別 -->
 
