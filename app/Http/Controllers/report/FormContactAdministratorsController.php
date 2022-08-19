@@ -4,6 +4,8 @@ namespace App\Http\Controllers\report;
 
 use App\Http\Controllers\Controller;
 use App\Models\ContactAdministrators;
+use App\Http\Requests\report\FormContactAdministratorsRequest;
+
 use Illuminate\Http\Request;
 
 class FormContactAdministratorsController extends Controller
@@ -31,10 +33,10 @@ class FormContactAdministratorsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\report\FormContactAdministratorsRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FormContactAdministratorsRequest $request)
     {
         //
     }

@@ -48,11 +48,14 @@
                                         name="radio_1" value="6">
                                     <label class="form-check-label" for="report_form_radio_1_6">その他</label>
                                 </div>
+                                <div name="radio_1_error"></div>
                             </div>
 
                             <div class="mb-2">
                                 <label for="report_form_textarea" class="form-label">内容を詳しく説明して下さい</label>
-                                <textarea id="report_form_textarea" class="form-control"></textarea>
+                                <textarea id="report_form_textarea" name="report_form_textarea"
+                                    class="form-control"></textarea>
+                                <div name="textarea_error"></div>
                             </div>
                         </form>
                         <button id="report_form_btn" class="btn btn-primary">
@@ -63,4 +66,6 @@
             </div>
         </div>
     </div>
+
+    <script src="{{ asset('js/app_jquery.js') }}"></script>
 </x-app-layout>
