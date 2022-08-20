@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "41db6afae5601a185054571a8d3443ce",
+    "content-hash": "35d146423b29ab90e5b721d28532ff3e",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1825,16 +1825,16 @@
         },
         {
             "name": "laravel-admin-ext/helpers",
-            "version": "v1.2",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-admin-extensions/helpers.git",
-                "reference": "47fac9ad239da56a444af86a0fa53b213209dd6d"
+                "reference": "b5ee6173794797d665b5baf7cc2713b523c2dd33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-admin-extensions/helpers/zipball/47fac9ad239da56a444af86a0fa53b213209dd6d",
-                "reference": "47fac9ad239da56a444af86a0fa53b213209dd6d",
+                "url": "https://api.github.com/repos/laravel-admin-extensions/helpers/zipball/b5ee6173794797d665b5baf7cc2713b523c2dd33",
+                "reference": "b5ee6173794797d665b5baf7cc2713b523c2dd33",
                 "shasum": ""
             },
             "require": {
@@ -1875,9 +1875,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel-admin-extensions/helpers/issues",
-                "source": "https://github.com/laravel-admin-extensions/helpers/tree/master"
+                "source": "https://github.com/laravel-admin-extensions/helpers/tree/v2.0.2"
             },
-            "time": "2019-12-11T02:59:06+00:00"
+            "time": "2021-10-11T09:41:51+00:00"
         },
         {
             "name": "laravel-admin-ext/log-viewer",
