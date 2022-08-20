@@ -67,7 +67,7 @@ class DepartmentThreadsController extends Controller
      * @param string $thread_id
      * @param int $pre_max_message_id
      *
-     * @return Illuminate\Support\Collection
+     * @return \Illuminate\Support\Collection
      */
     public function show(string $user_email, string $thread_id, int $pre_max_message_id)
     {

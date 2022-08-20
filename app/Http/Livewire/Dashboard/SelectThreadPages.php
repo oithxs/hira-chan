@@ -20,7 +20,7 @@ class SelectThreadPages extends Component
     /**
      * Storing data used on this page
      *
-     * @param Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return void
      */
     public function mount(Request $request)
@@ -39,7 +39,7 @@ class SelectThreadPages extends Component
     /**
      * Page Display
      *
-     * @return Illuminate\Support\Facades\View
+     * @return \Illuminate\Support\Facades\View
      */
     public function render()
     {

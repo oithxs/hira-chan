@@ -25,7 +25,7 @@ class AuthenticationTest extends TestCase
     {
         $response = $this->get('/dashboard');
 
-        $response->assertRedirect('/login');
+        $response->assertStatus(200);
     }
 
     public function test_dashboard_user_access()
@@ -50,14 +50,14 @@ class AuthenticationTest extends TestCase
     {
         $response = $this->get('/dashboard?sort=new_create');
 
-        $response->assertRedirect('/login');
+        $response->assertStatus(200);
     }
 
     public function test_dashboard_sort0_not_login_access()
     {
         $response = $this->get('/dashboard?sort=');
 
-        $response->assertRedirect('/login');
+        $response->assertStatus(200);
     }
 
     public function test_dashboard_sort1_user_access()
@@ -100,14 +100,14 @@ class AuthenticationTest extends TestCase
     {
         $response = $this->get('/dashboard?page=1');
 
-        $response->assertRedirect('/login');
+        $response->assertStatus(200);
     }
 
     public function test_dashboard_page0_not_login_access()
     {
         $response = $this->get('/dashboard?page=');
 
-        $response->assertRedirect('/login');
+        $response->assertStatus(200);
     }
 
     public function test_dashboard_page1_user_access()
@@ -150,28 +150,28 @@ class AuthenticationTest extends TestCase
     {
         $response = $this->get('/dashboard?page=1&sort=new_create');
 
-        $response->assertRedirect('/login');
+        $response->assertStatus(200);
     }
 
     public function test_dashboard_page1_sort0_not_login_access()
     {
         $response = $this->get('/dashboard?page=1&sort=');
 
-        $response->assertRedirect('/login');
+        $response->assertStatus(200);
     }
 
     public function test_dashboard_page0_sort1_not_login_access()
     {
         $response = $this->get('/dashboard?page=&sort=new_create');
 
-        $response->assertRedirect('/login');
+        $response->assertStatus(200);
     }
 
     public function test_dashboard_page0_sort0_not_login_access()
     {
         $response = $this->get('dashboard?page=&sort=');
 
-        $response->assertRedirect('/login');
+        $response->assertStatus(200);
     }
 
     public function test_dashboard_page1_sort1_user_access()

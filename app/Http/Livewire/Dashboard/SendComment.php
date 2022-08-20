@@ -9,7 +9,7 @@ class SendComment extends Component
     /**
      * Page Display
      *
-     * @return Illuminate\Support\Facades\View
+     * @return \Illuminate\Support\Facades\View
      */
     public function render()
     {

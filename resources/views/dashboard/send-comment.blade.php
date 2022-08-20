@@ -37,6 +37,7 @@
     </button>
 
 <!-- ここからデザイン関係なし -->
+@if (Auth::check() && Auth::user()->hasVerifiedEmail())
 <script>
     const url = "{{ url('') }}";
 </script>
@@ -47,4 +48,5 @@
     }
 </script>
 <script src="{{ asset('js/app_jquery.js') }}"></script>
+@endif
 <!-- ここまでデザイン関係なし -->

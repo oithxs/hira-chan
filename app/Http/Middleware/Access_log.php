@@ -18,7 +18,7 @@ class Access_log
     public function handle(Request $request, Closure $next)
     {
         AccessLogs::create([
-            'user_email' => $request->user()->email,
+            'user_email' => $request->user()->email ?? "Not logged in",
             'thread_name' => $request->thread_name ?? "",
             'thread_id' => $request->thread_id ?? "",
             'access_log' => $request->ip()
