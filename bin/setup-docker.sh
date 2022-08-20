@@ -51,6 +51,7 @@ docker-compose exec app php artisan migrate
 docker-compose exec app php artisan admin:install
 docker-compose exec app php artisan db:seed
 docker-compose exec app php artisan admin:import helpers
+docker-compose exec app php artisan admin:import log-viewer
 docker-compose exec app php artisan storage:link
 
 rm ~/docker-Laravel_Forum-B/Laravel_Forum-B/.enve

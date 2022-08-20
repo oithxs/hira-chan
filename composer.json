@@ -16,6 +16,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.7",
         "laravel-admin-ext/helpers": "1.*",
+        "laravel-admin-ext/log-viewer": "^1.0",
         "laravel-lang/lang": "~8.0",
         "laravel/framework": "^9.0",
         "laravel/jetstream": "^2.7",
