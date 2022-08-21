@@ -10,10 +10,10 @@ Route::group([
     'middleware'    => config('admin.route.middleware'),
     'as'            => config('admin.route.prefix') . '.',
 ], function (Router $router) {
-    $router->controller(App\Admin\Controllers\Dashboard\HomeController::class)->group(function (Router $router) {
+    $router->controller(Dashboard\HomeController::class)->group(function (Router $router) {
         $router->get('/', 'index')->name('home');
     });
-    $router->resource('/users', UserController::class);
+    $router->resource('/users', General\UserController::class);
     $router->get('/users/create/mail', 'MailController@show');
 
     $router->get('/users/mail', 'PostController')->middleware('AccessGET');
