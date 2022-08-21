@@ -50,8 +50,10 @@ docker-compose exec app php artisan key:generate
 docker-compose exec app php artisan migrate
 docker-compose exec app php artisan admin:install
 docker-compose exec app php artisan db:seed
+docker-compose exec app php artisan admin:import helpers
+docker-compose exec app php artisan admin:import log-viewer
 docker-compose exec app php artisan storage:link
 
-rm ../Laravel_Forum-B/.enve
+rm ~/docker-Laravel_Forum-B/Laravel_Forum-B/.enve
 
 exit 0
