@@ -15,5 +15,10 @@ Route::group([
     });
 
     $router->resource('/users', General\UserController::class);
-    $router->post('/users/create/mail', 'MailController@show');
+
+    $router->middleware([
+        'PostAccess_only'
+    ])->group(function (Router $router) {
+        $router->match(['get', 'post'], '/users/create/mail', General\MailController::class);
+    });
 });

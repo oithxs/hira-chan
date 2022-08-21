@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Controllers;
+namespace App\Admin\Controllers\General;
 
 use App\Admin\Forms\MailForm;
 use App\Http\Controllers\Controller;
@@ -20,7 +20,7 @@ class MailController extends Controller
      * @return Encore\Admin\Layout\Content
      */
 
-    public function show(Request $request, Content $content)
+    public function __invoke(Request $request, Content $content)
     {
         $emails = array();
         foreach (User::find(explode(',', $request->ids)) as $user) {
