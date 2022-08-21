@@ -13,9 +13,7 @@ Route::group([
     $router->controller(Dashboard\HomeController::class)->group(function (Router $router) {
         $router->get('/', 'index')->name('home');
     });
-    $router->resource('/users', General\UserController::class);
-    $router->get('/users/create/mail', 'MailController@show');
 
-    $router->get('/users/mail', 'PostController')->middleware('AccessGET');
-    $router->post('/users/mail', 'PostController');
+    $router->resource('/users', General\UserController::class);
+    $router->post('/users/create/mail', 'MailController@show');
 });
