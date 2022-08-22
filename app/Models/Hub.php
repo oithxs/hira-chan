@@ -34,6 +34,7 @@ class Hub extends Model
         'thread_category',
         'thread_category_type',
         'user_email',
+        'is_enabled'
     ];
 
     /**
