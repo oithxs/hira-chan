@@ -25,13 +25,9 @@ class MailForm extends Form
      */
     public function handle(Request $request)
     {
-        session_start();
-
-        $count = 1;
-        while (isset($_SESSION['email' . $count])) {
-            $emails[$count] = $_SESSION['email' . $count];
-            unset($_SESSION['email' . $count]);
-            $count++;
+        $emails = [];
+        for ($i = 0; $i <= $request->get('max'); $i++) {
+            array_push($emails, $request->get('email' . $i));
         }
         Mail::to($emails)->send(new ContactMail($request->mail_message));
 
@@ -44,6 +40,13 @@ class MailForm extends Form
      */
     public function form()
     {
+        $max = 0;
+
+        foreach ($this->data as $key => $email) {
+            $this->hidden('email' . $key)->default($email);
+            $max = $key;
+        }
+        $this->hidden('max')->default($max);
         $this->textarea("mail_message", __('Send mail text'));
     }
 
@@ -54,6 +57,6 @@ class MailForm extends Form
      */
     public function data()
     {
-        return [];
+        return $this->data;
     }
 }
