@@ -14,11 +14,11 @@ Route::group([
         $router->get('/', 'index')->name('home');
     });
 
-    $router->resource('/users', General\UserController::class);
+    $router->resource('/general/users', General\UserController::class);
 
     $router->middleware([
         'PostAccess_only'
     ])->group(function (Router $router) {
-        $router->match(['get', 'post'], '/users/create/mail', General\MailController::class);
+        $router->match(['get', 'post'], '/general/users/create/mail', General\MailController::class);
     });
 });

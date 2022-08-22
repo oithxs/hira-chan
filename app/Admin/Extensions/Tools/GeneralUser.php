@@ -18,7 +18,7 @@ class GeneralUser extends BatchAction
         return <<<EOT
 
 $('{$this->getElementClass()}').on('click', function() {
-    $('<form/>', {method: 'POST', action: '/admin/users/create/mail'})
+    $('<form/>', {method: 'POST', action: '/admin/general/users/create/mail'})
     .append($('<input/>', {type: 'hidden', name: '_token', value: LA.token}))
     .append($('<input/>', {type: 'hidden', name: 'ids', value: $.admin.grid.selected()}))
     .appendTo(document.body)

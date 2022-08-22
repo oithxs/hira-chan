@@ -26,7 +26,7 @@ class AdminInstallSeeder extends Seeder
             'order' => 9,
             'title' => 'Users',
             'icon' => 'fa-users',
-            'uri' => 'users'
+            'uri' => 'general/users'
         ]);
     }
 }
