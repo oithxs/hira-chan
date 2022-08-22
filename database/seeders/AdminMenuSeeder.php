@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\AdminMenu;
 
-class AdminInstallSeeder extends Seeder
+class AdminMenuSeeder extends Seeder
 {
     /**
      * Run the database seeds.
