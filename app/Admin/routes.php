@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Routing\Router;
+// use Encore\Admin\Facades\Admin;
+// use Illuminate\Support\Facades\Route;
 
 Admin::routes();
 
@@ -15,6 +17,7 @@ Route::group([
     });
 
     $router->resource('/general/users', General\UserController::class);
+    $router->resource('/general/threads', General\ThreadController::class);
 
     $router->middleware([
         'PostAccess_only'

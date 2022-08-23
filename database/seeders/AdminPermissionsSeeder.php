@@ -27,5 +27,12 @@ class AdminPermissionsSeeder extends Seeder
             'http_method' => 'GET,POST',
             'http_path' => '/general/users/create/mail'
         ]);
+
+        AdminPermissions::updateOrCreate([
+            'name' => 'General threads',
+            'slug' => 'general.threads',
+            'http_method' => '',
+            'http_path' => '/general/threads'
+        ]);
     }
 }

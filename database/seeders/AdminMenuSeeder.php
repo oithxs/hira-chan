@@ -28,5 +28,13 @@ class AdminMenuSeeder extends Seeder
             'icon' => 'fa-users',
             'uri' => 'general/users'
         ]);
+
+        AdminMenu::updateOrCreate([
+            'parent_id' => 8,
+            'order' => 10,
+            'title' => 'Threads',
+            'icon' => 'fa-book',
+            'uri' => 'general/threads'
+        ]);
     }
 }
