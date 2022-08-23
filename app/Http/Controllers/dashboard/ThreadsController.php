@@ -40,6 +40,8 @@ class ThreadsController extends Controller
      */
     public function store(Request $request)
     {
+        if (Hub::where('thread_id', '=', $request->table)->where('is_enabled', '=', '1')) return;
+
         $special_character_set = array(
             "&" => "&amp;",
             "<" => "&lt;",
@@ -96,7 +98,9 @@ class ThreadsController extends Controller
             return (new NotLoggedInThreadsController)->show($request->table, $request->max_message_id);
         }
 
-        $thread = Hub::where('thread_id', '=', $request->table)->first();
+        $thread = Hub::where('thread_id', '=', $request->table)
+            ->where('is_enabled', '=', 1)
+            ->first();
         switch ($thread->thread_category_type) {
             case '学科':
                 return (new DepartmentThreadsController)->show($request->user()->email, $request->table, $request->max_message_id);

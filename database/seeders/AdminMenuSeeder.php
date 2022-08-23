@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\AdminMenu;
 
-class AdminInstallSeeder extends Seeder
+class AdminMenuSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -26,7 +26,15 @@ class AdminInstallSeeder extends Seeder
             'order' => 9,
             'title' => 'Users',
             'icon' => 'fa-users',
-            'uri' => 'users'
+            'uri' => 'general/users'
+        ]);
+
+        AdminMenu::updateOrCreate([
+            'parent_id' => 8,
+            'order' => 10,
+            'title' => 'Threads',
+            'icon' => 'fa-book',
+            'uri' => 'general/threads'
         ]);
     }
 }

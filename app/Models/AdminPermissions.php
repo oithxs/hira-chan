@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hub extends Model
+class AdminPermissions extends Model
 {
     use HasFactory;
 
@@ -16,12 +16,13 @@ class Hub extends Model
      */
     protected $connection = 'mysql';
 
+
     /**
      * Tables to be associated
      *
      * @var string
      */
-    protected $table = 'hub';
+    protected $table = 'admin_permissions';
 
     /**
      * The attributes that are mass assignable
@@ -29,12 +30,10 @@ class Hub extends Model
      * @var string[]
      */
     protected $fillable = [
-        'thread_id',
-        'thread_name',
-        'thread_category',
-        'thread_category_type',
-        'user_email',
-        'is_enabled'
+        'name',
+        'slug',
+        'http_method',
+        'http_path'
     ];
 
     /**

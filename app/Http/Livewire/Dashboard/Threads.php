@@ -41,6 +41,7 @@ class Threads extends Component
                     ->leftJoin('access_logs', function ($join) {
                         $join->on('hub.thread_id', '=', 'access_logs.thread_id');
                     })
+                    ->where('hub.is_enabled', '=', 1)
                     ->groupBy('hub.thread_id')
                     ->orderByRaw('hub.created_at DESC')
                     ->get();
@@ -49,6 +50,7 @@ class Threads extends Component
                     ->leftJoin('access_logs', function ($join) {
                         $join->on('hub.thread_id', '=', 'access_logs.thread_id');
                     })
+                    ->where('hub.is_enabled', '=', 1)
                     ->groupBy('hub.thread_id')
                     ->orderByRaw('COUNT(access_logs.access_log) DESC')
                     ->get();
@@ -57,6 +59,7 @@ class Threads extends Component
                     ->leftJoin('access_logs', function ($join) {
                         $join->on('hub.thread_id', '=', 'access_logs.thread_id');
                     })
+                    ->where('hub.is_enabled', '=', 1)
                     ->groupBy('hub.thread_id')
                     ->get();
             }
@@ -67,6 +70,7 @@ class Threads extends Component
                         $join->on('hub.thread_id', '=', 'access_logs.thread_id');
                     })
                     ->where('hub.thread_category', '=', $category)
+                    ->where('hub.is_enabled', '=', 1)
                     ->groupBy('hub.thread_id')
                     ->orderByRaw('hub.created_at DESC')
                     ->get();
@@ -76,6 +80,7 @@ class Threads extends Component
                         $join->on('hub.thread_id', '=', 'access_logs.thread_id');
                     })
                     ->where('hub.thread_category', '=', $category)
+                    ->where('hub.is_enabled', '=', 1)
                     ->groupBy('hub.thread_id')
                     ->orderByRaw('COUNT(access_logs.access_log) DESC')
                     ->get();
@@ -85,6 +90,7 @@ class Threads extends Component
                         $join->on('hub.thread_id', '=', 'access_logs.thread_id');
                     })
                     ->where('hub.thread_category', '=', $category)
+                    ->where('hub.is_enabled', '=', 1)
                     ->groupBy('hub.thread_id')
                     ->get();
             }

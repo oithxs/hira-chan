@@ -25,7 +25,9 @@ class Messages extends Component
      */
     public function mount(Request $request)
     {
-        $exists = Hub::where('thread_id', '=', $request->thread_id)->get();
+        $exists = Hub::where('thread_id', '=', $request->thread_id)
+            ->where('is_enabled', '=', 1)
+            ->get();
 
         if ($exists) {
             $this->result = 1;
