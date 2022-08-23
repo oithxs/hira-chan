@@ -87,14 +87,14 @@ class ThreadController extends AdminController
         $form->text('thread_name', __('Thread name'));
         $form->textarea('thread_id', __('Thread ID'));
         $form->select('thread_category_type', __('Thread category type'))->options([
-            '学科', '学年', '部活', '授業', '就職'
+            '学科' => '学科', '学年' => '学年', '部活' => '部活', '授業' => '授業', '就職' => '就職'
         ]);
         $form->select('thread_category', __('Thread category'))->options([
-            'IS科', 'IN科', 'IC科', 'ID科', 'IM科',
-            '1年生', '2年生', '3年生', '4年生',
-            'HxSコンピュータ部',
-            'キャリア科目',
-            '2022年度'
+            'IS科' => 'IS科', 'IN科' => 'IN科', 'IC科' => 'IC科', 'ID科' => 'ID科', 'IM科' => 'IN科',
+            '1年生' => '1年生', '2年生' => '2年生', '3年生' => '3年生', '4年生' => '4年生',
+            'HxSコンピュータ部' => 'HxSコンピュータ部',
+            'キャリア科目' => 'キャリア科目',
+            '2022年度' => '2022年度'
         ]);
         $form->email('user_email', __('Email'));
         $form->switch('is_enabled', __('is enabled'))->default(1);

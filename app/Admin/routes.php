@@ -1,8 +1,8 @@
 <?php
 
+use Encore\Admin\Facades\Admin;
 use Illuminate\Routing\Router;
-// use Encore\Admin\Facades\Admin;
-// use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;
 
 Admin::routes();
 
