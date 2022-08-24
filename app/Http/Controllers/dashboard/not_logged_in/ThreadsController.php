@@ -49,7 +49,9 @@ class ThreadsController extends Controller
      */
     public function show(string $thread_id, int $pre_max_message_id)
     {
-        $thread = Hub::where('thread_id', '=', $thread_id)->first();
+        $thread = Hub::where('thread_id', '=', $thread_id)
+            ->where('is_enabled', '=', 1)
+            ->first();
         switch ($thread->thread_category_type) {
             case '学科':
                 return (new DepartmentThreadsController)->show($thread_id, $pre_max_message_id);
