@@ -6,9 +6,9 @@
 <div>
     <table class="table table-striped">
         <thead>
-            <tr>
+            <tr class="text-center">
                 @foreach ($category_types as $category_type)
-                <th>
+                <th class="col-md-1">
                     <label></label>
                     <select onChange="location.href=value;">
                         <option>{{ $category_type->category_type }}</option>

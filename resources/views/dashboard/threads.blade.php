@@ -63,7 +63,7 @@
     </div>
   </div>
 
- <table id="dashboard_threads_threads_table" style="table-layout:fixed;width:100%;" class="table shadow table table-hover">
+ <table id="dashboard_threads_threads_table" style="table-layout:fixed;width:100%;" class="table shadow-xl table table-hover">
      <thead class="table-info text-nowrap">
          <tr>
              <!-- ここからソートのためのリンク -->

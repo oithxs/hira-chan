@@ -18,6 +18,7 @@
 
         <!-- ここからPVランキング -->
             <div class="py-12 col-lg-2 col-md-12">
+
                         @if ($main_type == 'threads')
                         @livewire('dashboard.threads')
                         @elseif ($main_type == 'messages')
@@ -28,41 +29,40 @@
 
             <!-- ここからメインの表示欄 -->
             <div class="py-12 col-lg-7 col-md-12">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-2">
-                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+
                         @if ($main_type == 'threads')
-                        @livewire('dashboard.rankings')
+                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                            <div class="max-w-7xl mx-auto sm:px-6 lg:px-2">
+                                @livewire('dashboard.rankings')
+                            </div>
+                        </div>
                         @elseif ($main_type == 'messages')
-                        @livewire('dashboard.messages')
+                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-2">
+                            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                                @livewire('dashboard.messages')
+                            </div>
+                        </div>
                         <!-- elseif (カテゴリ別) -->
                         @endif
-                    </div>
-                </div>
-
-
-
-
             </div>
             <!-- ここまでメインの表示欄 -->
 
             <!-- ここから右にいろいろ -->
             <div class="py-12 col-lg-3 col-md-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-2">
-                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         @if ($main_type == 'messages')
                         @livewire('dashboard.send-comment')
                         <!-- elseif (カテゴリ別) -->
                         @endif
-                    </div>
                 </div>
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-6">
+                    <div class="bg-secondary bg-opacity-25">
                         @livewire('dashboard.various')
                     </div>
                 </div>
 
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+
                         <!--
                             ここからTwitterの表示
                             配置のイメージがつかめなかったので応急処置的にここに書いています
@@ -78,7 +78,7 @@
 
                         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                         <!-- ここまでTwitterの表示 -->
-                    </div>
+
                 </div>
             </div>
             <!-- ここまで右にいろいろ -->
