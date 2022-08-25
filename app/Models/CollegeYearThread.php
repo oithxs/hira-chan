@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ThreadImagePaths extends Model
+class CollegeYearThread extends Model
 {
     use HasFactory;
 
@@ -21,7 +21,7 @@ class ThreadImagePaths extends Model
      *
      * @var string
      */
-    protected $table = 'thread_image_paths';
+    protected $table = 'college_year_threads';
 
     /**
      * The attributes that are mass assignable
@@ -31,9 +31,9 @@ class ThreadImagePaths extends Model
     protected $fillable = [
         'thread_id',
         'message_id',
+        'user_name',
         'user_email',
-        'img_path',
-        'img_size',
+        'message',
     ];
 
     /**
@@ -43,8 +43,6 @@ class ThreadImagePaths extends Model
      */
     protected $hidden = [
         'thread_id',
-        'img_path',
-        'img_size'
     ];
 
     /**
@@ -53,7 +51,7 @@ class ThreadImagePaths extends Model
      * @var array
      */
     protected $casts = [
-        'created_at' => 'datetime',
-        'update_at' => 'datetime',
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'update_at' => 'datetime:Y-m-d H:i:s',
     ];
 }

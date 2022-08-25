@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LectureThreads extends Model
+class AdminPermission extends Model
 {
     use HasFactory;
 
@@ -16,12 +16,13 @@ class LectureThreads extends Model
      */
     protected $connection = 'mysql';
 
+
     /**
      * Tables to be associated
      *
      * @var string
      */
-    protected $table = 'lecture_threads';
+    protected $table = 'admin_permissions';
 
     /**
      * The attributes that are mass assignable
@@ -29,20 +30,10 @@ class LectureThreads extends Model
      * @var string[]
      */
     protected $fillable = [
-        'thread_id',
-        'message_id',
-        'user_name',
-        'user_email',
-        'message',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'thread_id',
+        'name',
+        'slug',
+        'http_method',
+        'http_path'
     ];
 
     /**

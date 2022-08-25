@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AdminPermissions extends Model
+class ContactAdministrator extends Model
 {
     use HasFactory;
 
@@ -16,13 +16,12 @@ class AdminPermissions extends Model
      */
     protected $connection = 'mysql';
 
-
     /**
      * Tables to be associated
      *
      * @var string
      */
-    protected $table = 'admin_permissions';
+    protected $table = 'contact_administrators';
 
     /**
      * The attributes that are mass assignable
@@ -30,10 +29,18 @@ class AdminPermissions extends Model
      * @var string[]
      */
     protected $fillable = [
-        'name',
-        'slug',
-        'http_method',
-        'http_path'
+        'type',
+        'report_email',
+        'message',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'report_email',
     ];
 
     /**

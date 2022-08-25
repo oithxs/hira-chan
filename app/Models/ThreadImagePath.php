@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AccessLogs extends Model
+class ThreadImagePath extends Model
 {
     use HasFactory;
 
@@ -21,7 +21,7 @@ class AccessLogs extends Model
      *
      * @var string
      */
-    protected $table = 'access_logs';
+    protected $table = 'thread_image_paths';
 
     /**
      * The attributes that are mass assignable
@@ -29,10 +29,11 @@ class AccessLogs extends Model
      * @var string[]
      */
     protected $fillable = [
-        'user_email',
-        'thread_name',
         'thread_id',
-        'access_log',
+        'message_id',
+        'user_email',
+        'img_path',
+        'img_size',
     ];
 
     /**
@@ -42,6 +43,8 @@ class AccessLogs extends Model
      */
     protected $hidden = [
         'thread_id',
+        'img_path',
+        'img_size'
     ];
 
     /**
@@ -50,7 +53,7 @@ class AccessLogs extends Model
      * @var array
      */
     protected $casts = [
-        'created_at' => 'datetime:Y-m-d H:i:s',
-        'update_at' => 'datetime:Y-m-d H:i:s',
+        'created_at' => 'datetime',
+        'update_at' => 'datetime',
     ];
 }

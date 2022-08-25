@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ClubThreads extends Model
+class AccessLog extends Model
 {
     use HasFactory;
 
@@ -21,7 +21,7 @@ class ClubThreads extends Model
      *
      * @var string
      */
-    protected $table = 'club_threads';
+    protected $table = 'access_logs';
 
     /**
      * The attributes that are mass assignable
@@ -29,11 +29,10 @@ class ClubThreads extends Model
      * @var string[]
      */
     protected $fillable = [
-        'thread_id',
-        'message_id',
-        'user_name',
         'user_email',
-        'message',
+        'thread_name',
+        'thread_id',
+        'access_log',
     ];
 
     /**

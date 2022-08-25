@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class JobHuntingThreads extends Model
+class LectureThread extends Model
 {
     use HasFactory;
 
@@ -21,7 +21,7 @@ class JobHuntingThreads extends Model
      *
      * @var string
      */
-    protected $table = 'job_hunting_threads';
+    protected $table = 'lecture_threads';
 
     /**
      * The attributes that are mass assignable

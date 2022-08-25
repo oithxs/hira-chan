@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ContactAdministrators extends Model
+class DepartmentThread extends Model
 {
     use HasFactory;
 
@@ -21,7 +21,7 @@ class ContactAdministrators extends Model
      *
      * @var string
      */
-    protected $table = 'contact_administrators';
+    protected $table = 'department_threads';
 
     /**
      * The attributes that are mass assignable
@@ -29,8 +29,10 @@ class ContactAdministrators extends Model
      * @var string[]
      */
     protected $fillable = [
-        'type',
-        'report_email',
+        'thread_id',
+        'message_id',
+        'user_name',
+        'user_email',
         'message',
     ];
 
@@ -40,7 +42,7 @@ class ContactAdministrators extends Model
      * @var array
      */
     protected $hidden = [
-        'report_email',
+        'thread_id',
     ];
 
     /**
