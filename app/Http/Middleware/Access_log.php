@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\AccessLog;
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\AccessLogs;
 
 class Access_log
 {
@@ -17,7 +17,7 @@ class Access_log
      */
     public function handle(Request $request, Closure $next)
     {
-        AccessLogs::create([
+        AccessLog::create([
             'user_email' => $request->user()->email ?? "Not logged in",
             'thread_name' => $request->thread_name ?? "",
             'thread_id' => $request->thread_id ?? "",
