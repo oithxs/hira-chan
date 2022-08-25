@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\AdminPermissions;
+use App\Models\AdminPermission;
 
-class AdminPermissionsSeeder extends Seeder
+class AdminPermissionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,21 +14,21 @@ class AdminPermissionsSeeder extends Seeder
      */
     public function run()
     {
-        AdminPermissions::updateOrCreate([
+        AdminPermission::updateOrCreate([
             'name' => 'General users',
             'slug' => 'general.users',
             'http_method' => '',
             'http_path' => '/general/users'
         ]);
 
-        AdminPermissions::updateOrCreate([
+        AdminPermission::updateOrCreate([
             'name' => 'Send general users',
             'slug' => 'general.users.mail',
             'http_method' => 'GET,POST',
             'http_path' => '/general/users/create/mail'
         ]);
 
-        AdminPermissions::updateOrCreate([
+        AdminPermission::updateOrCreate([
             'name' => 'General threads',
             'slug' => 'general.threads',
             'http_method' => '',

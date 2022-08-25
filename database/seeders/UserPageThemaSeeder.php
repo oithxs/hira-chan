@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\UserPageThemas;
+use App\Models\UserPageThema;
 
-class UserPageThemasSeeder extends Seeder
+class UserPageThemaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,12 +14,12 @@ class UserPageThemasSeeder extends Seeder
      */
     public function run()
     {
-        UserPageThemas::updateOrCreate([
+        UserPageThema::updateOrCreate([
             'thema_id' => 0,
             'thema_name' => 'default'
         ]);
 
-        UserPageThemas::updateOrCreate([
+        UserPageThema::updateOrCreate([
             'thema_id' => 1,
             'thema_name' => 'dark'
         ]);
