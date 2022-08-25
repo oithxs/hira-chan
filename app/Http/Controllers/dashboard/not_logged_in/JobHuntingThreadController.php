@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\dashboard\not_logged_in;
 
 use App\Http\Controllers\Controller;
-
-use App\Models\LectureThreads;
-
+use App\Models\JobHuntingThread;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class LectureThreadsController extends Controller
+class JobHuntingThreadController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -54,8 +52,8 @@ class LectureThreadsController extends Controller
     {
         $this->thread_id = $thread_id;
 
-        return LectureThreads::select(
-            'lecture_threads.*',
+        return JobHuntingThread::select(
+            'job_hunting_threads.*',
             DB::raw('COUNT(likes1.user_email) AS count_user'),
             DB::raw('0 AS user_like'),
             'thread_image_paths.img_path'
@@ -63,26 +61,26 @@ class LectureThreadsController extends Controller
             ->leftjoin('likes AS likes1', function ($join) {
                 $join
                     ->where('likes1.thread_id', '=', $this->thread_id)
-                    ->whereColumn('likes1.message_id', '=', 'lecture_threads.message_id');
+                    ->whereColumn('likes1.message_id', '=', 'job_hunting_threads.message_id');
             })
             ->leftjoin('thread_image_paths', function ($join) {
                 $join
-                    ->whereColumn('thread_image_paths.thread_id', '=', 'lecture_threads.thread_id')
-                    ->whereColumn('thread_image_paths.message_id', '=', 'lecture_threads.message_id');
+                    ->whereColumn('thread_image_paths.thread_id', '=', 'job_hunting_threads.thread_id')
+                    ->whereColumn('thread_image_paths.message_id', '=', 'job_hunting_threads.message_id');
             })
-            ->where('lecture_threads.thread_id', '=', $this->thread_id)
-            ->where('lecture_threads.message_id', '>', $pre_max_message_id)
-            ->groupBy('lecture_threads.message_id')
+            ->where('job_hunting_threads.thread_id', '=', $this->thread_id)
+            ->where('job_hunting_threads.message_id', '>', $pre_max_message_id)
+            ->groupBy('job_hunting_threads.message_id')
             ->get();
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\LectureThreads  $lectureThreads
+     * @param  \App\Models\JobHuntingThread  $jobHuntingThreads
      * @return \Illuminate\Http\Response
      */
-    public function edit(LectureThreads $lectureThreads)
+    public function edit(JobHuntingThread $jobHuntingThreads)
     {
         //
     }
@@ -91,10 +89,10 @@ class LectureThreadsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\LectureThreads  $lectureThreads
+     * @param  \App\Models\JobHuntingThread  $jobHuntingThreads
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, LectureThreads $lectureThreads)
+    public function update(Request $request, JobHuntingThread $jobHuntingThreads)
     {
         //
     }
@@ -102,10 +100,10 @@ class LectureThreadsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\LectureThreads  $lectureThreads
+     * @param  \App\Models\JobHuntingThread  $jobHuntingThreads
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LectureThreads $lectureThreads)
+    public function destroy(JobHuntingThread $jobHuntingThreads)
     {
         //
     }

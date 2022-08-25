@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
-
 use App\Models\Hub;
-use App\Models\ThreadCategorys;
-
+use App\Models\ThreadCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -42,7 +40,7 @@ class HubController extends Controller
     {
         $uuid = str_replace('-', '', Str::uuid());
 
-        $category = ThreadCategorys::where('category_name', '=', $request->thread_category)->first();
+        $category = ThreadCategory::where('category_name', '=', $request->thread_category)->first();
 
         Hub::create([
             'thread_id' => $uuid,

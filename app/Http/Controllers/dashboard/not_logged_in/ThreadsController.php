@@ -54,15 +54,15 @@ class ThreadsController extends Controller
             ->first();
         switch ($thread->thread_category_type) {
             case '学科':
-                return (new DepartmentThreadsController)->show($thread_id, $pre_max_message_id);
+                return (new DepartmentThreadController)->show($thread_id, $pre_max_message_id);
             case '学年':
-                return (new CollegeYearThreadsController)->show($thread_id, $pre_max_message_id);
+                return (new CollegeYearThreadController)->show($thread_id, $pre_max_message_id);
             case '部活':
-                return (new ClubThreadsController)->show($thread_id, $pre_max_message_id);
+                return (new ClubThreadController)->show($thread_id, $pre_max_message_id);
             case '授業':
-                return (new LectureThreadsController)->show($thread_id, $pre_max_message_id);
+                return (new LectureThreadController)->show($thread_id, $pre_max_message_id);
             case '就職':
-                return (new JobHuntingThreadsController)->show($thread_id, $pre_max_message_id);
+                return (new JobHuntingThreadController)->show($thread_id, $pre_max_message_id);
             default:
                 return null;
         }

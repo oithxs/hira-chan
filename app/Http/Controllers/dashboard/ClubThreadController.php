@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
-
-use App\Models\ClubThreads;
-
+use App\Models\ClubThread;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ClubThreadsController extends Controller
+class ClubThreadController extends Controller
 {
     /** @var string */
     private $user_email;
@@ -49,8 +47,8 @@ class ClubThreadsController extends Controller
      */
     public function store(string $thread_id, string $user_name, string $user_email, string $message)
     {
-        $message_id = ClubThreads::where('thread_id', '=', $thread_id)->max('message_id') + 1 ?? 0;
-        ClubThreads::create([
+        $message_id = ClubThread::where('thread_id', '=', $thread_id)->max('message_id') + 1 ?? 0;
+        ClubThread::create([
             'thread_id' => $thread_id,
             'message_id' => $message_id,
             'user_name' => $user_name,
@@ -74,7 +72,7 @@ class ClubThreadsController extends Controller
         $this->user_email = $user_email;
         $this->thread_id = $thread_id;
 
-        return ClubThreads::select(
+        return ClubThread::select(
             'club_threads.*',
             DB::raw('COUNT(likes1.user_email) AS count_user'),
             DB::raw('COALESCE((likes2.user_email), 0) AS user_like'),
@@ -105,10 +103,10 @@ class ClubThreadsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ClubThreads  $clubThreads
+     * @param  \App\Models\ClubThread  $clubThreads
      * @return \Illuminate\Http\Response
      */
-    public function edit(ClubThreads $clubThreads)
+    public function edit(ClubThread $clubThreads)
     {
         //
     }
@@ -117,10 +115,10 @@ class ClubThreadsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ClubThreads  $clubThreads
+     * @param  \App\Models\ClubThread  $clubThreads
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ClubThreads $clubThreads)
+    public function update(Request $request, ClubThread $clubThreads)
     {
         //
     }
@@ -128,10 +126,10 @@ class ClubThreadsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ClubThreads  $clubThreads
+     * @param  \App\Models\ClubThread  $clubThreads
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ClubThreads $clubThreads)
+    public function destroy(ClubThread $clubThreads)
     {
         //
     }

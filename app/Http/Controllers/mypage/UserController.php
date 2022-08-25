@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\mail;
+namespace App\Http\Controllers\mypage;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -65,28 +65,24 @@ class UsersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
-        //
+        $page_thema = $request->page_thema;
+        $user = User::find($request->user()->id);
+        $user->thema = $page_thema;
+        $user->save();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse | void
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(User $user)
     {
-        if (!$request->hasValidSignature()) {
-            abort(403);
-        } else {
-            $ctl = User::find($request->id);
-            $ctl->delete();
-            return redirect('/');
-        }
+        //
     }
 }

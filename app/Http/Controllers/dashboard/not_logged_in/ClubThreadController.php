@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\dashboard\not_logged_in;
 
 use App\Http\Controllers\Controller;
-
-use App\Models\CollegeYearThreads;
-
+use App\Models\ClubThread;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class CollegeYearThreadsController extends Controller
+class ClubThreadController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -54,8 +52,8 @@ class CollegeYearThreadsController extends Controller
     {
         $this->thread_id = $thread_id;
 
-        return CollegeYearThreads::select(
-            'college_year_threads.*',
+        return ClubThread::select(
+            'club_threads.*',
             DB::raw('COUNT(likes1.user_email) AS count_user'),
             DB::raw('0 AS user_like'),
             'thread_image_paths.img_path'
@@ -63,26 +61,26 @@ class CollegeYearThreadsController extends Controller
             ->leftjoin('likes AS likes1', function ($join) {
                 $join
                     ->where('likes1.thread_id', '=', $this->thread_id)
-                    ->whereColumn('likes1.message_id', '=', 'college_year_threads.message_id');
+                    ->whereColumn('likes1.message_id', '=', 'club_threads.message_id');
             })
             ->leftjoin('thread_image_paths', function ($join) {
                 $join
-                    ->whereColumn('thread_image_paths.thread_id', '=', 'college_year_threads.thread_id')
-                    ->whereColumn('thread_image_paths.message_id', '=', 'college_year_threads.message_id');
+                    ->whereColumn('thread_image_paths.thread_id', '=', 'club_threads.thread_id')
+                    ->whereColumn('thread_image_paths.message_id', '=', 'club_threads.message_id');
             })
-            ->where('college_year_threads.thread_id', '=', $this->thread_id)
-            ->where('college_year_threads.message_id', '>', $pre_max_message_id)
-            ->groupBy('college_year_threads.message_id')
+            ->where('club_threads.thread_id', '=', $this->thread_id)
+            ->where('club_threads.message_id', '>', $pre_max_message_id)
+            ->groupBy('club_threads.message_id')
             ->get();
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\CollegeYearThreads  $collegeYearThreads
+     * @param  \App\Models\ClubThread  $clubThreads
      * @return \Illuminate\Http\Response
      */
-    public function edit(CollegeYearThreads $collegeYearThreads)
+    public function edit(ClubThread $clubThreads)
     {
         //
     }
@@ -91,10 +89,10 @@ class CollegeYearThreadsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CollegeYearThreads  $collegeYearThreads
+     * @param  \App\Models\ClubThread  $clubThreads
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CollegeYearThreads $collegeYearThreads)
+    public function update(Request $request, ClubThread $clubThreads)
     {
         //
     }
@@ -102,10 +100,10 @@ class CollegeYearThreadsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CollegeYearThreads  $collegeYearThreads
+     * @param  \App\Models\ClubThread  $clubThreads
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CollegeYearThreads $collegeYearThreads)
+    public function destroy(ClubThread $clubThreads)
     {
         //
     }

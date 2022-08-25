@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\report;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\report\FormContactAdministratorsRequest;
-
-use App\Models\ContactAdministrators;
-
+use App\Http\Requests\report\FormContactAdministratorRequest;
+use App\Models\ContactAdministrator;
 use Illuminate\Http\Request;
 
-class FormContactAdministratorsController extends Controller
+class FormContactAdministratorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,12 +32,12 @@ class FormContactAdministratorsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\report\FormContactAdministratorsRequest $request
+     * @param  \App\Http\Requests\report\FormContactAdministratorRequest $request
      * @return void
      */
-    public function store(FormContactAdministratorsRequest $request)
+    public function store(FormContactAdministratorRequest $request)
     {
-        ContactAdministrators::create([
+        ContactAdministrator::create([
             'type' => $request->radio_1,
             'report_email' => $request->user()->email,
             'message' => $request->report_form_textarea
@@ -49,10 +47,10 @@ class FormContactAdministratorsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ContactAdministrators  $contactAdministrators
+     * @param  \App\Models\ContactAdministrator  $contactAdministrators
      * @return \Illuminate\Http\Response
      */
-    public function show(ContactAdministrators $contactAdministrators)
+    public function show(ContactAdministrator $contactAdministrators)
     {
         //
     }
@@ -60,10 +58,10 @@ class FormContactAdministratorsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ContactAdministrators  $contactAdministrators
+     * @param  \App\Models\ContactAdministrator  $contactAdministrators
      * @return \Illuminate\Http\Response
      */
-    public function edit(ContactAdministrators $contactAdministrators)
+    public function edit(ContactAdministrator $contactAdministrators)
     {
         //
     }
@@ -72,10 +70,10 @@ class FormContactAdministratorsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ContactAdministrators  $contactAdministrators
+     * @param  \App\Models\ContactAdministrator  $contactAdministrators
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ContactAdministrators $contactAdministrators)
+    public function update(Request $request, ContactAdministrator $contactAdministrators)
     {
         //
     }
@@ -83,10 +81,10 @@ class FormContactAdministratorsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ContactAdministrators  $contactAdministrators
+     * @param  \App\Models\ContactAdministrator  $contactAdministrators
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ContactAdministrators $contactAdministrators)
+    public function destroy(ContactAdministrator $contactAdministrators)
     {
         //
     }

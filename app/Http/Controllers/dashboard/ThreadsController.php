@@ -4,13 +4,11 @@ namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\dashboard\not_logged_in\ThreadsController as NotLoggedInThreadsController;
-
 use App\Models\Hub;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ThreadsController extends Controller
+class ThreadController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -66,24 +64,24 @@ class ThreadsController extends Controller
         $thread = Hub::where('thread_id', '=', $request->table)->first();
         switch ($thread->thread_category_type) {
             case '学科':
-                $message_id = (new DepartmentThreadsController)->store($request->table, $request->user()->name, $request->user()->email, $message);
+                $message_id = (new DepartmentThreadController)->store($request->table, $request->user()->name, $request->user()->email, $message);
                 break;
             case '学年':
-                $message_id = (new CollegeYearThreadsController)->store($request->table, $request->user()->name, $request->user()->email, $message);
+                $message_id = (new CollegeYearThreadController)->store($request->table, $request->user()->name, $request->user()->email, $message);
                 break;
             case '部活':
-                $message_id = (new ClubThreadsController)->store($request->table, $request->user()->name, $request->user()->email, $message);
+                $message_id = (new ClubThreadController)->store($request->table, $request->user()->name, $request->user()->email, $message);
                 break;
             case '授業':
-                $message_id = (new LectureThreadsController)->store($request->table, $request->user()->name, $request->user()->email, $message);
+                $message_id = (new LectureThreadController)->store($request->table, $request->user()->name, $request->user()->email, $message);
                 break;
             case '就職':
-                $message_id = (new JobHuntingThreadsController)->store($request->table, $request->user()->name, $request->user()->email, $message);
+                $message_id = (new JobHuntingThreadController)->store($request->table, $request->user()->name, $request->user()->email, $message);
             default:
                 break;
         }
 
-        (new ThreadImagePathsController)->store($request, $message_id);
+        (new ThreadImagePathController)->store($request, $message_id);
     }
 
     /**
@@ -103,15 +101,15 @@ class ThreadsController extends Controller
             ->first();
         switch ($thread->thread_category_type) {
             case '学科':
-                return (new DepartmentThreadsController)->show($request->user()->email, $request->table, $request->max_message_id);
+                return (new DepartmentThreadController)->show($request->user()->email, $request->table, $request->max_message_id);
             case '学年':
-                return (new CollegeYearThreadsController)->show($request->user()->email, $request->table, $request->max_message_id);
+                return (new CollegeYearThreadController)->show($request->user()->email, $request->table, $request->max_message_id);
             case '部活':
-                return (new ClubThreadsController)->show($request->user()->email, $request->table, $request->max_message_id);
+                return (new ClubThreadController)->show($request->user()->email, $request->table, $request->max_message_id);
             case '授業':
-                return (new LectureThreadsController)->show($request->user()->email, $request->table, $request->max_message_id);
+                return (new LectureThreadController)->show($request->user()->email, $request->table, $request->max_message_id);
             case '就職':
-                return (new JobHuntingThreadsController)->show($request->user()->email, $request->table, $request->max_message_id);
+                return (new JobHuntingThreadController)->show($request->user()->email, $request->table, $request->max_message_id);
             default:
                 return null;
         }
