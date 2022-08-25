@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire\Dashboard;
 
+use App\Models\Hub;
+use App\Models\ThreadCategory;
 use Livewire\Component;
 use Illuminate\Http\Request;
-use App\Models\ThreadCategorys;
-use App\Models\Hub;
 
 class Threads extends Component
 {
@@ -96,8 +96,8 @@ class Threads extends Component
             }
         }
 
-        $this->categorys = ThreadCategorys::get();
-        $this->category_types = ThreadCategorys::select('category_type')
+        $this->categorys = ThreadCategory::get();
+        $this->category_types = ThreadCategory::select('category_type')
             ->distinct('category_type')
             ->get();
         $this->category_name = $request->category;

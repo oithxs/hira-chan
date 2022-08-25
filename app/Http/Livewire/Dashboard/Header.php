@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Dashboard;
 
+use App\Models\ThreadCategory;
 use Illuminate\Http\Request;
 use Livewire\Component;
-use App\Models\ThreadCategorys;
 
 class Header extends Component
 {
@@ -22,8 +22,8 @@ class Header extends Component
      */
     public function mount(Request $request)
     {
-        $this->categorys = ThreadCategorys::get();
-        $this->category_types = ThreadCategorys::select('category_type')
+        $this->categorys = ThreadCategory::get();
+        $this->category_types = ThreadCategory::select('category_type')
             ->distinct('category_type')
             ->get();
     }
