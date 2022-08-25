@@ -39,7 +39,6 @@ class HubController extends Controller
     public function store(Request $request)
     {
         $uuid = str_replace('-', '', Str::uuid());
-
         $category = ThreadCategory::where('category_name', '=', $request->thread_category)->first();
 
         Hub::create([

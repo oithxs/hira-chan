@@ -38,8 +38,7 @@ class ThreadsController extends Controller
      */
     public function store(Request $request)
     {
-        if (Hub::where('thread_id', '=', $request->table)->where('is_enabled', '=', '1')) return;
-
+        if (!Hub::where('thread_id', '=', $request->table)->where('is_enabled', '=', 1)->first()) return;
         $special_character_set = array(
             "&" => "&amp;",
             "<" => "&lt;",
