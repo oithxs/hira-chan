@@ -41,7 +41,7 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/mypage', 'App\Http\Controllers\mypage\MyPageController')->name('mypage');
-    Route::get('/report/create', 'App\Http\Controllers\report\FormContactAdministratorsController@create')->name('report.create');
+    Route::get('/report/create', 'App\Http\Controllers\report\FormContactAdministratorController@create')->name('report.create');
 });
 
 // データ処理
@@ -61,16 +61,16 @@ Route::middleware([
             Route::match(['get', 'post'], 'jQuery.ajax/create_thread', 'store');
         });
 
-        Route::controller(\App\Http\Controllers\dashboard\LikesController::class)->group(function () {
+        Route::controller(\App\Http\Controllers\dashboard\LikeController::class)->group(function () {
             Route::match(['get', 'post'], 'jQuery.ajax/like', 'store');
             Route::match(['get', 'post'], 'jQuery.ajax/unlike', 'destroy');
         });
 
-        Route::controller(\App\Http\Controllers\mypage\UsersController::class)->group(function () {
+        Route::controller(\App\Http\Controllers\mypage\UserController::class)->group(function () {
             Route::match(['get', 'post'], 'jQuery.ajax/page_thema', 'update');
         });
 
-        Route::controller(\App\Http\Controllers\report\FormContactAdministratorsController::class)->group(function () {
+        Route::controller(\App\Http\Controllers\report\FormContactAdministratorController::class)->group(function () {
             Route::match(['get', 'post'], 'report/store', 'store')->name('report.store');
         });
     });
@@ -80,7 +80,7 @@ Route::middleware([
     });
 });
 
-Route::controller(\App\Http\Controllers\mail\UsersController::class)->group(function () {
+Route::controller(\App\Http\Controllers\mail\UserController::class)->group(function () {
     // アカウント登録キャンセル
     Route::get('/account/delete/{id}/{hash}', 'destroy')->middleware('auth')->name('account/delete');
 });

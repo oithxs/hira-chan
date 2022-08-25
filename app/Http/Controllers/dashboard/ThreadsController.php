@@ -8,7 +8,7 @@ use App\Models\Hub;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ThreadController extends Controller
+class ThreadsController extends Controller
 {
     /**
      * Display a listing of the resource.
