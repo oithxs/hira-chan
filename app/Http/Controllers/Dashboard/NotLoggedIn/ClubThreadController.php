@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\dashboard\not_logged_in;
+namespace App\Http\Controllers\Dashboard\NotLoggedIn;
 
 use App\Http\Controllers\Controller;
 use App\Models\ClubThread;

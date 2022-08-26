@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\report;
+namespace App\Http\Controllers\Report;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\report\FormContactAdministratorRequest;
+use App\Http\Requests\Report\FormContactAdministratorRequest;
 use App\Models\ContactAdministrator;
 use Illuminate\Http\Request;
 

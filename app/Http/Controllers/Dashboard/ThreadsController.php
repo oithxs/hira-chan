@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\dashboard;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\dashboard\not_logged_in\ThreadsController as NotLoggedInThreadsController;
+use App\Http\Controllers\Dashboard\NotLoggedIn\ThreadsController as NotLoggedInThreadsController;
 use App\Models\Hub;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

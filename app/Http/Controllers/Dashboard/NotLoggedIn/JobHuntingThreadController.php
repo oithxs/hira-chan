@@ -1,17 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\dashboard\not_logged_in;
+namespace App\Http\Controllers\Dashboard\NotLoggedIn;
 
 use App\Http\Controllers\Controller;
-use App\Models\DepartmentThread;
+use App\Models\JobHuntingThread;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class DepartmentThreadController extends Controller
+class JobHuntingThreadController extends Controller
 {
-    /** @var string */
-    private $thread_id;
-
     /**
      * Display a listing of the resource.
      *
@@ -55,8 +52,8 @@ class DepartmentThreadController extends Controller
     {
         $this->thread_id = $thread_id;
 
-        return DepartmentThread::select(
-            'department_threads.*',
+        return JobHuntingThread::select(
+            'job_hunting_threads.*',
             DB::raw('COUNT(likes1.user_email) AS count_user'),
             DB::raw('0 AS user_like'),
             'thread_image_paths.img_path'
@@ -64,26 +61,26 @@ class DepartmentThreadController extends Controller
             ->leftjoin('likes AS likes1', function ($join) {
                 $join
                     ->where('likes1.thread_id', '=', $this->thread_id)
-                    ->whereColumn('likes1.message_id', '=', 'department_threads.message_id');
+                    ->whereColumn('likes1.message_id', '=', 'job_hunting_threads.message_id');
             })
             ->leftjoin('thread_image_paths', function ($join) {
                 $join
-                    ->whereColumn('thread_image_paths.thread_id', '=', 'department_threads.thread_id')
-                    ->whereColumn('thread_image_paths.message_id', '=', 'department_threads.message_id');
+                    ->whereColumn('thread_image_paths.thread_id', '=', 'job_hunting_threads.thread_id')
+                    ->whereColumn('thread_image_paths.message_id', '=', 'job_hunting_threads.message_id');
             })
-            ->where('department_threads.thread_id', '=', $this->thread_id)
-            ->where('department_threads.message_id', '>', $pre_max_message_id)
-            ->groupBy('department_threads.message_id')
+            ->where('job_hunting_threads.thread_id', '=', $this->thread_id)
+            ->where('job_hunting_threads.message_id', '>', $pre_max_message_id)
+            ->groupBy('job_hunting_threads.message_id')
             ->get();
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\DepartmentThread  $departmentThreads
+     * @param  \App\Models\JobHuntingThread  $jobHuntingThreads
      * @return \Illuminate\Http\Response
      */
-    public function edit(DepartmentThread $departmentThreads)
+    public function edit(JobHuntingThread $jobHuntingThreads)
     {
         //
     }
@@ -92,10 +89,10 @@ class DepartmentThreadController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\DepartmentThread  $departmentThreads
+     * @param  \App\Models\JobHuntingThread  $jobHuntingThreads
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DepartmentThread $departmentThreads)
+    public function update(Request $request, JobHuntingThread $jobHuntingThreads)
     {
         //
     }
@@ -103,10 +100,10 @@ class DepartmentThreadController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\DepartmentThread  $departmentThreads
+     * @param  \App\Models\JobHuntingThread  $jobHuntingThreads
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DepartmentThread $departmentThreads)
+    public function destroy(JobHuntingThread $jobHuntingThreads)
     {
         //
     }

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\dashboard;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\LectureThread;
+use App\Models\DepartmentThread;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class LectureThreadController extends Controller
+class DepartmentThreadController extends Controller
 {
     /** @var string */
     private $user_email;
@@ -47,8 +47,8 @@ class LectureThreadController extends Controller
      */
     public function store(string $thread_id, string $user_name, string $user_email, string $message)
     {
-        $message_id = LectureThread::where('thread_id', '=', $thread_id)->max('message_id') + 1 ?? 0;
-        LectureThread::create([
+        $message_id = DepartmentThread::where('thread_id', '=', $thread_id)->max('message_id') + 1 ?? 0;
+        DepartmentThread::create([
             'thread_id' => $thread_id,
             'message_id' => $message_id,
             'user_name' => $user_name,
@@ -72,8 +72,8 @@ class LectureThreadController extends Controller
         $this->user_email = $user_email;
         $this->thread_id = $thread_id;
 
-        return LectureThread::select(
-            'lecture_threads.*',
+        return DepartmentThread::select(
+            'department_threads.*',
             DB::raw('COUNT(likes1.user_email) AS count_user'),
             DB::raw('COALESCE((likes2.user_email), 0) AS user_like'),
             'thread_image_paths.img_path'
@@ -81,32 +81,32 @@ class LectureThreadController extends Controller
             ->leftjoin('likes AS likes1', function ($join) {
                 $join
                     ->where('likes1.thread_id', '=', $this->thread_id)
-                    ->whereColumn('likes1.message_id', '=', 'lecture_threads.message_id');
+                    ->whereColumn('likes1.message_id', '=', 'department_threads.message_id');
             })
             ->leftjoin('likes AS likes2', function ($join) {
                 $join
                     ->where('likes2.thread_id', '=', $this->thread_id)
                     ->where('likes2.user_email', '=', $this->user_email)
-                    ->whereColumn('likes2.message_id', '=', 'lecture_threads.message_id');
+                    ->whereColumn('likes2.message_id', '=', 'department_threads.message_id');
             })
             ->leftjoin('thread_image_paths', function ($join) {
                 $join
-                    ->whereColumn('thread_image_paths.thread_id', '=', 'lecture_threads.thread_id')
-                    ->whereColumn('thread_image_paths.message_id', '=', 'lecture_threads.message_id');
+                    ->whereColumn('thread_image_paths.thread_id', '=', 'department_threads.thread_id')
+                    ->whereColumn('thread_image_paths.message_id', '=', 'department_threads.message_id');
             })
-            ->where('lecture_threads.thread_id', '=', $this->thread_id)
-            ->where('lecture_threads.message_id', '>', $pre_max_message_id)
-            ->groupBy('lecture_threads.message_id')
+            ->where('department_threads.thread_id', '=', $this->thread_id)
+            ->where('department_threads.message_id', '>', $pre_max_message_id)
+            ->groupBy('department_threads.message_id')
             ->get();
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\LectureThread  $lectureThreads
+     * @param  \App\Models\DepartmentThread  $departmentThreads
      * @return \Illuminate\Http\Response
      */
-    public function edit(LectureThread $lectureThreads)
+    public function edit(DepartmentThread $departmentThreads)
     {
         //
     }
@@ -115,10 +115,10 @@ class LectureThreadController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\LectureThread  $lectureThreads
+     * @param  \App\Models\DepartmentThread  $departmentThreads
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, LectureThread $lectureThreads)
+    public function update(Request $request, DepartmentThread $departmentThreads)
     {
         //
     }
@@ -126,10 +126,10 @@ class LectureThreadController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\LectureThread  $lectureThreads
+     * @param  \App\Models\DepartmentThread  $departmentThreads
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LectureThread $lectureThreads)
+    public function destroy(DepartmentThread $departmentThreads)
     {
         //
     }

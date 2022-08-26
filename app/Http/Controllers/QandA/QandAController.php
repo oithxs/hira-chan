@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Q_and_A;
+namespace App\Http\Controllers\QandA;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class Q_and_AController extends Controller
+class QandAController extends Controller
 {
     /**
      * Show Q&A page

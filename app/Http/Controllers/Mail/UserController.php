@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\mail;
+namespace App\Http\Controllers\Mail;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
