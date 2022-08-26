@@ -2,12 +2,10 @@
 
 namespace App\Http\Livewire\Dashboard;
 
-use Livewire\Component;
-
 use App\Models\Hub;
 use Carbon\Carbon;
-
 use Illuminate\Http\Request;
+use Livewire\Component;
 
 class Rankings extends Component
 {

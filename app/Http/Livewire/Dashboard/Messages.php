@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Dashboard;
 
-use Livewire\Component;
-use Illuminate\Http\Request;
 use App\Models\Hub;
+use Illuminate\Http\Request;
+use Livewire\Component;
 
 class Messages extends Component
 {

@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Dashboard;
 
-use Illuminate\Http\Request;
-use Livewire\Component;
 use App\Models\Hub;
+use Livewire\Component;
+use Illuminate\Http\Request;
 
 class SelectThreadPages extends Component
 {

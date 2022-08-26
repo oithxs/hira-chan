@@ -63,9 +63,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'PostAccess_only' => \App\Http\Middleware\PostAccess_only::class,
-        'Access_log' => \App\Http\Middleware\Access_log::class,
-        'Is_Admin' => \App\Http\Middleware\IsAdmin::class,
+        'PostAccess_only' => \App\Http\Middleware\PostAccessOnly::class,
+        'Access_log' => \App\Http\Middleware\AccessLog::class,
         'login.must_verified' => \App\Http\Middleware\MustAuthVerified::class
     ];
 
@@ -77,7 +76,7 @@ class Kernel extends HttpKernel
      * @var string[]
      */
     protected $middlewarePriority = [
-        \App\Http\Middleware\PostAccess_only::class,
+        \App\Http\Middleware\PostAccessOnly::class,
         \Illuminate\Cookie\Middleware\EncryptCookies::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
