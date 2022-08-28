@@ -20,19 +20,18 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
+        $input['email'] .= "@st.oit.ac.jp";
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255', 'unique:users'],
-            'email' => ['required', 'string', 'max:255', 'unique:users', 'regex:/^e1[a-z]\d{5}$/'],
+            'email' => ['required', 'string', 'max:255', 'unique:users', 'regex:/^e1[a-z]\d{5}@st.oit.ac.jp$/'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ], [
-            'name.unique:users' => '名前が重複しています',
+            'name.unique' => '名前が重複しています',
             'email.max:255' => '学生番号は例の様に入力して下さい',
-            'emailunique:users' => '学生番号が重複しています',
+            'email.unique' => '学生番号が重複しています',
             'email.regex' => '学生番号は例の様に入力して下さい'
         ])->validate();
-
-        $input['email'] .= "@st.oit.ac.jp";
 
         return User::create([
             'name' => $input['name'],
