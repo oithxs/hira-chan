@@ -79,8 +79,3 @@ Route::middleware([
         Route::match(['get', 'post'], 'jQuery.ajax/getRow', 'show');
     });
 });
-
-Route::controller(\App\Http\Controllers\Mail\UserController::class)->group(function () {
-    // アカウント登録キャンセル
-    Route::get('/account/delete/{id}/{hash}', 'destroy')->middleware('auth')->name('account/delete');
-});
