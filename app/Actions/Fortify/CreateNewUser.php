@@ -28,7 +28,8 @@ class CreateNewUser implements CreatesNewUsers
                 'password' => $this->passwordRules(),
                 'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
             ], [
-                'email.max:255' => '学生番号は例の様に入力して下さい',
+                'name.max' => '名前は255文字以内で入力して下さい',
+                'email.max' => '学生番号は例の様に入力して下さい',
                 'email.regex' => '学生番号は例の様に入力して下さい'
             ])->validate();
 
@@ -47,13 +48,13 @@ class CreateNewUser implements CreatesNewUsers
             return User::where('email', '=', $input['email'])->first();
         } else {
             Validator::make($input, [
-                'name' => ['required', 'string', 'max:255', 'unique:users'],
+                'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'max:255', 'unique:users', 'regex:/^e1[a-z]\d{5}@st.oit.ac.jp$/'],
                 'password' => $this->passwordRules(),
                 'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
             ], [
-                'name.unique' => '名前が重複しています',
-                'email.max:255' => '学生番号は例の様に入力して下さい',
+                'name.max' => '名前は255文字以内で入力して下さい',
+                'email.max' => '学生番号は例の様に入力して下さい',
                 'email.unique' => '学生番号が重複しています',
                 'email.regex' => '学生番号は例の様に入力して下さい'
             ])->validate();
