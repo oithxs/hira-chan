@@ -95,4 +95,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new \App\Notifications\VerifyEmailAddURL);
     }
+
+    /**
+     * Get the access logs for the user.
+     */
+    public function access_logs()
+    {
+        return $this->hasMany(AccessLog::class);
+    }
 }

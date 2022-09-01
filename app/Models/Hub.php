@@ -45,4 +45,12 @@ class Hub extends UuidModel
         'created_at' => 'datetime:Y-m-d H:i:s',
         'update_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    /**
+     * Get the access logs for the user.
+     */
+    public function access_logs()
+    {
+        return $this->hasMany(AccessLog::class);
+    }
 }
