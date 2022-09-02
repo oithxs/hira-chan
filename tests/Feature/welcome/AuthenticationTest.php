@@ -12,13 +12,11 @@ class AuthenticationTest extends TestCase
     use RefreshDatabase;
 
     private $user;
-    private $admin;
 
     public function setUp(): void
     {
         parent::setUp();
         $this->user = User::factory()->create();
-        $this->admin = User::factory()->admin()->create();
     }
 
     public function test_welcome_not_login_access()
@@ -32,15 +30,6 @@ class AuthenticationTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->get('/');
-
-        $response->assertStatus(200);
-    }
-
-    public function test_welcome_admin_access()
-    {
-        $response = $this
-            ->actingAs($this->admin)
             ->get('/');
 
         $response->assertStatus(200);

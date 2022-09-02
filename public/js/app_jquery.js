@@ -5,7 +5,14 @@ var __webpack_exports__ = {};
 /*!*************************************************!*\
   !*** ./resources/js/dashboard/Create_thread.js ***!
   \*************************************************/
-$('#dashboard_create_thread_btn').click(function () {
+$('#dashboard_create_thread_btn').click(create_thread);
+$('#dashboard_create_thread_text').keydown(function (e) {
+  if (e.keyCode === 13) {
+    create_thread();
+  }
+});
+
+function create_thread() {
   var formElm = document.getElementById("dashboard_create_thread_form");
   var threadName = formElm.dashboard_create_thread_text.value;
   var thread_category = formElm.dashboard_thread_category_select.value;
@@ -38,7 +45,7 @@ $('#dashboard_create_thread_btn').click(function () {
     console.log(textStatus);
     console.log(errorThrown.message);
   });
-});
+}
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
@@ -46,9 +53,10 @@ $('#dashboard_create_thread_btn').click(function () {
 /*!**********************************************!*\
   !*** ./resources/js/dashboard/Get_allRow.js ***!
   \**********************************************/
-if (location.href.includes('dashboard/thread/name=')) {
+if (show_thread_messages_flag === 1) {
+  show_thread_messages_flag = 0;
   reload();
-  setInterval(reload, 5000);
+  setInterval(reload, 1000);
 }
 
 function reload() {
@@ -66,11 +74,10 @@ function reload() {
     url: url + "/jQuery.ajax/getRow",
     dataType: "json",
     data: {
-      "table": thread_id
+      "table": thread_id,
+      "max_message_id": max_message_id
     }
   }).done(function (data) {
-    displayArea.innerHTML = "<br>";
-
     for (var item in data) {
       if (data[item]['is_validity']) {
         // 通常
@@ -82,24 +89,25 @@ function reload() {
         msg = "<br>この投稿は管理者によって削除されました";
       }
 
-      show = "" + data[item]['message_id'] + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>";
+      show = "" + "<a " + "id='thread_message_id_" + data[item]['message_id'] + "' " + "href='#dashboard_send_comment_label' " + "type='button' " + "onClick='reply(" + data[item]['message_id'] + ")'>" + data[item]['message_id'] + "</a>" + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>";
 
       if (data[item]['img_path'] != null) {
         show += "" + "<p>" + "<img src='" + url + data[item]['img_path'].replace('public', '/storage') + "'>" + "</p>";
       }
 
-      show += "" + "<p>" + "</p>" + "<br>";
+      show += "" + "<br>" + "<button " + "id='js_dashboard_Get_allRow_button_" + data[item]['message_id'] + "' " + "type='button' ";
 
       if (data[item]['user_like'] == 0) {
         // いいねが押されていない場合
-        show += "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['message_id'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'];
+        show += "class='btn btn-light' onClick='likes(" + data[item]['message_id'] + ", " + 0 + ")'>";
       } else {
         // いいねが押されていた場合
-        show += "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['message_id'] + ", " + 1 + ")'>like</button> " + data[item]['count_user'];
+        show += "class='btn btn-dark' onClick='likes(" + data[item]['message_id'] + ", " + 1 + ")'>";
       }
 
-      show += "<hr>";
+      show += "" + "like" + "</button> " + "<dev id='js_dashboard_Get_allRow_dev_" + data[item]['message_id'] + "'>" + data[item]['count_user'] + "</dev>" + "<hr>";
       displayArea.insertAdjacentHTML('afterbegin', show);
+      max_message_id = data[item]['message_id'];
     }
   }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
     console.log(XMLHttpRequest.status);
@@ -107,6 +115,17 @@ function reload() {
     console.log(errorThrown.message);
   });
 }
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!*************************************************!*\
+  !*** ./resources/js/dashboard/Reply_message.js ***!
+  \*************************************************/
+$("#dashboard_send_comment_replay_clear").click(function () {
+  $('#dashboard_send_comment_reply_disabled_text').val('');
+  $('#dashboard_send_comment_reply_source').attr('href', '#!');
+});
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
@@ -173,14 +192,23 @@ $('#dashboard_threads_category_select').change(search_thread);
 /*!********************************************!*\
   !*** ./resources/js/dashboard/Send_Row.js ***!
   \********************************************/
-$('#dashboard_sendMessage_btn').click(function () {
+$('#dashboard_sendMessage_btn').click(send_comment);
+$('#dashboard_message_textarea').keydown(function (e) {
+  if (event.ctrlKey && e.keyCode === 13) {
+    send_comment();
+  }
+});
+
+function send_comment() {
   var rows_limit = 20;
   var bytes_limit = 300;
   var formElm = document.getElementById("dashboard_sendMessage_form");
   var message = formElm.dashboard_message_textarea.value;
+  var reply = formElm.dashboard_send_comment_reply_disabled_text.value;
   var formData = new FormData();
   formData.append('table', thread_id);
   formData.append('message', message);
+  formData.append('reply', reply);
   formData.append('img', $('#dashboard_send_comment_upload_img').prop('files')[0]);
 
   if (message.trim() == 0) {
@@ -210,8 +238,10 @@ $('#dashboard_sendMessage_btn').click(function () {
     formElm.dashboard_message_textarea.value = '';
     $('#dashboard_send_commnet_img_preview').attr('src', '');
     $('#dashboard_send_comment_upload_img').val('');
+    $('#dashboard_send_comment_reply_disabled_text').val('');
+    $('#dashboard_send_comment_reply_source').attr('href', '#!');
   }
-});
+}
 
 String.prototype.bytes = function () {
   return encodeURIComponent(this).replace(/%../g, "x").length;
@@ -267,260 +297,6 @@ function file_size_check(idname) {
 
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
-/*!*******************************************!*\
-  !*** ./resources/js/hub/Create_thread.js ***!
-  \*******************************************/
-$('#hub_create_thread_btn').click(function () {
-  var formElm = document.getElementById("hub_CreateThread_form");
-  var threadName = formElm.hub_new_threadName_text.value;
-  formElm.hub_new_threadName_text.value = "";
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-  $.ajax({
-    type: "POST",
-    url: url + "/jQuery.ajax/create_thread",
-    data: {
-      "table": threadName
-    }
-  }).done(function () {}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-    console.log(XMLHttpRequest.status);
-    console.log(textStatus);
-    console.log(errorThrown.message);
-  });
-});
-})();
-
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
-(() => {
-/*!*******************************************!*\
-  !*** ./resources/js/hub/Delete_thread.js ***!
-  \*******************************************/
-$('#hub_delete_thread_btn').click(function () {
-  var formElm = document.getElementById("hub_thread_actions_form");
-  var thread_id = formElm.hub_thread_id_text.value;
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-  $.ajax({
-    type: "POST",
-    url: url + "/jQuery.ajax/admin/delete_thread",
-    data: {
-      "thread_id": thread_id
-    }
-  }).done(function () {
-    window.location.reload();
-  }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-    console.log(XMLHttpRequest.status);
-    console.log(textStatus);
-    console.log(errorThrown.message);
-  });
-});
-})();
-
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
-(() => {
-/*!*****************************************!*\
-  !*** ./resources/js/hub/Edit_thread.js ***!
-  \*****************************************/
-$('#hub_edit_thread_btn').click(function () {
-  var formElm = document.getElementById("hub_thread_actions_form");
-  var thread_id = formElm.hub_thread_id_text.value;
-  var formElm = document.getElementById("hub_edit_thread_form");
-  var thread_name = formElm.hub_edit_ThreadName_text.value;
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-  $.ajax({
-    type: "POST",
-    url: url + "/jQuery.ajax/admin/edit_thread",
-    data: {
-      "thread_id": thread_id,
-      "thread_name": thread_name
-    }
-  }).done(function () {
-    window.location.reload();
-  }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-    console.log(XMLHttpRequest.status);
-    console.log(textStatus);
-    console.log(errorThrown.message);
-  });
-});
-})();
-
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
-(() => {
-/*!*************************************************!*\
-  !*** ./resources/js/keiziban/Delete_message.js ***!
-  \*************************************************/
-$('#keiziban_delete_message_btn').click(function () {
-  var formElm = document.getElementById("keiziban_message_actions_form");
-  var message_id = formElm.keiziban_message_id_number.value;
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-  $.ajax({
-    type: "POST",
-    url: url + "/jQuery.ajax/admin/delete_message",
-    data: {
-      "thread_id": thread_id,
-      "message_id": message_id
-    }
-  }).done(function () {}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-    console.log(XMLHttpRequest.status);
-    console.log(textStatus);
-    console.log(errorThrown.message);
-  });
-});
-})();
-
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
-(() => {
-/*!*********************************************!*\
-  !*** ./resources/js/keiziban/Get_allRow.js ***!
-  \*********************************************/
-if (location.href.includes('hub/thread_name=')) {
-  reload();
-  setInterval(reload, 1000);
-}
-
-function reload() {
-  var displayArea = document.getElementById("keiziban_displayArea");
-  var user;
-  var msg;
-  var show;
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-  $.ajax({
-    type: "POST",
-    url: url + "/jQuery.ajax/getRow",
-    dataType: "json",
-    data: {
-      "table": thread_id
-    }
-  }).done(function (data) {
-    displayArea.innerHTML = "<br>";
-
-    for (var item in data) {
-      if (data[item]['is_validity']) {
-        // 通常
-        user = data[item]['name'];
-        msg = data[item]['message'];
-      } else {
-        // 管理者によって削除されていた場合
-        user = "-----";
-        msg = "<br>この投稿は管理者によって削除されました";
-      }
-
-      if (data[item]['user_like'] == 1) {
-        // いいねが押されていた場合
-        show = "" + data[item]['no'] + ": " + user + " " + data[item]['time'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>" + "<br>" + "<button type='button' class='btn btn-dark' onClick='likes(" + data[item]['no'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] + "<hr>";
-      } else {
-        // いいねが押されていない場合
-        show = "" + data[item]['no'] + ": " + user + " " + data[item]['time'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>" + "<br>" + "<button type='button' class='btn btn-light' onClick='likes(" + data[item]['no'] + ", " + data[item]['user_like'] + ")'>like</button> " + data[item]['count_user'] + "<hr>";
-      }
-
-      displayArea.insertAdjacentHTML('afterbegin', show);
-    }
-  }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-    console.log(XMLHttpRequest.status);
-    console.log(textStatus);
-    console.log(errorThrown.message);
-  });
-}
-})();
-
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
-(() => {
-/*!**************************************************!*\
-  !*** ./resources/js/keiziban/Restore_message.js ***!
-  \**************************************************/
-$('#keiziban_restore_message_btn').click(function () {
-  var formElm = document.getElementById("keiziban_message_actions_form");
-  var message_id = formElm.keiziban_message_id_number.value;
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-  $.ajax({
-    type: "POST",
-    url: url + "/jQuery.ajax/admin/restore_message",
-    data: {
-      "thread_id": thread_id,
-      "message_id": message_id
-    }
-  }).done(function () {}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-    console.log(XMLHttpRequest.status);
-    console.log(textStatus);
-    console.log(errorThrown.message);
-  });
-});
-})();
-
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
-(() => {
-/*!*******************************************!*\
-  !*** ./resources/js/keiziban/Send_Row.js ***!
-  \*******************************************/
-$('#keiziban_sendMessage_btn').click(function () {
-  var rows_limit = 20;
-  var bytes_limit = 300;
-  var sendAlertArea = document.getElementById("keiziban_sendAlertArea");
-  var formElm = document.getElementById("keiziban_sendMessage_form");
-  var message = formElm.keiziban_message_textarea.value;
-
-  if (message.trim() == 0) {
-    keiziban_sendAlertArea.innerHTML = "<div class='alert alert-danger'>書き込みなし・空白・改行のみの投稿は出来ません</div>";
-  } else if (message.rows() > rows_limit) {
-    keiziban_sendAlertArea.innerHTML = "<div class='alert alert-danger'>入力は" + rows_limit + "行以内にして下さい</div>";
-  } else if (message.bytes() > bytes_limit) {
-    keiziban_sendAlertArea.innerHTML = "<div class='alert alert-danger'>入力は" + bytes_limit / 3 + "文字(英数字は " + bytes_limit + "文字)以内にして下さい</div>";
-  } else {
-    keiziban_sendAlertArea.innerHTML = "";
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-    $.ajax({
-      type: "POST",
-      url: url + "/jQuery.ajax/sendRow",
-      data: {
-        "table": thread_id,
-        "message": message
-      }
-    }).done(function () {}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-      console.log(XMLHttpRequest.status);
-      console.log(textStatus);
-      console.log(errorThrown.message);
-    });
-    formElm.keiziban_message_textarea.value = '';
-  }
-});
-
-String.prototype.bytes = function () {
-  return encodeURIComponent(this).replace(/%../g, "x").length;
-};
-
-String.prototype.rows = function () {
-  if (this.match(/\n/g)) return this.match(/\n/g).length + 1;else return 1;
-};
-})();
-
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
-(() => {
 /*!************************************************!*\
   !*** ./resources/js/mypage/SelectPageThema.js ***!
   \************************************************/
@@ -554,6 +330,47 @@ $('#mypage_page_thema_select').change(function () {
     console.log(errorThrown.message);
   });
 });
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!*************************************!*\
+  !*** ./resources/js/report/form.js ***!
+  \*************************************/
+$('#report_form_btn').click(send_report_form);
+$('#report_form_textarea').keydown(function (e) {
+  if (e.keyCode === 13) {
+    send_report_form();
+  }
+});
+
+function send_report_form() {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $.ajax({
+    type: "POST",
+    url: "/report/store",
+    data: $('#report_form_form').serializeArray()
+  }).done(function (data) {
+    $('div[name="radio_1_error"]').html('');
+    $('div[name="textarea_error"]').html('');
+
+    if (typeof data['errors'] !== 'undefined') {
+      if (typeof data['errors']['radio_1'] !== 'undefined') $('div[name="radio_1_error"]').html('<div class="alert alert-danger">' + data['errors']['radio_1'][0] + '</div>');
+      if (typeof data['errors']['report_form_textarea'] !== 'undefined') $('div[name="textarea_error"]').html('<div class="alert alert-danger">' + data['errors']['report_form_textarea'][0] + '</div>');
+    } else {
+      $('input:radio[name="radio_1"]').prop('checked', false);
+      $('#report_form_textarea').val('');
+    }
+  }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+    console.log(XMLHttpRequest.status);
+    console.log(textStatus);
+    console.log(errorThrown.message);
+  });
+}
 })();
 
 /******/ })()

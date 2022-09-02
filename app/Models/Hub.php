@@ -34,15 +34,7 @@ class Hub extends Model
         'thread_category',
         'thread_category_type',
         'user_email',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'thread_id',
+        'is_enabled'
     ];
 
     /**

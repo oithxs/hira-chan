@@ -18,22 +18,11 @@ class GeneralUser extends BatchAction
         return <<<EOT
 
 $('{$this->getElementClass()}').on('click', function() {
-
-    $.ajax({
-        method: 'post',
-        url: '{$this->resource}/mail',
-        data: {
-            _token:LA.token,
-            ids: $.admin.grid.selected(),
-            action: {$this->action}
-        }
-	}).done(function () {
-		document.location = '/admin/users/create/mail';
-	}).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-		console.log(XMLHttpRequest.status);
-		console.log(textStatus);
-		console.log(errorThrown.message);
-	});
+    $('<form/>', {method: 'POST', action: '/admin/general/users/create/mail'})
+    .append($('<input/>', {type: 'hidden', name: '_token', value: LA.token}))
+    .append($('<input/>', {type: 'hidden', name: 'ids', value: $.admin.grid.selected()}))
+    .appendTo(document.body)
+    .submit();
 });
 
 EOT;

@@ -2,10 +2,24 @@
 <script>
     const table = "{{ $thread_name }}";
     const thread_id = "{{ $thread_id }}";
+    var max_message_id = 0;
 </script>
 
+@if (Auth::check() && Auth::user()->hasVerifiedEmail())
 <script>
-    function likes(message_id, user_like) {
+    function likes(message_id) {
+        var access = "";
+
+        $('#js_dashboard_Get_allRow_button_' + message_id).prop('disabled', true);
+        $('#js_dashboard_Get_allRow_button_' + message_id).toggleClass('btn-light');
+        $('#js_dashboard_Get_allRow_button_' + message_id).toggleClass('btn-dark');
+
+        if ($('#js_dashboard_Get_allRow_button_' + message_id).hasClass('btn-dark')) {
+            access = '/jQuery.ajax/like';
+        } else {
+            access = '/jQuery.ajax/unlike';
+        }
+
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": $(
@@ -13,48 +27,30 @@
                 ).attr("content"),
             },
         });
-
-        if (user_like == 1) {
-            $.ajax({
-                type: "POST",
-                url: url + "/jQuery.ajax/unlike",
-                data: {
-                    thread_id: thread_id,
-                    message_id: message_id,
-                },
-            })
-                .done(function () { })
-                .fail(function (
-                    XMLHttpRequest,
-                    textStatus,
-                    errorThrown
-                ) {
-                    console.log(XMLHttpRequest.status);
-                    console.log(textStatus);
-                    console.log(errorThrown.message);
-                });
-        } else {
-            $.ajax({
-                type: "POST",
-                url: url + "/jQuery.ajax/like",
-                data: {
-                    thread_id: thread_id,
-                    message_id: message_id,
-                },
-            })
-                .done(function () { })
-                .fail(function (
-                    XMLHttpRequest,
-                    textStatus,
-                    errorThrown
-                ) {
-                    console.log(XMLHttpRequest.status);
-                    console.log(textStatus);
-                    console.log(errorThrown.message);
-                });
-        }
+        $.ajax({
+            type: "POST",
+            url: url + access,
+            data: {
+                thread_id: thread_id,
+                message_id: message_id,
+            },
+        }).done(function (data) {
+            $('#js_dashboard_Get_allRow_button_' + message_id).prop('disabled', false);
+            $('#js_dashboard_Get_allRow_dev_' + message_id).html(data);
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(XMLHttpRequest.status);
+            console.log(textStatus);
+            console.log(errorThrown.message);
+        });
     }
 </script>
+@else
+<script>
+    function likes() {
+        window.location.href = "{{ route('login') }}";
+    }
+</script>
+@endif
 <!-- ここまでデザイン関係なし -->
 
 <!-- ここからスレッドが存在したとき -->
@@ -86,6 +82,7 @@
 <!-- ここからデザイン関係なし -->
 <script>
     const url = "{{ url('') }}";
+    show_thread_messages_flag = 1;
 </script>
-<script src="{{ mix('js/app_jquery.js') }}"></script>
+<script src="{{ asset('js/app_jquery.js') }}"></script>
 <!-- ここまでデザイン関係なし -->
