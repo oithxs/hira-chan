@@ -13,65 +13,56 @@
     </x-slot>
     <!-- ここまでカテゴリ別 -->
 
-    <div class="container">
+    <div class=" container">
+        <div class="row">
 
         <!-- ここからPVランキング -->
-        <div class="row container">
-            <div class="py-12 col-lg-12 col-md-12">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                        @livewire('dashboard.rankings')
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- ここまでPVランキング -->
+            <div class="py-12 col-lg-2 col-md-12">
 
-        <div class="row">
-            <!-- ここからメインの表示欄 -->
-            <div class="py-12 col-lg-8 col-md-12">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         @if ($main_type == 'threads')
                         @livewire('dashboard.threads')
                         @elseif ($main_type == 'messages')
-                        @livewire('dashboard.messages')
+                        @livewire('dashboard.rankings')
+                        @endif
+            </div>
+        <!-- ここまでPVランキング -->
+
+            <!-- ここからメインの表示欄 -->
+            <div class="py-12 col-lg-7 col-md-12">
+
+                        @if ($main_type == 'threads')
+                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                            <div class="max-w-7xl mx-auto sm:px-6 lg:px-2">
+                                @livewire('dashboard.rankings')
+                            </div>
+                        </div>
+                        @elseif ($main_type == 'messages')
+                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-2">
+                            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                                @livewire('dashboard.messages')
+                            </div>
+                        </div>
                         <!-- elseif (カテゴリ別) -->
                         @endif
-                    </div>
-                </div>
             </div>
             <!-- ここまでメインの表示欄 -->
 
             <!-- ここから右にいろいろ -->
-            <div class="py-12 col-lg-4 col-md-12">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                        @livewire('dashboard.various')
-                    </div>
-                </div>
-            </div>
-            <!-- ここまで右にいろいろ -->
-        </div>
-
-        <!-- ここからスレッド一覧の移動や書き込みなど -->
-        <div class="row container">
-            <div class="py-12 col-lg-8 col-md-12">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                        @if ($main_type == 'threads')
-                        @livewire('dashboard.select-thread-pages')
-                        @elseif ($main_type == 'messages')
+            <div class="py-12 col-lg-3 col-md-12">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-2">
+                        @if ($main_type == 'messages')
                         @livewire('dashboard.send-comment')
                         <!-- elseif (カテゴリ別) -->
                         @endif
+                </div>
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-6">
+                    <div class="bg-secondary bg-opacity-25">
+                        @livewire('dashboard.various')
                     </div>
                 </div>
-            </div>
 
-            <div class="py-12 col-lg-4 col-md-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+
                         <!--
                             ここからTwitterの表示
                             配置のイメージがつかめなかったので応急処置的にここに書いています
@@ -87,11 +78,14 @@
 
                         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                         <!-- ここまでTwitterの表示 -->
-                    </div>
+
                 </div>
             </div>
-        </div>
-        <!-- ここまでスレッド一覧の移動や書き込みなど -->
+            <!-- ここまで右にいろいろ -->
 
+        <!-- ここからスレッド一覧の移動や書き込みなど -->
+
+        <!-- ここまでスレッド一覧の移動や書き込みなど -->
+    </div>
     </div>
 </x-app-layout>
