@@ -14,7 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::table('access_logs', function (Blueprint $table) {
-            $table->foreignUuid('user_id')->after('id')->constrained('users');
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
+        });
+
+        Schema::table('access_logs', function (Blueprint $table) {
+            $table->foreignUuid('user_id')->after('session_id')->nullable(true)->constrained('users');
         });
     }
 
@@ -26,8 +31,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('access_logs', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropColumn('user_id');
+            $table->foreignUuid('user_id')->after('session_id')->constrained('users');
         });
     }
 };

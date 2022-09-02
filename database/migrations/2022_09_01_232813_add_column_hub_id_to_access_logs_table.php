@@ -27,6 +27,7 @@ return new class extends Migration
     {
         Schema::table('access_logs', function (Blueprint $table) {
             $table->dropForeign(['hub_id']);
+            $table->dropColumn('hub_id');
         });
     }
 };
