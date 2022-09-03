@@ -19,7 +19,7 @@ return new class extends Migration
         });
 
         Schema::table('access_logs', function (Blueprint $table) {
-            $table->foreignUuid('user_id')->after('session_id')->nullable(true)->constrained('users');
+            $table->foreignUuid('user_id')->after('hub_id')->nullable(true)->constrained('users');
         });
     }
 

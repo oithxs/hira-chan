@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('access_logs', function (Blueprint $table) {
-            $table->text('uri')->after('user_id');
+            $table->text('uri')->after('session_id');
         });
     }
 

@@ -14,9 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('access_logs', function (Blueprint $table) {
-            $table->string('session_id')->after('hub_id');
-
-            $table->foreign('session_id')->references('id')->on('sessions');
+            $table->string('session_id')->after('user_id');
         });
     }
 
