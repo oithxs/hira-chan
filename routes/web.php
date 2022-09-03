@@ -13,7 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// ページ移動（ログインせずとも移動可）
+/*
+|--------------------------------------------------------------------------
+| Warning
+|--------------------------------------------------------------------------
+|
+| - Don't use "admin" in the path.
+|
+*/
+
+// Page transition: allow not logged in
 Route::middleware([
     config('jetstream.auth_session'),
     'login.must_verified'
@@ -34,7 +43,7 @@ Route::middleware([
     });
 });
 
-// ページ移動（要ログイン）
+// Page transition: login required
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -44,7 +53,7 @@ Route::middleware([
     Route::get('/report/create', 'App\Http\Controllers\Report\FormContactAdministratorController@create')->name('report.create');
 });
 
-// データ処理
+// CRUD
 Route::middleware([
     'PostAccess_only',
 ])->group(function () {

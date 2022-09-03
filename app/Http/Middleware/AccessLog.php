@@ -3,9 +3,9 @@
 namespace App\Http\Middleware;
 
 use App\Models\AccessLog as Log;
-use App\Models\Session;
 use Closure;
 use Illuminate\Http\Request;
+use RuntimeException;
 
 class AccessLog
 {
@@ -19,13 +19,22 @@ class AccessLog
     public function handle(Request $request, Closure $next)
     {
         $response = $next($request);
+        if (strpos($request->path(), config('admin.route.prefix')) === false) {
+            try {
+                Log::create([
+                    'hub_id' => $request->thread_id ?? null,
+                    'session_id' => $request->session()->getId(),
+                    'user_id' => $request->user()->id ?? null,
+                    'uri' => $request->path(),
+                ]);
+            } catch (RuntimeException) {
+                /*
+                RuntimeException: Session store not set on request.
 
-        Log::create([
-            'hub_id' => $request->thread_id ?? null,
-            'session_id' => $request->session()->getId(),
-            'user_id' => $request->user()->id ?? null,
-            'uri' => $request->path(),
-        ]);
+                Do nothing when an exception occurs because the session can be retrieved.
+                */
+            }
+        }
 
         return $response;
     }
