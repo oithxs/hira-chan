@@ -29,19 +29,10 @@ class AccessLog extends Model
      * @var string[]
      */
     protected $fillable = [
-        'user_email',
-        'thread_name',
-        'thread_id',
-        'access_log',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'thread_id',
+        'hub_id',
+        'session_id',
+        'user_id',
+        'uri',
     ];
 
     /**

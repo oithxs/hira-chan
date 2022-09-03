@@ -50,7 +50,7 @@ class ThreadImagePathController extends Controller
 
             if ($path) {
                 ThreadImagePath::create([
-                    'thread_id' => $request->table,
+                    'thread_id' => $request->thread_id,
                     'message_id' => $message_id,
                     'user_email' => $request->user()->email,
                     'img_path' => $path,

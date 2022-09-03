@@ -7,7 +7,7 @@ $('#dashboard_create_thread_text').keydown(function (e) {
 
 function create_thread() {
     const formElm = document.getElementById("dashboard_create_thread_form");
-    const threadName = formElm.dashboard_create_thread_text.value;
+    const thread_name = formElm.dashboard_create_thread_text.value;
     const thread_category = formElm.dashboard_thread_category_select.value;
     formElm.dashboard_create_thread_text.value = "";
 
@@ -28,7 +28,7 @@ function create_thread() {
         type: "POST",
         url: url + "/jQuery.ajax/create_thread",
         data: {
-            "table": threadName,
+            "thread_name": thread_name,
             'thread_category': thread_category
         },
     }).done(function () {

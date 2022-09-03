@@ -12,7 +12,7 @@ function send_comment() {
     var message = formElm.dashboard_message_textarea.value;
     var reply = formElm.dashboard_send_comment_reply_disabled_text.value;
     var formData = new FormData();
-    formData.append('table', thread_id);
+    formData.append('thread_id', thread_id);
     formData.append('message', message);
     formData.append('reply', reply);
     formData.append('img', $('#dashboard_send_comment_upload_img').prop('files')[0]);

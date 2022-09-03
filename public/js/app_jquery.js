@@ -14,7 +14,7 @@ $('#dashboard_create_thread_text').keydown(function (e) {
 
 function create_thread() {
   var formElm = document.getElementById("dashboard_create_thread_form");
-  var threadName = formElm.dashboard_create_thread_text.value;
+  var thread_name = formElm.dashboard_create_thread_text.value;
   var thread_category = formElm.dashboard_thread_category_select.value;
   formElm.dashboard_create_thread_text.value = "";
 
@@ -35,7 +35,7 @@ function create_thread() {
     type: "POST",
     url: url + "/jQuery.ajax/create_thread",
     data: {
-      "table": threadName,
+      "thread_name": thread_name,
       'thread_category': thread_category
     }
   }).done(function () {
@@ -74,7 +74,7 @@ function reload() {
     url: url + "/jQuery.ajax/getRow",
     dataType: "json",
     data: {
-      "table": thread_id,
+      "thread_id": thread_id,
       "max_message_id": max_message_id
     }
   }).done(function (data) {
@@ -206,7 +206,7 @@ function send_comment() {
   var message = formElm.dashboard_message_textarea.value;
   var reply = formElm.dashboard_send_comment_reply_disabled_text.value;
   var formData = new FormData();
-  formData.append('table', thread_id);
+  formData.append('thread_id', thread_id);
   formData.append('message', message);
   formData.append('reply', reply);
   formData.append('img', $('#dashboard_send_comment_upload_img').prop('files')[0]);

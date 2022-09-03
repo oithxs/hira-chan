@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\AccessLog as Log;
+use App\Models\Session;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -17,13 +18,15 @@ class AccessLog
      */
     public function handle(Request $request, Closure $next)
     {
+        $response = $next($request);
+
         Log::create([
-            'user_email' => $request->user()->email ?? "Not logged in",
-            'thread_name' => $request->thread_name ?? "",
-            'thread_id' => $request->thread_id ?? "",
-            'access_log' => $request->ip()
+            'hub_id' => $request->thread_id ?? null,
+            'session_id' => $request->session()->getId(),
+            'user_id' => $request->user()->id ?? null,
+            'uri' => $request->path(),
         ]);
 
-        return $next($request);
+        return $response;
     }
 }
