@@ -29,19 +29,10 @@ class AccessLog extends Model
      * @var string[]
      */
     protected $fillable = [
-        'user_email',
-        'thread_name',
-        'thread_id',
-        'access_log',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'thread_id',
+        'hub_id',
+        'session_id',
+        'user_id',
+        'uri',
     ];
 
     /**
@@ -53,4 +44,20 @@ class AccessLog extends Model
         'created_at' => 'datetime:Y-m-d H:i:s',
         'update_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    /**
+     * Get the hub that owns the access log.
+     */
+    public function hub()
+    {
+        return $this->belongsTo(Hub::class);
+    }
+
+    /**
+     * Get the user that owns the access log.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

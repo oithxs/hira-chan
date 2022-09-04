@@ -40,19 +40,16 @@ class VerifyEmailAddURL extends Notification
     public function toMail($notifiable)
     {
         $verificationUrl = $this->verificationUrl($notifiable);
-        $accountDeleteUrl = $this->accountDeleteUrl($notifiable);
 
         if (static::$toMailCallback) {
-            return call_user_func(static::$toMailCallback, $notifiable, $verificationUrl, $accountDeleteUrl);
+            return call_user_func(static::$toMailCallback, $notifiable, $verificationUrl);
         }
 
         return (new MailMessage)
             ->subject(Lang::get('メールアドレスを認証してください'))
             ->line(Lang::get('以下のボタンをクリックしてメールアドレスを認証してください'))
             ->action(Lang::get('認証する'), $verificationUrl)
-            ->line(Lang::get('もしこのメールに覚えがない場合はあなたのEmailアドレスがHxSコンピュータ部掲示板サービスのアカウント登録に使用されています．以下のURLにアクセスすると該当アカウントを削除する事ができます'))
-            ->line(Lang::get('放置しても構いません．'))
-            ->line(Lang::get($accountDeleteUrl));
+            ->line(Lang::get('（もしこのメールに覚えがない場合は放置して問題ございません）'));
     }
 
     /**
@@ -69,22 +66,6 @@ class VerifyEmailAddURL extends Notification
             [
                 'id' => $notifiable->getKey(),
                 'hash' => sha1($notifiable->getEmailForVerification()),
-            ]
-        );
-    }
-
-    protected function accountDeleteUrl($notifiable)
-    {
-        return URL::temporarySignedRoute(
-            'account/delete',
-            Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),
-            [
-                'id' => $notifiable->getKey(),
-                'hash' => sha1(
-                    $notifiable->getKey() .
-                        $notifiable->getEmailForVerification() .
-                        $notifiable->getKey()
-                ),
             ]
         );
     }

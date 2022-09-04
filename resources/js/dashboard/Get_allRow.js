@@ -21,7 +21,7 @@ function reload() {
         url: url + "/jQuery.ajax/getRow",
         dataType: "json",
         data: {
-            "table": thread_id,
+            "thread_id": thread_id,
             "max_message_id": max_message_id
         }
     }).done(function (data) {

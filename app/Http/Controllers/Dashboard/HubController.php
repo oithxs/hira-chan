@@ -43,7 +43,7 @@ class HubController extends Controller
 
         Hub::create([
             'thread_id' => $uuid,
-            'thread_name' => $request->table,
+            'thread_name' => $request->thread_name,
             'thread_category' => $request->thread_category,
             'thread_category_type' => $category->category_type,
             'user_email' => $request->user()->email

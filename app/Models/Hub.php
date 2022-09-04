@@ -3,9 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Hub extends Model
+class Hub extends UuidModel
 {
     use HasFactory;
 
@@ -46,4 +45,12 @@ class Hub extends Model
         'created_at' => 'datetime:Y-m-d H:i:s',
         'update_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    /**
+     * Get the access logs for the user.
+     */
+    public function access_logs()
+    {
+        return $this->hasMany(AccessLog::class);
+    }
 }

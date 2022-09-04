@@ -38,7 +38,7 @@ class ThreadsController extends Controller
      */
     public function store(Request $request)
     {
-        if (!Hub::where('thread_id', '=', $request->table)->where('is_enabled', '=', 1)->first()) return;
+        if (!Hub::where('thread_id', '=', $request->thread_id)->where('is_enabled', '=', 1)->first()) return;
         $special_character_set = array(
             "&" => "&amp;",
             "<" => "&lt;",
@@ -60,22 +60,22 @@ class ThreadsController extends Controller
         }
 
         $message_id = 0;
-        $thread = Hub::where('thread_id', '=', $request->table)->first();
+        $thread = Hub::where('thread_id', '=', $request->thread_id)->first();
         switch ($thread->thread_category_type) {
             case '学科':
-                $message_id = (new DepartmentThreadController)->store($request->table, $request->user()->name, $request->user()->email, $message);
+                $message_id = (new DepartmentThreadController)->store($request->thread_id, $request->user()->name, $request->user()->email, $message);
                 break;
             case '学年':
-                $message_id = (new CollegeYearThreadController)->store($request->table, $request->user()->name, $request->user()->email, $message);
+                $message_id = (new CollegeYearThreadController)->store($request->thread_id, $request->user()->name, $request->user()->email, $message);
                 break;
             case '部活':
-                $message_id = (new ClubThreadController)->store($request->table, $request->user()->name, $request->user()->email, $message);
+                $message_id = (new ClubThreadController)->store($request->thread_id, $request->user()->name, $request->user()->email, $message);
                 break;
             case '授業':
-                $message_id = (new LectureThreadController)->store($request->table, $request->user()->name, $request->user()->email, $message);
+                $message_id = (new LectureThreadController)->store($request->thread_id, $request->user()->name, $request->user()->email, $message);
                 break;
             case '就職':
-                $message_id = (new JobHuntingThreadController)->store($request->table, $request->user()->name, $request->user()->email, $message);
+                $message_id = (new JobHuntingThreadController)->store($request->thread_id, $request->user()->name, $request->user()->email, $message);
             default:
                 break;
         }
@@ -92,23 +92,23 @@ class ThreadsController extends Controller
     public function show(Request $request)
     {
         if (!Auth::check()) {
-            return (new NotLoggedInThreadsController)->show($request->table, $request->max_message_id);
+            return (new NotLoggedInThreadsController)->show($request->thread_id, $request->max_message_id);
         }
 
-        $thread = Hub::where('thread_id', '=', $request->table)
+        $thread = Hub::where('thread_id', '=', $request->thread_id)
             ->where('is_enabled', '=', 1)
             ->first();
         switch ($thread->thread_category_type) {
             case '学科':
-                return (new DepartmentThreadController)->show($request->user()->email, $request->table, $request->max_message_id);
+                return (new DepartmentThreadController)->show($request->user()->email, $request->thread_id, $request->max_message_id);
             case '学年':
-                return (new CollegeYearThreadController)->show($request->user()->email, $request->table, $request->max_message_id);
+                return (new CollegeYearThreadController)->show($request->user()->email, $request->thread_id, $request->max_message_id);
             case '部活':
-                return (new ClubThreadController)->show($request->user()->email, $request->table, $request->max_message_id);
+                return (new ClubThreadController)->show($request->user()->email, $request->thread_id, $request->max_message_id);
             case '授業':
-                return (new LectureThreadController)->show($request->user()->email, $request->table, $request->max_message_id);
+                return (new LectureThreadController)->show($request->user()->email, $request->thread_id, $request->max_message_id);
             case '就職':
-                return (new JobHuntingThreadController)->show($request->user()->email, $request->table, $request->max_message_id);
+                return (new JobHuntingThreadController)->show($request->user()->email, $request->thread_id, $request->max_message_id);
             default:
                 return null;
         }
