@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Dashboard;
 
 use App\Models\Hub;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
@@ -25,19 +26,13 @@ class Rankings extends Component
     {
         $week = Carbon::today()->subDay(7);
 
-        $this->access_ranking = Hub::selectRaw('*, COUNT(*) AS access_count')
-            ->rightjoin('access_logs', 'access_logs.thread_id', '=', 'hub.thread_id')
-            ->whereNotNull('hub.thread_name')
-            ->groupBy('hub.thread_id')
-            ->orderByRaw('COUNT(*) DESC')
+        $this->access_ranking = Hub::withCount('access_logs')
+            ->orderBy('access_logs_count', 'desc')
             ->get();
 
-        $this->weekly_access_ranking = Hub::selectRaw('*, COUNT(*) AS access_count')
-            ->rightjoin('access_logs', 'access_logs.thread_id', '=', 'hub.thread_id')
-            ->whereNotNull('hub.thread_name')
-            ->whereDate('access_logs.created_at', '>=', $week)
-            ->groupBy('hub.thread_id')
-            ->orderByRaw('COUNT(*) DESC')
+        $this->weekly_access_ranking = Hub::withCount(['access_logs' => function (Builder $query) use ($week) {
+            $query->whereDate('created_at', '>=', $week);
+        }])->orderBy('access_logs_count', 'desc')
             ->get();
     }
 

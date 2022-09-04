@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\AccessLog as Log;
+use App\Models\Hub;
 use Closure;
 use Illuminate\Http\Request;
 use RuntimeException;
@@ -19,10 +20,14 @@ class AccessLog
     public function handle(Request $request, Closure $next)
     {
         $response = $next($request);
-        if (strpos($request->path(), config('admin.route.prefix')) === false) {
+
+        if (
+            strpos($request->path(), config('admin.route.prefix')) === false &&
+            strcmp(url()->current(), route('thread.get')) !== 0
+        ) {
             try {
                 Log::create([
-                    'hub_id' => $request->thread_id ?? null,
+                    'hub_id' => Hub::where('thread_id', '=', $request->thread_id)->first()->id ?? null,
                     'session_id' => $request->session()->getId(),
                     'user_id' => $request->user()->id ?? null,
                     'uri' => $request->path(),

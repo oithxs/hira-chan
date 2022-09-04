@@ -53,7 +53,7 @@
                         ?>
                         <tr>
                             <td>{{ $count++ }}</td>
-                            <td>{{ $row["access_count"] }}</td>
+                            <td>{{ $row["access_logs_count"] }}</td>
                             <td>{{ $title }}</td>
                         </tr>
                         @endforeach
@@ -101,7 +101,7 @@
                         ?>
                         <tr>
                             <td>{{ $count++ }}</td>
-                            <td>{{ $row["access_count"] }}</td>
+                            <td>{{ $row["access_logs_count"] }}</td>
                             <td>{{ $title }}</td>
                         </tr>
                         @endforeach

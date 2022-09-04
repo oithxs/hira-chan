@@ -18,7 +18,7 @@ function create_thread() {
   var thread_category = formElm.dashboard_thread_category_select.value;
   formElm.dashboard_create_thread_text.value = "";
 
-  if (threadName == '') {
+  if (thread_name == '') {
     return;
   }
 

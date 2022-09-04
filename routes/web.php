@@ -33,14 +33,10 @@ Route::middleware([
     Route::get('dashboard', 'App\Http\Controllers\Dashboard\DashboardController@threads')->name('dashboard');
     Route::get('Q_and_A', 'App\Http\Controllers\QandA\QandAController@Q_and_A')->name('Q_and_A');
 
-    Route::middleware([
-        'Access_log'
-    ])->group(function () {
-        Route::get('dashboard/thread/name={thread_name}&id={thread_id}', 'App\Http\Controllers\Dashboard\DashboardController@messages');
-        Route::get('dashboard/thread/name={thread_name}&id=', 'App\Http\Controllers\Dashboard\DashboardController@messages');
-        Route::get('dashboard/thread/name=&id={thread_id}', 'App\Http\Controllers\Dashboard\DashboardController@messages');
-        Route::get('dashboard/thread/name=&id=', 'App\Http\Controllers\Dashboard\DashboardController@messages');
-    });
+    Route::get('dashboard/thread/name={thread_name}&id={thread_id}', 'App\Http\Controllers\Dashboard\DashboardController@messages');
+    Route::get('dashboard/thread/name={thread_name}&id=', 'App\Http\Controllers\Dashboard\DashboardController@messages');
+    Route::get('dashboard/thread/name=&id={thread_id}', 'App\Http\Controllers\Dashboard\DashboardController@messages');
+    Route::get('dashboard/thread/name=&id=', 'App\Http\Controllers\Dashboard\DashboardController@messages');
 });
 
 // Page transition: login required
@@ -85,6 +81,6 @@ Route::middleware([
     });
 
     Route::controller(\App\Http\Controllers\Dashboard\ThreadsController::class)->group(function () {
-        Route::match(['get', 'post'], 'jQuery.ajax/getRow', 'show');
+        Route::match(['get', 'post'], 'jQuery.ajax/getRow', 'show')->name('thread.get');
     });
 });
