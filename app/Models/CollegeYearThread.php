@@ -54,4 +54,21 @@ class CollegeYearThread extends Model
         'created_at' => 'datetime:Y-m-d H:i:s',
         'update_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+
+    /**
+     * Get the hub that owns the college year thread.
+     */
+    public function hub()
+    {
+        return $this->belongsTo(Hub::class);
+    }
+
+    /**
+     * Get the user that owns the college year thread.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
