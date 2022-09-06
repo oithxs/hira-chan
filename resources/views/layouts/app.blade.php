@@ -45,12 +45,18 @@
     <x-jet-banner />
 
     <div class="min-h-screen">
-        @livewire('navigation-menu')
+        @if (isset($header))
+            @livewire('navigation-menu')
+        @else
+            <div class="shadow-sm">
+                @livewire('navigation-menu')
+            </div>
+        @endif
 
         <!-- Page Heading -->
         @if (isset($header))
-        <header class="shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <header class="shadow-sm">
+            <div class="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
                 {{ $header }}
             </div>
         </header>

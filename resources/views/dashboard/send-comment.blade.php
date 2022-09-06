@@ -2,39 +2,55 @@
     スレッドへ書き込むための部分
  -->
 
-    <form id="dashboard_sendMessage_form" enctype="multipart/form-data">
-        <div class="mb-2">
-            <div style="width:100%;" class="row">
-                <div class="col-8">
-                    <a id="dashboard_send_comment_reply_source" href="#!">
-                        <input class="form-control" type="text" id="dashboard_send_comment_reply_disabled_text"
-                            disabled>
-                    </a>
-                </div>
-                <div class="col-4">
-                    <a id="dashboard_send_comment_replay_clear" href="#!">クリア</a>
-                </div>
-            </div>
-            <label id="dashboard_send_comment_label" class="form-label">コメント</label>
-            <textarea class="form-control" id="dashboard_message_textarea" rows="4"></textarea>
-            <br />
-            <div class="form-text mb-2">
-                入力欄の右下にマウスカーソルを移動させると，高さを変えることができます
-            </div>
-            <img src="" id="dashboard_send_commnet_img_preview" class="img_preview mb-2">
-            <label>
-                <span class="btn btn-secondary">
-                    ファイル選択
-                    <input type="file" style="display:none" id="dashboard_send_comment_upload_img">
-                </span>
-            </label>
+ <div class="">
+    @if (Auth::check() && Auth::user()->hasVerifiedEmail())
+    <dev class="">
 
-            <div id="dashboard_sendAlertArea"></div>
+        <form id="dashboard_sendMessage_form" enctype="multipart/form-data">
+            <div class="width: 100% mb-2">
+                <div class="row">
+                    <div class="col-8">
+                        <a id="dashboard_send_comment_reply_source" href="#!">
+                            <input class="form-control" type="text" id="dashboard_send_comment_reply_disabled_text"
+                                disabled>
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a id="dashboard_send_comment_replay_clear" href="#!">クリア</a>
+                    </div>
+                </div>
+                <label id="dashboard_send_comment_label" class="form-label mt-2">コメント</label>
+                <textarea class="form-control" id="dashboard_message_textarea" rows="4"></textarea>
+
+                <div class="form-text">
+                    入力欄の右下にマウスカーソルを移動させると，高さを変えることができます
+                </div>
+
+
+                <img src="" id="dashboard_send_commnet_img_preview" class="img_preview">
+                <label>
+                    <span class="btn btn-secondary mb-2">
+                        ファイル選択
+                        <input type="file"style="display:none" id="dashboard_send_comment_upload_img">
+                    </span>
+                </label>
+
+                <div id="dashboard_sendAlertArea"></div>
+
+        </form>
+        <button id="dashboard_sendMessage_btn" class="btn btn-primary">
+            {{ __("Write forum") }}
+        </button>
+    </div>
+    </dev>
+    @else
+    <dev class="">
+        <div class="mb-3 p-3 bg-warning bg-opacity-25 text-center rounded-pill ">
+            <a href="{{ route('login') }}" class="">スレッドへ書き込む</a>
         </div>
-    </form>
-    <button id="dashboard_sendMessage_btn" class="btn btn-primary">
-        {{ __("Write forum") }}
-    </button>
+    </dev>
+    @endif
+</div>
 
 <!-- ここからデザイン関係なし -->
 @if (Auth::check() && Auth::user()->hasVerifiedEmail())

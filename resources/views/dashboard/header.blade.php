@@ -3,10 +3,10 @@
     カテゴリへのリンクを載せる予定
  -->
 
-<div>
-    <table class="table table-striped">
+ <div>
+    <table style="margin-bottom:0px" class="table table-borderless">
         <thead>
-            <tr class="text-center">
+            <tr class="">
                 @foreach ($category_types as $category_type)
                 <th class="col-md-1">
                     <label></label>
