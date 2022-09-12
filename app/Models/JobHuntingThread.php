@@ -29,10 +29,9 @@ class JobHuntingThread extends Model
      * @var string[]
      */
     protected $fillable = [
-        'thread_id',
+        'hub_id',
+        'user_id',
         'message_id',
-        'user_name',
-        'user_email',
         'message',
     ];
 
