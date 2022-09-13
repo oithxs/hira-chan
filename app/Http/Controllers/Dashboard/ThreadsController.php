@@ -38,7 +38,7 @@ class ThreadsController extends Controller
      */
     public function store(Request $request)
     {
-        if (!Hub::where('thread_id', '=', $request->thread_id)->where('is_enabled', '=', 1)->first()) return;
+        if (!Hub::where('id', '=', $request->thread_id)->where('is_enabled', '=', 1)->first()) return;
         $special_character_set = array(
             "&" => "&amp;",
             "<" => "&lt;",
@@ -60,22 +60,22 @@ class ThreadsController extends Controller
         }
 
         $message_id = 0;
-        $thread = Hub::where('thread_id', '=', $request->thread_id)->first();
+        $thread = Hub::where('id', '=', $request->thread_id)->first();
         switch ($thread->thread_category_type) {
             case '学科':
-                $message_id = (new DepartmentThreadController)->store($request->thread_id, $request->user()->name, $request->user()->email, $message);
+                $message_id = (new DepartmentThreadController)->store($request->thread_id, $request->user()->id, $message);
                 break;
             case '学年':
-                $message_id = (new CollegeYearThreadController)->store($request->thread_id, $request->user()->name, $request->user()->email, $message);
+                $message_id = (new CollegeYearThreadController)->store($request->thread_id, $request->user()->id, $message);
                 break;
             case '部活':
-                $message_id = (new ClubThreadController)->store($request->thread_id, $request->user()->name, $request->user()->email, $message);
+                $message_id = (new ClubThreadController)->store($request->thread_id, $request->user()->id, $message);
                 break;
             case '授業':
-                $message_id = (new LectureThreadController)->store($request->thread_id, $request->user()->name, $request->user()->email, $message);
+                $message_id = (new LectureThreadController)->store($request->thread_id, $request->user()->id, $message);
                 break;
             case '就職':
-                $message_id = (new JobHuntingThreadController)->store($request->thread_id, $request->user()->name, $request->user()->email, $message);
+                $message_id = (new JobHuntingThreadController)->store($request->thread_id, $request->user()->id, $message);
             default:
                 break;
         }
@@ -95,7 +95,7 @@ class ThreadsController extends Controller
             return (new NotLoggedInThreadsController)->show($request->thread_id, $request->max_message_id);
         }
 
-        $thread = Hub::where('thread_id', '=', $request->thread_id)
+        $thread = Hub::where('id', '=', $request->thread_id)
             ->where('is_enabled', '=', 1)
             ->first();
         switch ($thread->thread_category_type) {

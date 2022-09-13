@@ -79,16 +79,8 @@ function reload() {
     }
   }).done(function (data) {
     for (var item in data) {
-      if (data[item]['is_validity']) {
-        // 通常
-        user = data[item]['user_name'];
-        msg = data[item]['message'];
-      } else {
-        // 管理者によって削除されていた場合
-        user = "-----";
-        msg = "<br>この投稿は管理者によって削除されました";
-      }
-
+      user = data[item]['user']['name'];
+      msg = data[item]['message'];
       show = "" + "<a " + "id='thread_message_id_" + data[item]['message_id'] + "' " + "href='#dashboard_send_comment_label' " + "type='button' " + "onClick='reply(" + data[item]['message_id'] + ")'>" + data[item]['message_id'] + "</a>" + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>";
 
       if (data[item]['img_path'] != null) {
