@@ -103,4 +103,61 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(AccessLog::class);
     }
+
+    /**
+     * Get the club threads for the user.
+     */
+    public function club_threads()
+    {
+        return $this->hasMany(ClubThread::class);
+    }
+
+    /**
+     * Get the college year threads for the user.
+     */
+    public function college_year_threads()
+    {
+        return $this->hasMany(CollegeYearThread::class);
+    }
+
+    /**
+     * Get the department threads for the user.
+     */
+    public function department_threads()
+    {
+        return $this->hasMany(DepartmentThread::class);
+    }
+
+    /**
+     * Get the job hunting threads for the user.
+     */
+    public function job_hunting_threads()
+    {
+        return $this->hasMany(JobHuntingThread::class);
+    }
+
+    /**
+     * Get the lecture threads for the user.
+     */
+    public function lecture_threads()
+    {
+        return $this->hasMany(LectureThread::class);
+    }
+
+
+    /**
+     * Get the hub that owns the lecture thread.
+     */
+    public function hub()
+    {
+        return $this->belongsTo(Hub::class);
+    }
+
+    /**
+     * Get the user that owns the lecture thread.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

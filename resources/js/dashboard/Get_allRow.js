@@ -26,15 +26,8 @@ function reload() {
         }
     }).done(function (data) {
         for (var item in data) {
-            if (data[item]['is_validity']) {
-                // 通常
-                user = data[item]['user_name'];
-                msg = data[item]['message'];
-            } else {
-                // 管理者によって削除されていた場合
-                user = "-----";
-                msg = "<br>この投稿は管理者によって削除されました";
-            }
+            user = data[item]['user']['name'];
+            msg = data[item]['message'];
 
             show = "" +
                 "<a " +
