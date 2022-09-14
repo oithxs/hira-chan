@@ -27,7 +27,7 @@ class AccessLog
         ) {
             try {
                 Log::create([
-                    'hub_id' => Hub::where('thread_id', '=', $request->thread_id)->first()->id ?? null,
+                    'hub_id' => $request->thread_id ?? null,
                     'session_id' => $request->session()->getId(),
                     'user_id' => $request->user()->id ?? null,
                     'uri' => $request->path(),

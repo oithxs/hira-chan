@@ -94,7 +94,7 @@
                     </a>
                 </td>
                 <td>{{ $tableInfo["created_at"] }}</td>
-                <td>{{ $tableInfo['Access'] }}</td>
+                <td>{{ $tableInfo['access_logs_count'] }}</td>
                 <td class="hidden">{{ $tableInfo['thread_category'] }}</td>
                 <td class="hidden">{{ $tableInfo['thread_category_type'] }}</td>
             </tr>
