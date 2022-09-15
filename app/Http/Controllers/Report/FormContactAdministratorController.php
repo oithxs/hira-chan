@@ -38,8 +38,8 @@ class FormContactAdministratorController extends Controller
     public function store(FormContactAdministratorRequest $request)
     {
         ContactAdministrator::create([
+            'user_id' => $request->user()->id,
             'type' => $request->radio_1,
-            'report_email' => $request->user()->email,
             'message' => $request->report_form_textarea
         ]);
     }
