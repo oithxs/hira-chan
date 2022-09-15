@@ -121,6 +121,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Get the contact administrators for the user.
+     */
+    public function contact_administrators()
+    {
+        return $this->hasMany(ContactAdministrator::class);
+    }
+
+    /**
      * Get the department threads for the user.
      */
     public function department_threads()
