@@ -2,7 +2,7 @@
     スレッドへ書き込むための部分
  -->
 
- <div class="">
+<div class="">
     @if (Auth::check() && Auth::user()->hasVerifiedEmail())
     <dev class="">
 
@@ -31,7 +31,7 @@
                 <label>
                     <span class="btn btn-secondary mb-2">
                         ファイル選択
-                        <input type="file"style="display:none" id="dashboard_send_comment_upload_img">
+                        <input type="file" style="display:none" id="dashboard_send_comment_upload_img">
                     </span>
                 </label>
 
@@ -41,15 +41,15 @@
         <button id="dashboard_sendMessage_btn" class="btn btn-primary">
             {{ __("Write forum") }}
         </button>
+</div>
+</dev>
+@else
+<dev class="">
+    <div class="mb-3 p-3 bg-warning bg-opacity-25 text-center rounded-pill ">
+        <a href="{{ route('login') }}" class="">スレッドへ書き込む</a>
     </div>
-    </dev>
-    @else
-    <dev class="">
-        <div class="mb-3 p-3 bg-warning bg-opacity-25 text-center rounded-pill ">
-            <a href="{{ route('login') }}" class="">スレッドへ書き込む</a>
-        </div>
-    </dev>
-    @endif
+</dev>
+@endif
 </div>
 
 <!-- ここからデザイン関係なし -->

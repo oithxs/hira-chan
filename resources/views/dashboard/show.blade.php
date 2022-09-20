@@ -3,7 +3,7 @@
     この場所に他ファイルを載せて表示
  -->
 
- <x-app-layout>
+<x-app-layout>
 
     <!-- ここからカテゴリ別 -->
     @if ($main_type == 'threads')
@@ -18,15 +18,15 @@
     <div class=" container">
         <div class="row">
 
-        <!-- ここからPVランキング -->
+            <!-- ここからPVランキング -->
             <div class="py-12 col-lg-2 col-md-12">
-                        @if ($main_type == 'threads')
-                        @livewire('dashboard.threads')
-                        @elseif ($main_type == 'messages')
-                        @livewire('dashboard.rankings')
-                        @endif
+                @if ($main_type == 'threads')
+                @livewire('dashboard.threads')
+                @elseif ($main_type == 'messages')
+                @livewire('dashboard.rankings')
+                @endif
             </div>
-        <!-- ここまでPVランキング -->
+            <!-- ここまでPVランキング -->
 
             <!-- ここからメインの表示欄 -->
             <div class="py-12 col-lg-7 col-md-12">
@@ -51,38 +51,38 @@
             <div class="py-12 col-lg-3 col-md-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-2">
 
-                        @if ($main_type == 'messages')
-                        @livewire('dashboard.send-comment')
-                        <!-- elseif (カテゴリ別) -->
-                        @endif
+                    @if ($main_type == 'messages')
+                    @livewire('dashboard.send-comment')
+                    <!-- elseif (カテゴリ別) -->
+                    @endif
                 </div>
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-2">
-                        @livewire('dashboard.various')
+                    @livewire('dashboard.various')
                 </div>
 
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-2">
-                        <!--
+                    <!--
                             ここからTwitterの表示
                             配置のイメージがつかめなかったので応急処置的にここに書いています
                         -->
-                        @if (!Auth::check() || Auth::user()->thema == 0)
-                        <a class="twitter-timeline" data-chrome="nofooter" data-width="400" data-height="550"
-                            data-theme="light" href="https://twitter.com/hxs_?ref_src=twsrc%5Etfw">Tweets by
-                            hxs_</a>
-                        @elseif (Auth::user()->thema == 1)
-                        <a class="twitter-timeline" data-chrome="nofooter" data-width="400" data-height="550"
-                            data-theme="dark" href="https://twitter.com/hxs_?ref_src=twsrc%5Etfw">Tweets by hxs_</a>
-                        @endif
+                    @if (!Auth::check() || Auth::user()->thema == 0)
+                    <a class="twitter-timeline" data-chrome="nofooter" data-width="400" data-height="550"
+                        data-theme="light" href="https://twitter.com/hxs_?ref_src=twsrc%5Etfw">Tweets by
+                        hxs_</a>
+                    @elseif (Auth::user()->thema == 1)
+                    <a class="twitter-timeline" data-chrome="nofooter" data-width="400" data-height="550"
+                        data-theme="dark" href="https://twitter.com/hxs_?ref_src=twsrc%5Etfw">Tweets by hxs_</a>
+                    @endif
 
-                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                        <!-- ここまでTwitterの表示 -->
-                    </div>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    <!-- ここまでTwitterの表示 -->
+                </div>
             </div>
             <!-- ここまで右にいろいろ -->
 
-        <!-- ここからスレッド一覧の移動や書き込みなど -->
+            <!-- ここからスレッド一覧の移動や書き込みなど -->
 
-        <!-- ここまでスレッド一覧の移動や書き込みなど -->
-    </div>
+            <!-- ここまでスレッド一覧の移動や書き込みなど -->
+        </div>
     </div>
 </x-app-layout>
