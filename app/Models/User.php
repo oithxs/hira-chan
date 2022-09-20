@@ -151,21 +151,4 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(LectureThread::class);
     }
-
-
-    /**
-     * Get the hub that owns the lecture thread.
-     */
-    public function hub()
-    {
-        return $this->belongsTo(Hub::class);
-    }
-
-    /**
-     * Get the user that owns the lecture thread.
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }
