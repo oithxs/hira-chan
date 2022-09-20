@@ -42,4 +42,12 @@ class ThreadCategory extends Model
         'created_at' => 'datetime:Y-m-d H:i:s',
         'update_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    /**
+     * Get the hub for the thread category.
+     */
+    public function hub()
+    {
+        return $this->hasMany(Hub::class);
+    }
 }

@@ -137,6 +137,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Get the hub for the user.
+     */
+    public function hub()
+    {
+        return $this->hasMany(Hub::class);
+    }
+
+    /**
      * Get the job hunting threads for the user.
      */
     public function job_hunting_threads()
