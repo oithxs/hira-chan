@@ -50,8 +50,9 @@
             <!-- ここから右にいろいろ -->
             <div class="py-12 col-lg-3 col-md-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-2">
-
-                    @if ($main_type == 'messages')
+                    @if ($main_type == 'threads')
+                    @livewire('dashboard.select-thread-pages')
+                    @elseif ($main_type == 'messages')
                     @livewire('dashboard.send-comment')
                     <!-- elseif (カテゴリ別) -->
                     @endif
