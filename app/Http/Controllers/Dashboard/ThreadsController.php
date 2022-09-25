@@ -38,8 +38,12 @@ class ThreadsController extends Controller
         }
 
         $message_id = 0;
-        $thread = Hub::where('id', '=', $request->thread_id)->first();
-        switch ($thread->thread_category_type) {
+        $thread = Hub::with('thread_category')
+            ->where('id', '=', $request->thread_id)
+            ->where('is_enabled', '=', 1)
+            ->first();
+
+        switch ($thread->thread_category->category_type) {
             case '学科':
                 $message_id = (new DepartmentThreadController)->store($request->thread_id, $request->user()->id, $message);
                 break;

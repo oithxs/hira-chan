@@ -23,11 +23,12 @@ class ThreadsController extends Controller
             $user_email = '';
         }
 
-        $thread = Hub::where('id', '=', $request->thread_id)
+        $thread = Hub::with('thread_category')
+            ->where('id', '=', $request->thread_id)
             ->where('is_enabled', '=', 1)
             ->first();
 
-        switch ($thread->thread_category_type) {
+        switch ($thread->thread_category->category_type) {
             case '学科':
                 return (new DepartmentThreadController)->show($user_email, $request->thread_id, $request->max_message_id);
             case '学年':
