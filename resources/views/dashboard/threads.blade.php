@@ -69,8 +69,8 @@
             </tr>
         </thead>
         <tbody>
-            <!-- スレッド名使う時は「$tableName」 -->
-            @foreach($tables as $tableInfo)
+            <!-- スレッド名使う時は「$thread_name」 -->
+            @foreach($threads as $thread)
             <?php
                 if ($count < $min) {
                     $flag = 0;
@@ -81,22 +81,22 @@
                 }
 
                 $count++;
-                $tableName = str_replace('/', '&slash;', $tableInfo['thread_name']);
-                $tableName = str_replace('\\', '&backSlash;' , $tableName);
-                $tableName = str_replace('#', '&hash;', $tableName);
+                $thread_name = str_replace('/', '&slash;', $thread['name']);
+                $thread_name = str_replace('\\', '&backSlash;' , $thread_name);
+                $thread_name = str_replace('#', '&hash;', $thread_name);
             ?>
             @if ($flag == 1)
             <tr>
                 <td>
-                    <a href="dashboard/thread/name={{ $tableName }}&id={{ $tableInfo['id'] }}"
+                    <a href="dashboard/thread/name={{ $thread_name }}&id={{ $thread['id'] }}"
                         class="text-decoration-none">
-                        {{$tableInfo["thread_name"]}}
+                        {{$thread["name"]}}
                     </a>
                 </td>
-                <td>{{ $tableInfo["created_at"] }}</td>
-                <td>{{ $tableInfo['access_logs_count'] }}</td>
-                <td class="hidden">{{ $tableInfo['thread_category'] }}</td>
-                <td class="hidden">{{ $tableInfo['thread_category_type'] }}</td>
+                <td>{{ $thread["created_at"] }}</td>
+                <td>{{ $thread['access_logs_count'] }}</td>
+                <td class="hidden">{{ $thread['thread_category'] }}</td>
+                <td class="hidden">{{ $thread['thread_category_type'] }}</td>
             </tr>
             @endif
             @endforeach
