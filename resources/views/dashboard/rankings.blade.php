@@ -46,7 +46,7 @@
                         <!-- スレッド名は「$row['thread_name']」ではなく「$title」 -->
                         @foreach($access_ranking as $row)
                         <?php
-                        $title = str_replace("&amp;", "&", $row['thread_name']);
+                        $title = str_replace("&amp;", "&", $row['name']);
                         $title = str_replace("&slash;", "/", $title);
                         $title = str_replace("&backSlash;", "\\", $title);
                         $title = str_replace("&hash;", "#", $title);
@@ -91,10 +91,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- スレッド名は「$row['thread_name']」ではなく「$title」 -->
+                        <!-- スレッド名は「$row['name']」ではなく「$title」 -->
                         @foreach($weekly_access_ranking as $row)
                         <?php
-                        $title = str_replace("&amp;", "&", $row['thread_name']);
+                        $title = str_replace("&amp;", "&", $row['name']);
                         $title = str_replace("&slash;", "/", $title);
                         $title = str_replace("&backSlash;", "\\", $title);
                         $title = str_replace("&hash;", "#", $title);
