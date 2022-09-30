@@ -1,3 +1,7 @@
+<!--
+    スレッドの書き込みを表示するページ
+ -->
+
 <!-- ここからデザイン関係なし -->
 <script>
     const table = "{{ $thread_name }}";
@@ -55,37 +59,33 @@
 
 <!-- ここからスレッドが存在したとき -->
 @if ($result == 1)
-
-<div class="overflow-hidden  sm:rounded-lg">
-    <div class=" p-3 border-t border-gray-200 md:border-t-0 md:border-l bg-primary bg-opacity-25 ">
-        <div class=" hidden sm:flex sm:items-center ">
-            <div class=" text-lg leading-7 font-semibold">
+<div class="overflow-hidden sm:rounded-lg">
+    <div class="p-3 border-t border-gray-200 md:border-t-0 md:border-l bg-primary bg-opacity-25 ">
+        <div class="hidden sm:flex sm:items-center">
+            <div class="text-lg leading-7 font-semibold">
                 <div class="items-right">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')"
+                    <x-jet-nav-link href="{{ route('dashboard') }}" active="request()->routeIs('dashboard')"
                         class="text-nowrap me-4 mb-2">
                         ＜戻る
                     </x-jet-nav-link>
                 </div>
             </div>
-            <div class=" text-lg leading-7 font-semibold mb-2">
+            <div class="text-lg leading-7 font-semibold mb-2">
                 {{ $thread_name }}
             </div>
         </div>
     </div>
 
+    <!-- ここから非同期通信で掲示板の表示 -->
     <div class="row px-3 bg-primary bg-opacity-25">
-
-        <!-- ここから非同期通信で掲示板の表示 -->
         <div id="dashboard_displayArea" class="col-sm-12 col-xs-12 bg-secondry" style="
                                     height: 100vh;
                                     width: 50;
                                     overflow-y: scroll;
-                                    overflow-x: hidde;
-                                ">
+                                    overflow-x: hidde;">
         </div>
-        <!-- ここまで非同期通信で掲示板の表示 -->
-
     </div>
+    <!-- ここまで非同期通信で掲示板の表示 -->
 </div>
 <!-- ここまでスレッドが存在したとき -->
 
@@ -94,8 +94,8 @@
 <div class="mt-4">
     <h1 class="text-danger">※スレッドが存在しません</h1>
 </div>
-<br />
-<br />
+<br>
+<br>
 @endif
 <!-- ここまでスレッドが存在しなかったとき -->
 
