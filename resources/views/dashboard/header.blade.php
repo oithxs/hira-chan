@@ -14,7 +14,7 @@
                         @foreach ($categorys as $category)
                         @if ($category->category_type == $category_type->category_type)
                         <option value="dashboard?category={{ $category->category_name }}">
-                            {{ $category->category_name　}}
+                            {{ $category->category_name }}
                         </option>
                         @endif
                         @endforeach
