@@ -15,28 +15,25 @@
  $min = ($page - 1) * 10;
 ?>
 
-
-
 <!-- 検索モーダル -->
-<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-warning bg-opacity-25">
                 <h5 class="modal-title" id="exampleModalLabel">スレッド検索</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
             <div class="modal-body">
                 <label>スレッド名</label>
                 <input type="text" id="dashboard_threads_search_thread" style="width:100%">
 
                 <label class="mt-2">カテゴリー</label>
-                <br />
+                <br>
                 <input type="button" value="全て表示" id="dashboard_threads_show_all_threads_button">
 
                 <select id="dashboard_threads_category_type_select">
-                    <option value="">
-                        全て
-                    </option>
+                    <option value="">全て</option>
                     @foreach ($category_types as $category_type)
                     <option value="{{ $category_type->category_type }}">
                         {{ $category_type->category_type }}
@@ -45,9 +42,7 @@
                 </select>
 
                 <select id="dashboard_threads_category_select">
-                    <option value="">
-                        未選択
-                    </option>
+                    <option value="">未選択</option>
                     @foreach ($categorys as $category)
                     <option value="{{ $category->category_name }}" data-val="{{ $category->category_type }}">
                         {{ $category->category_name }}
@@ -55,6 +50,7 @@
                     @endforeach
                 </select>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary bg-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary bg-primary" data-bs-dismiss="modal">Save changes</button>
@@ -70,7 +66,7 @@
             <!-- ここからソートのためのリンク -->
             <th>
                 <div class="hidden sm:flex sm:items-center">
-                    <div class=" text-lg leading-7 font-semibold">
+                    <div class="text-lg leading-7 font-semibold">
                         <button
                             onclick="location.href='/dashboard?category={{ $category_name }}&page={{ $page }}&sort=access_count'">
                         </button>
@@ -80,9 +76,9 @@
                             onclick="location.href='/dashboard?category={{ $category_name }}&page={{ $page }}&sort=new_create'">
                         </button>
                     </div>
-                    <div class=" text-lg text-right leading-7 font-semibold ms-auto ">
+                    <div class="text-lg text-right leading-7 font-semibold ms-auto">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-default justify-continent-md-end " data-bs-toggle="modal"
+                        <button type="button" class="btn btn-default justify-continent-md-end" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-search" viewBox="0 0 16 16">
@@ -100,19 +96,19 @@
         <!-- スレッド名使う時は「$tableName」 -->
         @foreach($tables as $tableInfo)
         <?php
-          if ($count < $min) {
-              $flag = 0;
-          } else if ($max <= $count) {
-              break;
-          } else {
-              $flag = 1;
-          }
+            if ($count < $min) {
+                $flag = 0;
+            } else if ($max <= $count) {
+                break;
+            } else {
+                $flag = 1;
+            }
 
-          $count++;
-          $tableName = str_replace('/', '&slash;', $tableInfo['thread_name']);
-          $tableName = str_replace('\\', '&backSlash;' , $tableName);
-          $tableName = str_replace('#', '&hash;', $tableName);
-      ?>
+            $count++;
+            $tableName = str_replace('/', '&slash;', $tableInfo['thread_name']);
+            $tableName = str_replace('\\', '&backSlash;' , $tableName);
+            $tableName = str_replace('#', '&hash;', $tableName);
+        ?>
         @if ($flag == 1)
         <tr>
             <td style="word-wrap:break-word;">
@@ -126,7 +122,6 @@
                     {{ $tableInfo["created_at"] }}
                 </div>
             </td>
-
         </tr>
         @endif
         @endforeach
@@ -140,13 +135,10 @@
         <div class="modal-content">
             <div class="modal-body">
                 <form id="dashboard_create_thread_form">
-                    <label for="thread-name" class="" col-form-label>
-                        {{ __("Thread name") }}
-                    </label>
+                    <label for="thread-name" col-form-label>{{ __("Thread name") }}</label>
                     <input id="dashboard_create_thread_text" type="text" class="form-control">
-                    <label for="thread-category" class="mt-2" col-form-label>
-                        {{ __('Thread category') }}
-                    </label><br>
+                    <label for="thread-category" class="mt-2" col-form-label>{{ __('Thread category') }}</label>
+                    <br>
                     <select id="dashboard_thread_category_select">
                         <option value="">選択して下さい</option>
                         @foreach ($categorys as $category)
@@ -155,6 +147,7 @@
                     </select>
                 </form>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary bg-secondary" data-bs-dismiss="modal">
                     Close
@@ -174,5 +167,4 @@
     </script>
     <script src="{{ asset('js/app_jquery.js') }}"></script>
     <!-- ここまでデザイン関係なし -->
-
 </div>

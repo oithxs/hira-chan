@@ -23,7 +23,7 @@ glob.sync('resources/js/*/*.js').map(function (file) {
     mix.js(file, 'public/js/app_jquery.js')
 });
 
-glob.sync('resources/css/welcome/*.css').map(function (file) {
+glob.sync('resources/css/default/*/*.css').map(function (file) {
     mix.postCss(file, 'public/css/design.css')
 });
 

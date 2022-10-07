@@ -46,11 +46,11 @@
 
     <div class="min-h-screen">
         @if (isset($header))
-            @livewire('navigation-menu')
+        @livewire('navigation-menu')
         @else
-            <div class="shadow-sm">
-                @livewire('navigation-menu')
-            </div>
+        <div class="shadow-sm">
+            @livewire('navigation-menu')
+        </div>
         @endif
 
         <!-- Page Heading -->
