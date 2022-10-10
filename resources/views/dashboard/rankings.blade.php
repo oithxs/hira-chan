@@ -48,7 +48,12 @@
                             $title = str_replace("&hash;", "#", $title);
                         ?>
                         <tr>
-                            <td class="text-center">{{ $count++ }}</td>
+                            <td class="table-block">
+                                <div class="tablecell-block">
+                                    {{ $count++ }}
+                                </div>
+                            </td>
+
                             <td style="word-wrap:break-word;" class="font-semibold">
                                 {{ $title }}
                                 <br>
@@ -97,7 +102,11 @@
                             $title = str_replace("&hash;", "#", $title);
                         ?>
                         <tr>
-                            <td class="text-center">{{ $count++ }}</td>
+                            <td class="table-block">
+                                <div class="tablecell-block">
+                                    {{ $count++ }}
+                                </div>
+                            </td>
                             <td style="word-wrap:break-word;" class="font-semibold">
                                 {{ $title }}
                                 <br>
