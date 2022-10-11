@@ -25,9 +25,14 @@ class AccessLog
             strpos($request->path(), config('admin.route.prefix')) === false &&
             strcmp(url()->current(), route('thread.get')) !== 0
         ) {
+            $thread_id = $request->thread_id;
+            if (strpos($request->path(), 'jQuery.ajax') === 0) {
+                $thread_id = null;
+            }
+
             try {
                 Log::create([
-                    'hub_id' => $request->thread_id ?? null,
+                    'hub_id' => $thread_id,
                     'session_id' => $request->session()->getId(),
                     'user_id' => $request->user()->id ?? null,
                     'uri' => $request->path(),

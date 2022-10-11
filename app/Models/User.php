@@ -137,6 +137,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Get the hub for the user.
+     */
+    public function hub()
+    {
+        return $this->hasMany(Hub::class);
+    }
+
+    /**
      * Get the job hunting threads for the user.
      */
     public function job_hunting_threads()
@@ -150,22 +158,5 @@ class User extends Authenticatable implements MustVerifyEmail
     public function lecture_threads()
     {
         return $this->hasMany(LectureThread::class);
-    }
-
-
-    /**
-     * Get the hub that owns the lecture thread.
-     */
-    public function hub()
-    {
-        return $this->belongsTo(Hub::class);
-    }
-
-    /**
-     * Get the user that owns the lecture thread.
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 }

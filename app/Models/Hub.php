@@ -28,11 +28,9 @@ class Hub extends UuidModel
      * @var string[]
      */
     protected $fillable = [
-        'thread_id',
-        'thread_name',
-        'thread_category',
-        'thread_category_type',
-        'user_email',
+        'thread_category_id',
+        'user_id',
+        'name',
         'is_enabled'
     ];
 
@@ -92,5 +90,21 @@ class Hub extends UuidModel
     public function lecture_threads()
     {
         return $this->hasMany(LectureThread::class);
+    }
+
+    /**
+     * Get the thread category that owns the hub.
+     */
+    public function thread_category()
+    {
+        return $this->belongsTo(ThreadCategory::class);
+    }
+
+    /**
+     * Get the user that owns the hub.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
