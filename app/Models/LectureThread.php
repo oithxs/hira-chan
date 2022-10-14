@@ -70,4 +70,12 @@ class LectureThread extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get the likes for the club thread.
+     */
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 }

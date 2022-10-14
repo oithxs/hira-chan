@@ -29,9 +29,12 @@ class Like extends Model
      * @var string[]
      */
     protected $fillable = [
-        'thread_id',
-        'message_id',
-        'user_email',
+        'club_thread_id',
+        'college_year_thread_id',
+        'department_thread_id',
+        'job_hunting_thread_id',
+        'lecture_thread_id',
+        'user_id'
     ];
 
     /**
@@ -52,4 +55,44 @@ class Like extends Model
         'created_at' => 'datetime:Y-m-d H:i:s',
         'update_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    /**
+     * Get the club thread that owns the like.
+     */
+    public function club_thread()
+    {
+        return $this->belongsTo(ClubThread::class);
+    }
+
+    /**
+     * Get the college year thread that owns the like.
+     */
+    public function college_year_thread()
+    {
+        return $this->belongsTo(CollegeYearThread::class);
+    }
+
+    /**
+     * Get the department thread that owns the like.
+     */
+    public function department_thread()
+    {
+        return $this->belongsTo(DepartmentThread::class);
+    }
+
+    /**
+     * Get the job hunting thread that owns the like.
+     */
+    public function job_hunting_thread()
+    {
+        return $this->belongsTo(JobHuntingThread::class);
+    }
+
+    /**
+     * Get the user that owns the like.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
