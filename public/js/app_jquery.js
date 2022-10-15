@@ -83,8 +83,8 @@ function reload() {
       msg = data[item]['message'];
       show = "" + "<a " + "id='thread_message_id_" + data[item]['message_id'] + "' " + "href='#dashboard_send_comment_label' " + "type='button' " + "onClick='reply(" + data[item]['message_id'] + ")'>" + data[item]['message_id'] + "</a>" + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>";
 
-      if (data[item]['img_path'] != null) {
-        show += "" + "<p>" + "<img src='" + url + data[item]['img_path'].replace('public', '/storage') + "'>" + "</p>";
+      if (data[item]['thread_image_path'] !== null) {
+        show += "" + "<p>" + "<img src='" + url + data[item]['thread_image_path']['img_path'].replace('public', '/storage') + "'>" + "</p>";
       }
 
       show += "" + "<br>" + "<button " + "id='js_dashboard_Get_allRow_button_" + data[item]['message_id'] + "' " + "type='button' ";

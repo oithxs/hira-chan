@@ -44,24 +44,25 @@ class ThreadsController extends Controller
             ->first();
 
         switch ($thread->thread_category->category_type) {
-            case '学科':
-                $message_id = (new DepartmentThreadController)->store($request->thread_id, $request->user()->id, $message);
+            case '部活':
+                $message_id = (new ClubThreadController)->store($request->thread_id, $request->user()->id, $message);
                 break;
             case '学年':
                 $message_id = (new CollegeYearThreadController)->store($request->thread_id, $request->user()->id, $message);
                 break;
-            case '部活':
-                $message_id = (new ClubThreadController)->store($request->thread_id, $request->user()->id, $message);
+            case '学科':
+                $message_id = (new DepartmentThreadController)->store($request->thread_id, $request->user()->id, $message);
+                break;
+            case '就職':
+                $message_id = (new JobHuntingThreadController)->store($request->thread_id, $request->user()->id, $message);
                 break;
             case '授業':
                 $message_id = (new LectureThreadController)->store($request->thread_id, $request->user()->id, $message);
                 break;
-            case '就職':
-                $message_id = (new JobHuntingThreadController)->store($request->thread_id, $request->user()->id, $message);
             default:
                 break;
         }
 
-        (new ThreadImagePathController)->store($request, $message_id);
+        (new ThreadImagePathController)->store($request->file('img'), $request->user()->id, $request->thread_id, $message_id, $thread->thread_category->category_type);
     }
 }

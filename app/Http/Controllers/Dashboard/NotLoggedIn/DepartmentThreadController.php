@@ -20,19 +20,15 @@ class DepartmentThreadController extends Controller
     {
         return DepartmentThread::with([
             'user',
+            'thread_image_path',
             'likes' => function ($query) use ($user_id) {
                 $query->where('user_id', '=', $user_id);
             }
         ])
             ->withCount('likes')
-            ->leftjoin('thread_image_paths', function ($join) {
-                $join
-                    ->whereColumn('thread_image_paths.thread_id', '=', 'department_threads.hub_id')
-                    ->whereColumn('thread_image_paths.message_id', '=', 'department_threads.message_id');
-            })
-            ->where('department_threads.hub_id', '=', $thread_id)
-            ->where('department_threads.message_id', '>', $pre_max_message_id)
-            ->groupBy('department_threads.message_id')
+            ->where('hub_id', '=', $thread_id)
+            ->where('message_id', '>', $pre_max_message_id)
+            ->groupBy('message_id')
             ->get();
     }
 }

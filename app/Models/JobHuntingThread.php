@@ -78,4 +78,12 @@ class JobHuntingThread extends Model
     {
         return $this->hasMany(Like::class);
     }
+
+    /**
+     * Get the thread image path associated with the job hunting thread.
+     */
+    public function thread_image_path()
+    {
+        return $this->hasOne(ThreadImagePath::class);
+    }
 }

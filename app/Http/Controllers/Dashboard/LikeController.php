@@ -54,7 +54,7 @@ class LikeController extends Controller
                     ->where('message_id', '=', $request->message_id)
                     ->first()
                     ->id;
-                Like::insertOrIgnore([
+                Like::create([
                     'club_thread_id' => $club_thread_id,
                     'user_id' => $request->user()->id
                 ]);
@@ -65,7 +65,7 @@ class LikeController extends Controller
                     ->where('message_id', '=', $request->message_id)
                     ->first()
                     ->id;
-                Like::insertOrIgnore([
+                Like::create([
                     'college_year_thread_id' => $college_year_thread_id,
                     'user_id' => $request->user()->id
                 ]);
@@ -76,7 +76,7 @@ class LikeController extends Controller
                     ->where('message_id', '=', $request->message_id)
                     ->first()
                     ->id;
-                Like::insertOrIgnore([
+                Like::create([
                     'department_thread_id' => $department_thread_id,
                     'user_id' => $request->user()->id
                 ]);
@@ -87,7 +87,7 @@ class LikeController extends Controller
                     ->where('message_id', '=', $request->message_id)
                     ->first()
                     ->id;
-                Like::insertOrIgnore([
+                Like::create([
                     'job_hunting_thread_id' => $job_hunting_thread_id,
                     'user_id' => $request->user()->id
                 ]);
@@ -98,7 +98,7 @@ class LikeController extends Controller
                     ->where('message_id', '=', $request->message_id)
                     ->first()
                     ->id;
-                Like::insertOrIgnore([
+                Like::create([
                     'lecture_thread_id' => $lecture_thread_id,
                     'user_id' => $request->user()->id
                 ]);
