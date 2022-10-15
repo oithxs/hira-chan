@@ -40,12 +40,15 @@ class ThreadImagePathController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\UploadedFile $img
+     * @param string $user_id
+     * @param string $thread_id
      * @param int $message_id
+     * @param string $category_type
      *
      * @return void
      */
-    public function store(UploadedFile $img = null, string $user_id, string $thread_id, int $message_id, $category_type)
+    public function store(UploadedFile $img = null, string $user_id, string $thread_id, int $message_id, string $category_type)
     {
         if ($img) {
             $img = Image::make($img)->encode('jpg')->orientate()->save();
