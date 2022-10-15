@@ -40,16 +40,6 @@ class ThreadImagePath extends Model
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'img_path',
-        'img_size'
-    ];
-
-    /**
      * The attributes that should be cast.
      *
      * @var array

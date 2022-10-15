@@ -22,14 +22,4 @@ class Session extends Model
      * @var string
      */
     protected $table = 'sessions';
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'created_at' => 'datetime:Y-m-d H:i:s',
-        'update_at' => 'datetime:Y-m-d H:i:s',
-    ];
 }

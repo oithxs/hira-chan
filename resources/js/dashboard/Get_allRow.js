@@ -43,10 +43,10 @@ function reload() {
                 msg +
                 "</p>";
 
-            if (data[item]['img_path'] != null) {
+            if (data[item]['thread_image_path'] !== null) {
                 show += "" +
                     "<p>" +
-                    "<img src='" + url + data[item]['img_path'].replace('public', '/storage') + "'>" +
+                    "<img src='" + url + data[item]['thread_image_path']['img_path'].replace('public', '/storage') + "'>" +
                     "</p>";
             }
 
