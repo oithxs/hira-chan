@@ -43,10 +43,10 @@ function reload() {
                 msg +
                 "</p>";
 
-            if (data[item]['img_path'] != null) {
+            if (data[item]['thread_image_path'] !== null) {
                 show += "" +
                     "<p>" +
-                    "<img src='" + url + data[item]['img_path'].replace('public', '/storage') + "'>" +
+                    "<img src='" + url + data[item]['thread_image_path']['img_path'].replace('public', '/storage') + "'>" +
                     "</p>";
             }
 
@@ -56,7 +56,7 @@ function reload() {
                 "id='js_dashboard_Get_allRow_button_" + data[item]['message_id'] + "' " +
                 "type='button' ";
 
-            if (data[item]['user_like'] == 0) {
+            if (data[item]['likes']['length'] === 0) {
                 // いいねが押されていない場合
                 show += "class='btn btn-light' onClick='likes(" + data[item]['message_id'] + ", " + 0 + ")'>";
             } else {
@@ -68,7 +68,7 @@ function reload() {
                 "like" +
                 "</button> " +
                 "<dev id='js_dashboard_Get_allRow_dev_" + data[item]['message_id'] + "'>" +
-                data[item]['count_user'] +
+                data[item]['likes_count'] +
                 "</dev>" +
                 "<hr>";
 
