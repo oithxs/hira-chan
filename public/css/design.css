@@ -1,3 +1,19 @@
+/*ここからランキングの順位の文字を上下中央にするCSS*/
+.table-block{
+    height: 30px;
+    position: relative;
+  }
+
+.tablecell-block{
+    position: absolute;
+    top: 50%; /*親要素を起点に上から50%*/
+    left: 50%;  /*親要素を起点に左から50%*/
+    transform: translateY(-50%) translateX(-50%); /*要素の大きさの半分ずつを戻す*/
+    -webkit-transform: translateY(-50%) translateX(-50%);
+  }
+
+ /*ここまで*/
+
 /*
  * ! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css
  * resources/css/welcome/normalize.css
@@ -280,22 +296,6 @@ video {
 .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
 }
-
-/*ここからランキングの順位の文字を上下中央にするCSS*/
-.table-block{
-    height: 30px;
-    position: relative;
-  }
-
-.tablecell-block{
-    position: absolute;
-    top: 50%; /*親要素を起点に上から50%*/
-    left: 50%;  /*親要素を起点に左から50%*/
-    transform: translateY(-50%) translateX(-50%); /*要素の大きさの半分ずつを戻す*/
-    -webkit-transform: translateY(-50%) translateX(-50%);
-  }
-
- /*ここまで*/
 
 @media (min-width: 640px) {
     .sm\:rounded-lg {
