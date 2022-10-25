@@ -1,0 +1,25 @@
+{
+    "name": "hira-chan_app",
+    "dockerComposeFile": "../docker/docker-compose.yml",
+    "service": "hira-chan_app",
+    "workspaceFolder": "/usr/src/app",
+    "forwardPorts": [8080],
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "esbenp.prettier-vscode",
+                "editorconfig.editorconfig",
+                "bmewburn.vscode-intelephense-client",
+                "neilbrayfield.php-docblocker",
+                "onecentlin.laravel5-snippets",
+                "onecentlin.laravel-blade",
+                "austenc.laravel-blade-spacer",
+                "amiralizadeh9480.laravel-extra-intellisense",
+                "naoray.laravel-goto-components",
+                "codingyu.laravel-goto-view",
+                "mikestead.dotenv"
+            ]
+        }
+    }
+}

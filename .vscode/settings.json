@@ -3,8 +3,6 @@
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 1000,
     "editor.formatOnType": true,
-    "files.associations": {
-        "*.blade.php": "html"
-    },
+    "blade.format.enable": true,
     "extensions.ignoreRecommendations": false
 }
