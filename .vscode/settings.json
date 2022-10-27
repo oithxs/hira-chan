@@ -3,8 +3,9 @@
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 1000,
     "editor.formatOnType": true,
-    "files.associations": {
-        "*.blade.php": "html"
-    },
-    "extensions.ignoreRecommendations": false
+    "blade.format.enable": true,
+    "extensions.ignoreRecommendations": false,
+    "[blade]": {
+        "editor.defaultFormatter": "onecentlin.laravel-blade"
+    }
 }
