@@ -1,16 +1,16 @@
 # 本プロジェクトの環境構築まで
 
-## 以下の OS では環境構築が出来ることを確認しています
+## 以下の 環境 では環境構築が出来ることを確認しています
 
--   Docker と Docker Compose を導入した OS
+-   WSL2
 
 ## 目次
 
 1. [Docker のインストール](#1-docker-rootless-モードのインストール)
 2. [Docker Compose のインストール](#2-docker-compose-のインストール)
 3. [コンテナの構築](#3-コンテナを構築-作成-起動-アタッチする)
-4. [コンテナの停止](#4-コンテナの自動停止・手動停止)
-5. [コンテナの起動](#5-コンテナの自動起動・手動起動)
+4. [コンテナの停止](#4-コンテナの停止)
+5. [コンテナの起動](#5-コンテナの起動2-回目以降)
 
 ---
 
@@ -100,29 +100,23 @@ docker-compose -v
 
 ## 3 コンテナを構築 作成 起動 アタッチする
 
-1. ホームディレクトリ直下に `git clone` でプロジェクトを配置する
-2. プロジェクトディレクトリ内で以下のコマンドを実行する
+1. （ホームディレクトリ直下に） `git clone` でプロジェクトを配置する
+2. vscode でプロジェクトを開き，`このワークスペースには拡張機能の推奨事項があります` の通知から `全てインストール` する
+3. その後，vscode の通知から `Reopen in Container` を実行する
+4. メール送信を可能とするために， `.env` ファイルの以下の項目を設定する
+    - `MAIL_USERNAME` -> Gmail アドレス
+    - `MAIL_PASSWORD` -> 上記の Gmail アドレスのアプリパスワード
+    - `MAIL_FROM_ADDRESS` -> Gmail アドレス
 
-```sh
-chmod +x ./bin/*
-```
+コンテナの構築・作成・起動はこれで完了です．
 
-```sh
-./bin/setup-docker.sh
-Account name (no @ or below required): <gmailの@より前の部分>
-Application Password: <アプリパスワード>
-```
+### コンテナ内での開発
 
-※ メール送信は可能ですがメールによるユーザ認証は 403 エラーがでて出来ないので，admin からユーザ登録をして下さい．
+`Reopen in Container` で起動・コンテナ内に入ることで開発でよく使用する `php`，`composer`，`npm` のコマンドを使用出来ます．
 
-メール機能が不要であれば上記の入力は不要です．ただし，メールサーバ用コンテナは作成されます．
-手動でメール機能を有効にする場合や，メールアドレスを変更したい場合は，`.env` ファイルの
+また，コンテナ内ではフォーマッタも使用出来るので `Ctrl` + `S` などにより整形を行って下さい．
 
--   `MAIL_USERNAME`
--   `MAIL_PASSWORD`
--   `MAIL_FROM_ADDRESS`
-
-部分を編集して下さい．
+基本的にコンテナ内での開発をお願いします．
 
 ### アクセス
 
@@ -130,55 +124,28 @@ Application Password: <アプリパスワード>
 -   掲示板管理者ページ: `http://localhost:8080/admin`
 -   phpmyadmin:`http://localhost:8080/phpmyadmin`
 
-## 4 コンテナの自動停止・手動停止
+## 4 コンテナの停止
 
-コンテナの停止に関しては，作業ディレクトリが異なるだけでたいした違いはありません．
+コンテナ内での開発中にコンテナを停止する場合は，vscode 左下の緑のアイコンから `Reopen Folder in WSL` を選択する事によりコンテナの停止が行われます
 
-### 4.1 自動停止（シェルスクリプト）
+## 5 コンテナの起動（2 回目以降）
 
-`docker-Laravel_Forum-B/Laravel_Forum-B` ディレクトリ内で以下のコマンドを実行する
+-   vscode の通知で `Reopen in Container` を実行する
+-   左下の緑のアイコンから `Reopen in Container` を実行
 
-```sh
-./bin/stop-docker.sh
-```
-
-### 4.2 手動停止（コマンドライン）
-
-`docker-Laravel_Forum-B/docker` ディレクトリ内で以下のコマンドを実行する
+コンテナの起動は上記のどちらかにより完了です．しかし，プロジェクトの更新には以下のコマンドが必要です．`git pull` などでリモート（フォーク元）の変更をローカルに取り込んでから，問題の無いタイミングで以下のコマンドを実行して下さい．
 
 ```sh
-docker-compose stop
+composer install # PHPのパッケージをインストール
+npm install # Nodeのパッケージをインストール
+npm install --update-binary --no-shrinkwrap # 上記コマンドでNodeのパッケージインストールが失敗した場合
+php artisan migrate # プロジェクトのデータベースを最新の状態にする
+php artisan migrate:fresh # プロジェクトのデータベースを再構築する
+app db:seed # プロジェクトのテーブルに初期データを作成する
 ```
 
-## 5 コンテナの自動起動・手動起動
-
-### 5.1 自動起動（シェルスクリプト）
-
-`docker-Laravel_Forum-B/Laravel_Forum-B` ディレクトリ内で以下のコマンドを実行する
-
-```sh
-./bin/start-docker.sh
-```
-
-ローカルリポジトリの更新もここで行っているので，`git pull` などでリモート（フォーク元）の変更をローカルに取り込んでから起動する事をオススメします．
-
-### 5.2 手動起動（コマンドライン）
-
-`docker-Laravel_Forum-B/docker` ディレクトリ内で以下のコマンドを実行する
-
-```sh
-docker-compose start
-```
-
-コンテナの起動自体はこれで完了です．しかし，ローカルリポジトリの更新には以下のコマンドが必要です．
-`git pull` などでリモート（フォーク元）の変更をローカルに取り込んでからコマンドを実行する事をオススメします．
-
-```sh
-docker-compose exec composer composer install
-docker-compose exec composer npm install
-docker-compose exec app php artisan migrate
-docker-compose exec app db:seed
-```
+-   `composer install` を実行する際は状況に応じて `vendor` フォルダを削除する事も検討して下さい
+-   `npm install` を実行する際は状況に応じて `node_modules` フォルダを削除する事も検討して下さい
 
 ## 参考にした記事
 
