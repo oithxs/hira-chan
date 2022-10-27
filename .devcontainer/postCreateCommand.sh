@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cp /usr/src/app/.env.example /usr/src/app/.env
+rm /usr/src/app/.enve
 
 mkdir storage/app/public/images
 mkdir storage/app/public/images/thread_message
