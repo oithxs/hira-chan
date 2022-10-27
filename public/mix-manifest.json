@@ -1,8 +1,8 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/app_jquery.js": "/js/app_jquery.js",
-    "/css/design-dark.css": "/css/design-dark.css",
     "/css/design.css": "/css/design.css",
     "/css/design-error.css": "/css/design-error.css",
+    "/css/design-dark.css": "/css/design-dark.css",
     "/css/app.css": "/css/app.css"
 }
