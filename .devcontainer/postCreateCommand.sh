@@ -1,7 +1,6 @@
 #!/bin/bash
 
 cp /usr/src/app/.env.example /usr/src/app/.env
-rm /usr/src/app/.enve
 
 mkdir storage/app/public/images
 mkdir storage/app/public/images/thread_message
@@ -11,6 +10,11 @@ chmod -R 777 public/uploads
 
 composer install
 npm install --update-binary --no-shrinkwrap
+
+sed -ie "s/DB_HOST=127.0.0.1/DB_HOST=hira-chan_mysql/g" /usr/src/app/.env
+sed -ie "s/DB_DATABASE=/DB_DATABASE=forum/g" /usr/src/app/.env
+sed -ie "s/DB_PASSWORD=/DB_PASSWORD=rootpass/g" /usr/src/app/.env
+
 php artisan key:generate
 php artisan migrate
 php artisan admin:install
@@ -19,8 +23,6 @@ php artisan admin:import helpers
 php artisan admin:import log-viewer
 php artisan storage:link
 
-sed -ie "s/DB_HOST=127.0.0.1/DB_HOST=hira-chan_mysql/g" /usr/src/app/.env
-sed -ie "s/DB_DATABASE=/DB_DATABASE=forum/g" /usr/src/app/.env
-sed -ie "s/DB_PASSWORD=/DB_PASSWORD=rootpass/g" /usr/src/app/.env
+rm /usr/src/app/.enve
 
 exit 0
