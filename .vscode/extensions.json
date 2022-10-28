@@ -1,8 +1,5 @@
 {
     "recommendations": [
-        "esbenp.prettier-vscode",
-        "bmewburn.vscode-intelephense-client",
-        "ms-vscode-remote.vscode-remote-extensionpack",
-        "editorconfig.editorconfig"
+        "ms-vscode-remote.vscode-remote-extensionpack"
     ]
 }

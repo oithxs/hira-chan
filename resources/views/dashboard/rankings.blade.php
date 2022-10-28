@@ -48,9 +48,12 @@
                             $thread_name = str_replace("&hash;", "#", $thread_name);
                         ?>
                         <tr>
-                            <td class="text-center">
-                                {{ $count++ }}
+                            <td class="table-block">
+                                <div class="tablecell-block">
+                                    {{ $count++ }}
+                                </div>
                             </td>
+
                             <td style="word-wrap:break-word;" class="font-semibold">
                                 {{ $thread_name }}
                                 <br>
@@ -99,8 +102,10 @@
                             $thread_name = str_replace("&hash;", "#", $thread_name);
                         ?>
                         <tr>
-                            <td class="text-center">
-                                {{ $count++ }}
+                            <td class="table-block">
+                                <div class="tablecell-block">
+                                    {{ $count++ }}
+                                </div>
                             </td>
                             <td style="word-wrap:break-word;" class="font-semibold">
                                 {{ $thread_name }}
