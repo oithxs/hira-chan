@@ -99,6 +99,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Get the user page theme that owns the user.
+     */
+    public function user_page_theme()
+    {
+        return $this->belongsTo(UserPageTheme::class);
+    }
+
+    /**
      * Get the access logs for the user.
      */
     public function access_logs()

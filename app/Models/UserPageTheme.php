@@ -41,4 +41,12 @@ class UserPageTheme extends Model
         'created_at' => 'datetime:Y-m-d H:i:s',
         'update_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    /**
+     * Get the users for the user page themes.
+     */
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }
