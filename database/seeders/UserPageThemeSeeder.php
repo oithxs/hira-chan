@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\UserPageTheme;
 
-class UserPageThemaSeeder extends Seeder
+class UserPageThemeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
