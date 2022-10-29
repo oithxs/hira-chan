@@ -1,10 +1,10 @@
-$('#mypage_page_thema_select').change(function () {
+$('#mypage_page_theme_select').change(function () {
     var value = $('option:selected').val();
 
     if (value == 'default') {
-        value = 0;
-    } else if (value == 'dark') {
         value = 1;
+    } else if (value == 'dark') {
+        value = 2;
     } else {
         return;
     }
@@ -17,9 +17,9 @@ $('#mypage_page_thema_select').change(function () {
 
     $.ajax({
         type: "POST",
-        url: url + "/jQuery.ajax/page_thema",
+        url: url + "/jQuery.ajax/page_theme",
         data: {
-            "page_thema": value
+            "page_theme": value
         },
     }).done(function () {
         window.location.reload();

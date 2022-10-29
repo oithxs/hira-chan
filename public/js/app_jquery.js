@@ -11,21 +11,17 @@ $('#dashboard_create_thread_text').keydown(function (e) {
     create_thread();
   }
 });
-
 function create_thread() {
   var formElm = document.getElementById("dashboard_create_thread_form");
   var thread_name = formElm.dashboard_create_thread_text.value;
   var thread_category = formElm.dashboard_thread_category_select.value;
   formElm.dashboard_create_thread_text.value = "";
-
   if (thread_name == '') {
     return;
   }
-
   if (thread_category == '') {
     return;
   }
-
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -58,7 +54,6 @@ if (show_thread_messages_flag === 1) {
   reload();
   setInterval(reload, 1000);
 }
-
 function reload() {
   var displayArea = document.getElementById("dashboard_displayArea");
   var user;
@@ -82,13 +77,10 @@ function reload() {
       user = data[item]['user']['name'];
       msg = data[item]['message'];
       show = "" + "<a " + "id='thread_message_id_" + data[item]['message_id'] + "' " + "href='#dashboard_send_comment_label' " + "type='button' " + "onClick='reply(" + data[item]['message_id'] + ")'>" + data[item]['message_id'] + "</a>" + ": " + user + " " + data[item]['created_at'] + "<br>" + "<p style='overflow-wrap: break-word;'>" + msg + "</p>";
-
       if (data[item]['thread_image_path'] !== null) {
         show += "" + "<p>" + "<img src='" + url + data[item]['thread_image_path']['img_path'].replace('public', '/storage') + "'>" + "</p>";
       }
-
       show += "" + "<br>" + "<button " + "id='js_dashboard_Get_allRow_button_" + data[item]['message_id'] + "' " + "type='button' ";
-
       if (data[item]['likes']['length'] === 0) {
         // いいねが押されていない場合
         show += "class='btn btn-light' onClick='likes(" + data[item]['message_id'] + ", " + 0 + ")'>";
@@ -96,7 +88,6 @@ function reload() {
         // いいねが押されていた場合
         show += "class='btn btn-dark' onClick='likes(" + data[item]['message_id'] + ", " + 1 + ")'>";
       }
-
       show += "" + "like" + "</button> " + "<dev id='js_dashboard_Get_allRow_dev_" + data[item]['message_id'] + "'>" + data[item]['likes_count'] + "</dev>" + "<hr>";
       displayArea.insertAdjacentHTML('afterbegin', show);
       max_message_id = data[item]['message_id'];
@@ -126,22 +117,18 @@ $("#dashboard_send_comment_replay_clear").click(function () {
   !*** ./resources/js/dashboard/Search_thread.js ***!
   \*************************************************/
 $('#dashboard_threads_search_thread').keyup(search_thread);
-
 function search_thread() {
   var input = $('#dashboard_threads_search_thread').val();
   var category_type = $('#dashboard_threads_category_type_select').val();
   var category = $('#dashboard_threads_category_select').val();
-
   if (input == '') {
     $('#dashboard_threads_threads_table tr').show();
     return;
   }
-
   $('#dashboard_threads_threads_table tbody tr').each(function () {
     var text = $(this).find("td:eq(0)").html();
     var tb_category = $(this).find("td:eq(3)").html();
     var tb_category_type = $(this).find("td:eq(4)").html();
-
     if (text.match(input) != null) {
       if (category == tb_category) {
         $(this).show();
@@ -155,7 +142,6 @@ function search_thread() {
     }
   });
 }
-
 $('#dashboard_threads_show_all_threads_button').click(function () {
   $('#dashboard_threads_category_type_select').val('');
   $('#dashboard_threads_category_select').val('');
@@ -167,7 +153,6 @@ $('#dashboard_threads_category_type_select').change(function () {
   search_thread();
   $('#dashboard_threads_category_select').find('option').each(function () {
     var category = $(this).data('val');
-
     if (category_type == '' || category_type == category) {
       $(this).show();
     } else {
@@ -190,7 +175,6 @@ $('#dashboard_message_textarea').keydown(function (e) {
     send_comment();
   }
 });
-
 function send_comment() {
   var rows_limit = 20;
   var bytes_limit = 300;
@@ -202,7 +186,6 @@ function send_comment() {
   formData.append('message', message);
   formData.append('reply', reply);
   formData.append('img', $('#dashboard_send_comment_upload_img').prop('files')[0]);
-
   if (message.trim() == 0) {
     dashboard_sendAlertArea.innerHTML = "<div class='alert alert-danger'>書き込みなし・空白・改行のみの投稿は出来ません</div>";
   } else if (message.rows() > rows_limit) {
@@ -234,18 +217,14 @@ function send_comment() {
     $('#dashboard_send_comment_reply_source').attr('href', '#!');
   }
 }
-
 String.prototype.bytes = function () {
   return encodeURIComponent(this).replace(/%../g, "x").length;
 };
-
 String.prototype.rows = function () {
   if (this.match(/\n/g)) return this.match(/\n/g).length + 1;else return 1;
 };
-
 $('#dashboard_send_comment_upload_img').change(function (e) {
   var fileset = $(this).val();
-
   if (fileset !== '' && e.target.files[0].type.indexOf('image') < 0) {
     dashboard_sendAlertArea.innerHTML = "<div class='alert alert-danger'>画像ファイルを指定してください</div>";
     $('#dashboard_send_commnet_img_preview').attr('src', '');
@@ -258,24 +237,19 @@ $('#dashboard_send_comment_upload_img').change(function (e) {
     return false;
   } else {
     dashboard_sendAlertArea.innerHTML = "";
-
     if (fileset === '') {
       $('#dashboard_send_commnet_img_preview').attr('src', '');
     } else {
       var reader = new FileReader();
-
       reader.onload = function (e) {
         $('#dashboard_send_commnet_img_preview').attr('src', e.target.result);
       };
-
       reader.readAsDataURL(e.target.files[0]);
     }
   }
 });
-
 function file_size_check(idname) {
   var fileset = $('#' + idname).prop('files')[0];
-
   if (fileset) {
     // 画像サイズ3MBまで
     if (3145728 <= fileset.size) {
@@ -292,17 +266,15 @@ function file_size_check(idname) {
 /*!************************************************!*\
   !*** ./resources/js/mypage/SelectPageThema.js ***!
   \************************************************/
-$('#mypage_page_thema_select').change(function () {
+$('#mypage_page_theme_select').change(function () {
   var value = $('option:selected').val();
-
   if (value == 'default') {
-    value = 0;
-  } else if (value == 'dark') {
     value = 1;
+  } else if (value == 'dark') {
+    value = 2;
   } else {
     return;
   }
-
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -310,9 +282,9 @@ $('#mypage_page_thema_select').change(function () {
   });
   $.ajax({
     type: "POST",
-    url: url + "/jQuery.ajax/page_thema",
+    url: url + "/jQuery.ajax/page_theme",
     data: {
-      "page_thema": value
+      "page_theme": value
     }
   }).done(function () {
     window.location.reload();
@@ -335,7 +307,6 @@ $('#report_form_textarea').keydown(function (e) {
     send_report_form();
   }
 });
-
 function send_report_form() {
   $.ajaxSetup({
     headers: {
@@ -349,7 +320,6 @@ function send_report_form() {
   }).done(function (data) {
     $('div[name="radio_1_error"]').html('');
     $('div[name="textarea_error"]').html('');
-
     if (typeof data['errors'] !== 'undefined') {
       if (typeof data['errors']['radio_1'] !== 'undefined') $('div[name="radio_1_error"]').html('<div class="alert alert-danger">' + data['errors']['radio_1'][0] + '</div>');
       if (typeof data['errors']['report_form_textarea'] !== 'undefined') $('div[name="textarea_error"]').html('<div class="alert alert-danger">' + data['errors']['report_form_textarea'][0] + '</div>');

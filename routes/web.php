@@ -72,7 +72,7 @@ Route::middleware([
         });
 
         Route::controller(\App\Http\Controllers\MyPage\UserController::class)->group(function () {
-            Route::match(['get', 'post'], 'jQuery.ajax/page_thema', 'update');
+            Route::match(['get', 'post'], 'jQuery.ajax/page_theme', 'update');
         });
 
         Route::controller(\App\Http\Controllers\Report\FormContactAdministratorController::class)->group(function () {

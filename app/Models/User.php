@@ -48,6 +48,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var string[]
      */
     protected $fillable = [
+        'user_page_theme_id',
         'name',
         'email',
         'password',
