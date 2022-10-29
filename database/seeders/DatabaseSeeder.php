@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(AdminMenuSeeder::class);
         $this->call(AdminPermissionSeeder::class);
-        $this->call(UserPageThemaSeeder::class);
+        $this->call(UserPageThemeSeeder::class);
         $this->call(ThreadCategorySeeder::class);
     }
 }

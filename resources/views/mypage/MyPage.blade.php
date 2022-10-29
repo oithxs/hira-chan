@@ -21,7 +21,7 @@
                 <meta name="csrf-token" content="{{ csrf_token() }}" />
 
                 <p>ページテーマ</p>
-                <select id="mypage_page_thema_select">
+                <select id="mypage_page_theme_select">
                     <option value="">選択して下さい</option>
                     <option value="default">デフォルト</option>
                     <option value="dark">ダークテーマ</option>
@@ -30,9 +30,9 @@
                 <!-- ここからテーマ取得例（不要になり次第削除） -->
                 <br>
                 <br>
-                @if (Auth::user()->thema == 0)
+                @if (Auth::user()->user_page_theme_id == 1)
                 デフォルトテーマ
-                @elseif (Auth::user()->thema == 1)
+                @elseif (Auth::user()->user_page_theme_id == 2)
                 ダークテーマ
                 @endif
                 <!-- ここまでテーマ取得例（不要になり次第削除） -->

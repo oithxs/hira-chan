@@ -11,12 +11,12 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
-    @if (!Auth::check() || Auth::user()->thema == 0)
+    @if (!Auth::check() || Auth::user()->user_page_theme_id == 1)
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ asset('css/design.css') }}">
-    @elseif (Auth::user()->thema == 1)
+    @elseif (Auth::user()->user_page_theme_id == 2)
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-dark-5@1.1.2/dist/css/bootstrap-night.min.css"
         integrity="sha384-RvY1VEsYg2mun1QUZIdkZHhMcwhsQnHOoxD8MBfRlSyIXcnukm039Qx28Ap+LCox" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/design-dark.css') }}">

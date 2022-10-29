@@ -659,6 +659,15 @@ var directiveOrder = [
   "ref",
   "data",
   "id",
+  "radio",
+  "tabs",
+  "switch",
+  "disclosure",
+  "menu",
+  "listbox",
+  "list",
+  "item",
+  "combobox",
   "bind",
   "init",
   "for",
@@ -1337,11 +1346,11 @@ function getBinding(el, name, fallback) {
   let attr = el.getAttribute(name);
   if (attr === null)
     return typeof fallback === "function" ? fallback() : fallback;
+  if (attr === "")
+    return true;
   if (isBooleanAttr(name)) {
     return !![name, "true"].includes(attr);
   }
-  if (attr === "")
-    return true;
   return attr;
 }
 
@@ -1474,7 +1483,7 @@ var Alpine = {
   get raw() {
     return raw;
   },
-  version: "3.10.3",
+  version: "3.10.5",
   flushAndStopDeferringMutations,
   dontAutoEvaluateFunctions,
   disableEffectScheduling,
@@ -2635,8 +2644,9 @@ directive("bind", (el, {value, modifiers, expression, original}, {effect: effect
     return storeKeyForXFor(el, expression);
   let evaluate2 = evaluateLater(el, expression);
   effect3(() => evaluate2((result) => {
-    if (result === void 0 && expression.match(/\./))
+    if (result === void 0 && typeof expression === "string" && expression.match(/\./)) {
       result = "";
+    }
     mutateDom(() => bind(el, value, result, modifiers));
   }));
 });
@@ -5034,7 +5044,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
 
@@ -5047,6 +5056,7 @@ alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -5055,13 +5065,17 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
  */
+
 // import Echo from 'laravel-echo';
+
 // window.Pusher = require('pusher-js');
+
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',
 //     key: process.env.MIX_PUSHER_APP_KEY,
@@ -22283,6 +22297,19 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
+/***/ "./resources/css/dark/dashboard/nomal.css":
+/*!************************************************!*\
+  !*** ./resources/css/dark/dashboard/nomal.css ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./resources/css/errors/layout.css":
 /*!*****************************************!*\
   !*** ./resources/css/errors/layout.css ***!
@@ -22322,6 +22349,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/css/default/dashboard/ranking.css":
+/*!*****************************************************!*\
+  !*** ./resources/css/default/dashboard/ranking.css ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./resources/css/default/welcome/normalize.css":
 /*!*****************************************************!*\
   !*** ./resources/css/default/welcome/normalize.css ***!
@@ -22352,19 +22392,6 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************************!*\
   !*** ./resources/css/dark/dashboard/dark.css ***!
   \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./resources/css/dark/dashboard/nomal.css":
-/*!************************************************!*\
-  !*** ./resources/css/dark/dashboard/nomal.css ***!
-  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22702,9 +22729,9 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"/js/app": 0,
-/******/ 			"css/design-dark": 0,
 /******/ 			"css/design": 0,
 /******/ 			"css/design-error": 0,
+/******/ 			"css/design-dark": 0,
 /******/ 			"css/app": 0
 /******/ 		};
 /******/ 		
@@ -22755,14 +22782,15 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/design-dark","css/design","css/design-error","css/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/design-dark","css/design","css/design-error","css/app"], () => (__webpack_require__("./resources/css/app.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/design-dark","css/design","css/design-error","css/app"], () => (__webpack_require__("./resources/css/default/welcome/normalize.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/design-dark","css/design","css/design-error","css/app"], () => (__webpack_require__("./resources/css/default/welcome/welcome.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/design-dark","css/design","css/design-error","css/app"], () => (__webpack_require__("./resources/css/dark/dashboard/dark.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/design-dark","css/design","css/design-error","css/app"], () => (__webpack_require__("./resources/css/dark/dashboard/nomal.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/design-dark","css/design","css/design-error","css/app"], () => (__webpack_require__("./resources/css/errors/layout.css")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/design-dark","css/design","css/design-error","css/app"], () => (__webpack_require__("./resources/css/errors/minimal.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/design","css/design-error","css/design-dark","css/app"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/design","css/design-error","css/design-dark","css/app"], () => (__webpack_require__("./resources/css/app.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/design","css/design-error","css/design-dark","css/app"], () => (__webpack_require__("./resources/css/default/dashboard/ranking.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/design","css/design-error","css/design-dark","css/app"], () => (__webpack_require__("./resources/css/default/welcome/normalize.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/design","css/design-error","css/design-dark","css/app"], () => (__webpack_require__("./resources/css/default/welcome/welcome.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/design","css/design-error","css/design-dark","css/app"], () => (__webpack_require__("./resources/css/dark/dashboard/dark.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/design","css/design-error","css/design-dark","css/app"], () => (__webpack_require__("./resources/css/dark/dashboard/nomal.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/design","css/design-error","css/design-dark","css/app"], () => (__webpack_require__("./resources/css/errors/layout.css")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/design","css/design-error","css/design-dark","css/app"], () => (__webpack_require__("./resources/css/errors/minimal.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

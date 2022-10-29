@@ -1,58 +1,42 @@
 version: "3"
 services:
-  app:
-    container_name: laravel-app
-    build: ./php
+  hira-chan_app:
+    image: hira-chan_app:latest
+    container_name: hira-chan_app
+    build:
+      context: ..
+      dockerfile: ./docker/app/Dockerfile
+    user: dev
     volumes:
-      - ../:/var/www
+      - ..:/usr/src/app
     depends_on:
-      - db
+      - hira-chan_mysql
     tty: true
 
-  composer:
-    image: composer:latest
-    container_name: laravel-composer
-    volumes:
-      - ../Laravel_Forum-B:/usr/local/src/Laravel_Forum-B
-    working_dir: /usr/local/src/Laravel_Forum-B
-    command: tail -f /dev/null
-    tty: true
-    stdin_open: true
-
-  node:
-    image: node:16.16.0-alpine
-    container_name: laravel-node
-    volumes:
-      - ../Laravel_Forum-B:/usr/local/src/Laravel_Forum-B
-    working_dir: /usr/local/src/Laravel_Forum-B
-    tty: true
-    stdin_open: true
-
-  postfix:
-    container_name: laravel-postfix
-    build: ./postfix
-    volumes:
-      - ./postfix:/etc/postfix/sasl
-    tty: true
-
-  nginx:
-    image: nginx:alpine
-    container_name: laravel-nginx
+  hira-chan_nginx:
+    image: hira-chan_nginx:latest
+    container_name: hira-chan_nginx
+    build:
+      context: ..
+      dockerfile: ./docker/nginx/Dockerfile
     ports:
       - 8080:80
     volumes:
-      - ../:/var/www
-      - phpmyadmin-fpm:/var/www/phpmyadmin
+      - ..:/var/www/hira-chan
+      - hira-chan_phpmyadmin-vol:/var/www/phpmyadmin
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     working_dir: /var/www
     depends_on:
-      - app
-      - phpmyadmin
+      - hira-chan_app
+      - hira-chan_phpmyadmin
     tty: true
 
-  db:
-    image: mysql:latest
-    container_name: laravel-db
+  hira-chan_mysql:
+    image: hira-chan_mysql:latest
+    container_name: hira-chan_mysql
+    build:
+      context: ..
+      dockerfile: ./docker/mysql/Dockerfile
     environment:
       MYSQL_DATABASE: forum
       MYSQL_USER: user
@@ -60,29 +44,28 @@ services:
       MYSQL_PASSWORD: pass
       TZ: "Asia/Tokyo"
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-    volumes:
-      - ./db/data:/var/lib/mysql
-      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
-      - ./db/sql:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
     tty: true
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:fpm-alpine
-    container_name: laravel-phpmyadmin
+  hira-chan_phpmyadmin:
+    image: hira-chan_phpmyadmin:latest
+    container_name: hira-chan_phpmyadmin
+    build:
+      context: ..
+      dockerfile: ./docker/phpmyadmin/Dockerfile
     environment:
       - PMA_ARBITRARY=1
-      - PMA_HOST=db
+      - PMA_HOST=hira-chan_mysql
       - PMA_USER=root
       - PMA_PASSWORD=rootpass
       - PMA_VERBOSE=phpmyadmin
       - PMA_PORT=3306
     volumes:
-      - phpmyadmin-fpm:/var/www/html
+      - hira-chan_phpmyadmin-vol:/var/www/html
     depends_on:
-      - db
+      - hira-chan_mysql
     tty: true
 
 volumes:
-  phpmyadmin-fpm:
+  hira-chan_phpmyadmin-vol:

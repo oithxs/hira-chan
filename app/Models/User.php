@@ -48,6 +48,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var string[]
      */
     protected $fillable = [
+        'user_page_theme_id',
         'name',
         'email',
         'password',
@@ -96,6 +97,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function sendEmailVerificationNotification()
     {
         $this->notify(new \App\Notifications\VerifyEmailAddURL);
+    }
+
+    /**
+     * Get the user page theme that owns the user.
+     */
+    public function user_page_theme()
+    {
+        return $this->belongsTo(UserPageTheme::class);
     }
 
     /**
