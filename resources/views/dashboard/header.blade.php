@@ -13,7 +13,7 @@
                         <option>{{ $category_type->category_type }}</option>
                         @foreach ($categorys as $category)
                         @if ($category->category_type == $category_type->category_type)
-                        <option value="dashboard?category={{ $category->category_name }}">
+                        <option value="dashboard?category={{ $category->id }}">
                             {{ $category->category_name }}
                         </option>
                         @endif
