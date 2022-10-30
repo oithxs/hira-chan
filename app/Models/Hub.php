@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Hub extends UuidModel
 {
     use HasFactory;
+    use SerializeDate;
 
     /**
      * Database to be connected

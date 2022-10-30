@@ -28,7 +28,7 @@ class SelectThreadPages extends Component
         if ($request->category == NULL) {
             $this->max_thread = Hub::count();
         } else {
-            $this->max_thread = Hub::where('thread_category', '=', $request->category)
+            $this->max_thread = Hub::where('thread_category_id', '=', $request->category)
                 ->count();
         }
 

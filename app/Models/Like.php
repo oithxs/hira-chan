@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Like extends Model
 {
     use HasFactory;
+    use SerializeDate;
 
     /**
      * Database to be connected
