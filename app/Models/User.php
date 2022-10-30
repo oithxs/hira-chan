@@ -20,6 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
     use SoftDeletes;
     use TwoFactorAuthenticatable;
+    use SerializeDate;
 
     /**
      * The primary key for the model.
@@ -75,6 +76,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime:Y-m-d H:i:s',
         'created_at' => 'datetime:Y-m-d H:i:s',
         'update_at' => 'datetime:Y-m-d H:i:s',
+        'deleted_at' => 'datetime:Y-m-d H:i:s'
     ];
 
     /**

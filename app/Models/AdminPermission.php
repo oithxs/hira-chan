@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AdminPermission extends Model
 {
     use HasFactory;
+    use SerializeDate;
 
     /**
      * Database to be connected
