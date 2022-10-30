@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Hub;
 use App\Models\ThreadCategory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class HubController extends Controller
 {
@@ -38,15 +37,12 @@ class HubController extends Controller
      */
     public function store(Request $request)
     {
-        $uuid = str_replace('-', '', Str::uuid());
-        $category = ThreadCategory::where('category_name', '=', $request->thread_category)->first();
+        $thread_category_id = ThreadCategory::where('category_name', '=', $request->thread_category)->first()->id;
 
         Hub::create([
-            'thread_id' => $uuid,
-            'thread_name' => $request->table,
-            'thread_category' => $request->thread_category,
-            'thread_category_type' => $category->category_type,
-            'user_email' => $request->user()->email
+            'thread_category_id' => $thread_category_id,
+            'user_id' => $request->user()->id,
+            'name' => $request->thread_name
         ]);
     }
 

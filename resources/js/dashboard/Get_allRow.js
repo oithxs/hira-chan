@@ -21,20 +21,13 @@ function reload() {
         url: url + "/jQuery.ajax/getRow",
         dataType: "json",
         data: {
-            "table": thread_id,
+            "thread_id": thread_id,
             "max_message_id": max_message_id
         }
     }).done(function (data) {
         for (var item in data) {
-            if (data[item]['is_validity']) {
-                // 通常
-                user = data[item]['user_name'];
-                msg = data[item]['message'];
-            } else {
-                // 管理者によって削除されていた場合
-                user = "-----";
-                msg = "<br>この投稿は管理者によって削除されました";
-            }
+            user = data[item]['user']['name'];
+            msg = data[item]['message'];
 
             show = "" +
                 "<a " +
@@ -50,10 +43,10 @@ function reload() {
                 msg +
                 "</p>";
 
-            if (data[item]['img_path'] != null) {
+            if (data[item]['thread_image_path'] !== null) {
                 show += "" +
                     "<p>" +
-                    "<img src='" + url + data[item]['img_path'].replace('public', '/storage') + "'>" +
+                    "<img src='" + url + data[item]['thread_image_path']['img_path'].replace('public', '/storage') + "'>" +
                     "</p>";
             }
 
@@ -63,7 +56,7 @@ function reload() {
                 "id='js_dashboard_Get_allRow_button_" + data[item]['message_id'] + "' " +
                 "type='button' ";
 
-            if (data[item]['user_like'] == 0) {
+            if (data[item]['likes']['length'] === 0) {
                 // いいねが押されていない場合
                 show += "class='btn btn-light' onClick='likes(" + data[item]['message_id'] + ", " + 0 + ")'>";
             } else {
@@ -75,7 +68,7 @@ function reload() {
                 "like" +
                 "</button> " +
                 "<dev id='js_dashboard_Get_allRow_dev_" + data[item]['message_id'] + "'>" +
-                data[item]['count_user'] +
+                data[item]['likes_count'] +
                 "</dev>" +
                 "<hr>";
 

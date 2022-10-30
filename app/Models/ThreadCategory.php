@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ThreadCategory extends Model
 {
     use HasFactory;
+    use SerializeDate;
 
     /**
      * Database to be connected
@@ -42,4 +43,12 @@ class ThreadCategory extends Model
         'created_at' => 'datetime:Y-m-d H:i:s',
         'update_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    /**
+     * Get the hub for the thread category.
+     */
+    public function hub()
+    {
+        return $this->hasMany(Hub::class);
+    }
 }

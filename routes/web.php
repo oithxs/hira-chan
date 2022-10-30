@@ -13,7 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// ページ移動（ログインせずとも移動可）
+/*
+|--------------------------------------------------------------------------
+| Warning
+|--------------------------------------------------------------------------
+|
+| - Don't use "admin" in the path.
+|
+*/
+
+// Page transition: allow not logged in
 Route::middleware([
     config('jetstream.auth_session'),
     'login.must_verified'
@@ -24,17 +33,13 @@ Route::middleware([
     Route::get('dashboard', 'App\Http\Controllers\Dashboard\DashboardController@threads')->name('dashboard');
     Route::get('Q_and_A', 'App\Http\Controllers\QandA\QandAController@Q_and_A')->name('Q_and_A');
 
-    Route::middleware([
-        'Access_log'
-    ])->group(function () {
-        Route::get('dashboard/thread/name={thread_name}&id={thread_id}', 'App\Http\Controllers\Dashboard\DashboardController@messages');
-        Route::get('dashboard/thread/name={thread_name}&id=', 'App\Http\Controllers\Dashboard\DashboardController@messages');
-        Route::get('dashboard/thread/name=&id={thread_id}', 'App\Http\Controllers\Dashboard\DashboardController@messages');
-        Route::get('dashboard/thread/name=&id=', 'App\Http\Controllers\Dashboard\DashboardController@messages');
-    });
+    Route::get('dashboard/thread/name={thread_name}&id={thread_id}', 'App\Http\Controllers\Dashboard\DashboardController@messages');
+    Route::get('dashboard/thread/name={thread_name}&id=', 'App\Http\Controllers\Dashboard\DashboardController@messages');
+    Route::get('dashboard/thread/name=&id={thread_id}', 'App\Http\Controllers\Dashboard\DashboardController@messages');
+    Route::get('dashboard/thread/name=&id=', 'App\Http\Controllers\Dashboard\DashboardController@messages');
 });
 
-// ページ移動（要ログイン）
+// Page transition: login required
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -44,7 +49,7 @@ Route::middleware([
     Route::get('/report/create', 'App\Http\Controllers\Report\FormContactAdministratorController@create')->name('report.create');
 });
 
-// データ処理
+// CRUD
 Route::middleware([
     'PostAccess_only',
 ])->group(function () {
@@ -67,7 +72,7 @@ Route::middleware([
         });
 
         Route::controller(\App\Http\Controllers\MyPage\UserController::class)->group(function () {
-            Route::match(['get', 'post'], 'jQuery.ajax/page_thema', 'update');
+            Route::match(['get', 'post'], 'jQuery.ajax/page_theme', 'update');
         });
 
         Route::controller(\App\Http\Controllers\Report\FormContactAdministratorController::class)->group(function () {
@@ -76,11 +81,6 @@ Route::middleware([
     });
 
     Route::controller(\App\Http\Controllers\Dashboard\ThreadsController::class)->group(function () {
-        Route::match(['get', 'post'], 'jQuery.ajax/getRow', 'show');
+        Route::match(['get', 'post'], 'jQuery.ajax/getRow', 'show')->name('thread.get');
     });
-});
-
-Route::controller(\App\Http\Controllers\Mail\UserController::class)->group(function () {
-    // アカウント登録キャンセル
-    Route::get('/account/delete/{id}/{hash}', 'destroy')->middleware('auth')->name('account/delete');
 });

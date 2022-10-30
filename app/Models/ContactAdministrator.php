@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ContactAdministrator extends Model
 {
     use HasFactory;
+    use SerializeDate;
 
     /**
      * Database to be connected
@@ -29,8 +30,8 @@ class ContactAdministrator extends Model
      * @var string[]
      */
     protected $fillable = [
+        'user_id',
         'type',
-        'report_email',
         'message',
     ];
 
@@ -52,4 +53,12 @@ class ContactAdministrator extends Model
         'created_at' => 'datetime:Y-m-d H:i:s',
         'update_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    /**
+     * Get the user that owns the contact administrator.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

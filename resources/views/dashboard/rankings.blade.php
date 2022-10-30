@@ -39,13 +39,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- スレッド名は「$row['thread_name']」ではなく「$title」 -->
+                        <!-- スレッド名は「$row['name']」ではなく「$thread_name」 -->
                         @foreach($access_ranking as $row)
                         <?php
-                            $title = str_replace("&amp;", "&", $row['thread_name']);
-                            $title = str_replace("&slash;", "/", $title);
-                            $title = str_replace("&backSlash;", "\\", $title);
-                            $title = str_replace("&hash;", "#", $title);
+                            $thread_name = str_replace("&amp;", "&", $row['name']);
+                            $thread_name = str_replace("&slash;", "/", $thread_name);
+                            $thread_name = str_replace("&backSlash;", "\\", $thread_name);
+                            $thread_name = str_replace("&hash;", "#", $thread_name);
                         ?>
                         <tr>
                             <td class="table-block">
@@ -55,10 +55,10 @@
                             </td>
 
                             <td style="word-wrap:break-word;" class="font-semibold">
-                                {{ $title }}
+                                {{ $thread_name }}
                                 <br>
                                 <div class="text-gray-400">
-                                    {{ __("Access count") }}：{{ $row["access_count"] }}
+                                    {{ __("Access count") }}：{{ $row["access_logs_count"] }}
                                 </div>
                             </td>
                         </tr>
@@ -93,13 +93,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- スレッド名は「$row['thread_name']」ではなく「$title」 -->
+                        <!-- スレッド名は「$row['name']」ではなく「$thread_name」 -->
                         @foreach($weekly_access_ranking as $row)
                         <?php
-                            $title = str_replace("&amp;", "&", $row['thread_name']);
-                            $title = str_replace("&slash;", "/", $title);
-                            $title = str_replace("&backSlash;", "\\", $title);
-                            $title = str_replace("&hash;", "#", $title);
+                            $thread_name = str_replace("&amp;", "&", $row['name']);
+                            $thread_name = str_replace("&slash;", "/", $thread_name);
+                            $thread_name = str_replace("&backSlash;", "\\", $thread_name);
+                            $thread_name = str_replace("&hash;", "#", $thread_name);
                         ?>
                         <tr>
                             <td class="table-block">
@@ -108,10 +108,10 @@
                                 </div>
                             </td>
                             <td style="word-wrap:break-word;" class="font-semibold">
-                                {{ $title }}
+                                {{ $thread_name }}
                                 <br>
                                 <div class="text-gray-400">
-                                    {{ __("Access count") }}：{{ $row["access_count"] }}
+                                    {{ __("Access count") }}：{{ $row["access_logs_count"] }}
                                 </div>
                             </td>
                         </tr>

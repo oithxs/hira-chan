@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ClubThread extends Model
 {
     use HasFactory;
+    use SerializeDate;
 
     /**
      * Database to be connected
@@ -29,10 +30,9 @@ class ClubThread extends Model
      * @var string[]
      */
     protected $fillable = [
-        'thread_id',
+        'hub_id',
+        'user_id',
         'message_id',
-        'user_name',
-        'user_email',
         'message',
     ];
 
@@ -54,4 +54,36 @@ class ClubThread extends Model
         'created_at' => 'datetime:Y-m-d H:i:s',
         'update_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    /**
+     * Get the hub that owns the club thread.
+     */
+    public function hub()
+    {
+        return $this->belongsTo(Hub::class);
+    }
+
+    /**
+     * Get the user that owns the club thread.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the likes for the club thread.
+     */
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    /**
+     * Get the thread image path associated with the club thread.
+     */
+    public function thread_image_path()
+    {
+        return $this->hasOne(ThreadImagePath::class);
+    }
 }

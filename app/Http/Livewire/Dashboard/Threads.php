@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class Threads extends Component
 {
     /** @var \Illuminate\Support\Collection */
-    public $tables;
+    public $threads;
 
     /** @var \Illuminate\Support\Collection */
     public $categorys;
@@ -32,66 +32,41 @@ class Threads extends Component
      */
     public function mount(Request $request)
     {
-        $category = $request->category;
-        $sort = $request->sort;
-
-        if ($category == NULL) {
-            if ($sort == 'new_create') {
-                $this->tables = Hub::selectRaw('hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access')
-                    ->leftJoin('access_logs', function ($join) {
-                        $join->on('hub.thread_id', '=', 'access_logs.thread_id');
-                    })
-                    ->where('hub.is_enabled', '=', 1)
-                    ->groupBy('hub.thread_id')
-                    ->orderByRaw('hub.created_at DESC')
+        if ($request->category == NULL) {
+            if ($request->sort == 'new_create') {
+                $this->threads = Hub::withCount('access_logs')
+                    ->where('is_enabled', '=', 1)
+                    ->orderBy('created_at', 'desc')
                     ->get();
-            } else if ($sort == 'access_count') {
-                $this->tables = Hub::selectRaw('hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access')
-                    ->leftJoin('access_logs', function ($join) {
-                        $join->on('hub.thread_id', '=', 'access_logs.thread_id');
-                    })
-                    ->where('hub.is_enabled', '=', 1)
-                    ->groupBy('hub.thread_id')
-                    ->orderByRaw('COUNT(access_logs.access_log) DESC')
+            } else if ($request->sort == 'access_count') {
+                $this->threads = Hub::withCount('access_logs')
+                    ->where('is_enabled', '=', 1)
+                    ->orderBy('access_logs_count', 'desc')
                     ->get();
             } else {
-                $this->tables = Hub::selectRaw('hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access')
-                    ->leftJoin('access_logs', function ($join) {
-                        $join->on('hub.thread_id', '=', 'access_logs.thread_id');
-                    })
-                    ->where('hub.is_enabled', '=', 1)
-                    ->groupBy('hub.thread_id')
+                $this->threads = Hub::withCount('access_logs')
+                    ->where('is_enabled', '=', 1)
+                    ->orderBy('created_at', 'desc')
                     ->get();
             }
         } else {
-            if ($sort == 'new_create') {
-                $this->tables = Hub::selectRaw('hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access')
-                    ->leftJoin('access_logs', function ($join) {
-                        $join->on('hub.thread_id', '=', 'access_logs.thread_id');
-                    })
-                    ->where('hub.thread_category', '=', $category)
-                    ->where('hub.is_enabled', '=', 1)
-                    ->groupBy('hub.thread_id')
-                    ->orderByRaw('hub.created_at DESC')
+            if ($request->sort == 'new_create') {
+                $this->threads = Hub::withCount('access_logs')
+                    ->where('thread_category_id', '=', $request->category)
+                    ->where('is_enabled', '=', 1)
+                    ->orderBy('created_at', 'desc')
                     ->get();
-            } else if ($sort == 'access_count') {
-                $this->tables = Hub::selectRaw('hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access')
-                    ->leftJoin('access_logs', function ($join) {
-                        $join->on('hub.thread_id', '=', 'access_logs.thread_id');
-                    })
-                    ->where('hub.thread_category', '=', $category)
-                    ->where('hub.is_enabled', '=', 1)
-                    ->groupBy('hub.thread_id')
-                    ->orderByRaw('COUNT(access_logs.access_log) DESC')
+            } else if ($request->sort == 'access_count') {
+                $this->threads = Hub::withCount('access_logs')
+                    ->where('thread_category_id', '=', $request->category)
+                    ->where('is_enabled', '=', 1)
+                    ->orderBy('access_logs_count', 'desc')
                     ->get();
             } else {
-                $this->tables = Hub::selectRaw('hub.*, COALESCE(COUNT(access_logs.access_log), 0) AS Access')
-                    ->leftJoin('access_logs', function ($join) {
-                        $join->on('hub.thread_id', '=', 'access_logs.thread_id');
-                    })
-                    ->where('hub.thread_category', '=', $category)
-                    ->where('hub.is_enabled', '=', 1)
-                    ->groupBy('hub.thread_id')
+                $this->threads = Hub::withCount('access_logs')
+                    ->where('thread_category_id', '=', $request->category)
+                    ->where('is_enabled', '=', 1)
+                    ->orderBy('created_at', 'desc')
                     ->get();
             }
         }

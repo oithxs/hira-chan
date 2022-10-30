@@ -3,8 +3,14 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\ClubThread;
+use App\Models\CollegeYearThread;
+use App\Models\DepartmentThread;
+use App\Models\JobHuntingThread;
+use App\Models\LectureThread;
 use App\Models\ThreadImagePath;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
@@ -34,28 +40,81 @@ class ThreadImagePathController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\UploadedFile $img
+     * @param string $user_id
+     * @param string $thread_id
      * @param int $message_id
+     * @param string $category_type
      *
      * @return void
      */
-    public function store(Request $request, int $message_id)
+    public function store(UploadedFile $img = null, string $user_id, string $thread_id, int $message_id, string $category_type)
     {
-        if ($request->file('img')) {
-            $img = Image::make($request->file('img'))->encode('jpg')->orientate()->save();
+        if ($img) {
+            $img = Image::make($img)->encode('jpg')->orientate()->save();
 
             $size = $img->filesize();
             $path = 'public/images/thread_message/' . str_replace('-', '', Str::uuid()) . '.jpg';
             Storage::put($path, $img);
 
             if ($path) {
-                ThreadImagePath::create([
-                    'thread_id' => $request->table,
-                    'message_id' => $message_id,
-                    'user_email' => $request->user()->email,
-                    'img_path' => $path,
-                    'img_size' => $size
-                ]);
+                switch ($category_type) {
+                    case '部活':
+                        ThreadImagePath::create([
+                            'club_thread_id' => ClubThread::where('hub_id', '=', $thread_id)
+                                ->where('message_id', '=', $message_id)
+                                ->first()
+                                ->id,
+                            'user_id' => $user_id,
+                            'img_path' => $path,
+                            'img_size' => $size
+                        ]);
+                        break;
+                    case '学年':
+                        ThreadImagePath::create([
+                            'college_year_thread_id' => CollegeYearThread::where('hub_id', '=', $thread_id)
+                                ->where('message_id', '=', $message_id)
+                                ->first()
+                                ->id,
+                            'user_id' => $user_id,
+                            'img_path' => $path,
+                            'img_size' => $size
+                        ]);
+                        break;
+                    case '学科':
+                        ThreadImagePath::create([
+                            'department_thread_id' => DepartmentThread::where('hub_id', '=', $thread_id)
+                                ->where('message_id', '=', $message_id)
+                                ->first()
+                                ->id,
+                            'user_id' => $user_id,
+                            'img_path' => $path,
+                            'img_size' => $size
+                        ]);
+                        break;
+                    case '就職':
+                        ThreadImagePath::create([
+                            'job_hunting_thread_id' => JobHuntingThread::where('hub_id', '=', $thread_id)
+                                ->where('message_id', '=', $message_id)
+                                ->first()
+                                ->id,
+                            'user_id' => $user_id,
+                            'img_path' => $path,
+                            'img_size' => $size
+                        ]);
+                        break;
+                    case '授業':
+                        ThreadImagePath::create([
+                            'lecture_thread_id' => LectureThread::where('hub_id', '=', $thread_id)
+                                ->where('message_id', '=', $message_id)
+                                ->first()
+                                ->id,
+                            'user_id' => $user_id,
+                            'img_path' => $path,
+                            'img_size' => $size
+                        ]);
+                        break;
+                }
             }
 
             $img->destroy();

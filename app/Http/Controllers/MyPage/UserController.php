@@ -69,10 +69,9 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $page_thema = $request->page_thema;
-        $user = User::find($request->user()->id);
-        $user->thema = $page_thema;
-        $user->save();
+        User::where('id', '=', $request->user()->id)->update([
+            'user_page_theme_id' => $request->page_theme
+        ]);
     }
 
     /**

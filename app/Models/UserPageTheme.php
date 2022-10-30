@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserPageThema extends Model
+class UserPageTheme extends Model
 {
     use HasFactory;
+    use SerializeDate;
 
     /**
      * Database to be connected
@@ -21,7 +22,7 @@ class UserPageThema extends Model
      *
      * @var string
      */
-    protected $table = 'user_page_themas';
+    protected $table = 'user_page_themes';
 
     /**
      * The attributes that are mass assignable
@@ -29,8 +30,7 @@ class UserPageThema extends Model
      * @var string[]
      */
     protected $fillable = [
-        'thema_id',
-        'thema_name',
+        'theme_name',
     ];
 
     /**
@@ -42,4 +42,12 @@ class UserPageThema extends Model
         'created_at' => 'datetime:Y-m-d H:i:s',
         'update_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    /**
+     * Get the users for the user page themes.
+     */
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

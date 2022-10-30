@@ -282,31 +282,12 @@ video {
 .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
 }
-@-webkit-keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(1turn);
-    }
-}
 @keyframes spin {
     0% {
         transform: rotate(0deg);
     }
     to {
         transform: rotate(1turn);
-    }
-}
-@-webkit-keyframes ping {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    75%,
-    to {
-        transform: scale(2);
-        opacity: 0;
     }
 }
 @keyframes ping {
@@ -320,15 +301,6 @@ video {
         opacity: 0;
     }
 }
-@-webkit-keyframes pulse {
-    0%,
-    to {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
-}
 @keyframes pulse {
     0%,
     to {
@@ -338,29 +310,14 @@ video {
         opacity: 0.5;
     }
 }
-@-webkit-keyframes bounce {
-    0%,
-    to {
-        transform: translateY(-25%);
-        -webkit-animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-    }
-    50% {
-        transform: translateY(0);
-        -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-    }
-}
 @keyframes bounce {
     0%,
     to {
         transform: translateY(-25%);
-        -webkit-animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
         animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
     }
     50% {
         transform: translateY(0);
-        -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
         animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
 }
