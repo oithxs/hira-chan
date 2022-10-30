@@ -7,6 +7,8 @@ services:
       context: ..
       dockerfile: ./docker/app/Dockerfile
     user: dev
+    environment:
+      TZ: Asia/Tokyo
     volumes:
       - ..:/usr/src/app
     depends_on:
@@ -19,6 +21,8 @@ services:
     build:
       context: ..
       dockerfile: ./docker/nginx/Dockerfile
+    environment:
+      TZ: Asia/Tokyo
     ports:
       - 8080:80
     volumes:
@@ -42,7 +46,7 @@ services:
       MYSQL_USER: user
       MYSQL_ROOT_PASSWORD: rootpass
       MYSQL_PASSWORD: pass
-      TZ: "Asia/Tokyo"
+      TZ: Asia/Tokyo
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     ports:
       - 3306:3306
@@ -55,12 +59,13 @@ services:
       context: ..
       dockerfile: ./docker/phpmyadmin/Dockerfile
     environment:
-      - PMA_ARBITRARY=1
-      - PMA_HOST=hira-chan_mysql
-      - PMA_USER=root
-      - PMA_PASSWORD=rootpass
-      - PMA_VERBOSE=phpmyadmin
-      - PMA_PORT=3306
+      PMA_ARBITRARY: 1
+      PMA_HOST: hira-chan_mysql
+      PMA_USER: root
+      PMA_PASSWORD: rootpass
+      PMA_VERBOSE: phpmyadmin
+      PMA_PORT: 3306
+      TZ: Asia/Tokyo
     volumes:
       - hira-chan_phpmyadmin-vol:/var/www/html
     depends_on:
