@@ -21,10 +21,7 @@ class AccessLog
     {
         $response = $next($request);
 
-        if (
-            strpos($request->path(), config('admin.route.prefix')) === false &&
-            strcmp(url()->current(), route('thread.get')) !== 0
-        ) {
+        if (strcmp(url()->current(), route('thread.get')) !== 0) {
             $thread_id = $request->thread_id;
             if (strpos($request->path(), 'jQuery.ajax') === 0) {
                 $thread_id = null;
