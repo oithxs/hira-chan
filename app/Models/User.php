@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,7 +13,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -93,6 +94,11 @@ class User extends Authenticatable implements MustVerifyEmail
         parent::__construct($attributes);
 
         $this->attributes['id'] = Str::uuid();
+    }
+
+    public function canAccessFilament(): bool
+    {
+        return str_ends_with($this->email, '@example.com'); // && $this->hasVerifiedEmail();
     }
 
     // Add custom mail
