@@ -17,10 +17,7 @@ sed -ie "s/DB_PASSWORD=/DB_PASSWORD=rootpass/g" /usr/src/app/.env
 
 php artisan key:generate
 php artisan migrate
-php artisan admin:install
 php artisan db:seed
-php artisan admin:import helpers
-php artisan admin:import log-viewer
 php artisan storage:link
 
 rm /usr/src/app/.enve

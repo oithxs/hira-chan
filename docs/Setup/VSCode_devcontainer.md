@@ -121,7 +121,6 @@ docker-compose -v
 ### アクセス
 
 -   掲示板: `http://localhost:8080`
--   掲示板管理者ページ: `http://localhost:8080/admin`
 -   phpmyadmin:`http://localhost:8080/phpmyadmin`
 
 ## 4 コンテナの停止
