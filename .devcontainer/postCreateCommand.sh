@@ -9,7 +9,7 @@ chmod -R 777 bootstrap/cache
 chmod -R 777 public/uploads
 
 composer install
-npm install --update-binary --no-shrinkwrap
+npm install
 
 sed -ie "s/DB_HOST=127.0.0.1/DB_HOST=hira-chan_mysql/g" /usr/src/app/.env
 sed -ie "s/DB_DATABASE=/DB_DATABASE=forum/g" /usr/src/app/.env
