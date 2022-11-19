@@ -140,7 +140,7 @@ npm install # Nodeのパッケージをインストール
 npm install --update-binary --no-shrinkwrap # 上記コマンドでNodeのパッケージインストールが失敗した場合
 php artisan migrate # プロジェクトのデータベースを最新の状態にする
 php artisan migrate:fresh # プロジェクトのデータベースを再構築する
-app db:seed # プロジェクトのテーブルに初期データを作成する
+php artisan db:seed # プロジェクトのテーブルに初期データを作成する
 ```
 
 -   `composer install` を実行する際は状況に応じて `vendor` フォルダを削除する事も検討して下さい
