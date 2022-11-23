@@ -11,7 +11,7 @@ chmod -R 777 public/uploads
 composer install
 npm install
 
-sed -ie "s/DB_HOST=127.0.0.1/DB_HOST=hira-chan_mysql/g" /usr/src/app/.env
+sed -ie "s/DB_HOST=127.0.0.1/DB_HOST=hira-chan_mariadb/g" /usr/src/app/.env
 sed -ie "s/DB_DATABASE=/DB_DATABASE=forum/g" /usr/src/app/.env
 sed -ie "s/DB_PASSWORD=/DB_PASSWORD=rootpass/g" /usr/src/app/.env
 
