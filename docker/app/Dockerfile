@@ -6,24 +6,36 @@ ENV LANG=C.UTF-8
 
 RUN sed -i 's@archive.ubuntu.com@ftp.jaist.ac.jp/pub/Linux@g' /etc/apt/sources.list
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    git \
-    openssh-client \
-    zlib1g-dev \
-    libzip-dev \
-    libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
-    default-mysql-client \
-    gnupg \
-    bsd-mailx \
-    libsasl2-modules \
-    && DEBIAN_FRONTEND=noninteractive apt-get install postfix -y \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install mysqli pdo_mysql zip opcache gd exif \
-    && useradd -m -s /bin/bash dev \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update; \
+    apt-get install -y --no-install-recommends \
+        git \
+        openssh-client \
+        default-mysql-client \
+        libfreetype6-dev \
+        libjpeg-dev \
+        libpng-dev \
+        libzip-dev \
+        zlib1g-dev \
+    ; \
+    \
+    DEBIAN_FRONTEND=noninteractive apt-get install postfix -y \
+    ; \
+	docker-php-ext-configure gd --with-freetype --with-jpeg; \
+	docker-php-ext-install \
+		bcmath \
+		exif \
+		gd \
+		mysqli \
+		opcache \
+		pdo_mysql \
+		zip \
+    ; \
+    \
+    useradd -m -s /bin/bash dev \
+    ; \
+	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+	apt-get clean; \
+	rm -rf /var/lib/apt/lists/*;
 
 COPY --from=node:16.18.0-slim /usr/local /usr/local
 COPY --from=composer:2.4.3 /usr/bin/composer /usr/bin/composer
