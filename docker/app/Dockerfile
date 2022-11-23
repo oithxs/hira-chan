@@ -4,12 +4,16 @@ WORKDIR /usr/src/app
 
 ENV LANG=C.UTF-8
 
+# Faster apt commands
 RUN sed -i 's@archive.ubuntu.com@ftp.jaist.ac.jp/pub/Linux@g' /etc/apt/sources.list
 
-RUN apt-get update; \
+RUN \
+    # # Install Required Linux Packages
+    apt-get update; \
     apt-get install -y --no-install-recommends \
         git \
         openssh-client \
+        wget \
         default-mysql-client \
         libfreetype6-dev \
         libjpeg-dev \
@@ -17,9 +21,13 @@ RUN apt-get update; \
         libzip-dev \
         zlib1g-dev \
     ; \
-    \
     DEBIAN_FRONTEND=noninteractive apt-get install postfix -y \
     ; \
+    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+	apt-get clean; \
+	rm -rf /var/lib/apt/lists/* \
+    ; \
+    # # Install Required PHP extensions
 	docker-php-ext-configure gd --with-freetype --with-jpeg; \
 	docker-php-ext-install \
 		bcmath \
@@ -31,13 +39,12 @@ RUN apt-get update; \
 		zip \
     ; \
     \
-    useradd -m -s /bin/bash dev \
-    ; \
-	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
-	apt-get clean; \
-	rm -rf /var/lib/apt/lists/*;
+    useradd -m -s /bin/bash dev
 
+# Enabling composer and npm in containers
 COPY --from=node:16.18.0-slim /usr/local /usr/local
 COPY --from=composer:2.4.3 /usr/bin/composer /usr/bin/composer
+
+# Place configuration files in containers
 COPY ./docker/app/php/php.ini /usr/local/etc/php/php.ini
 COPY ./docker/app/postfix/main.cf /etc/postfix/main.cf
