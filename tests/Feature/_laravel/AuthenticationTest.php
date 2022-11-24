@@ -22,7 +22,7 @@ class AuthenticationTest extends TestCase
     {
         // テストが通るようにemail修正
         $user = User::factory()->create([
-            'email' => config('AddConfig.mail.example') . '@st.oit.ac.jp'
+            'email' => config('mail.example.address') . '@st.oit.ac.jp'
         ]);
 
         $response = $this->post('/login', [
@@ -38,7 +38,7 @@ class AuthenticationTest extends TestCase
     {
         // テストが通るようにemail修正
         $user = User::factory()->create([
-            'email' => config('AddConfig.mail.example') . '@st.oit.ac.jp'
+            'email' => config('mail.example.address') . '@st.oit.ac.jp'
         ]);
 
         $this->post('/login', [

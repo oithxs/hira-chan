@@ -43,7 +43,7 @@ class RegistrationTest extends TestCase
         // テストが通るようにemail修正
         $response = $this->post('/register', [
             'name' => 'Test User',
-            'email' => config('AddConfig.mail.example'),
+            'email' => config('mail.example.address'),
             'password' => 'password',
             'password_confirmation' => 'password',
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature(),

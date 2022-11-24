@@ -37,8 +37,8 @@
 
             <div class="input-group mt-3">
                 <x-jet-input id="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="text"
-                    name="email" placeholder="（例）{{ config('AddConfig.mail.example') }}"
-                    aria-label="（例）{{ config('AddConfig.mail.example') }}" aria-describedby="basic-addon2" required
+                    name="email" placeholder="（例）{{ config('mail.example.address') }}"
+                    aria-label="（例）{{ config('mail.example.address') }}" aria-describedby="basic-addon2" required
                     autofocus />
                 <span class="input-group-text" id="basic-addon2">@st.oit.ac.jp</span>
                 @if ($errors->has('email'))

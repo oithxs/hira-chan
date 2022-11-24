@@ -96,9 +96,20 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         $this->attributes['id'] = Str::uuid();
     }
 
+    /**
+     * Filament Authentication
+     *
+     * @return boolean
+     */
     public function canAccessFilament(): bool
     {
-        return str_ends_with($this->email, '@example.com'); // && $this->hasVerifiedEmail();
+        // Need to confirm email and match domain
+        if (config('filament.auth.email.verified')) {
+            return str_ends_with($this->email, config('filament.auth.email.domain')) && $this->hasVerifiedEmail();
+        }
+
+        // Only domain match
+        return str_ends_with($this->email, config('filament.auth.email.domain'));
     }
 
     // Add custom mail

@@ -115,4 +115,17 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Mail Example (Added settings)
+    |--------------------------------------------------------------------------
+    |
+    | Email address to be used as an example.
+    | This email address must not actually be in use.
+    |
+    */
+
+    'example' => [
+        'address' => env('MAIL_EXAMPLE_ADDRESS', 'e1z99999'),
+    ],
 ];

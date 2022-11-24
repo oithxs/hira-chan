@@ -89,6 +89,10 @@ return [
         'pages' => [
             'login' => \Filament\Http\Livewire\Auth\Login::class,
         ],
+        'email' => [
+            'domain' => env('FILAMENT_AUTH_EMAIL_DOMAIN', '@example.com'),
+            'verified' => (bool) env('FILAMENT_AUTH_EMAIL_VERIFIED', false),
+        ]
     ],
 
     /*
