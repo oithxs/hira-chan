@@ -53,6 +53,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         'user_page_theme_id',
         'name',
         'email',
+        'email_verified_at',
         'password',
     ];
 
