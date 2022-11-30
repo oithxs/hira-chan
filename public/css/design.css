@@ -409,6 +409,7 @@ body {
 }
 
 .contents-box {
+    /* 影・丸みをセットhttps://neumorphism.io/#ffffff */
     border-radius: 30px;
     background: #ffffff;
     box-shadow:  16px 16px 32px #dedede,
