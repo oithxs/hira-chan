@@ -23,6 +23,7 @@ abstract class UseFormRequestTestCase extends TestCase
     public function setUp(): void
     {
         parent::setUp();
+        $this->setAny();
         $this->setMethod();
         $this->setArgument();
     }
@@ -40,6 +41,16 @@ abstract class UseFormRequestTestCase extends TestCase
      * @return void
      */
     abstract protected function setArgument(): void;
+
+    /**
+     * Called first when the setUp method is executed
+     *
+     * @return void
+     */
+    protected function setAny(): void
+    {
+        // Can be defined in a child class
+    }
 
     /**
      * Called first when the useFormRequest method is executed
