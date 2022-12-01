@@ -2,3 +2,15 @@
 body {
     font-family: "Nunito", sans-serif;
 }
+
+.contents-box {
+    /* 影・丸みをセットhttps://neumorphism.io/#ffffff */
+    border-radius: 30px;
+    background: #ffffff;
+    box-shadow:  16px 16px 32px #dedede,
+             -16px -16px 32px #ffffff;
+}
+
+.char-color {
+    color: #363636;
+}

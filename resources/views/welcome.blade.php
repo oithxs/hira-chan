@@ -32,15 +32,15 @@
 
 <body class="antialiased">
     <div
-        class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+        class="relative flex items-top justify-center min-h-screen sm:items-center py-4 sm:pt-0 bg-white">
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
             <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
                 <p class="h1">HxS コンピュータ部</p>
             </div>
 
-            <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+            <div class="mt-8 overflow-hidden contents-box sm:rounded-lg">
                 <div class="grid grid-cols-1 md:grid-cols-2">
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+                    <div class="p-6 border-t md:border-t-0 md:border-l bg-gray-100">
                         <div class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                 class="bi bi-card-heading" viewBox="0 0 16 16">
@@ -51,18 +51,18 @@
                             </svg>
                             <div class="ml-4 text-lg leading-7 font-semibold">
                                 <a href="{{ url('dashboard') }}"
-                                    class="underline text-gray-900 text-decoration-none">掲示板</a>
+                                    class="underline char-color text-decoration-none">掲示板</a>
                             </div>
                         </div>
 
                         <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                            <div class="mt-2 char-color text-sm">
                                 HxSコンピュータ部が提供する掲示板です．利用には学内ネットワーク・ログインが必要です．
                             </div>
                         </div>
                     </div>
 
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+                    <div class="p-6 border-t md:border-t-0 md:border-l bg-gray-100">
                         <div class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                 class="bi bi-twitter" viewBox="0 0 16 16">
@@ -71,36 +71,36 @@
                             </svg>
                             <div class="ml-4 text-lg leading-7 font-semibold">
                                 <a href="https://twitter.com/hxs_" target="_blank"
-                                    class="underline text-gray-900 text-decoration-none">Twitter</a>
+                                    class="underline char-color text-decoration-none">Twitter</a>
                             </div>
                         </div>
 
                         <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                            <div class="mt-2 char-color text-sm">
                                 大阪工業大学
                                 HxSコンピュータ部の非公式アカウントです。ハードウェア（Hardware）とソフトウェア（Software）の両面からスキルアップを図る事を目標とした部活です。活動内容・イベント宣伝等をつぶやきます。
                             </div>
                         </div>
                     </div>
 
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+                    <div class="p-6 border-t md:border-t-0 md:border-l bg-gray-100">
                         <div class="flex items-center">
                             <!-- よさげなアイコン
                                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                 -->
                             <div class="ml-4 text-lg leading-7 font-semibold">
-                                <a href="" class="underline text-gray-900 text-decoration-none">入部希望者はコチラ</a>
+                                <a href="" class="underline char-color text-decoration-none">入部希望者はコチラ</a>
                             </div>
                         </div>
 
                         <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                            <div class="mt-2 char-color text-sm">
                                 このリンクは現在機能していません．
                             </div>
                         </div>
                     </div>
 
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+                    <div class="p-6 border-t md:border-t-0 md:border-l bg-gray-100">
                         <div class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                 class="bi bi-github" viewBox="0 0 16 16">
@@ -109,12 +109,12 @@
                             </svg>
                             <div class="ml-4 text-lg leading-7 font-semibold">
                                 <a href="https://github.com/oithxs" target="_blank"
-                                    class="underline text-gray-900 text-decoration-none">Github</a>
+                                    class="underline char-color text-decoration-none">Github</a>
                             </div>
                         </div>
 
                         <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                            <div class="mt-2 char-color text-sm">
                                 大阪工業大学情報科学部HxSコンピュータ部の組織アカウントです。
                             </div>
                         </div>
