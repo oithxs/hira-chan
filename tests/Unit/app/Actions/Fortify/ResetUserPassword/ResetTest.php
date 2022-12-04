@@ -13,14 +13,16 @@ class ResetTest extends UseFormRequestTestCase
     use RefreshDatabase;
 
     /**
-     * Test user.
+     * テストユーザ
      *
      * @var \App\Models\User
      */
     private User $user;
 
     /**
-     * Called first when the setUp method is executed
+     * setUpメソッドが実行されたときに最初に呼び出される
+     *
+     * ユーザを作成する．
      *
      * @return void
      */
@@ -30,7 +32,7 @@ class ResetTest extends UseFormRequestTestCase
     }
 
     /**
-     * Set the target method.
+     * テスト対象のメソッドを定義する．
      *
      * @see UseFormRequestTestCase::setMethod()
      * @return void
@@ -44,7 +46,7 @@ class ResetTest extends UseFormRequestTestCase
     }
 
     /**
-     * Set the arguments of the target method.
+     * テスト対象メソッドの引数を定義する．
      *
      * @see UseFormRequestTestCase::setArgument()
      * @return void
@@ -61,7 +63,7 @@ class ResetTest extends UseFormRequestTestCase
     }
 
     /**
-     * It is possible to change the arguments of the method under test.
+     * テスト対象メソッドの引数を変更することが可能．
      *
      * @return void
      */
@@ -71,33 +73,30 @@ class ResetTest extends UseFormRequestTestCase
     }
 
     /**
-     * Verify that passwords can be reset by entering various passwords.
+     * 様々なパスワードを入力してパスワードリセットが行える事を確認する．
      *
      * @return void
      */
     public function test_reset_user_password(): void
     {
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['password', 'password'])); // Reset password.
-        $this->assertFalse($this->useFormRequest(['password', 'password_confirmation'], [Str::random(0), Str::random(0)])); // User password undefined.
+        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['password', 'password'])); // ユーザ作成
+        $this->assertFalse($this->useFormRequest(['password', 'password_confirmation'], [Str::random(0), Str::random(0)])); // パスワード未定義
 
-        // The number of characters that can't define a user password.
+        // パスワードを定義出来ない文字数
         foreach (range(1, 7) as $num) {
             $password = Str::random($num);
             $this->assertFalse($this->useFormRequest(['password', 'password_confirmation'], [$password, $password]));
         }
 
-        // The number of characters that can define a user password.
-        // It is possible to increase the number of digits beyond this.
+        // パスワードを定義出来る文字数（実際には256文字以降も可）
         foreach (range(8, 255) as $num) {
             $password = Str::random($num);
             $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], [$password, $password]));
         }
 
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['abcdefgh', 'abcdefgh'])); // All characters.
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['12345678', '12345678'])); // All numbers.
-        $this->assertFalse($this->useFormRequest(['password', 'password_confirmation'], ['12345678', '87654321'])); // Enter different passwords
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['abcdefgh', 'abcdefgh'])); // All characters.
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['12345678', '12345678'])); // All numbers.
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['!"#$%&\'()-^\\@[;:],./\\=~|`{+*}<>?_', '!"#$%&\'()-^\\@[;:],./\\=~|`{+*}<>?_'])); // Non-alphanumeric password.
+        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['abcdefgh', 'abcdefgh'])); // 全て英字
+        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['12345678', '12345678'])); // 全て数字
+        $this->assertFalse($this->useFormRequest(['password', 'password_confirmation'], ['12345678', '87654321'])); // 1度目と2度目を異なる入力
+        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['!"#$%&\'()-^\\@[;:],./\\=~|`{+*}<>?_', '!"#$%&\'()-^\\@[;:],./\\=~|`{+*}<>?_'])); // 英数字以外
     }
 }

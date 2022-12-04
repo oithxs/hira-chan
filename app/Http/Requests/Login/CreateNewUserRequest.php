@@ -6,15 +6,15 @@ use App\Actions\Fortify\PasswordValidationRules;
 use Laravel\Jetstream\Jetstream;
 
 /**
- * This class is not used as a form request.
- * This class is for validation and output messages of '\App\Actions\Fortify\CreateNewUser.php'.
+ * このクラスはFormRequestとして使用しない．
+ * このクラスは，「\App\Actions\Fortify\CreateNewUser.php」のバリデーションと出力メッセージに使用する．
  */
 class CreateNewUserRequest
 {
     use PasswordValidationRules;
 
     /**
-     * Determine if the user is authorized to make this request.
+     * ユーザーがこの要求を行う権限があるかどうかを判断する．
      *
      * @return bool
      */
@@ -24,7 +24,9 @@ class CreateNewUserRequest
     }
 
     /**
-     * Get the validation rules applied to the user creation.
+     * ユーザー作成に適用されるバリデーションルールを取得する．
+     *
+     * @see \App\Actions\Fortify\CreateNewUser::create() [Called]
      *
      * @return array<string, mixed>
      */
@@ -39,7 +41,9 @@ class CreateNewUserRequest
     }
 
     /**
-     * Get a custom message for validator errors during user creation.
+     * ユーザー作成時のバリデータエラーに対するカスタムメッセージを取得する．
+     *
+     * @see \App\Actions\Fortify\CreateNewUser::create() [Called]
      *
      * @return array
      */
@@ -54,7 +58,9 @@ class CreateNewUserRequest
     }
 
     /**
-     * Get the validation rules applied to the user restoration.
+     * ユーザー復元に適用されるバリデーションルールを取得する．
+     *
+     * @see \App\Actions\Fortify\CreateNewUser::create() [Called]
      *
      * @return array<string, mixed>
      */
@@ -69,7 +75,9 @@ class CreateNewUserRequest
     }
 
     /**
-     * Get a custom message for validator errors during user restore.
+     * ユーザー復元時のバリデータエラーに対応するカスタムメッセージを取得する．
+     *
+     * @see \App\Actions\Fortify\CreateNewUser::create() [Called]
      *
      * @return array
      */

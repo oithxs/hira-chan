@@ -14,27 +14,34 @@ class CreateTest extends UseFormRequestTestCase
     use RefreshDatabase;
 
     /**
-     * student ID number.
+     * 学生番号（数字5桁）
      *
      * @var integer
      */
     private int $number = 10000;
 
     /**
-     * Used for user restore tests.
-     * Determines whether to execute the userSoftDelete method.
+     * ユーザー復元テストに使用する．
+     * userSoftDelete メソッドを実行するかどうかを決定する．
      *
      * @var boolean
      */
     private bool $restore_flag = false;
 
     /**
-     * User email to be soft deleted.
+     * 論理削除されるEmail（学生番号）
      *
      * @var string
      */
-    private string $deleted_email = 'e1z10000';
+    private string $deleted_email = 'e1z12345';
 
+    /**
+     * 各テストメソッドの前に実行される．（はず）
+     *
+     * @link https://readouble.com/laravel/9.x/ja/testing.html
+     *
+     * @return void
+     */
     public function setUp(): void
     {
         parent::setUp();
@@ -42,9 +49,9 @@ class CreateTest extends UseFormRequestTestCase
     }
 
     /**
-     * Set the target method.
+     * テスト対象のメソッドを定義する．
      *
-     * @see UseFormRequestTestCase::setMethod()
+     * @see \Tests\UseFormRequestTestCase::setMethod() [Overirde]
      * @return void
      */
     protected function setMethod(): void
@@ -56,9 +63,9 @@ class CreateTest extends UseFormRequestTestCase
     }
 
     /**
-     * Set the arguments of the target method.
+     * テスト対象のメソッドに渡す引数を定義する．
      *
-     * @see UseFormRequestTestCase::setArgument()
+     * @see \Tests\UseFormRequestTestCase::setArgument() [Override]
      * @return void
      */
     protected function setArgument(): void
@@ -73,9 +80,9 @@ class CreateTest extends UseFormRequestTestCase
     }
 
     /**
-     * Called first when the useFormRequest method is executed
+     * useFormRequestメソッドの始めに実行される．
      *
-     * @see UseFormRequestTestCase::reserve()
+     * @see \Tests\UseFormRequestTestCase::reserve() [Overirde]
      * @return void
      */
     protected function reserve(): void
@@ -88,7 +95,9 @@ class CreateTest extends UseFormRequestTestCase
     }
 
     /**
-     * After returning the student number, increment it.
+     * 学生番号を返却し，インクリメントを行う．
+     *
+     * Emailが重複するとユーザ作成が出来ないため．
      *
      * @return string
      */
@@ -98,34 +107,37 @@ class CreateTest extends UseFormRequestTestCase
     }
 
     /**
-     * Executed during user restore test.
+     * ユーザ復元テスト中に実行される．
+     *
+     * - 全く同じユーザを作成するために引数を調整する．
+     * - 全てのユーザを削除し，同じユーザを作成する．
+     * - 作成したユーザの論理削除を行う．
      *
      * @return void
      */
     private function userSoftDelete(): void
     {
-        // For create exactly the same user.
         $this->setArgument();
         $this->args['email'] = $this->deleted_email;
 
         try {
-            // Delete all users and create new users with the same input.
             User::withTrashed()->forceDelete();
             (new CreateNewUser())->create($this->args);
         } catch (Exception $e) {
             //
         } finally {
-            // Perform user SoftDelete.
             User::where('email', '=', $this->deleted_email . '@st.oit.ac.jp')->delete();
         }
     }
 
     /**
-     * Required for user restore test. restore_flag is must be false if user registration test is to be performed later.
-     * Verify that the lower two registrations are in a state suitable for user restore testing.
+     * ユーザ復元テストを実行可能にする．
      *
-     * Within the test method that calls this method, the useFormRequest method can be called with SoftDeletes for a user whose 'email' is '$this->deleted_email'.
-     * Also, the initial value of 'email' in '$this->args' is set to '$this->deleted_email'.
+     * このメソッドを呼び出すテストメソッド内で，「email」が「$this->deleted_email」であるユーザに対して
+     * SoftDeletes を指定して useFormRequest メソッドを呼び出すことが可能．また，「$this->args」にある
+     * 「email」の初期値は「$this->deleted_email」に設定される．
+     *
+     * 下2つのuseFormRequest呼び出しは論理削除のテストが可能かを確認している．
      *
      * @return void
      */
@@ -137,160 +149,266 @@ class CreateTest extends UseFormRequestTestCase
     }
 
     /**
-     * Verifies that a user is created with various names as arguments.
+     * 様々な名前を引数としてユーザーが作成されることを確認する．
      *
      * @return void
      */
     public function test_user_creation_on_name(): void
     {
-        $this->assertTrue($this->useFormRequest(['name'], ['laravel'])); // User Creation.
-        $this->assertTrue($this->useFormRequest(['name'], ['laravel'])); // Duplicate user name.
-        $this->assertFalse($this->useFormRequest(['name'], [Str::random(0)])); // User name undefined.
+        $this->assertTrue($this->useFormRequest(['name'], ['laravel'])); // ユーザ作成
+        $this->assertTrue($this->useFormRequest(['name'], ['laravel'])); // ユーザ名の重複
+        $this->assertFalse($this->useFormRequest(['name'], [Str::random(0)])); // ユーザ名未定義
 
+        // ユーザー名を定義できる文字数範囲
         foreach (range(1, 255) as $num) {
-            $this->assertTrue($this->useFormRequest(['name'], [Str::random($num)])); // The number of characters that can define a user name.
+            $this->assertTrue($this->useFormRequest(['name'], [Str::random($num)]));
         }
 
-        $this->assertFalse($this->useFormRequest(['name'], [Str::random(256)])); // Maximum number of characters in user name exceeded.
-        $this->assertTrue($this->useFormRequest(['name'], ['!"#$%&\'()-^\\@[;:],./\\=~|`{+*}<>?_'])); // Non-alphanumeric user name.
+        $this->assertFalse($this->useFormRequest(['name'], [Str::random(256)])); // ユーザ名の最大文字数超過
+        $this->assertTrue($this->useFormRequest(['name'], ['123456789'])); // 数字のみのユーザ名
+        $this->assertTrue($this->useFormRequest(['name'], ['!"#$%&\'()-^\\@[;:],./\\=~|`{+*}<>?_'])); // 英数字を使用しないユーザ名
     }
 
     /**
-     * Verify that users are created with various emails as arguments.
+     * 様々なEmailを引数としてユーザが作成されることを確認する．
      *
      * @return void
      */
     public function test_user_creation_on_email(): void
     {
-        // Verification of the first character
+        // 1文字目を英字にした際のテスト
         foreach (range('a', 'z') as $str) {
             if (strcmp($str, 'e') === 0) {
-                $this->assertTrue($this->useFormRequest(['email'], [$str . '1a00000'])); // e1a00000
+                $this->assertTrue($this->useFormRequest(['email'], [$str . str_replace("e", "", $this->getDummyEmail())]));
             } else {
-                $this->assertFalse($this->useFormRequest(['email'], [$str . '1a00000']));
+                $this->assertFalse($this->useFormRequest(['email'], [$str . str_replace("e", "", $this->getDummyEmail())]));
             }
         }
 
-        // Verification of the second character.
-        // 'a' has already been verified above.
+        // 1文字目を数字にした際のテスト
+        foreach (range(0, 9) as $num) {
+            $this->assertFalse($this->useFormRequest(['email'], [$num . str_replace("e", "", $this->getDummyEmail())]));
+        }
+
+        // 2文字目を英字にした際のテスト
+        foreach (range('a', 'z') as $str) {
+            $this->assertFalse($this->useFormRequest(['email'], ['e' . $str . str_replace("e1", "", $this->getDummyEmail())]));
+        }
+
+        // 2文字目のを数字にした際のテスト
         foreach (range(0, 9) as $num) {
             if ($num === 1) {
-                $this->assertTrue($this->useFormRequest(['email'], ['e' . $num . 'b00000'])); // e1b00000
+                $this->assertTrue($this->useFormRequest(['email'], ['e' . $num . str_replace("e1", "", $this->getDummyEmail())]));
             } else {
-                $this->assertFalse($this->useFormRequest(['email'], ['e' . $num . 'b00000']));
+                $this->assertFalse($this->useFormRequest(['email'], ['e' . $num . str_replace("e1", "", $this->getDummyEmail())]));
             }
         }
 
-        // Verification of the third character.
+        // 3文字目を英字にした際のテスト
         foreach (range('a', 'z') as $str) {
-            $this->assertTrue($this->useFormRequest(['email'], ['e1' . $str . '98765'])); // e1a99998 ~ e1z99998
+            $this->assertTrue($this->useFormRequest(['email'], ['e1' . $str . str_replace("e1z", "", $this->getDummyEmail())]));
         }
 
-        // Verification of last 5 digits.
-        // '00000' has already been verified above
-        foreach (range(1, 9) as $num) {
-            $this->assertTrue($this->useFormRequest(['email'], ['e1a' . 11111 * $num])); // e1a11111, e1a22222, ... , e1a99999
+        // 3文字目を数字にした際のテスト
+        foreach (range(0, 9) as $num) {
+            $this->assertFalse($this->useFormRequest(['email'], ['e1' . $num . str_replace("e1z", "", $this->getDummyEmail())]));
         }
 
-        $this->assertFalse($this->useFormRequest(['email'], ['e1a00000'])); // Duplicate user email.
-        $this->assertFalse($this->useFormRequest(['email'], [Str::random(0)])); // User email undefined.
-        $this->assertFalse($this->useFormRequest(['email'], [Str::random(255)])); // Maximum string of characters for which a user email can be defined.
-        $this->assertFalse($this->useFormRequest(['email'], [Str::random(256)])); // Maximum number of characters in user email exceeded.
-        $this->assertFalse($this->useFormRequest(['email'], ['e1a12345@st.oit.ac.jp'])); // With domain name of the email.
-        $this->assertFalse($this->useFormRequest(['email'], ['e1b12345' . config('filament.auth.email.domain')])); // With domain name to be used in filament.
+        // 下5桁を英字にした際のテスト（桁数も変更）
+        foreach (range('a', 'z') as $str) {
+            $strs = "";
+            for ($i = 1; $i <= 5; $i++) {
+                $strs .= $str;
+                if ($i === 5) {
+                    $this->assertFalse($this->useFormRequest(['email'], ['e1a' . $strs]));
+                } else {
+                    $this->assertFalse($this->useFormRequest(['email'], ['e1a' . $strs]));
+                }
+            }
+        }
+
+        // 下5桁を数字にした際のテスト（桁数も変更）
+        foreach (range(0, 9) as $num) {
+            $nums = "";
+            for ($i = 1; $i <= 5; $i++) {
+                $nums .= $num;
+
+                if ($i === 5) {
+                    $this->assertTrue($this->useFormRequest(['email'], ['e1a' . $nums]));
+                } else {
+                    $this->assertFalse($this->useFormRequest(['email'], ['e1a' . $nums]));
+                }
+            }
+        }
+
+        $this->assertFalse($this->useFormRequest(['email'], ['e1a00000'])); // Emailの重複
+        $this->assertFalse($this->useFormRequest(['email'], [Str::random(0)])); // Email未定義
+        $this->assertFalse($this->useFormRequest(['email'], [Str::random(255)])); // Email定義可能な最大文字列
+        $this->assertFalse($this->useFormRequest(['email'], [Str::random(256)])); // Email定義可能な最大文字列超過
+        $this->assertFalse($this->useFormRequest(['email'], [$this->getDummyEmail() . '@st.oit.ac.jp'])); // ドメイン名付きEmail
+        $this->assertFalse($this->useFormRequest(['email'], [$this->getDummyEmail() .  config('filament.auth.email.domain')])); // Filamentで認証可能なEmailドメイン名
     }
 
     /**
-     * Verify that users are created with various passwords as arguments.
+     * 様々なパスワードを引数としてユーザが作成されることを確認する．
      *
      * @return void
      */
     public function test_user_creation_on_password(): void
     {
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['password', 'password'])); // User Creation.
-        $this->assertFalse($this->useFormRequest(['password', 'password_confirmation'], [Str::random(0), Str::random(0)])); // User password undefined.
+        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['password', 'password'])); // ユーザ作成
+        $this->assertFalse($this->useFormRequest(['password', 'password_confirmation'], [Str::random(0), Str::random(0)])); // パスワード未定義
 
-        // The number of characters that can't define a user password.
+        // パスワードを定義出来ない文字数
         foreach (range(1, 7) as $num) {
             $password = Str::random($num);
             $this->assertFalse($this->useFormRequest(['password', 'password_confirmation'], [$password, $password]));
         }
 
-        // The number of characters that can define a user password.
-        // It is possible to increase the number of digits beyond this.
+        // パスワードを定義出来る文字数（実際には256文字以降も可）
         foreach (range(8, 255) as $num) {
             $password = Str::random($num);
             $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], [$password, $password]));
         }
 
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['abcdefgh', 'abcdefgh'])); // All characters.
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['12345678', '12345678'])); // All numbers.
-        $this->assertFalse($this->useFormRequest(['password', 'password_confirmation'], ['12345678', '87654321'])); // Enter different passwords
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['abcdefgh', 'abcdefgh'])); // All characters.
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['12345678', '12345678'])); // All numbers.
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['!"#$%&\'()-^\\@[;:],./\\=~|`{+*}<>?_', '!"#$%&\'()-^\\@[;:],./\\=~|`{+*}<>?_'])); // Non-alphanumeric password.
+        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['abcdefgh', 'abcdefgh'])); // 全て英字
+        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['12345678', '12345678'])); // 全て数字
+        $this->assertFalse($this->useFormRequest(['password', 'password_confirmation'], ['12345678', '87654321'])); // 1度目と2度目を異なる入力
+        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['!"#$%&\'()-^\\@[;:],./\\=~|`{+*}<>?_', '!"#$%&\'()-^\\@[;:],./\\=~|`{+*}<>?_'])); // 英数字以外
     }
 
     /**
-     * Verify that it is possible to restore a user with various user names as arguments.
+     * 様々なユーザ名を引数として，ユーザの復元が可能かどうかを確認する．
      *
      * @return void
      */
     public function test_name_at_user_restore(): void
     {
         $this->restoreTest();
-        $this->assertTrue($this->useFormRequest(['name'], ['laravel'])); // User Creation.
-        $this->assertTrue($this->useFormRequest(['name'], ['laravel'])); // Duplicate user name.
-        $this->assertFalse($this->useFormRequest(['name'], [Str::random(0)])); // User name undefined.
+        $this->assertTrue($this->useFormRequest(['name'], ['laravel'])); // ユーザ復元
+        $this->assertTrue($this->useFormRequest(['name'], ['laravel'])); // ユーザ名重複
+        $this->assertFalse($this->useFormRequest(['name'], [Str::random(0)])); // ユーザ名未定義
 
+        // ユーザ名を定義出来る文字数範囲
         foreach (range(1, 255) as $num) {
-            $this->assertTrue($this->useFormRequest(['name'], [Str::random($num)])); // The number of characters that can define a user name.
+            $this->assertTrue($this->useFormRequest(['name'], [Str::random($num)]));
         }
 
-        $this->assertFalse($this->useFormRequest(['name'], [Str::random(256)])); // Maximum number of characters in user name exceeded.
-        $this->assertTrue($this->useFormRequest(['name'], ['hoge'])); // Restore user with different user name. ('laravel' -> 'hoge')
+        $this->assertFalse($this->useFormRequest(['name'], [Str::random(256)])); // ユーザ名を定義出来る文字数超過
+        $this->assertTrue($this->useFormRequest(['name'], ['123456789'])); // 数字のみのユーザ名
+        $this->assertTrue($this->useFormRequest(['name'], ['!"#$%&\'()-^\\@[;:],./\\=~|`{+*}<>?_'])); // 英数字を使用しないユーザ名
+        $this->assertTrue($this->useFormRequest(['name'], ['hoge'])); // 異なるユーザ名でユーザ復元 ('laravel' -> 'hoge')
     }
 
     /**
-     * Verify that it is possible to restore a user with various user emails as arguments.
+     * 論理削除されたユーザが存在する中で，それ以外のEmailを指定した際にユーザが作成されることを確認する．
      *
      * @return void
      */
     public function test_email_at_user_restore(): void
     {
-        // $this->restoreTest();
-        $this->markTestSkipped('Changing the Email causes the user to be created instead of restored.');
+        $this->restoreTest();
+        $this->assertTrue($this->useFormRequest(['email'], [$this->deleted_email])); // ユーザ復元
+
+        // 1文字目を英字にした際のテスト
+        foreach (range('a', 'z') as $str) {
+            if (strcmp($str, 'e') === 0) {
+                $this->assertTrue($this->useFormRequest(['email'], [$str . str_replace("e", "", $this->getDummyEmail())]));
+            } else {
+                $this->assertFalse($this->useFormRequest(['email'], [$str . str_replace("e", "", $this->getDummyEmail())]));
+            }
+        }
+
+        // 1文字目を数字にした際のテスト
+        foreach (range(0, 9) as $num) {
+            $this->assertFalse($this->useFormRequest(['email'], [$num . str_replace("e", "", $this->getDummyEmail())]));
+        }
+
+        // 2文字目を英字にした際のテスト
+        foreach (range('a', 'z') as $str) {
+            $this->assertFalse($this->useFormRequest(['email'], ['e' . $str . str_replace("e1", "", $this->getDummyEmail())]));
+        }
+
+        // 2文字目のを数字にした際のテスト
+        foreach (range(0, 9) as $num) {
+            if ($num === 1) {
+                $this->assertTrue($this->useFormRequest(['email'], ['e' . $num . str_replace("e1", "", $this->getDummyEmail())]));
+            } else {
+                $this->assertFalse($this->useFormRequest(['email'], ['e' . $num . str_replace("e1", "", $this->getDummyEmail())]));
+            }
+        }
+
+        // 3文字目を英字にした際のテスト
+        foreach (range('a', 'z') as $str) {
+            $this->assertTrue($this->useFormRequest(['email'], ['e1' . $str . str_replace("e1z", "", $this->getDummyEmail())]));
+        }
+
+        // 3文字目を数字にした際のテスト
+        foreach (range(0, 9) as $num) {
+            $this->assertFalse($this->useFormRequest(['email'], ['e1' . $num . str_replace("e1z", "", $this->getDummyEmail())]));
+        }
+
+        // 下5桁を英字にした際のテスト（桁数も変更）
+        foreach (range('a', 'z') as $str) {
+            $strs = "";
+            for ($i = 1; $i <= 5; $i++) {
+                $strs .= $str;
+                if ($i === 5) {
+                    $this->assertFalse($this->useFormRequest(['email'], ['e1a' . $strs]));
+                } else {
+                    $this->assertFalse($this->useFormRequest(['email'], ['e1a' . $strs]));
+                }
+            }
+        }
+
+        // 下5桁を数字にした際のテスト（桁数も変更）
+        foreach (range(0, 9) as $num) {
+            $nums = "";
+            for ($i = 1; $i <= 5; $i++) {
+                $nums .= $num;
+
+                if ($i === 5) {
+                    $this->assertTrue($this->useFormRequest(['email'], ['e1a' . $nums]));
+                } else {
+                    $this->assertFalse($this->useFormRequest(['email'], ['e1a' . $nums]));
+                }
+            }
+        }
+
+        $this->assertFalse($this->useFormRequest(['email'], [Str::random(0)])); // Email未定義
+        $this->assertFalse($this->useFormRequest(['email'], [Str::random(255)])); // Email定義可能な最大文字列
+        $this->assertFalse($this->useFormRequest(['email'], [Str::random(256)])); // Email定義可能な最大文字列超過
+        $this->assertFalse($this->useFormRequest(['email'], [$this->getDummyEmail() . '@st.oit.ac.jp'])); // ドメイン名付きEmail
+        $this->assertFalse($this->useFormRequest(['email'], [$this->getDummyEmail() .  config('filament.auth.email.domain')])); // Filamentで認証可能なEmailドメイン名
     }
 
     /**
-     * Verify that it is possible to restore a user with various user passwords as arguments.
+     * 様々なパスワードを引数として，ユーザの復元が可能かどうかを確認する．
      *
      * @return void
      */
     public function test_password_at_user_restore(): void
     {
         $this->restoreTest();
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['password', 'password'])); // User Creation.
-        $this->assertFalse($this->useFormRequest(['password', 'password_confirmation'], [Str::random(0), Str::random(0)])); // User password undefined.
+        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['password', 'password'])); // ユーザ作成
+        $this->assertFalse($this->useFormRequest(['password', 'password_confirmation'], [Str::random(0), Str::random(0)])); // パスワード未定義
 
-        // The number of characters that can't define a user password.
+        // パスワードを定義出来ない文字数
         foreach (range(1, 7) as $num) {
             $password = Str::random($num);
             $this->assertFalse($this->useFormRequest(['password', 'password_confirmation'], [$password, $password]));
         }
 
-        // The number of characters that can define a user password.
-        // It is possible to increase the number of digits beyond this.
+        // パスワードを定義出来る文字数（実際には256文字以降も可）
         foreach (range(8, 255) as $num) {
             $password = Str::random($num);
             $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], [$password, $password]));
         }
 
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['abcdefgh', 'abcdefgh'])); // All characters.
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['12345678', '12345678'])); // All numbers.
-        $this->assertFalse($this->useFormRequest(['password', 'password_confirmation'], ['12345678', '87654321'])); // Enter different passwords
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['abcdefgh', 'abcdefgh'])); // All characters.
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['12345678', '12345678'])); // All numbers.
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['different_passwords', 'different_passwords'])); // Different passwords.
+        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['abcdefgh', 'abcdefgh'])); // 全て英字
+        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['12345678', '12345678'])); // 全て数字
+        $this->assertFalse($this->useFormRequest(['password', 'password_confirmation'], ['12345678', '87654321'])); // 1度目と2度目を異なる入力
+        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['!"#$%&\'()-^\\@[;:],./\\=~|`{+*}<>?_', '!"#$%&\'()-^\\@[;:],./\\=~|`{+*}<>?_'])); // 英数字以外
+        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['different_passwords', 'different_passwords'])); // 作成時と異なるパスワード
     }
 }

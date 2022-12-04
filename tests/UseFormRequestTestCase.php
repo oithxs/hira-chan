@@ -7,14 +7,14 @@ use Exception;
 abstract class UseFormRequestTestCase extends TestCase
 {
     /**
-     * Methods to test.
+     * テスト対象のメソッド
      *
      * @var array
      */
     protected array $method;
 
     /**
-     * Method Arguments to be Tested.
+     * テスト対象メソッドの引数
      *
      * @var array
      */
@@ -29,41 +29,41 @@ abstract class UseFormRequestTestCase extends TestCase
     }
 
     /**
-     * Set the target method in the child class.
+     * 子クラスでテスト対象メソッドを設定します．
      *
      * @return void
      */
     abstract protected function setMethod(): void;
 
     /**
-     * Set the arguments of the target method in the child class.
+     * 子クラスでテスト対象メソッドの引数を設定します．
      *
      * @return void
      */
     abstract protected function setArgument(): void;
 
     /**
-     * Called first when the setUp method is executed
+     * setUpメソッドが実行されたときに最初に呼び出される．
      *
      * @return void
      */
     protected function setAny(): void
     {
-        // Can be defined in a child class
+        // 子クラスで定義することが出来る．
     }
 
     /**
-     * Called first when the useFormRequest method is executed
+     * useFormRequestメソッドが実行されたときに最初に呼び出される．
      *
      * @return void
      */
     protected function reserve(): void
     {
-        // Can be defined in a child class
+        // 子クラスで定義することが出来る．
     }
 
     /**
-     * It is possible to change the arguments of the method under test.
+     * テスト対象メソッドの引数を変更することが可能．
      *
      * @return void
      */
@@ -73,8 +73,8 @@ abstract class UseFormRequestTestCase extends TestCase
     }
 
     /**
-     * Changes the arguments when the target method is executed.
-     * The method returns whether the target method can be executed or not.
+     * 対象メソッド実行時の引数を変更する．
+     * このメソッドは，対象となるメソッドでエラーが発生したかどうかを返す．
      *
      * @param array $key
      * @param array $value

@@ -13,6 +13,11 @@ class CreateNewUser implements CreatesNewUsers
     /**
      * Validate and create a newly registered user.
      *
+     * @see \App\Http\Requests\Login\CreateNewUserRequest::storeRules() [Call]
+     * @see \App\Http\Requests\Login\CreateNewUserRequest::storeMessages() [Call]
+     * @see \App\Http\Requests\Login\CreateNewUserRequest::reStoreRules() [Call]
+     * @see \App\Http\Requests\Login\CreateNewUserRequest::reStoreMessages() [Call]
+     *
      * @param  array  $input
      * @return \App\Models\User
      */
