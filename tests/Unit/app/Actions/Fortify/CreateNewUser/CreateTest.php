@@ -82,10 +82,10 @@ class CreateTest extends UseFormRequestTestCase
     /**
      * useFormRequestメソッドの始めに実行される．
      *
-     * @see \Tests\UseFormRequestTestCase::reserve() [Overirde]
+     * @see \Tests\UseFormRequestTestCase::setUpUseFormRequest() [Overirde]
      * @return void
      */
-    protected function reserve(): void
+    protected function setUpUseFormRequest(): void
     {
         if ($this->restore_flag) {
             $this->userSoftDelete();

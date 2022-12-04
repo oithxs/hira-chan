@@ -57,7 +57,7 @@ abstract class UseFormRequestTestCase extends TestCase
      *
      * @return void
      */
-    protected function reserve(): void
+    protected function setUpUseFormRequest(): void
     {
         // 子クラスで定義することが出来る．
     }
@@ -82,7 +82,7 @@ abstract class UseFormRequestTestCase extends TestCase
      */
     protected function useFormRequest(array $keys, array $values): bool
     {
-        $this->reserve();
+        $this->setUpUseFormRequest();
         for ($i = 0; $i < count($keys); $i++) {
             $this->args[$keys[$i]] = $values[$i];
         }
