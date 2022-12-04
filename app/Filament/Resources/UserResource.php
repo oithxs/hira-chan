@@ -61,6 +61,7 @@ class UserResource extends Resource
      * 管理画面での表示ページ
      *
      * @link https://filamentphp.com/docs/2.x/admin/resources/getting-started
+     * @link https://readouble.com/laravel/9.x/ja/migrations.html
      *
      * @param Table $table
      * @return Table

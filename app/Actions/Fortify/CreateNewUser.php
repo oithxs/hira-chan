@@ -16,6 +16,7 @@ class CreateNewUser implements CreatesNewUsers
      * 新規に登録されたユーザーを検証し，作成する．
      *
      * @link https://jetstream.laravel.com/2.x/features/registration.html
+     * @link https://readouble.com/laravel/9.x/ja/migrations.html
      * @link https://readouble.com/laravel/9.x/ja/validation.html
      * @link https://readouble.com/laravel/9.x/ja/queries.html
      *

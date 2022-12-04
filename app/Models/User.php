@@ -82,6 +82,8 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
      * キャストすべき属性
      *
      * @link https://readouble.com/laravel/9.x/ja/eloquent-serialization.html
+     * @link https://readouble.com/laravel/9.x/ja/migrations.html
+     * @link https://readouble.com/laravel/9.x/ja/migrations.html
      *
      * @var array
      */
