@@ -13,7 +13,11 @@ class CreateNewUser implements CreatesNewUsers
     use PasswordValidationRules;
 
     /**
-     * Validate and create a newly registered user.
+     * 新規に登録されたユーザーを検証し，作成する．
+     *
+     * @link https://jetstream.laravel.com/2.x/features/registration.html
+     * @link https://readouble.com/laravel/9.x/ja/validation.html
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
      *
      * @param  array  $input
      * @return \App\Models\User
@@ -22,6 +26,7 @@ class CreateNewUser implements CreatesNewUsers
     {
         $input['email'] .= "@st.oit.ac.jp";
         if (User::onlyTrashed()->where('email', '=', $input['email'])->first()) {
+            // 論理削除されたユーザの復元
             Validator::make($input, [
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'max:255', 'regex:/^e1[a-z]\d{5}@st.oit.ac.jp$/'],
@@ -47,6 +52,7 @@ class CreateNewUser implements CreatesNewUsers
             ]);
             return User::where('email', '=', $input['email'])->first();
         } else {
+            // ユーザ登録
             Validator::make($input, [
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'max:255', 'unique:users', 'regex:/^e1[a-z]\d{5}@st.oit.ac.jp$/'],

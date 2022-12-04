@@ -1,15 +1,19 @@
 <?php
 
+/**
+ * @link https://readouble.com/laravel/9.x/ja/broadcasting.html
+ */
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Broadcaster
+    | デフォルトのブロードキャスター
     |--------------------------------------------------------------------------
     |
-    | This option controls the default broadcaster that will be used by the
-    | framework when an event needs to be broadcast. You may set this to
-    | any of the connections defined in the "connections" array below.
+    | このオプションは，イベントをブロードキャストする必要があるときに
+    | フレームワークによって使用されるデフォルトのブロードキャスタを制御します．
+    | 下記の「connection」配列で定義された接続のいずれかにこれを設定することが
+    | できます．
     |
     | Supported: "pusher", "ably", "redis", "log", "null"
     |
@@ -19,12 +23,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Broadcast Connections
+    | ブロードキャストコネクション
     |--------------------------------------------------------------------------
     |
-    | Here you may define all of the broadcast connections that will be used
-    | to broadcast events to other systems or over websockets. Samples of
-    | each available type of connection are provided inside this array.
+    | ここで，他のシステムやウェブソケットにイベントを送信する際に使用する
+    | ブロードキャスト接続をすべて定義します．使用できる接続のサンプルは，
+    | この配列の中に含まれています．
     |
     */
 

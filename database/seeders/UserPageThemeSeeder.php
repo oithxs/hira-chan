@@ -8,7 +8,9 @@ use App\Models\UserPageTheme;
 class UserPageThemeSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * user page theme の初期データ
+     *
+     * @link https://readouble.com/laravel/9.x/ja/seeding.html
      *
      * @return void
      */

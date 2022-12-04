@@ -8,7 +8,9 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     /**
-     * Define the application's command schedule.
+     * アプリケーションのコマンドスケジュールを定義する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/scheduling.html
      *
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
@@ -19,7 +21,9 @@ class Kernel extends ConsoleKernel
     }
 
     /**
-     * Register the commands for the application.
+     * アプリケーションのコマンドを登録する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/artisan.html
      *
      * @return void
      */

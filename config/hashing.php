@@ -1,15 +1,18 @@
 <?php
 
+/**
+ * @link https://readouble.com/laravel/9.x/ja/hashing.html
+ */
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Hash Driver
+    | デフォルトのハッシュドライバ
     |--------------------------------------------------------------------------
     |
-    | This option controls the default hash driver that will be used to hash
-    | passwords for your application. By default, the bcrypt algorithm is
-    | used; however, you remain free to modify this option if you wish.
+    | このオプションは，アプリケーションのパスワードのハッシュ化に使用する
+    | デフォルトのハッシュドライバを制御します．デフォルトでは bcrypt アルゴリズムが
+    | 使われますが，必要に応じてこのオプションを自由に変更できます．
     |
     | Supported: "bcrypt", "argon", "argon2id"
     |
@@ -19,12 +22,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Bcrypt Options
+    | Bcryptオプション
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the configuration options that should be used when
-    | passwords are hashed using the Bcrypt algorithm. This will allow you
-    | to control the amount of time it takes to hash the given password.
+    | ここでは，Bcryptアルゴリズムを使用してパスワードをハッシュ化する際に
+    | 使用する設定オプションを指定することができます．これにより，与えられた
+    | パスワードのハッシュ化にかかる時間を制御することができます．
     |
     */
 
@@ -34,12 +37,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Argon Options
+    | Argon オプション
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the configuration options that should be used when
-    | passwords are hashed using the Argon algorithm. These will allow you
-    | to control the amount of time it takes to hash the given password.
+    | ここでは，Argon アルゴリズムを使用してパスワードをハッシュ化する際に
+    | 使用する設定オプションを指定することができます．これらによって，与えられた
+    | パスワードのハッシュ化にかかる時間を制御することができます．
     |
     */
 

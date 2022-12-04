@@ -30,7 +30,9 @@ class HubController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * [POST] スレッドを作成する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
      *
      * @param  \Illuminate\Http\Request  $request
      * @return void

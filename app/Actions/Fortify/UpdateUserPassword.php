@@ -11,7 +11,11 @@ class UpdateUserPassword implements UpdatesUserPasswords
     use PasswordValidationRules;
 
     /**
-     * Validate and update the user's password.
+     * ユーザーのパスワードを検証し，更新する．
+     *
+     * @link https://jetstream.laravel.com/2.x/features/password-update.html
+     * @link https://readouble.com/laravel/9.x/ja/validation.html
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
      *
      * @param  mixed  $user
      * @param  array  $input

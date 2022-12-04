@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\URL;
 class MustAuthVerified
 {
     /**
-     * Handle an incoming request.
+     * 受信したリクエストを処理する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/verification.html
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next

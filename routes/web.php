@@ -4,25 +4,25 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Webルート
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| ここでは，アプリケーションのWebルートを登録することができます．これらの
+| ルートは，「web」ミドルウェアグループを含むグループ内のRouteServiceProvider
+| によってロードされます．さあ，素晴らしいものを作りましょう
 |
 */
 
 /*
 |--------------------------------------------------------------------------
-| Warning
+| 警告
 |--------------------------------------------------------------------------
 |
-| - Don't use "admin" in the path.
+| - パスに config('filament.path') と同じものを使用しないで下さい．
 |
 */
 
-// Page transition: allow not logged in
+// 画面遷移：ログインしていない状態でもアクセス許可
 Route::middleware([
     config('jetstream.auth_session'),
     'login.must_verified'
@@ -39,7 +39,7 @@ Route::middleware([
     Route::get('dashboard/thread/name=&id=', 'App\Http\Controllers\Dashboard\DashboardController@messages');
 });
 
-// Page transition: login required
+// 画面遷移：ログインが必要
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

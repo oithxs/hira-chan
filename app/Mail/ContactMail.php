@@ -7,6 +7,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * @todo このファイルはLaravel-adminを使用していた時のもの．
+ *       現在の管理画面は別のライブラリを使用しているので，状況を見て削除する．
+ */
 class ContactMail extends Mailable
 {
     use Queueable, SerializesModels;
@@ -14,7 +18,9 @@ class ContactMail extends Mailable
     public $content;
 
     /**
-     * Create a new message instance.
+     * 新しいメッセージのインスタンスを作成する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/mail.html
      *
      * @return void
      */
@@ -24,7 +30,10 @@ class ContactMail extends Mailable
     }
 
     /**
-     * Build the message.
+     * メッセージを構築する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/mail.html
+     * @see resources/views/emails/contact.blade.php
      *
      * @return $this
      */

@@ -11,17 +11,19 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\URL;
 
-class VerifyEmailAddURL extends Notification
+class VerifyEmailNotification extends Notification
 {
     /**
-     * The callback that should be used to build the mail message.
+     * メールメッセージを構築するために使用されるべきコールバック．
      *
      * @var \Closure|null
      */
     public static $toMailCallback;
 
     /**
-     * Get the notification's channels.
+     * 通知のチャンネルを取得する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/notifications.html
      *
      * @param  mixed  $notifiable
      * @return array|string
@@ -32,7 +34,9 @@ class VerifyEmailAddURL extends Notification
     }
 
     /**
-     * Build the mail representation of the notification.
+     * 通知のメール表現を構築する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/notifications.html
      *
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
@@ -53,7 +57,7 @@ class VerifyEmailAddURL extends Notification
     }
 
     /**
-     * Get the verification URL for the given notifiable.
+     * 指定された通知先の検証用URLを取得する．
      *
      * @param  mixed  $notifiable
      * @return string
@@ -71,7 +75,9 @@ class VerifyEmailAddURL extends Notification
     }
 
     /**
-     * Set a callback that should be used when building the notification mail message.
+     * 通知メールメッセージの構築時に使用されるコールバックを設定する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/verification.html
      *
      * @param  \Closure  $callback
      * @return void

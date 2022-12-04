@@ -7,7 +7,9 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * アプリケーションのデータベースにデータを挿入する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/seeding.html
      *
      * @return void
      */

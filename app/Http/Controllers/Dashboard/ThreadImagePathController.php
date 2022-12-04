@@ -38,13 +38,15 @@ class ThreadImagePathController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * スレッドにアップロードされた画像を保存し，画像までのパスをDBに保存する．
+     *
+     * @see \App\Http\Controllers\Dashboard\ThreadsController::store() [Called]
      *
      * @param \Illuminate\Http\UploadedFile $img
-     * @param string $user_id
-     * @param string $thread_id
-     * @param int $message_id
-     * @param string $category_type
+     * @param string $user_id ユーザID
+     * @param string $thread_id スレッド（Hub）ID
+     * @param int $message_id メッセージID
+     * @param string $category_type 大枠カテゴリ
      *
      * @return void
      */

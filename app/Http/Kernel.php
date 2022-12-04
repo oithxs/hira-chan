@@ -7,9 +7,11 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 class Kernel extends HttpKernel
 {
     /**
-     * The application's global HTTP middleware stack.
+     * アプリケーションのグローバルなHTTPミドルウェアスタック．
      *
-     * These middleware are run during every request to your application.
+     * これらのミドルウェアは，アプリケーションへのすべてのリクエストの際に実行される．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/middleware.html
      *
      * @var array<int, class-string|string>
      */
@@ -25,7 +27,9 @@ class Kernel extends HttpKernel
     ];
 
     /**
-     * The application's route middleware groups.
+     * アプリケーションのルートミドルウェア群．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/middleware.html
      *
      * @var array<string, array<int, class-string|string>>
      */
@@ -48,9 +52,11 @@ class Kernel extends HttpKernel
     ];
 
     /**
-     * The application's route middleware.
+     * アプリケーションのミドルウェア．
      *
-     * These middleware may be assigned to groups or used individually.
+     * これらのミドルウェアは，グループに割り当てることも，個別に使用することも可能．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/middleware.html
      *
      * @var array<string, class-string|string>
      */
@@ -69,9 +75,11 @@ class Kernel extends HttpKernel
     ];
 
     /**
-     * The priority-sorted list of middleware.
+     * ミドルウェアの優先順位をソートしたリスト．
      *
-     * This forces non-global middleware to always be in the given order.
+     * これにより，非グローバルなミドルウェアは常に指定された順序になるように強制される．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/middleware.html
      *
      * @var string[]
      */

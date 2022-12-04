@@ -17,10 +17,28 @@ use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
+    /**
+     * 対象のモデル
+     *
+     * @var string|null
+     */
     protected static ?string $model = User::class;
 
+    /**
+     * @link https://filamentphp.com/docs/2.x/admin/resources/getting-started
+     *
+     * @var string|null
+     */
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    /**
+     * 管理画面で作成・編集する際のフォーム
+     *
+     * @link https://filamentphp.com/docs/2.x/admin/resources/getting-started
+     *
+     * @param Form $form
+     * @return Form
+     */
     public static function form(Form $form): Form
     {
         return $form
@@ -39,6 +57,14 @@ class UserResource extends Resource
             ]);
     }
 
+    /**
+     * 管理画面での表示ページ
+     *
+     * @link https://filamentphp.com/docs/2.x/admin/resources/getting-started
+     *
+     * @param Table $table
+     * @return Table
+     */
     public static function table(Table $table): Table
     {
         return $table
@@ -64,6 +90,11 @@ class UserResource extends Resource
             ]);
     }
 
+    /**
+     * @link https://filamentphp.com/docs/2.x/admin/resources/relation-managers
+     *
+     * @return array
+     */
     public static function getRelations(): array
     {
         return [
@@ -71,6 +102,11 @@ class UserResource extends Resource
         ];
     }
 
+    /**
+     * @link https://filamentphp.com/docs/2.x/admin/resources/getting-started
+     *
+     * @return array
+     */
     public static function getPages(): array
     {
         return [
@@ -81,6 +117,11 @@ class UserResource extends Resource
         ];
     }
 
+    /**
+     * @link https://filamentphp.com/docs/2.x/admin/resources/getting-started
+     *
+     * @return Builder
+     */
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()

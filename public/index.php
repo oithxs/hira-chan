@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @link https://readouble.com/laravel/9.x/ja/lifecycle.html
+ */
+
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
@@ -7,44 +11,43 @@ define('LARAVEL_START', microtime(true));
 
 /*
 |--------------------------------------------------------------------------
-| Check If The Application Is Under Maintenance
+| アプリケーションがメンテナンス中かどうかを確認する
 |--------------------------------------------------------------------------
 |
-| If the application is in maintenance / demo mode via the "down" command
-| we will load this file so that any pre-rendered content can be shown
-| instead of starting the framework, which could cause an exception.
+| アプリケーションが "down "コマンドによってメンテナンス/デモモードに
+| なっている場合，例外を引き起こす可能性のあるフレームワークを起動する代わりに，
+| プリレンダーコンテンツを表示できるように，このファイルをロードします．
 |
 */
 
-if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
+if (file_exists($maintenance = __DIR__ . '/../storage/framework/maintenance.php')) {
     require $maintenance;
 }
 
 /*
 |--------------------------------------------------------------------------
-| Register The Auto Loader
+| オートローダーの登録
 |--------------------------------------------------------------------------
 |
-| Composer provides a convenient, automatically generated class loader for
-| this application. We just need to utilize it! We'll simply require it
-| into the script here so we don't need to manually load our classes.
-|
+| Composerは，このアプリケーションのために便利な自動生成のクラスローダーを
+| 提供しています．それを利用すればいいのです．手動でクラスをロードする必要が
+| ないように，ここではスクリプトにそれを要求するだけです．
 */
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
-| Run The Application
+| アプリケーションの実行
 |--------------------------------------------------------------------------
 |
-| Once we have the application, we can handle the incoming request using
-| the application's HTTP kernel. Then, we will send the response back
-| to this client's browser, allowing them to enjoy our application.
+| アプリケーションを作成したら，アプリケーションのHTTPカーネルを使用して，
+| 受信したリクエストを処理できます．そして，このクライアントのブラウザに
+| レスポンスを送り返し，アプリケーションを楽しんでもらうことができます．
 |
 */
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+$app = require_once __DIR__ . '/../bootstrap/app.php';
 
 $kernel = $app->make(Kernel::class);
 

@@ -8,7 +8,9 @@ use App\Models\ThreadCategory;
 class ThreadCategorySeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * thread category の初期データ
+     *
+     * @link https://readouble.com/laravel/9.x/ja/seeding.html
      *
      * @return void
      */

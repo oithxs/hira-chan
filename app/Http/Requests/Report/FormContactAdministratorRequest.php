@@ -9,7 +9,9 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 class FormContactAdministratorRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * ユーザーがこの要求を行う権限があるかどうかを判断する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/validation.html
      *
      * @return bool
      */
@@ -19,7 +21,9 @@ class FormContactAdministratorRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * リクエストに適用されるバリデーションルールを取得．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/validation.html
      *
      * @return array<string, mixed>
      */
@@ -32,7 +36,9 @@ class FormContactAdministratorRequest extends FormRequest
     }
 
     /**
-     * Get custom messages for validator errors.
+     * バリデータエラー用のカスタムメッセージを取得する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/validation.html
      *
      * @return array
      */
@@ -46,7 +52,10 @@ class FormContactAdministratorRequest extends FormRequest
     }
 
     /**
-     * Handle a failed validation attempt.
+     * バリデーションの失敗を処理する．
+     *
+     * @link https://laravel.com/api/9.x/Illuminate/Foundation/Http/FormRequest.html#method_failedValidation
+     * @todo 上記のリンクをメソッドの説明付きの良さげなURLに置き換える
      *
      * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @return void

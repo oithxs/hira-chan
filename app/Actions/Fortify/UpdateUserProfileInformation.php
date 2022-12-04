@@ -10,7 +10,11 @@ use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 class UpdateUserProfileInformation implements UpdatesUserProfileInformation
 {
     /**
-     * Validate and update the given user's profile information.
+     * 指定されたユーザーのプロファイル情報を検証し，更新する．
+     *
+     * @link https://jetstream.laravel.com/2.x/features/profile-management.html
+     * @link https://readouble.com/laravel/9.x/ja/validation.html
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
      *
      * @param  mixed  $user
      * @param  array  $input

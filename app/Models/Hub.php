@@ -10,21 +10,30 @@ class Hub extends UuidModel
     use SerializeDate;
 
     /**
-     * Database to be connected
+     * 接続するデータベース
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent.html
+     * @see config/database.php
      *
      * @var string
      */
     protected $connection = 'mysql';
 
     /**
-     * Tables to be associated
+     * 関連付けるテーブル
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent.html
      *
      * @var string
      */
     protected $table = 'hub';
 
     /**
-     * The attributes that are mass assignable
+     * マスアサインメント可能な属性
+     *
+     * ここに登録している属性にはデータの挿入・更新が出来る．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent.html
      *
      * @var string[]
      */
@@ -36,7 +45,9 @@ class Hub extends UuidModel
     ];
 
     /**
-     * The attributes that should be cast.
+     * キャストすべき属性
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-serialization.html
      *
      * @var array
      */
@@ -46,7 +57,10 @@ class Hub extends UuidModel
     ];
 
     /**
-     * Get the access logs for the hub.
+     * hub に関連する access log を取得する．
+     * 1：多
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function access_logs()
     {
@@ -54,7 +68,10 @@ class Hub extends UuidModel
     }
 
     /**
-     * Get the club threads for the hub.
+     * hub に関連する club thread を取得する．
+     * 1：多
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function club_threads()
     {
@@ -62,7 +79,10 @@ class Hub extends UuidModel
     }
 
     /**
-     * Get the college year threads for the hub.
+     * hub に関連する college year thread を取得する．
+     * 1：多
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function college_year_threads()
     {
@@ -70,7 +90,10 @@ class Hub extends UuidModel
     }
 
     /**
-     * Get the department threads for the hub.
+     * hub に関連する department thread を取得する．
+     * 1：多
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function department_threads()
     {
@@ -78,7 +101,10 @@ class Hub extends UuidModel
     }
 
     /**
-     * Get the job hunting threads for the hub.
+     * hub に関連する job hunting thread を取得する．
+     * 1：多
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function job_hunting_threads()
     {
@@ -86,7 +112,10 @@ class Hub extends UuidModel
     }
 
     /**
-     * Get the lecture threads for the hub.
+     * hub に関連する lecture thread を取得する．
+     * 1：多
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function lecture_threads()
     {
@@ -94,7 +123,10 @@ class Hub extends UuidModel
     }
 
     /**
-     * Get the thread category that owns the hub.
+     * hub を所有する thread category を取得します．
+     * 多：1
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function thread_category()
     {
@@ -102,7 +134,10 @@ class Hub extends UuidModel
     }
 
     /**
-     * Get the user that owns the hub.
+     * hub を所有する user を取得します．
+     * 多：1
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function user()
     {

@@ -4,16 +4,19 @@ use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 
+/**
+ * @link https://readouble.com/laravel/8.x/ja/logging.html
+ */
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Log Channel
+    | デフォルトのログチャンネル
     |--------------------------------------------------------------------------
     |
-    | This option defines the default log channel that gets used when writing
-    | messages to the logs. The name specified in this option should match
-    | one of the channels defined in the "channels" configuration array.
+    | このオプションは，ログにメッセージを書き込む際に使用する デフォルトの
+    | ログチャンネルを定義します．このオプションで指定する名前は，設定配列
+    | 「channels」で定義されているチャネルのうちのひとつと一致しなければなりません．
     |
     */
 
@@ -21,12 +24,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Deprecations Log Channel
+    | Deprecationsログチャンネル
     |--------------------------------------------------------------------------
     |
-    | This option controls the log channel that should be used to log warnings
-    | regarding deprecated PHP and library features. This allows you to get
-    | your application ready for upcoming major versions of dependencies.
+    | このオプションは，非推奨の PHP およびライブラリ機能に関する警告を記録するための
+    | ログチャンネルを制御します．これにより，今後リリースされるメジャーバージョンに
+    | 対応したアプリケーションを準備することができます．
     |
     */
 
@@ -34,12 +37,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Log Channels
+    | ログチャンネル
     |--------------------------------------------------------------------------
     |
-    | Here you may configure the log channels for your application. Out of
-    | the box, Laravel uses the Monolog PHP logging library. This gives
-    | you a variety of powerful log handlers / formatters to utilize.
+    | ここでは，アプリケーションのログチャンネルを設定することができます．
+    | Laravelでは，Monolog PHPロギング・ライブラリーを使用します．これにより，
+    | 様々な強力なログハンドラ/フォーマッタを利用することができます．
     |
     | Available Drivers: "single", "daily", "slack", "syslog",
     |                    "errorlog", "monolog",

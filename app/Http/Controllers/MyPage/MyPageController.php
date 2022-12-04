@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 class MyPageController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * [GET] マイページを表示する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/views.html
+     * @see resources/views/mypage/MyPage.blade.php
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

@@ -11,21 +11,30 @@ class CollegeYearThread extends Model
     use SerializeDate;
 
     /**
-     * Database to be connected
+     * 接続するデータベース
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent.html
+     * @see config/database.php
      *
      * @var string
      */
     protected $connection = 'mysql';
 
     /**
-     * Tables to be associated
+     * 関連付けるテーブル
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent.html
      *
      * @var string
      */
     protected $table = 'college_year_threads';
 
     /**
-     * The attributes that are mass assignable
+     * マスアサインメント可能な属性
+     *
+     * ここに登録している属性にはデータの挿入・更新が出来る．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent.html
      *
      * @var string[]
      */
@@ -37,7 +46,13 @@ class CollegeYearThread extends Model
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * シリアライズのために隠すべき属性
+     *
+     * ここに登録した属性は，管理画面で見ることが出来ない．
+     * そのほかの効果は不明．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-serialization.html
+     * @todo 結局スレッドにアクセスする際のリンクにこの属性を使用しているので，隠す意味は無いかと思われる．
      *
      * @var array
      */
@@ -46,7 +61,9 @@ class CollegeYearThread extends Model
     ];
 
     /**
-     * The attributes that should be cast.
+     * キャストすべき属性
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-serialization.html
      *
      * @var array
      */
@@ -55,25 +72,23 @@ class CollegeYearThread extends Model
         'update_at' => 'datetime:Y-m-d H:i:s',
     ];
 
-
     /**
-     * Get the hub that owns the college year thread.
+     * college year thread に関連する thread image path を取得します．
+     * 1：1
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
+     * @todo
      */
-    public function hub()
+    public function thread_image_path()
     {
-        return $this->belongsTo(Hub::class);
+        return $this->hasOne(ThreadImagePath::class);
     }
 
     /**
-     * Get the user that owns the college year thread.
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Get the likes for the club thread.
+     * college year thread に関連する like を取得する．
+     * 1：多
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function likes()
     {
@@ -81,10 +96,24 @@ class CollegeYearThread extends Model
     }
 
     /**
-     * Get the thread image path associated with the college year thread.
+     * college year thread を所有する hub を取得します．
+     * 多：1
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
-    public function thread_image_path()
+    public function hub()
     {
-        return $this->hasOne(ThreadImagePath::class);
+        return $this->belongsTo(Hub::class);
+    }
+
+    /**
+     * college year thread を所有する user を取得します．
+     * 多：1
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

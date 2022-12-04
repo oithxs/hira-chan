@@ -17,17 +17,24 @@ use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Http\Requests\LoginRequest;
 
+/**
+ * vendorフォルダ内のファイルをオーバーライドする．
+ *
+ * @see composer.json [autoload.exclude-from-classmap, autoload.files]
+ * @todo このファイルは手探りで変更したので，公式のドキュメントが見つけられなかった．
+ *       見つけ次第，参考リンクを追加する．
+ */
 class AuthenticatedSessionController extends Controller
 {
     /**
-     * The guard implementation.
+     * ガード実装．
      *
      * @var \Illuminate\Contracts\Auth\StatefulGuard
      */
     protected $guard;
 
     /**
-     * Create a new controller instance.
+     * 新しいコントローラのインスタンスを作成する
      *
      * @param  \Illuminate\Contracts\Auth\StatefulGuard  $guard
      * @return void
@@ -38,7 +45,7 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Show the login view.
+     * ログインビューを表示する．
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Laravel\Fortify\Contracts\LoginViewResponse
@@ -49,7 +56,11 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Attempt to authenticate a new session.
+     * 新しいセッションの認証を試みる．
+     *
+     * ログインで入力された学生番号にEmailのドメインを追加する．
+     *
+     * @see \Laravel\Fortify\Http\Requests\LoginRequest
      *
      * @param  \Laravel\Fortify\Http\Requests\LoginRequest  $request
      * @return mixed
@@ -64,7 +75,9 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Get the authentication pipeline instance.
+     * 認証パイプラインのインスタンスを取得する．
+     *
+     * @see \Laravel\Fortify\Http\Requests\LoginRequest
      *
      * @param  \Laravel\Fortify\Http\Requests\LoginRequest  $request
      * @return \Illuminate\Pipeline\Pipeline
@@ -92,7 +105,7 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Destroy an authenticated session.
+     * 認証済みセッションを破棄する．
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Laravel\Fortify\Contracts\LogoutResponse

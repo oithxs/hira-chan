@@ -2,16 +2,19 @@
 
 use Illuminate\Support\Str;
 
+/**
+ * @link https://readouble.com/laravel/9.x/ja/cache.html
+ */
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Cache Store
+    | デフォルトのキャッシュストア
     |--------------------------------------------------------------------------
     |
-    | This option controls the default cache connection that gets used while
-    | using this caching library. This connection is used when another is
-    | not explicitly specified when executing a given caching function.
+    | このオプションは，このキャッシュライブラリの使用時に使用されるデフォルトの
+    | キャッシュ接続を制御します．この接続は，キャッシュ関数を実行する際に他の接続が
+    | 明示的に指定されていない場合に使用されます．
     |
     */
 
@@ -19,12 +22,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Cache Stores
+    | キャッシュストア
     |--------------------------------------------------------------------------
     |
-    | Here you may define all of the cache "stores" for your application as
-    | well as their drivers. You may even define multiple stores for the
-    | same cache driver to group types of items stored in your caches.
+    | ここでは，アプリケーションのすべてのキャッシュ「ストア」とそのドライバを
+    | 定義することができます．同じキャッシュドライバに対して複数のストアを定義して，
+    | キャッシュに保存されるアイテムの種類をグループ化することもできます．
     |
     | Supported drivers: "apc", "array", "database", "file",
     |         "memcached", "redis", "dynamodb", "octane", "null"
@@ -96,15 +99,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Cache Key Prefix
+    | キャッシュキーのプレフィックス
     |--------------------------------------------------------------------------
     |
-    | When utilizing a RAM based store such as APC or Memcached, there might
-    | be other applications utilizing the same cache. So, we'll specify a
-    | value to get prefixed to all our keys so we can avoid collisions.
+    | APC や Memcached のような RAM ベースのストアを使用する場合，同じキャッシュを
+    | 使用する他のアプリケーションもあるかもしれません．そこで，すべてのキーの
+    | プレフィックスとして値を指定し，衝突を回避できるようにします．
     |
     */
 
-    'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_cache'),
+    'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_cache'),
 
 ];
