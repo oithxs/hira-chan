@@ -13,6 +13,8 @@ class ResetUserPassword implements ResetsUserPasswords
     /**
      * Validate and reset the user's forgotten password.
      *
+     * パスワードリセットの際にこのクラスが実行されている訳ではなさそう．
+     *
      * @param  mixed  $user
      * @param  array  $input
      * @return void
