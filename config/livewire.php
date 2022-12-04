@@ -39,7 +39,7 @@ return [
     |--------------------------------------------------------------------------
     | Route::get('/some-endpoint', SomeComponent::class); でコンポーネントを
     | レンダリングする際に使用されるデフォルトのレイアウトビューです．この場合，
-    | SomeComponentによって返されたビューは，"layouts.app "にラップされます．
+    | SomeComponentによって返されたビューは，「layouts.app」にラップされます．
     |
     */
 
