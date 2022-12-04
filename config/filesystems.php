@@ -1,15 +1,18 @@
 <?php
 
+/**
+ * @link https://readouble.com/laravel/9.x/ja/filesystem.html
+ */
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Filesystem Disk
+    | デフォルトのファイルシステムディスク
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the default filesystem disk that should be used
-    | by the framework. The "local" disk, as well as a variety of cloud
-    | based disks are available to your application. Just store away!
+    | ここでは，フレームワークが使用するデフォルトのファイルシステムディスクを
+    | 指定することができます．「local」ディスクと，さまざまなクラウドベースの
+    | ディスクが，アプリケーションで利用可能です．そのまま保存してください
     |
     */
 
@@ -17,12 +20,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Filesystem Disks
+    | ファイルシステムディスク
     |--------------------------------------------------------------------------
     |
-    | Here you may configure as many filesystem "disks" as you wish, and you
-    | may even configure multiple disks of the same driver. Defaults have
-    | been setup for each driver as an example of the required options.
+    | ここでは，ファイルシステムの「disks」をいくつでも設定でき，
+    | 同じドライバーの複数のディスクを設定することもできます．必要なオプションの
+    | 一例として，各ドライバにデフォルトが設定されています．
     |
     | Supported Drivers: "local", "ftp", "sftp", "s3"
     |
@@ -38,7 +41,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
 
@@ -57,12 +60,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Symbolic Links
+    | シンボリックリンク
     |--------------------------------------------------------------------------
     |
-    | Here you may configure the symbolic links that will be created when the
-    | `storage:link` Artisan command is executed. The array keys should be
-    | the locations of the links and the values should be their targets.
+    | ここでは，`storage:link` Artisanコマンドが実行されたときに作成される
+    | シンボリックリンクを設定することができます．配列のキーにはリンクの場所を，
+    | 値にはそのターゲットを指定します．
     |
     */
 

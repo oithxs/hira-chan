@@ -20,7 +20,10 @@ class FormContactAdministratorController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * [GET] お問い合わせ（報告）用のフォームを表示する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/views.html
+     * @see resources/views/report/form.blade.php
      *
      * @return \Illuminate\Support\Facades\View
      */
@@ -30,7 +33,10 @@ class FormContactAdministratorController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * [POST] フォームに入力された値を検証し，DBに保存する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
+     * @see \App\Http\Requests\Report\FormContactAdministratorRequest
      *
      * @param  \App\Http\Requests\report\FormContactAdministratorRequest $request
      * @return void

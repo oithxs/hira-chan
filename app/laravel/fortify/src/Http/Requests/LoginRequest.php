@@ -5,10 +5,19 @@ namespace Laravel\Fortify\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Laravel\Fortify\Fortify;
 
+/**
+ * vendorフォルダ内のファイルをオーバーライドする．
+ *
+ * @see composer.json [autoload.exclude-from-classmap, autoload.files]
+ * @todo このファイルは手探りで変更したので，公式のドキュメントが見つけられなかった．
+ *       見つけ次第，参考リンクを追加する．
+ */
 class LoginRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * ユーザーがこの要求を行う権限があるかどうかを判断する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/validation.html
      *
      * @return bool
      */
@@ -18,7 +27,9 @@ class LoginRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * リクエストに適用されるバリデーションルールを取得．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/validation.html
      *
      * @return array
      */
@@ -35,6 +46,13 @@ class LoginRequest extends FormRequest
         ];
     }
 
+    /**
+     * バリデータエラー用のカスタムメッセージを取得する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/validation.html
+     *
+     * @return array
+     */
     public function messages()
     {
         $username = Fortify::username();

@@ -10,14 +10,19 @@ class Session extends Model
     use HasFactory;
 
     /**
-     * Database to be connected
+     * 接続するデータベース
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent.html
+     * @see config/database.php
      *
      * @var string
      */
     protected $connection = 'mysql';
 
     /**
-     * Tables to be associated
+     * 関連付けるテーブル
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent.html
      *
      * @var string
      */

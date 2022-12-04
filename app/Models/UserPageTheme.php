@@ -11,21 +11,30 @@ class UserPageTheme extends Model
     use SerializeDate;
 
     /**
-     * Database to be connected
+     * 接続するデータベース
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent.html
+     * @see config/database.php
      *
      * @var string
      */
     protected $connection = 'mysql';
 
     /**
-     * Tables to be associated
+     * 関連付けるテーブル
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent.html
      *
      * @var string
      */
     protected $table = 'user_page_themes';
 
     /**
-     * The attributes that are mass assignable
+     * マスアサインメント可能な属性
+     *
+     * ここに登録している属性にはデータの挿入・更新が出来る．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent.html
      *
      * @var string[]
      */
@@ -34,7 +43,9 @@ class UserPageTheme extends Model
     ];
 
     /**
-     * The attributes that should be cast.
+     * キャストすべき属性
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-serialization.html
      *
      * @var array
      */
@@ -44,7 +55,10 @@ class UserPageTheme extends Model
     ];
 
     /**
-     * Get the users for the user page themes.
+     * user page theme に関連する user を取得する．
+     * 1：多
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function users()
     {

@@ -7,7 +7,9 @@ use Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance as Mi
 class PreventRequestsDuringMaintenance extends Middleware
 {
     /**
-     * The URIs that should be reachable while maintenance mode is enabled.
+     * メンテナンスモードが有効な間，到達可能であるべき URI．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/configuration.html
      *
      * @var array<int, string>
      */

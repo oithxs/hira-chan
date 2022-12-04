@@ -10,7 +10,6 @@ use App\Models\Hub;
 use App\Models\JobHuntingThread;
 use App\Models\LectureThread;
 use App\Models\Like;
-use Illuminate\Contracts\Queue\Job;
 use Illuminate\Http\Request;
 
 class LikeController extends Controller
@@ -36,7 +35,9 @@ class LikeController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * [POST] スレッドへの書き込みに対するいいねを保存する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
      *
      * @param  \Illuminate\Http\Request  $request
      * @return int
@@ -144,7 +145,9 @@ class LikeController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * [POST] スレッドの書き込みに対するいいねを削除する
+     *
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
      *
      * @param  \Illuminate\Htt\Request $request
      * @return int

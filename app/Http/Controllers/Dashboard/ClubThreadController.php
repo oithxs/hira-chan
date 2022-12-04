@@ -8,11 +8,17 @@ use App\Models\ClubThread;
 class ClubThreadController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
+     * カテゴリ「クラブ」に属するスレッドへの書き込みを行う．
+     * メッセージIDのみはここで生成している．
+     * メッセージIDを返却し，次回の取得時に送信データ削減に利用している．
      *
-     * @param string $thread_id
-     * @param string $user_id
-     * @param string $message
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
+     * @see \App\Http\Controllers\Dashboard\ThreadsController::store() [Called]
+     * @todo 同時にスレッドに書き込んだ際の動作を確認し，$message_id の処遇を決定する．
+     *
+     * @param string $thread_id スレッド（Hub）ID
+     * @param string $user_id ユーザID
+     * @param string $message 書き込み内容
      *
      * @return int
      */

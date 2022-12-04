@@ -7,7 +7,9 @@ use Illuminate\Cookie\Middleware\EncryptCookies as Middleware;
 class EncryptCookies extends Middleware
 {
     /**
-     * The names of the cookies that should not be encrypted.
+     * 暗号化しない方がよいクッキーの名前．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/responses.html
      *
      * @var array<int, string>
      */

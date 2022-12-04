@@ -1,17 +1,21 @@
 <?php
 
+/**
+ * @link https://laravel-livewire.com/docs/2.x/quickstart
+ */
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Class Namespace
+    | クラスの名前空間
     |--------------------------------------------------------------------------
     |
-    | This value sets the root namespace for Livewire component classes in
-    | your application. This value affects component auto-discovery and
-    | any Livewire file helper commands, like `artisan make:livewire`.
+    | この値は，アプリケーション内のLivewireコンポーネントクラスの
+    | ルートネームスペースを設定します．この値は，コンポーネントの自動検出や，
+    | `artisan make:livewire` のような Livewire ファイルヘルパー・コマンドに
+    | 影響します．
     |
-    | After changing this item, run: `php artisan livewire:discover`.
+    | この項目を変更した後, run: `php artisan livewire:discover`.
     |
     */
 
@@ -22,8 +26,8 @@ return [
     | View Path
     |--------------------------------------------------------------------------
     |
-    | This value sets the path for Livewire component views. This affects
-    | file manipulation helper commands like `artisan make:livewire`.
+    | この値は，Livewireコンポーネントビューのパスを設定します．これは，
+    | `artisan make:livewire` のようなファイル操作のヘルパーコマンドに影響します．
     |
     */
 
@@ -31,11 +35,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Layout
+    | レイアウト
     |--------------------------------------------------------------------------
-    | The default layout view that will be used when rendering a component via
-    | Route::get('/some-endpoint', SomeComponent::class);. In this case the
-    | the view returned by SomeComponent will be wrapped in "layouts.app"
+    | Route::get('/some-endpoint', SomeComponent::class); でコンポーネントを
+    | レンダリングする際に使用されるデフォルトのレイアウトビューです．この場合，
+    | SomeComponentによって返されたビューは，「layouts.app」にラップされます．
     |
     */
 
@@ -46,9 +50,9 @@ return [
     | Livewire Assets URL
     |--------------------------------------------------------------------------
     |
-    | This value sets the path to Livewire JavaScript assets, for cases where
-    | your app's domain root is not the correct path. By default, Livewire
-    | will load its JavaScript assets from the app's "relative root".
+    | この値は，アプリのドメインルートが正しいパスでない場合のために，Livewireの
+    | JavaScriptアセットへのパスを設定します．デフォルトでは，Livewireはアプリの
+    | 「相対ルート」からJavaScriptアセットを読み込みます．
     |
     | Examples: "/assets", "myurl.com/app".
     |
@@ -61,8 +65,8 @@ return [
     | Livewire App URL
     |--------------------------------------------------------------------------
     |
-    | This value should be used if livewire assets are served from CDN.
-    | Livewire will communicate with an app through this url.
+    | この値は，livewireのアセットがCDNから提供される場合に使用する必要があります．
+    | Livewireは，このURLを介してアプリと通信します．
     |
     | Examples: "https://my-app.com", "myurl.com/app".
     |
@@ -72,12 +76,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Livewire Endpoint Middleware Group
+    | Livewire エンドポイントミドルウェアグループ
     |--------------------------------------------------------------------------
     |
-    | This value sets the middleware group that will be applied to the main
-    | Livewire "message" endpoint (the endpoint that gets hit everytime
-    | a Livewire component updates). It is set to "web" by default.
+    | この値は，メインのLivewire「message」エンドポイント（Livewireコンポーネントが
+    | 更新されるたびにヒットするエンドポイント）に適用されるミドルウェアグループを
+    | 設定します．デフォルトでは「web」に設定されています．
     |
     */
 
@@ -85,13 +89,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Livewire Temporary File Uploads Endpoint Configuration
+    | Livewire Temporary File Uploads エンドポイント設定
     |--------------------------------------------------------------------------
     |
-    | Livewire handles file uploads by storing uploads in a temporary directory
-    | before the file is validated and stored permanently. All file uploads
-    | are directed to a global endpoint for temporary storage. The config
-    | items below are used for customizing the way the endpoint works.
+    | Livewireは，ファイルが検証され永続的に保存される前に，アップロードを一時
+    | ディレクトリに保存することによって，ファイルアップロードを処理します．すべての
+    | ファイルアップロードは，一時的な保存のためにグローバルエンドポイントに
+    | 向けられます．以下の設定項目は，エンドポイントが動作する方法をカスタマイズ
+    | するために使用されます．
     |
     */
 
@@ -105,18 +110,18 @@ return [
             'mov', 'avi', 'wmv', 'mp3', 'm4a',
             'jpg', 'jpeg', 'mpga', 'webp', 'wma',
         ],
-        'max_upload_time' => 5, // Max duration (in minutes) before an upload gets invalidated.
+        'max_upload_time' => 5, // アップロードが無効になるまでの最大時間(分)．
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Manifest File Path
+    | マニフェストファイルのパス
     |--------------------------------------------------------------------------
     |
-    | This value sets the path to the Livewire manifest file.
-    | The default should work for most cases (which is
-    | "<app_root>/bootstrap/cache/livewire-components.php"), but for specific
-    | cases like when hosting on Laravel Vapor, it could be set to a different value.
+    | この値は，Livewireマニフェスト・ファイルへのパスを設定します．デフォルトは
+    | 「<app_root>/bootstrap/cache/livewire-components.php」 です） しかし，
+    | Laravel Vapor でホストする場合など特定のケースでは，別の値を設定することが
+    | できます．
     |
     | Example: for Laravel Vapor, it would be "/tmp/storage/bootstrap/cache/livewire-components.php".
     |
@@ -126,15 +131,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Back Button Cache
+    | バックボタンキャッシュ
     |--------------------------------------------------------------------------
     |
-    | This value determines whether the back button cache will be used on pages
-    | that contain Livewire. By disabling back button cache, it ensures that
-    | the back button shows the correct state of components, instead of
-    | potentially stale, cached data.
+    | この値は，Livewireを含むページでバックボタンキャッシュを使用するかどうかを
+    | 決定する．バックボタンキャッシュを無効にすることで，バックボタンが，潜在的に
+    | 古くキャッシュされたデータではなく，コンポーネントの正しい状態を表示することを
+    | 保証する．
     |
-    | Setting it to "false" (default) will disable back button cache.
+    | 「false」（デフォルト）に設定すると，バックボタンのキャッシュが無効になります．
     |
     */
 
@@ -142,14 +147,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Render On Redirect
+    | レンダリングオンリダイレクト
     |--------------------------------------------------------------------------
     |
-    | This value determines whether Livewire will render before it's redirected
-    | or not. Setting it to "false" (default) will mean the render method is
-    | skipped when redirecting. And "true" will mean the render method is
-    | run before redirecting. Browsers bfcache can store a potentially
-    | stale view if render is skipped on redirect.
+    | この値は，Livewireがリダイレクトされる前にレンダリングを行うかどうかを
+    | 決定します．「false」(デフォルト) に設定すると，リダイレクト時にレンダリング
+    | メソッドをスキップします．また，「true」を設定すると，リダイレクト前に
+    | レンダリングメソッドが実行されます．リダイレクト時にレンダリングがスキップ
+    | されると，ブラウザの bfcache に古いビューが保存される可能性があります．
     |
     */
 

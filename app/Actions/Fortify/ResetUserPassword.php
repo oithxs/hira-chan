@@ -11,7 +11,11 @@ class ResetUserPassword implements ResetsUserPasswords
     use PasswordValidationRules;
 
     /**
-     * Validate and reset the user's forgotten password.
+     * パスワードリセット画面で入力された値を検証し，パスワードのリセット（再登録）を行う．
+     *
+     * @link https://jetstream.laravel.com/2.x/features/authentication.html
+     * @link https://readouble.com/laravel/9.x/ja/validation.html
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
      *
      * @param  mixed  $user
      * @param  array  $input

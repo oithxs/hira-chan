@@ -3,6 +3,11 @@
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Http\Middleware\AuthenticateSession;
 
+/**
+ * @link https://jetstream.laravel.com/2.x/features/api.html
+ * @link https://jetstream.laravel.com/2.x/features/profile-management.html
+ * @link https://jetstream.laravel.com/2.x/features/teams.html
+ */
 return [
 
     /*
@@ -10,9 +15,9 @@ return [
     | Jetstream Stack
     |--------------------------------------------------------------------------
     |
-    | This configuration value informs Jetstream which "stack" you will be
-    | using for your application. In general, this value is set for you
-    | during installation and will not need to be changed after that.
+    | この設定値により，アプリケーションに使用する「stack」をJetstreamに
+    | 通知します．通常，この値はインストール時に設定されるため，
+    | その後変更する必要はありません．
     |
     */
 
@@ -20,12 +25,12 @@ return [
 
     /*
      |--------------------------------------------------------------------------
-     | Jetstream Route Middleware
+     | Jetstream Route ミドルウェア
      |--------------------------------------------------------------------------
      |
-     | Here you may specify which middleware Jetstream will assign to the routes
-     | that it registers with the application. When necessary, you may modify
-     | these middleware; however, this default value is usually sufficient.
+     | ここでは，Jetstream がアプリケーションに登録する経路に割り当てるミドルウェアを
+     | 指定できます．必要に応じて，これらのミドルウェアを変更することができますが，
+     | 通常はこのデフォルト値で十分です．
      |
      */
 
@@ -38,9 +43,9 @@ return [
     | Jetstream Guard
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the authentication guard Jetstream will use while
-    | authenticating users. This value should correspond with one of your
-    | guards that is already present in your "auth" configuration file.
+    | ここでは，Jetstreamがユーザーを認証する際に使用する認証ガードを指定することが
+    | できます．この値は，「auth」設定ファイルにすでに存在するガードと一致させる
+    | 必要があります．
     |
     */
 
@@ -48,12 +53,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Features
+    | 機能
     |--------------------------------------------------------------------------
     |
-    | Some of Jetstream's features are optional. You may disable the features
-    | by removing them from this array. You're free to only remove some of
-    | these features or you can even remove all of these if you need to.
+    | Jetstreamの機能の中には，オプションで提供されているものもあります．この配列から
+    | 機能を削除することで，機能を無効にすることができます．これらの機能の一部だけを
+    | 削除するのも自由ですし，必要ならこれらすべてを削除することもできます．
     |
     */
 
@@ -67,12 +72,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Profile Photo Disk
+    | プロフィールフォトディスク
     |--------------------------------------------------------------------------
     |
-    | This configuration value determines the default disk that will be used
-    | when storing profile photos for your application's users. Typically
-    | this will be the "public" disk but you may adjust this if needed.
+    | この設定値は，アプリケーションのユーザーのプロファイル写真を保存する際に
+    | 使用されるデフォルトのディスクを決定します．通常は「public」ディスクを
+    | 使用しますが，必要に応じて調整することができます．
     |
     */
 

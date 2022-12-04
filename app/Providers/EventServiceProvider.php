@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Event;
 class EventServiceProvider extends ServiceProvider
 {
     /**
-     * The event listener mappings for the application.
+     * アプリケーションのイベントリスナーマッピング．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/events.html
      *
      * @var array<class-string, array<int, class-string>>
      */
@@ -21,7 +23,9 @@ class EventServiceProvider extends ServiceProvider
     ];
 
     /**
-     * Register any events for your application.
+     * アプリケーションのイベントを登録します．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/events.html
      *
      * @return void
      */

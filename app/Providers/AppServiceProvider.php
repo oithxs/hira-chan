@@ -7,7 +7,9 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * 任意のアプリケーションサービスを登録する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/providers.html
      *
      * @return void
      */
@@ -17,7 +19,9 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap any application services.
+     * あらゆるアプリケーションサービスをブートストラップする．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/providers.html
      *
      * @return void
      */

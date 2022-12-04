@@ -5,17 +5,20 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Middleware\TrustProxies as Middleware;
 use Illuminate\Http\Request;
 
+/**
+ * @link https://readouble.com/laravel/9.x/ja/requests.html
+ */
 class TrustProxies extends Middleware
 {
     /**
-     * The trusted proxies for this application.
+     * このアプリケーションの信頼できるプロキシ．
      *
      * @var array<int, string>|string|null
      */
     protected $proxies;
 
     /**
-     * The headers that should be used to detect proxies.
+     * プロキシを検出するために使用すべきヘッダ．
      *
      * @var int
      */

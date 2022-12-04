@@ -8,21 +8,21 @@ use Illuminate\Support\Str;
 class UuidModel extends Model
 {
     /**
-     * The primary key for the model.
+     * モデルの主キー．
      *
      * @var string
      */
     protected $primaryKey = 'id';
 
     /**
-     * The "type" of the auto-incrementing ID.
+     * オートインクリメントIDのタイプを指定する．
      *
      * @var string
      */
     protected $keyType = 'char';
 
     /**
-     * Indicates if the IDs are auto-incrementing.
+     * IDがオートインクリメントであるかどうかを示す．
      *
      * @var bool
      */

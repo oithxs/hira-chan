@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     /**
-     * For dashboard thread mode
+     * [GET] ダッシュボードでスレッド一覧を表示する場合．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/views.html
+     * @see resources/views/dashboard/show.blade.php
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Support\Facades\View
@@ -23,7 +26,10 @@ class DashboardController extends Controller
     }
 
     /**
-     * For dashboard messages mode
+     * [GET] ダッシュボードでスレッドにアクセスしている場合．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/views.html
+     * @see resources/views/dashboard/show.blade.php
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Support\Facades\View

@@ -7,7 +7,10 @@ use Livewire\Component;
 class Various extends Component
 {
     /**
-     * Page Display
+     * ダッシュボードのお問い合わせリンクなどを表示する部分
+     *
+     * @link https://laravel-livewire.com/docs/2.x/rendering-components
+     * @see resources/views/dashboard/various.blade.php
      *
      * @return \Illuminate\Support\Facades\View
      */

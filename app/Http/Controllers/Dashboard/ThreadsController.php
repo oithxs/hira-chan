@@ -9,7 +9,19 @@ use Illuminate\Http\Request;
 class ThreadsController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
+     * [POST] スレッドへの書き込みを検証し，保存する
+     *
+     * 特殊文字変換のエスケープなどを行う．
+     * このメソッドから各カテゴリ用のクラスを呼び出し，DBにメッセージなどを書き込む．
+     * ファイルがアップロードされた場合，ThreadImagePathController を呼び出す．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
+     * @see \App\Http\Controllers\Dashboard\ClubThreadController::store() [Call]
+     * @see \App\Http\Controllers\Dashboard\CollegeYearThreadController::store() [Call]
+     * @see \App\Http\Controllers\Dashboard\DepartmentThreadController::store() [Call]
+     * @see \App\Http\Controllers\Dashboard\JobHuntingThreadController::store() [Call]
+     * @see \App\Http\Controllers\Dashboard\LectureThreadController::store() [Call]
+     * @see \App\Http\Controllers\Dashboard\ThreadImagePathController::store() [Call]
      *
      * @param  \Illuminate\Http\Request  $request
      * @return void

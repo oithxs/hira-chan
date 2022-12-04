@@ -7,7 +7,9 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
 class VerifyCsrfToken extends Middleware
 {
     /**
-     * The URIs that should be excluded from CSRF verification.
+     * CSRFの検証から除外すべきURI．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/csrf.html
      *
      * @var array<int, string>
      */

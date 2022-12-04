@@ -15,7 +15,9 @@ use Laravel\Fortify\Fortify;
 class FortifyServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * 任意のアプリケーションサービスを登録する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/fortify.html
      *
      * @return void
      */
@@ -25,7 +27,9 @@ class FortifyServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap any application services.
+     * あらゆるアプリケーションサービスをブートストラップする．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/fortify.html
      *
      * @return void
      */

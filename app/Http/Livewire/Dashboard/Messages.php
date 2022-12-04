@@ -8,17 +8,34 @@ use Livewire\Component;
 
 class Messages extends Component
 {
-    /** @var string */
+    /**
+     * スレッド名
+     *
+     * @var string
+     */
     public $thread_name;
 
-    /** @var string */
+    /**
+     * スレッド（Hub）ID
+     *
+     * @var string
+     */
     public $thread_id;
 
-    /** @var int */
+    /**
+     * スレッドが存在しているかどうか
+     *
+     * @todo 現状，スレッドが表示しない場合にそれを旨を表示出来ていない
+     *
+     * @var int
+     */
     public $result;
 
     /**
-     * Storing data used on this page
+     * このページで使用するデータ定義
+     *
+     * @link https://laravel-livewire.com/docs/2.x/rendering-components
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
      *
      * @param \Illuminate\Http\Request $request
      * @return void
@@ -40,7 +57,10 @@ class Messages extends Component
     }
 
     /**
-     * Page Display
+     * スレッドにアクセスしている時の書き込み表示欄を表示する
+     *
+     * @link https://laravel-livewire.com/docs/2.x/rendering-components
+     * @see resources/views/dashboard/messages.blade.php
      *
      * @return \Illuminate\Support\Facades\View
      */

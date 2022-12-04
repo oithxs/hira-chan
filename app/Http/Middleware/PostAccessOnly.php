@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 class PostAccessOnly
 {
     /**
-     * Handle an incoming request.
+     * GETメソッドでアクセスされた場合，404エラーを表示する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/requests.html
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next

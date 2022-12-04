@@ -1,16 +1,19 @@
 <?php
 
+/**
+ * @link https://laravel.com/docs/9.x/socialite
+ */
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Third Party Services
+    | サードパーティサービス
     |--------------------------------------------------------------------------
     |
-    | This file is for storing the credentials for third party services such
-    | as Mailgun, Postmark, AWS and more. This file provides the de facto
-    | location for this type of information, allowing packages to have
-    | a conventional file to locate the various service credentials.
+    | このファイルは Mailgun, Postmark, AWS などのサードパーティサービスの
+    | 認証情報を格納するためのものです．このファイルはこの種の情報の事実上の場所を
+    | 提供し，パッケージが様々なサービスの認証情報を見つけるための従来のファイルを
+    | 持つことができるようにします．
     |
     */
 
