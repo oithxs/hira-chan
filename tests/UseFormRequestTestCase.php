@@ -63,21 +63,31 @@ abstract class UseFormRequestTestCase extends TestCase
     }
 
     /**
+     * It is possible to change the arguments of the method under test.
+     *
+     * @return void
+     */
+    protected function useMethod(): void
+    {
+        ($this->method)($this->args);
+    }
+
+    /**
      * Changes the arguments when the target method is executed.
      * The method returns whether the target method can be executed or not.
      *
      * @param array $key
      * @param array $value
-     * @return void
+     * @return bool
      */
-    protected function useFormRequest(array $keys, array $values)
+    protected function useFormRequest(array $keys, array $values): bool
     {
         $this->reserve();
         for ($i = 0; $i < count($keys); $i++) {
             $this->args[$keys[$i]] = $values[$i];
         }
         try {
-            ($this->method)($this->args);
+            $this->useMethod();
         } catch (Exception $e) {
             return false;
         }
