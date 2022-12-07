@@ -6,6 +6,7 @@ use App\Actions\Fortify\ResetUserPassword;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
+use \Illuminate\Validation\ValidationException;
 use Tests\UseFormRequestTestCase;
 
 class ResetTest extends UseFormRequestTestCase
@@ -18,6 +19,18 @@ class ResetTest extends UseFormRequestTestCase
      * @var \App\Models\User
      */
     private User $user;
+
+    /**
+     * 記号
+     *
+     * @var array
+     */
+    private array $symbols = [
+        '!', '"', '\'', '#', '$', '%', '&', '\\', '(', ')',
+        '-', '^', '@', '[', ';', ':', ']', ',', '.', '/',
+        '=', '~', '|', '`', '{', '+', '*', '}', '<', '>',
+        '?', '_'
+    ];
 
     /**
      * setUpメソッドが実行されたときに最初に呼び出される
@@ -65,38 +78,108 @@ class ResetTest extends UseFormRequestTestCase
     /**
      * テスト対象メソッドの引数を変更することが可能．
      *
-     * @return void
+     * @return mixed
      */
-    protected function useMethod(): void
+    protected function useMethod(): mixed
     {
-        ($this->method)($this->user, $this->args);
+        return ($this->method)($this->user, $this->args);
     }
 
     /**
-     * 様々なパスワードを入力してパスワードリセットが行える事を確認する．
+     * パスワードリセットテスト
      *
      * @return void
      */
-    public function test_reset_user_password(): void
+    public function test_password_reset(): void
     {
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['password', 'password'])); // ユーザ作成
-        $this->assertFalse($this->useFormRequest(['password', 'password_confirmation'], [Str::random(0), Str::random(0)])); // パスワード未定義
+        $this->assertSame(null, $this->useFormRequest(['password', 'password_confirmation'], ['password', 'password']));
+    }
 
-        // パスワードを定義出来ない文字数
+    /**
+     * パスワード未定義
+     *
+     * @return void
+     */
+    public function test_password_undefined(): void
+    {
+        $this->assertSame(null, $this->useFormRequest(['password', 'password_confirmation'], ['password', 'password']));
+    }
+
+    /**
+     * パスワードを定義出来ない文字数範囲
+     *
+     * @return void
+     */
+    public function test_character_range_for_which_passwords_cannot_be_defined(): void
+    {
         foreach (range(1, 7) as $num) {
             $password = Str::random($num);
-            $this->assertFalse($this->useFormRequest(['password', 'password_confirmation'], [$password, $password]));
+            $this->assertThrows(
+                fn () => $this->useFormRequest(['password', 'password_confirmation'], [$password, $password]),
+                ValidationException::class
+            );
         }
+    }
 
-        // パスワードを定義出来る文字数（実際には256文字以降も可）
+    /**
+     * パスワードを定義出来る文字数範囲
+     *
+     * 実際には256文字以上も可能
+     *
+     * @return void
+     */
+    public function test_the_range_of_characters_for_which_a_password_can_be_defined(): void
+    {
         foreach (range(8, 255) as $num) {
             $password = Str::random($num);
-            $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], [$password, $password]));
+            $this->assertSame(null, $this->useFormRequest(['password', 'password_confirmation'], [$password, $password]));
         }
+    }
 
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['abcdefgh', 'abcdefgh'])); // 全て英字
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['12345678', '12345678'])); // 全て数字
-        $this->assertFalse($this->useFormRequest(['password', 'password_confirmation'], ['12345678', '87654321'])); // 1度目と2度目を異なる入力
-        $this->assertTrue($this->useFormRequest(['password', 'password_confirmation'], ['!"#$%&\'()-^\\@[;:],./\\=~|`{+*}<>?_', '!"#$%&\'()-^\\@[;:],./\\=~|`{+*}<>?_'])); // 英数字以外
+    /**
+     * 全て英字のパスワード
+     *
+     * @return void
+     */
+    public function test_all_alphanumeric_passwords(): void
+    {
+        $this->assertSame(null, $this->useFormRequest(['password', 'password_confirmation'], ['abcdefgh', 'abcdefgh']));
+    }
+
+    /**
+     * 全て数字のパスワード
+     *
+     * @return void
+     */
+    public function test_all_numbers_password(): void
+    {
+        $this->assertSame(null, $this->useFormRequest(['password', 'password_confirmation'], ['12345678', '12345678']));
+    }
+
+    /**
+     * 全て英数字以外のパスワード
+     *
+     * @return void
+     */
+    public function test_all_not_alphanumeric_passwords(): void
+    {
+        $password = '';
+        foreach ($this->symbols as $symbol) {
+            $password .= $symbol;
+        }
+        $this->assertSame(null, $this->useFormRequest(['password', 'password_confirmation'], [$password, $password]));
+    }
+
+    /**
+     * パスワードの1度目と2度目が異なる入力
+     *
+     * @return void
+     */
+    public function test_password_entered_differently_the_first_and_second_time(): void
+    {
+        $this->assertThrows(
+            fn () => $this->useFormRequest(['password', 'password_confirmation'], ['12345678', '87654321']),
+            ValidationException::class
+        );
     }
 }
