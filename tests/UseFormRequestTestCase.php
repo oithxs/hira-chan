@@ -2,8 +2,6 @@
 
 namespace Tests;
 
-use Exception;
-
 abstract class UseFormRequestTestCase extends TestCase
 {
     /**
@@ -29,6 +27,16 @@ abstract class UseFormRequestTestCase extends TestCase
     }
 
     /**
+     * setUpメソッドが実行されたときに最初に呼び出される．
+     *
+     * @return void
+     */
+    protected function setAny(): void
+    {
+        //
+    }
+
+    /**
      * 子クラスでテスト対象メソッドを設定します．
      *
      * @return void
@@ -42,15 +50,6 @@ abstract class UseFormRequestTestCase extends TestCase
      */
     abstract protected function setArgument(): void;
 
-    /**
-     * setUpメソッドが実行されたときに最初に呼び出される．
-     *
-     * @return void
-     */
-    protected function setAny(): void
-    {
-        // 子クラスで定義することが出来る．
-    }
 
     /**
      * useFormRequestメソッドが実行されたときに最初に呼び出される．
@@ -59,17 +58,17 @@ abstract class UseFormRequestTestCase extends TestCase
      */
     protected function setUpUseFormRequest(): void
     {
-        // 子クラスで定義することが出来る．
+        //
     }
 
     /**
      * テスト対象メソッドの引数を変更することが可能．
      *
-     * @return void
+     * @return mixed
      */
-    protected function useMethod(): void
+    protected function useMethod(): mixed
     {
-        ($this->method)($this->args);
+        return ($this->method)($this->args);
     }
 
     /**
@@ -78,19 +77,14 @@ abstract class UseFormRequestTestCase extends TestCase
      *
      * @param array $key
      * @param array $value
-     * @return bool
+     * @return mixed
      */
-    protected function useFormRequest(array $keys, array $values): bool
+    protected function useFormRequest(array $keys, array $values): mixed
     {
         $this->setUpUseFormRequest();
         for ($i = 0; $i < count($keys); $i++) {
             $this->args[$keys[$i]] = $values[$i];
         }
-        try {
-            $this->useMethod();
-        } catch (Exception $e) {
-            return false;
-        }
-        return true;
+        return $this->useMethod();
     }
 }
