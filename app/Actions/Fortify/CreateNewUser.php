@@ -2,7 +2,7 @@
 
 namespace App\Actions\Fortify;
 
-use App\Http\Requests\Login\CreateNewUserRequest;
+use App\Http\Requests\Register\CreateNewUserRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -18,10 +18,10 @@ class CreateNewUser implements CreatesNewUsers
      * @link https://readouble.com/laravel/9.x/ja/validation.html
      * @link https://readouble.com/laravel/9.x/ja/queries.html
      *
-     * @see \App\Http\Requests\Login\CreateNewUserRequest::storeRules() [Call]
-     * @see \App\Http\Requests\Login\CreateNewUserRequest::storeMessages() [Call]
-     * @see \App\Http\Requests\Login\CreateNewUserRequest::reStoreRules() [Call]
-     * @see \App\Http\Requests\Login\CreateNewUserRequest::reStoreMessages() [Call]
+     * @see \App\Http\Requests\Register\CreateNewUserRequest::storeRules() [Call]
+     * @see \App\Http\Requests\Register\CreateNewUserRequest::storeMessages() [Call]
+     * @see \App\Http\Requests\Register\CreateNewUserRequest::reStoreRules() [Call]
+     * @see \App\Http\Requests\Register\CreateNewUserRequest::reStoreMessages() [Call]
      *
      * @param  array  $input ['_token', 'name', 'email', 'password', 'password_confirmation']
      * @return \App\Models\User

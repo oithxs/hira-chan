@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Login;
+namespace App\Http\Requests\Register;
 
 use App\Actions\Fortify\PasswordValidationRules;
 use Laravel\Jetstream\Jetstream;
