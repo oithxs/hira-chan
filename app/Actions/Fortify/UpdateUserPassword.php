@@ -18,7 +18,7 @@ class UpdateUserPassword implements UpdatesUserPasswords
      * @link https://readouble.com/laravel/9.x/ja/queries.html
      *
      * @param  mixed  $user
-     * @param  array  $input
+     * @param  array  $input ['current_password', 'password', 'password_confirmation']
      * @return void
      */
     public function update($user, array $input)
@@ -27,7 +27,7 @@ class UpdateUserPassword implements UpdatesUserPasswords
             'current_password' => ['required', 'string'],
             'password' => $this->passwordRules(),
         ])->after(function ($validator) use ($user, $input) {
-            if (! isset($input['current_password']) || ! Hash::check($input['current_password'], $user->password)) {
+            if (!isset($input['current_password']) || !Hash::check($input['current_password'], $user->password)) {
                 $validator->errors()->add('current_password', __('The provided password does not match your current password.'));
             }
         })->validateWithBag('updatePassword');

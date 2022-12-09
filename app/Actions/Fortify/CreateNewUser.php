@@ -23,7 +23,7 @@ class CreateNewUser implements CreatesNewUsers
      * @see \App\Http\Requests\Login\CreateNewUserRequest::reStoreRules() [Call]
      * @see \App\Http\Requests\Login\CreateNewUserRequest::reStoreMessages() [Call]
      *
-     * @param  array  $input
+     * @param  array  $input ['_token', 'name', 'email', 'password', 'password_confirmation']
      * @return \App\Models\User
      */
     public function create(array $input)

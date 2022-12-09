@@ -19,8 +19,10 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      * @link https://readouble.com/laravel/9.x/ja/validation.html
      * @link https://readouble.com/laravel/9.x/ja/queries.html
      *
-     * @param  mixed  $user
-     * @param  array  $input
+     * @param mixed $user
+     * @param array $input ['id', 'user_page_theme_id', 'name', 'email', 'email_verified_at',
+     *                      'two_factor_confirmed_at', 'current_team_id', 'profile_photo_path',
+     *                      'created_at', 'updated_at', 'deleted_at', 'profile_photo_url']
      * @return void
      */
     public function update($user, array $input)
@@ -51,8 +53,10 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     /**
      * 指定された認証ユーザーのプロファイル情報を更新する．
      *
-     * @param  mixed  $user
-     * @param  array  $input
+     * @param mixed $user
+     * @param array $input ['id', 'user_page_theme_id', 'name', 'email', 'email_verified_at',
+     *                      'two_factor_confirmed_at', 'current_team_id', 'profile_photo_path',
+     *                      'created_at', 'updated_at', 'deleted_at', 'profile_photo_url']
      * @return void
      */
     protected function updateVerifiedUser($user, array $input)
