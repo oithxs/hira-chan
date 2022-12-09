@@ -1,9 +1,11 @@
 name: Github Notification
 
 on:
-  push:
+  pull_request:
     branches:
       - develop
+      - main
+    types: [closed]
 
 jobs:
   slackNotification:
