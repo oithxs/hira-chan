@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use \Illuminate\Validation\ValidationException;
+use Illuminate\Validation\ValidationException;
 use Tests\UseFormRequestTestCase;
 
 class UpdateTest extends UseFormRequestTestCase

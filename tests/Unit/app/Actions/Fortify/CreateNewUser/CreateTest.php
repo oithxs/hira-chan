@@ -7,7 +7,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
-use \Illuminate\Validation\ValidationException;
+use Illuminate\Validation\ValidationException;
 use Tests\UseFormRequestTestCase;
 
 class CreateTest extends UseFormRequestTestCase
@@ -278,7 +278,7 @@ class CreateTest extends UseFormRequestTestCase
     public function test_username_undefined(): void
     {
         $this->assertThrows(
-            fn () => $this->assertTrue($this->useFormRequest(['name'], [Str::random(0)])),
+            fn () => $this->useFormRequest(['name'], [Str::random(0)]),
             ValidationException::class
         );
     }
@@ -798,7 +798,7 @@ class CreateTest extends UseFormRequestTestCase
     {
         $this->restoreTest();
         $this->assertThrows(
-            fn () => $this->assertTrue($this->useFormRequest(['name'], [Str::random(0)])),
+            fn () => $this->useFormRequest(['name'], [Str::random(0)]),
             ValidationException::class
         );
     }
