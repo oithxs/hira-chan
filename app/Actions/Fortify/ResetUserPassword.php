@@ -13,11 +13,12 @@ class ResetUserPassword implements ResetsUserPasswords
     /**
      * パスワードリセット画面で入力された値を検証し，パスワードのリセット（再登録）を行う．
      *
-     * @link https://jetstream.laravel.com/2.x/features/authentication.html
-     * @link https://readouble.com/laravel/9.x/ja/validation.html
-     * @link https://readouble.com/laravel/9.x/ja/queries.html
-     *
      * パスワードリセットの際にこのクラスが実行されている訳ではなさそう．
+     *
+     * @link https://jetstream.laravel.com/2.x/features/authentication.html
+     * @link https://readouble.com/laravel/8.x/ja/passwords.html
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
+     * @link https://readouble.com/laravel/9.x/ja/validation.html
      *
      * @param  mixed  $user
      * @param  array  $input
