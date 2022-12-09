@@ -16,7 +16,7 @@ class ResetUserPassword implements ResetsUserPasswords
      * パスワードリセットの際にこのクラスが実行されている訳ではなさそう．
      *
      * @link https://jetstream.laravel.com/2.x/features/authentication.html
-     * @link https://readouble.com/laravel/8.x/ja/passwords.html
+     * @link https://readouble.com/laravel/9.x/ja/passwords.html
      * @link https://readouble.com/laravel/9.x/ja/queries.html
      * @link https://readouble.com/laravel/9.x/ja/validation.html
      *
