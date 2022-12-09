@@ -10,7 +10,17 @@ use Illuminate\Support\Facades\Auth;
 class ThreadsController extends Controller
 {
     /**
-     * Display the specified resource.
+     * [POST] スレッドの書き込みを取得する．
+     *
+     * このメソッドから各カテゴリ用のクラスを呼び出し，書き込みを取得する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/authentication.html
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
+     * @see \App\Http\Controllers\Dashboard\NotLoggedIn\ClubThreadController::show() [Call]
+     * @see \App\Http\Controllers\Dashboard\NotLoggedIn\CollegeYearThreadController::show() [Call]
+     * @see \App\Http\Controllers\Dashboard\NotLoggedIn\DepartmentThreadController::show() [Call]
+     * @see \App\Http\Controllers\Dashboard\NotLoggedIn\JobHuntingThreadController::show() [Call]
+     * @see \App\Http\Controllers\Dashboard\NotLoggedIn\LectureThreadController::show() [Call]
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Support\Collection | void

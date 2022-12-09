@@ -7,7 +7,9 @@ use DateTimeInterface;
 trait SerializeDate
 {
     /**
-     * Prepare a date for array / JSON serialization.
+     * 配列/JSONシリアライズ用の日付を用意する
+     *
+     * @link https://laravel.com/docs/9.x/eloquent-serialization
      *
      * @param DateTimeInterface $date
      * @return string

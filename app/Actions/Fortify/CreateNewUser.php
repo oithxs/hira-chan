@@ -11,7 +11,12 @@ use Laravel\Fortify\Contracts\CreatesNewUsers;
 class CreateNewUser implements CreatesNewUsers
 {
     /**
-     * Validate and create a newly registered user.
+     * 新規に登録されたユーザーを検証し，作成する．
+     *
+     * @link https://jetstream.laravel.com/2.x/features/registration.html
+     * @link https://readouble.com/laravel/9.x/ja/migrations.html
+     * @link https://readouble.com/laravel/9.x/ja/validation.html
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
      *
      * @see \App\Http\Requests\Login\CreateNewUserRequest::storeRules() [Call]
      * @see \App\Http\Requests\Login\CreateNewUserRequest::storeMessages() [Call]
@@ -26,7 +31,7 @@ class CreateNewUser implements CreatesNewUsers
         $form_request = new CreateNewUserRequest();
         $input['email'] .= "@st.oit.ac.jp";
 
-        // User Restore.
+        // 論理削除されたユーザの復元
         if (User::onlyTrashed()->where('email', '=', $input['email'])->first()) {
             Validator::make($input, $form_request->reStoreRules(), $form_request->reStoreMessages())->validate();
             User::onlyTrashed()->where('email', '=', $input['email'])->restore();
@@ -44,7 +49,7 @@ class CreateNewUser implements CreatesNewUsers
             return User::where('email', '=', $input['email'])->first();
         }
 
-        // User Creation.
+        // ユーザ登録
         Validator::make($input, $form_request->storeRules(), $form_request->storeMessages())->validate();
         return User::create([
             'name' => $input['name'],

@@ -8,14 +8,25 @@ use Livewire\Component;
 
 class Header extends Component
 {
-    /** @var \Illuminate\Support\Collection */
+    /**
+     * カテゴリテーブルの全てのデータ
+     *
+     * @var \Illuminate\Support\Collection
+     */
     public $categorys;
 
-    /** @var \Illuminate\Support\Collection */
+    /**
+     * カテゴリテーブルの内大枠カテゴリのみ
+     *
+     * @var \Illuminate\Support\Collection
+     */
     public $category_types;
 
     /**
-     * Storing data used on this page
+     * このページで使用するデータ定義
+     *
+     * @link https://laravel-livewire.com/docs/2.x/rendering-components
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
      *
      * @param \Illuminate\Http\Request $request
      * @return void
@@ -29,7 +40,10 @@ class Header extends Component
     }
 
     /**
-     * Page Display
+     * ダッシュボードのヘッダー部分表示
+     *
+     * @link https://laravel-livewire.com/docs/2.x/rendering-components
+     * @see resources/views/dashboard/header.blade.php
      *
      * @return \Illuminate\Support\Facades\View
      */

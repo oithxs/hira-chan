@@ -11,14 +11,18 @@ use Laravel\Jetstream\Features;
 class UserFactory extends Factory
 {
     /**
-     * The name of the factory's corresponding model.
+     * factory の対象モデル．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/database-testing.html
      *
      * @var string
      */
     protected $model = User::class;
 
     /**
-     * Define the model's default state.
+     * モデルのデフォルトの状態を定義する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/database-testing.html
      *
      * @return array
      */
@@ -34,7 +38,9 @@ class UserFactory extends Factory
     }
 
     /**
-     * Indicate that the model's email address should be unverified.
+     * モデルのメールアドレスが未検証であることを示す．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/database-testing.html
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
@@ -48,7 +54,9 @@ class UserFactory extends Factory
     }
 
     /**
-     * Indicate that the user should have a personal team.
+     * ユーザーが個人チームを持つべきことを示す．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/database-testing.html
      *
      * @return $this
      */

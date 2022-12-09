@@ -24,28 +24,32 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     use SerializeDate;
 
     /**
-     * The primary key for the model.
+     * モデルの主キー
      *
      * @var string
      */
     protected $primaryKey = 'id';
 
     /**
-     * The "type" of the auto-incrementing ID.
+     * オートインクリメントのIDのタイプを指定する．
      *
      * @var string
      */
     protected $keyType = 'char';
 
     /**
-     * Indicates if the IDs are auto-incrementing.
+     * IDがオートインクリメントであるかどうかを示す．
      *
      * @var bool
      */
     public $incrementing = false;
 
     /**
-     * The attributes that are mass assignable.
+     * マスアサインメント可能な属性
+     *
+     * ここに登録している属性にはデータの挿入・更新が出来る．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent.html
      *
      * @var string[]
      */
@@ -53,11 +57,17 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         'user_page_theme_id',
         'name',
         'email',
+        'email_verified_at',
         'password',
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * シリアライズのために隠すべき属性
+     *
+     * ここに登録した属性は，管理画面で見ることが出来ない．
+     * そのほかの効果は不明．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-serialization.html
      *
      * @var array
      */
@@ -69,7 +79,11 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     ];
 
     /**
-     * The attributes that should be cast.
+     * キャストすべき属性
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-serialization.html
+     * @link https://readouble.com/laravel/9.x/ja/migrations.html
+     * @link https://readouble.com/laravel/9.x/ja/migrations.html
      *
      * @var array
      */
@@ -81,7 +95,9 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     ];
 
     /**
-     * The accessors to append to the model's array form.
+     * モデルの配列フォームに追加するアクセサ．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-serialization.html
      *
      * @var array
      */
@@ -97,37 +113,43 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     }
 
     /**
-     * Filament Authentication
+     * filament の認証．
+     *
+     * config('filament.auth.email.verified') の値によってメールの認証の必要性を変更する．
+     *
+     * @link https://filamentphp.com/docs/2.x/admin/users#authorizing-access-to-the-admin-panel
      *
      * @return boolean
      */
     public function canAccessFilament(): bool
     {
-        // Need to confirm email and match domain
+        // メールの検証とドメインの一致が必要
         if (config('filament.auth.email.verified')) {
             return str_ends_with($this->email, config('filament.auth.email.domain')) && $this->hasVerifiedEmail();
         }
 
-        // Only domain match
+        // ドメインのみ一致
         return str_ends_with($this->email, config('filament.auth.email.domain'));
     }
 
-    // Add custom mail
+    /**
+     * Email確認の際に送信するメールカスタマイズ．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/verification.html
+     * @see \App\Notifications\VerifyEmailNotification
+     *
+     * @return void
+     */
     public function sendEmailVerificationNotification()
     {
-        $this->notify(new \App\Notifications\VerifyEmailAddURL);
+        $this->notify(new \App\Notifications\VerifyEmailNotification);
     }
 
     /**
-     * Get the user page theme that owns the user.
-     */
-    public function user_page_theme()
-    {
-        return $this->belongsTo(UserPageTheme::class);
-    }
-
-    /**
-     * Get the access logs for the user.
+     * user に関連する access log を取得する．
+     * 1：多
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function access_logs()
     {
@@ -135,7 +157,10 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     }
 
     /**
-     * Get the club threads for the user.
+     * user に関連する club thread を取得する．
+     * 1：多
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function club_threads()
     {
@@ -143,7 +168,10 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     }
 
     /**
-     * Get the college year threads for the user.
+     * user に関連する college year thread を取得する．
+     * 1：多
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function college_year_threads()
     {
@@ -151,7 +179,10 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     }
 
     /**
-     * Get the contact administrators for the user.
+     * user に関連する contact administrator を取得する．
+     * 1：多
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function contact_administrators()
     {
@@ -159,7 +190,10 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     }
 
     /**
-     * Get the department threads for the user.
+     * user に関連する department thread を取得する．
+     * 1：多
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function department_threads()
     {
@@ -167,7 +201,10 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     }
 
     /**
-     * Get the hub for the user.
+     * user に関連する hub を取得する．
+     * 1：多
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function hub()
     {
@@ -175,7 +212,10 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     }
 
     /**
-     * Get the job hunting threads for the user.
+     * user に関連する job hunting thread を取得する．
+     * 1：多
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function job_hunting_threads()
     {
@@ -183,7 +223,10 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     }
 
     /**
-     * Get the lecture threads for the user.
+     * user に関連する lecture thread を取得する．
+     * 1：多
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function lecture_threads()
     {
@@ -191,10 +234,24 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     }
 
     /**
-     * Get the likes for the user.
+     * user に関連する like を取得する．
+     * 1：多
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function likes()
     {
         return $this->hasMany(Like::class);
+    }
+
+    /**
+     * user を所有する user page theme を取得します．
+     * 多：1
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
+     */
+    public function user_page_theme()
+    {
+        return $this->belongsTo(UserPageTheme::class);
     }
 }

@@ -62,7 +62,9 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * [POST] ユーザのページテーマを変更する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
      *
      * @param  \Illuminate\Http\Request  $request
      * @return void

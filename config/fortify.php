@@ -3,6 +3,9 @@
 use App\Providers\RouteServiceProvider;
 use Laravel\Fortify\Features;
 
+/**
+ * @link https://readouble.com/laravel/9.x/ja/fortify.html
+ */
 return [
 
     /*
@@ -10,9 +13,9 @@ return [
     | Fortify Guard
     |--------------------------------------------------------------------------
     |
-    | Here you may specify which authentication guard Fortify will use while
-    | authenticating users. This value should correspond with one of your
-    | guards that is already present in your "auth" configuration file.
+    | ここでは，Fortify がユーザーを認証する際に使用する認証ガードを指定することが
+    | できます．この値は，「auth」設定ファイルにすでに存在するガードと一致させる
+    | 必要があります．
     |
     */
 
@@ -23,9 +26,9 @@ return [
     | Fortify Password Broker
     |--------------------------------------------------------------------------
     |
-    | Here you may specify which password broker Fortify can use when a user
-    | is resetting their password. This configured value should match one
-    | of your password brokers setup in your "auth" configuration file.
+    | ここでは，ユーザーがパスワードをリセットするときに，Fortifyが使用できる
+    | パスワードブローカーを指定することができます．この設定値は，「auth」
+    | 設定ファイルで設定したパスワードブローカーのいずれかと一致する必要があります．
     |
     */
 
@@ -33,16 +36,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Username / Email
+    | ユーザ名 / Email
     |--------------------------------------------------------------------------
     |
-    | This value defines which model attribute should be considered as your
-    | application's "username" field. Typically, this might be the email
-    | address of the users but you are free to change this value here.
+    | この値は，どのモデル属性をアプリケーションの「username」フィールドと見なすかを
+    | 定義します．典型的には，これはユーザーのメールアドレスかもしれませんが，
+    | この値は自由に変更することができます．
     |
-    | Out of the box, Fortify expects forgot password and reset password
-    | requests to have a field named 'email'. If the application uses
-    | another name for the field you may define it below as needed.
+    | Fortifyは，パスワード忘れとパスワードリセットのリクエストに，'email'という
+    | 名前のフィールドを持つことを想定しています．もしアプリケーションが
+    | このフィールドに別の名前を使う場合は， 必要に応じて以下で定義することが
+    | できます．
     |
     */
 
@@ -52,12 +56,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Home Path
+    | ホームパス
     |--------------------------------------------------------------------------
     |
-    | Here you may configure the path where users will get redirected during
-    | authentication or password reset when the operations are successful
-    | and the user is authenticated. You are free to change this value.
+    | ここでは，認証やパスワードリセットの操作に成功し，ユーザーが認証されたときに
+    | リダイレクトされるパスを設定することができます．この値は自由に変更することが
+    | できます．
     |
     */
 
@@ -65,12 +69,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Fortify Routes Prefix / Subdomain
+    | Fortify Routes Prefix / サブドメイン
     |--------------------------------------------------------------------------
     |
-    | Here you may specify which prefix Fortify will assign to all the routes
-    | that it registers with the application. If necessary, you may change
-    | subdomain under which all of the Fortify routes will be available.
+    | ここでは，Fortify がアプリケーションに登録するすべての経路に割り当てる
+    | プレフィックスを指定できま す．必要に応じて，すべてのFortifyルートを
+    | 利用できるようにするサブドメインを変更することができます．
     |
     */
 
@@ -80,12 +84,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Fortify Routes Middleware
+    | Fortify Routes ミドルウェア
     |--------------------------------------------------------------------------
     |
-    | Here you may specify which middleware Fortify will assign to the routes
-    | that it registers with the application. If necessary, you may change
-    | these middleware but typically this provided default is preferred.
+    | ここでは，Fortifyがアプリケーションに登録する経路に割り当てるミドルウェアを
+    | 指定することができます．必要であれば，これらのミドルウェアを変更することも
+    | できますが，通常はこのデフォルトのままにしておくことが望ましいでしょう．
     |
     */
 
@@ -93,12 +97,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Rate Limiting
+    | レート制限
     |--------------------------------------------------------------------------
     |
-    | By default, Fortify will throttle logins to five requests per minute for
-    | every email and IP address combination. However, if you would like to
-    | specify a custom rate limiter to call then you may specify it here.
+    | デフォルトでは，Fortifyは，すべての電子メールとIPアドレスの組み合わせに
+    | 対して，1分あたり5つのリクエストにログインをスロットルで制限します．しかし，
+    | もしあなたがカスタムレートリミッターを指定したいのであれば，
+    | ここで指定することができます．
     |
     */
 
@@ -109,12 +114,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Register View Routes
+    | 登録 ルート表示
     |--------------------------------------------------------------------------
     |
-    | Here you may specify if the routes returning views should be disabled as
-    | you may not need them when building your own application. This may be
-    | especially true if you're writing a custom single-page application.
+    | ここで，ビューを返すルートを無効にするかどうかを指定することができます．
+    | 特に，カスタムシングルページのアプリケーションを書いている場合，
+    | この指定が当てはまるでしょう．
     |
     */
 
@@ -122,12 +127,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Features
+    | 機能
     |--------------------------------------------------------------------------
     |
-    | Some of the Fortify features are optional. You may disable the features
-    | by removing them from this array. You're free to only remove some of
-    | these features or you can even remove all of these if you need to.
+    | Fortifyの機能の中には，オプションのものがあります．この配列から機能を
+    | 削除することで，機能を無効にすることができます．これらの機能の一部だけを
+    | 削除するのも自由ですし，必要ならこれらすべてを削除することもできます．
     |
     */
 

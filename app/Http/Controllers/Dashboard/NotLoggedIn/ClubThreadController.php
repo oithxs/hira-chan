@@ -4,15 +4,20 @@ namespace App\Http\Controllers\Dashboard\NotLoggedIn;
 
 use App\Http\Controllers\Controller;
 use App\Models\ClubThread;
+use Illuminate\Support\Collection;
 
 class ClubThreadController extends Controller
 {
     /**
-     * Display the specified resource.
+     * カテゴリ「クラブ」のスレッドを取得する．
+     * 2回目以降に呼び出された場合，前回取得した書き込みから更新された書き込みのみ返却する．
      *
-     * @param string $user_id
-     * @param string $thread_id
-     * @param int $pre_max_message_id
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
+     * @see \App\Http\Controllers\Dashboard\NotLoggedIn\ThreadController::show()　[Called]
+     *
+     * @param string $user_id ユーザID
+     * @param string $thread_id スレッド（Hub）ID
+     * @param int $pre_max_message_id 前回取得したメッセージIDの最大値
      *
      * @return \Illuminate\Support\Collection
      */

@@ -8,7 +8,9 @@ use Illuminate\Support\ServiceProvider;
 class BroadcastServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap any application services.
+     * あらゆるアプリケーションサービスをブートストラップする．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/broadcasting.html
      *
      * @return void
      */

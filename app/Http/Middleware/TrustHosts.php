@@ -7,7 +7,9 @@ use Illuminate\Http\Middleware\TrustHosts as Middleware;
 class TrustHosts extends Middleware
 {
     /**
-     * Get the host patterns that should be trusted.
+     * 信頼すべきホストパターンを取得します．
+     *
+     * @link https://readouble.com/laravel/8.x/ja/passwords.html
      *
      * @return array<int, string|null>
      */

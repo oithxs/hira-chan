@@ -7,7 +7,10 @@ use Laravel\Jetstream\Contracts\DeletesUsers;
 class DeleteUser implements DeletesUsers
 {
     /**
-     * Delete the given user.
+     * 指定されたユーザーを削除する．
+     *
+     * @link https://jetstream.laravel.com/2.x/features/profile-management.html
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
      *
      * @param  mixed  $user
      * @return void

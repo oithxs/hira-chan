@@ -9,23 +9,48 @@ use Illuminate\Http\Request;
 
 class Threads extends Component
 {
-    /** @var \Illuminate\Support\Collection */
+    /**
+     * スレッド一覧
+     *
+     * @var \Illuminate\Support\Collection
+     */
     public $threads;
 
-    /** @var \Illuminate\Support\Collection */
+    /**
+     * カテゴリ一覧
+     *
+     * @var \Illuminate\Support\Collection
+     */
     public $categorys;
 
-    /** @var \Illuminate\Support\Collection */
+    /**
+     * 大枠カテゴリ一覧
+     *
+     * @var \Illuminate\Support\Collection
+     */
     public $category_types;
 
-    /** @var \Illuminate\Support\Collection */
+    /**
+     * ダッシュボードで表示するスレッドをカテゴリで絞り込む時の対象カテゴリ
+     *
+     * @var \Illuminate\Support\Collection
+     */
     public $category_name;
 
-    /** @var \Illuminate\Support\Collection */
+    /**
+     * ダッシュボードで表示するスレッドのページ（10個ごと）
+     *
+     * @var \Illuminate\Support\Collection
+     */
     public $page;
 
     /**
-     * Storing data used on this page
+     * このページで使用するデータを定義する
+     *
+     * ダッシュボードで表示するスレッドのソートやカテゴリごとの絞り込みなど
+     *
+     * @link https://laravel-livewire.com/docs/2.x/rendering-components
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
      *
      * @param \Illuminate\Http\Request $request
      * @return void
@@ -80,7 +105,10 @@ class Threads extends Component
     }
 
     /**
-     * Page Display
+     * ダッシュボードのスレッドを表示する部分
+     *
+     * @link https://laravel-livewire.com/docs/2.x/rendering-components
+     * @see resources/views/dashboard/threads.blade.php
      *
      * @return \Illuminate\Support\Facades\View
      */

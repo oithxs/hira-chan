@@ -1,15 +1,18 @@
 <?php
 
+/**
+ * @link https://image.intervention.io/v2/introduction/configuration
+ */
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Image Driver
+    | イメージドライバー
     |--------------------------------------------------------------------------
     |
-    | Intervention Image supports "GD Library" and "Imagick" to process images
-    | internally. You may choose one of them according to your PHP
-    | configuration. By default PHP's "GD Library" implementation is used.
+    | Intervention Image は，内部で画像を処理するために「GD Library」と
+    | 「Imagick」をサポートしています．PHP の設定に応じてどちらかを選択することが
+    | できます．デフォルトでは，PHP の「GD Library」の実装が使用されます．
     |
     | Supported: "gd", "imagick"
     |

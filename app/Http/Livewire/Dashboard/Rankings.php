@@ -10,14 +10,25 @@ use Livewire\Component;
 
 class Rankings extends Component
 {
-    /** @var \Illuminate\Support\Collection */
+    /**
+     * アクセスランキング
+     *
+     * @var \Illuminate\Support\Collection
+     */
     public $access_ranking;
 
-    /** @var \Illuminate\Support\Collection */
+    /**
+     * 週間アクセスランキング
+     *
+     * @var \Illuminate\Support\Collection
+     */
     public $weekly_access_ranking;
 
     /**
-     * Storing data used on this page
+     * このページで使用するデータの定義
+     *
+     * @link https://laravel-livewire.com/docs/2.x/rendering-components
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
      *
      * @param \Illuminate\Http\Request $request
      * @return void
@@ -37,7 +48,10 @@ class Rankings extends Component
     }
 
     /**
-     * Page Display
+     * ダッシュボードのアクセスランキングを表示
+     *
+     * @link https://laravel-livewire.com/docs/2.x/rendering-components
+     * @see resources/views/dashboard/rankings.blade.php
      *
      * @return \Illuminate\Support\Facades\View
      */

@@ -8,17 +8,34 @@ use Illuminate\Http\Request;
 
 class SelectThreadPages extends Component
 {
-    /** @var int */
+    /**
+     * スレッド数
+     *
+     * @var int
+     */
     public $max_thread;
 
-    /** @var string */
+    /**
+     * ダッシュボードでスレッドを表示する際のソートタイプ
+     *
+     * @todo たしか，ソートが出来る様になっていなかったためソートが出来る様に修正する
+     *
+     * @var string
+     */
     public $sort;
 
-    /** @var string */
+    /**
+     * ダッシュボードで表示するスレッドをカテゴリで絞り込む時の対象カテゴリ
+     *
+     * @var string
+     */
     public $category;
 
     /**
-     * Storing data used on this page
+     * このページで使用するデータの定義
+     *
+     * @link https://laravel-livewire.com/docs/2.x/rendering-components
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
      *
      * @param \Illuminate\Http\Request $request
      * @return void
@@ -37,7 +54,10 @@ class SelectThreadPages extends Component
     }
 
     /**
-     * Page Display
+     * ダッシュボードの表示するスレッドを切り替える部分
+     *
+     * @link https://laravel-livewire.com/docs/2.x/rendering-components
+     * @see resources/views/dashboard/select-thread-pages.blade.php
      *
      * @return \Illuminate\Support\Facades\View
      */

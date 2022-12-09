@@ -11,10 +11,17 @@ use RuntimeException;
 class AccessLog
 {
     /**
-     * Handle an incoming request.
+     * ユーザがアクセスした全ての履歴を保存する．
+     * このミドルウェアは全てのアクセスに対して実行される．
+     *
+     *  例外)
+     *  - 書き込みの取得
+     *
+     * @link https://readouble.com/laravel/9.x/ja/queries.html
+     * @todo https://github.com/oithxs/hira-chan/issues/205
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse) $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next)
@@ -38,7 +45,7 @@ class AccessLog
                 /*
                 RuntimeException: Session store not set on request.
 
-                Do nothing when an exception occurs because the session can be retrieved.
+                実際にはSessionの取得が出来ているため，例外が発生した場合は何もしない
                 */
             }
         }

@@ -11,21 +11,30 @@ class Like extends Model
     use SerializeDate;
 
     /**
-     * Database to be connected
+     * 接続するデータベース
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent.html
+     * @see config/database.php
      *
      * @var string
      */
     protected $connection = 'mysql';
 
     /**
-     * Tables to be associated
+     * 関連付けるテーブル
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent.html
      *
      * @var string
      */
     protected $table = 'likes';
 
     /**
-     * The attributes that are mass assignable
+     * マスアサインメント可能な属性
+     *
+     * ここに登録している属性にはデータの挿入・更新が出来る．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent.html
      *
      * @var string[]
      */
@@ -39,7 +48,13 @@ class Like extends Model
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * シリアライズのために隠すべき属性
+     *
+     * ここに登録した属性は，管理画面で見ることが出来ない．
+     * そのほかの効果は不明．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-serialization.html
+     * @todo 結局スレッドにアクセスする際のリンクにこの属性を使用しているので，隠す意味は無いかと思われる．
      *
      * @var array
      */
@@ -48,7 +63,9 @@ class Like extends Model
     ];
 
     /**
-     * The attributes that should be cast.
+     * キャストすべき属性
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-serialization.html
      *
      * @var array
      */
@@ -58,7 +75,10 @@ class Like extends Model
     ];
 
     /**
-     * Get the club thread that owns the like.
+     * like を所有する club thread を取得します．
+     * 多：1
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function club_thread()
     {
@@ -66,7 +86,10 @@ class Like extends Model
     }
 
     /**
-     * Get the college year thread that owns the like.
+     * like を所有する college year thread を取得します．
+     * 多：1
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function college_year_thread()
     {
@@ -74,7 +97,10 @@ class Like extends Model
     }
 
     /**
-     * Get the department thread that owns the like.
+     * like を所有する department thread を取得します．
+     * 多：1
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function department_thread()
     {
@@ -82,7 +108,10 @@ class Like extends Model
     }
 
     /**
-     * Get the job hunting thread that owns the like.
+     * like を所有する job hunting thread を取得します．
+     * 多：1
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function job_hunting_thread()
     {
@@ -90,7 +119,10 @@ class Like extends Model
     }
 
     /**
-     * Get the user that owns the like.
+     * like を所有する user thread を取得します．
+     * 多：1
+     *
+     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
     public function user()
     {
