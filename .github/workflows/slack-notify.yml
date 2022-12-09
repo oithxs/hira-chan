@@ -1,16 +1,13 @@
 name: Github Notification
 
 on:
-  pull_request:
+  push:
     branches:
       - develop
-      - main
-    types: [closed]
 
 jobs:
   slackNotification:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
     steps:
       - name: Send GitHub Action trigger data to Slack workflow
         uses: slackapi/slack-github-action@v1.19.0
