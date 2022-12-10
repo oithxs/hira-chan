@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Hub extends UuidModel
 {
     use HasFactory;
     use SerializeDate;
+    use SoftDeletes;
 
     /**
      * 接続するデータベース
@@ -41,7 +43,6 @@ class Hub extends UuidModel
         'thread_category_id',
         'user_id',
         'name',
-        'is_enabled'
     ];
 
     /**
@@ -54,6 +55,7 @@ class Hub extends UuidModel
     protected $casts = [
         'created_at' => 'datetime:Y-m-d H:i:s',
         'update_at' => 'datetime:Y-m-d H:i:s',
+        'deleted_at' => 'datetime:Y-m-d H:i:s',
     ];
 
     /**
