@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
+use App\Models\UserPageTheme;
 use Filament\Forms;
 use Filament\Resources\Forms\Components;
 use Filament\Resources\Form;
@@ -43,6 +44,11 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('user_page_theme_id')
+                    ->label('ページテーマ')
+                    ->options(UserPageTheme::all()->pluck('theme_name', 'id'))
+                    ->searchable()
+                    ->default(1),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
