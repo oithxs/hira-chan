@@ -60,17 +60,14 @@ class Threads extends Component
         if ($request->category == NULL) {
             if ($request->sort == 'new_create') {
                 $this->threads = Hub::withCount('access_logs')
-                    ->where('is_enabled', '=', 1)
                     ->orderBy('created_at', 'desc')
                     ->get();
             } else if ($request->sort == 'access_count') {
                 $this->threads = Hub::withCount('access_logs')
-                    ->where('is_enabled', '=', 1)
                     ->orderBy('access_logs_count', 'desc')
                     ->get();
             } else {
                 $this->threads = Hub::withCount('access_logs')
-                    ->where('is_enabled', '=', 1)
                     ->orderBy('created_at', 'desc')
                     ->get();
             }
@@ -78,19 +75,16 @@ class Threads extends Component
             if ($request->sort == 'new_create') {
                 $this->threads = Hub::withCount('access_logs')
                     ->where('thread_category_id', '=', $request->category)
-                    ->where('is_enabled', '=', 1)
                     ->orderBy('created_at', 'desc')
                     ->get();
             } else if ($request->sort == 'access_count') {
                 $this->threads = Hub::withCount('access_logs')
                     ->where('thread_category_id', '=', $request->category)
-                    ->where('is_enabled', '=', 1)
                     ->orderBy('access_logs_count', 'desc')
                     ->get();
             } else {
                 $this->threads = Hub::withCount('access_logs')
                     ->where('thread_category_id', '=', $request->category)
-                    ->where('is_enabled', '=', 1)
                     ->orderBy('created_at', 'desc')
                     ->get();
             }
