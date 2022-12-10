@@ -74,13 +74,24 @@ class HubResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')
+                    ->searchable(isIndividual: true)
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('thread_category.category_name')
-                    ->label('カテゴリ'),
+                    ->label('カテゴリ')
+                    ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('user.email')
-                    ->label('ユーザEmail'),
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('created_at'),
+                    ->label('ユーザEmail')
+                    ->searchable(isIndividual: true),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(isIndividual: true),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->searchable(isIndividual: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->searchable(isIndividual: true)
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('deleted_at')
+                    ->searchable(isIndividual: true)
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
