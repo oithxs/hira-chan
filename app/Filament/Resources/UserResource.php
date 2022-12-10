@@ -76,25 +76,36 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')
+                    ->searchable(isIndividual: true)
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('user_page_theme.theme_name')
-                    ->label('ページテーマ'),
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('email'),
+                    ->label('ページテーマ')
+                    ->searchable(isIndividual: true),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(isIndividual: true),
+                Tables\Columns\TextColumn::make('email')
+                    ->searchable(isIndividual: true),
                 Tables\Columns\IconColumn::make('email_verified_at')
                     ->label('verified')
-                    ->boolean(),
+                    ->boolean()
+                    ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('two_factor_confirmed_at')
+                    ->searchable(isIndividual: true)
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('current_team_id')
+                    ->searchable(isIndividual: true)
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('profile_photo_path')
+                    ->searchable(isIndividual: true)
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->searchable(isIndividual: true)
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->searchable(isIndividual: true)
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('deleted_at')
+                    ->searchable(isIndividual: true)
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
