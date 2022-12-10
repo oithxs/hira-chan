@@ -28,7 +28,6 @@ class ThreadsController extends Controller
      */
     public function store(Request $request)
     {
-        if (!Hub::where('id', '=', $request->thread_id)->where('is_enabled', '=', 1)->first()) return;
         $special_character_set = array(
             "&" => "&amp;",
             "<" => "&lt;",
@@ -52,7 +51,6 @@ class ThreadsController extends Controller
         $message_id = 0;
         $thread = Hub::with('thread_category')
             ->where('id', '=', $request->thread_id)
-            ->where('is_enabled', '=', 1)
             ->first();
 
         switch ($thread->thread_category->category_type) {

@@ -46,7 +46,6 @@ class LikeController extends Controller
     {
         $thread = Hub::with('thread_category')
             ->where('id', '=', $request->thread_id)
-            ->where('is_enabled', '=', 1)
             ->first();
 
         switch ($thread->thread_category->category_type) {
@@ -156,7 +155,6 @@ class LikeController extends Controller
     {
         $thread = Hub::with('thread_category')
             ->where('id', '=', $request->thread_id)
-            ->where('is_enabled', '=', 1)
             ->first();
 
         switch ($thread->thread_category->category_type) {
