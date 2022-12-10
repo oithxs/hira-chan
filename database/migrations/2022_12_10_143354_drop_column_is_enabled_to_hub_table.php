@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * `php artisan migrate` で実行
+     *
+     * @link https://readouble.com/laravel/9.x/ja/migrations.html
      *
      * @return void
      */
@@ -19,7 +21,9 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * `php artisan migrate:rollback` で実行
+     *
+     * @link https://readouble.com/laravel/9.x/ja/migrations.html
      *
      * @return void
      */
