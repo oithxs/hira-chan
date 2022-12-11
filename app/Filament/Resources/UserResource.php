@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
+use App\Models\UserPageTheme;
 use Filament\Forms;
 use Filament\Resources\Forms\Components;
 use Filament\Resources\Form;
@@ -34,7 +35,7 @@ class UserResource extends Resource
     /**
      * 管理画面で作成・編集する際のフォーム
      *
-     * @link https://filamentphp.com/docs/2.x/admin/resources/getting-started
+     * @link https://filamentphp.com/docs/2.x/forms/fields
      *
      * @param Form $form
      * @return Form
@@ -43,6 +44,11 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('user_page_theme_id')
+                    ->label('ページテーマ')
+                    ->options(UserPageTheme::all()->pluck('theme_name', 'id'))
+                    ->searchable()
+                    ->default(1),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
@@ -60,8 +66,7 @@ class UserResource extends Resource
     /**
      * 管理画面での表示ページ
      *
-     * @link https://filamentphp.com/docs/2.x/admin/resources/getting-started
-     * @link https://readouble.com/laravel/9.x/ja/migrations.html
+     * @link https://filamentphp.com/docs/2.x/admin/resources/listing-records
      *
      * @param Table $table
      * @return Table
@@ -70,11 +75,38 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('id')
+                    ->searchable(isIndividual: true)
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('user_page_theme.theme_name')
+                    ->label('ページテーマ')
+                    ->searchable(isIndividual: true),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(isIndividual: true),
+                Tables\Columns\TextColumn::make('email')
+                    ->searchable(isIndividual: true),
                 Tables\Columns\IconColumn::make('email_verified_at')
                     ->label('verified')
                     ->boolean()
+                    ->searchable(isIndividual: true),
+                Tables\Columns\TextColumn::make('two_factor_confirmed_at')
+                    ->searchable(isIndividual: true)
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('current_team_id')
+                    ->searchable(isIndividual: true)
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('profile_photo_path')
+                    ->searchable(isIndividual: true)
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->searchable(isIndividual: true)
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->searchable(isIndividual: true)
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('deleted_at')
+                    ->searchable(isIndividual: true)
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
