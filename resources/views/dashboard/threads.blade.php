@@ -34,19 +34,22 @@
 
                 <select id="dashboard_threads_category_type_select">
                     <option value="">全て</option>
-                    @foreach ($category_types as $category_type)
-                    <option value="{{ $category_type->category_type }}">
-                        {{ $category_type->category_type }}
+                    @foreach ($thread_primary_categorys as $thread_primary_category)
+                    <option value="{{ $thread_primary_category->name }}">
+                        {{ $thread_primary_category->name }}
                     </option>
                     @endforeach
                 </select>
 
                 <select id="dashboard_threads_category_select">
                     <option value="">未選択</option>
-                    @foreach ($categorys as $category)
-                    <option value="{{ $category->category_name }}" data-val="{{ $category->category_type }}">
-                        {{ $category->category_name }}
+                    @foreach ($thread_primary_categorys as $thread_primary_category)
+                    @foreach ($thread_primary_category->thread_secondary_categorys as $thread_secondary_category)
+                    <option value="{{ $thread_secondary_category->name }}"
+                        data-val="{{ $thread_primary_category->name }}">
+                        {{ $thread_secondary_category->name }}
                     </option>
+                    @endforeach
                     @endforeach
                 </select>
             </div>
@@ -68,11 +71,11 @@
                 <div class="hidden sm:flex sm:items-center">
                     <div class="text-lg leading-7 font-semibold">
                         <button
-                            onclick="location.href='/dashboard?category={{ $category_name }}&page={{ $page }}&sort=access_count'">
+                            onclick="location.href='/dashboard?category={{ $narrowing_down_category }}&page={{ $page }}&sort=access_count'">
                         </button>
                         {{ __("Thread name") }}
                         <button
-                            onclick="location.href='/dashboard?category={{ $category_name }}&page={{ $page }}&sort=new_create'">
+                            onclick="location.href='/dashboard?category={{ $narrowing_down_category }}&page={{ $page }}&sort=new_create'">
                         </button>
                     </div>
                     <div class="text-lg text-right leading-7 font-semibold ms-auto">
@@ -141,8 +144,9 @@
                     <br>
                     <select id="dashboard_thread_category_select">
                         <option value="">選択して下さい</option>
-                        @foreach ($categorys as $category)
-                        <option value="{{ $category->category_name }}">{{ $category->category_name }}</option>
+                        @foreach ($thread_primary_category->thread_secondary_categorys as $thread_secondary_category)
+                        <option value="{{ $thread_secondary_category->name }}">{{ $thread_secondary_category->name }}
+                        </option>
                         @endforeach
                     </select>
                 </form>
