@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Hub;
-use App\Models\ThreadCategory;
+use App\Models\ThreadSecondaryCategory;
 use Illuminate\Http\Request;
 
 class HubController extends Controller
@@ -39,10 +39,10 @@ class HubController extends Controller
      */
     public function store(Request $request)
     {
-        $thread_category_id = ThreadCategory::where('category_name', '=', $request->thread_category)->first()->id;
+        $thread_category_id = ThreadSecondaryCategory::where('name', '=', $request->thread_category)->first()->id;
 
         Hub::create([
-            'thread_category_id' => $thread_category_id,
+            'thread_secondary_category_id' => $thread_category_id,
             'user_id' => $request->user()->id,
             'name' => $request->thread_name
         ]);
