@@ -144,9 +144,12 @@
                     <br>
                     <select id="dashboard_thread_category_select">
                         <option value="">選択して下さい</option>
+                        @foreach ($thread_primary_categorys as $thread_primary_category)
                         @foreach ($thread_primary_category->thread_secondary_categorys as $thread_secondary_category)
-                        <option value="{{ $thread_secondary_category->name }}">{{ $thread_secondary_category->name }}
+                        <option value="{{ $thread_secondary_category->name }}">
+                            {{ $thread_secondary_category->name }}
                         </option>
+                        @endforeach
                         @endforeach
                     </select>
                 </form>
