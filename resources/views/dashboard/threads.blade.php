@@ -32,7 +32,7 @@
                 <br>
                 <input type="button" value="全て表示" id="dashboard_threads_show_all_threads_button">
 
-                <select id="dashboard_threads_category_type_select">
+                <select id="dashboard_threads_primary_category_select">
                     <option value="">全て</option>
                     @foreach ($thread_primary_categorys as $thread_primary_category)
                     <option value="{{ $thread_primary_category->name }}">
@@ -41,7 +41,7 @@
                     @endforeach
                 </select>
 
-                <select id="dashboard_threads_category_select">
+                <select id="dashboard_threads_secondary_category_select">
                     <option value="">未選択</option>
                     @foreach ($thread_primary_categorys as $thread_primary_category)
                     @foreach ($thread_primary_category->thread_secondary_categorys as $thread_secondary_category)
