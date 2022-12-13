@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\HubResource\Pages;
 use App\Filament\Resources\HubResource\RelationManagers;
 use App\Models\Hub;
-use App\Models\ThreadCategory;
+use App\Models\ThreadSecondaryCategory;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Resources\Forms\Components;
@@ -45,9 +45,9 @@ class HubResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('thread_category_id')
+                Forms\Components\Select::make('thread_secondary_category_id')
                     ->label('カテゴリ')
-                    ->options(ThreadCategory::all()->pluck('category_name', 'id'))
+                    ->options(ThreadSecondaryCategory::all()->pluck('name', 'id'))
                     ->searchable()
                     ->required(),
                 Forms\Components\Select::make('user_id')
@@ -76,7 +76,7 @@ class HubResource extends Resource
                 Tables\Columns\TextColumn::make('id')
                     ->searchable(isIndividual: true)
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('thread_category.category_name')
+                Tables\Columns\TextColumn::make('thread_secondary_category.name')
                     ->label('カテゴリ')
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('user.email')
