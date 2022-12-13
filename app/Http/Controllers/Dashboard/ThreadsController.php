@@ -73,6 +73,12 @@ class ThreadsController extends Controller
                 break;
         }
 
-        (new ThreadImagePathController)->store($request->file('img'), $request->user()->id, $request->thread_id, $message_id, $thread->thread_secondary_category->thread_primary_category);
+        (new ThreadImagePathController)->store(
+            $request->file('img'),
+            $request->user()->id,
+            $request->thread_id,
+            $message_id,
+            $thread->thread_secondary_category->thread_primary_category->name
+        );
     }
 }
