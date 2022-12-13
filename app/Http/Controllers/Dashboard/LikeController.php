@@ -44,11 +44,11 @@ class LikeController extends Controller
      */
     public function store(Request $request)
     {
-        $thread = Hub::with('thread_category')
+        $thread = Hub::with('thread_secondary_category')
             ->where('id', '=', $request->thread_id)
             ->first();
 
-        switch ($thread->thread_category->category_type) {
+        switch ($thread->thread_secondary_category->thread_primary_category->name) {
             case '部活':
                 $club_thread_id = ClubThread::where('hub_id', '=', $request->thread_id)
                     ->where('message_id', '=', $request->message_id)
@@ -153,11 +153,11 @@ class LikeController extends Controller
      */
     public function destroy(Request $request)
     {
-        $thread = Hub::with('thread_category')
+        $thread = Hub::with('thread_secondary_category')
             ->where('id', '=', $request->thread_id)
             ->first();
 
-        switch ($thread->thread_category->category_type) {
+        switch ($thread->thread_secondary_category->thread_primary_category->name) {
             case '部活':
                 $club_thread_id = ClubThread::where('hub_id', '=', $request->thread_id)
                     ->where('message_id', '=', $request->message_id)
