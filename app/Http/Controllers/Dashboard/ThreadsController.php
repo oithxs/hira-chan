@@ -49,11 +49,11 @@ class ThreadsController extends Controller
         }
 
         $message_id = 0;
-        $thread = Hub::with('thread_category')
+        $thread = Hub::with('thread_secondary_category')
             ->where('id', '=', $request->thread_id)
             ->first();
 
-        switch ($thread->thread_category->category_type) {
+        switch ($thread->thread_secondary_category->thread_primary_category->name) {
             case '部活':
                 $message_id = (new ClubThreadController)->store($request->thread_id, $request->user()->id, $message);
                 break;
@@ -73,6 +73,6 @@ class ThreadsController extends Controller
                 break;
         }
 
-        (new ThreadImagePathController)->store($request->file('img'), $request->user()->id, $request->thread_id, $message_id, $thread->thread_category->category_type);
+        (new ThreadImagePathController)->store($request->file('img'), $request->user()->id, $request->thread_id, $message_id, $thread->thread_secondary_category->thread_primary_category);
     }
 }
