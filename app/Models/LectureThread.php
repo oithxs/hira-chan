@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class LectureThread extends Model
 {
     use HasFactory;
     use SerializeDate;
+    use SoftDeletes;
 
     /**
      * 接続するデータベース
@@ -70,6 +72,7 @@ class LectureThread extends Model
     protected $casts = [
         'created_at' => 'datetime:Y-m-d H:i:s',
         'update_at' => 'datetime:Y-m-d H:i:s',
+        'deleted_at' => 'datetime:Y-m-d H:i:s',
     ];
 
     /**
