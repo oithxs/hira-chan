@@ -221,6 +221,57 @@ class StoreTest extends UseFormRequestTestCase
     }
 
     /**
+     * 数字だけのスレッド名
+     *
+     * @return void
+     */
+    public function test_thread_name_with_only_numbers(): void
+    {
+        foreach (range(0, 9) as $num) {
+            $this->useFormRequest(['thread_name'], ["$num"]);
+            $this->assertSame($this->getKeysExpected(), array_keys(Hub::first()->toArray()));
+            $this->assertSame(
+                $this->getValuesExpected(),
+                $this->getArrayElement(Hub::first()->toArray(), [
+                    'thread_secondary_category_id',
+                    'user_id',
+                    'name',
+                    'deleted_at'
+                ])
+            );
+        }
+    }
+
+    /**
+     * 記号だけのスレッド名
+     *
+     * @return void
+     */
+    public function test_thread_name_with_only_symbols(): void
+    {
+        $symbols = [
+            '!', '"', '\'', '#', '$', '%', '&', '\\', '(', ')',
+            '-', '^', '@', '[', ';', ':', ']', ',', '.', '/',
+            '=', '~', '|', '`', '{', '+', '*', '}', '<', '>',
+            '?', '_'
+        ];
+
+        foreach ($symbols as $symbol) {
+            $this->useFormRequest(['thread_name'], [$symbol]);
+            $this->assertSame($this->getKeysExpected(), array_keys(Hub::first()->toArray()));
+            $this->assertSame(
+                $this->getValuesExpected(),
+                $this->getArrayElement(Hub::first()->toArray(), [
+                    'thread_secondary_category_id',
+                    'user_id',
+                    'name',
+                    'deleted_at'
+                ])
+            );
+        }
+    }
+
+    /**
      * スレッドカテゴリ未選択
      *
      * 現在はバリデーションを行っていないため投げられる例外が異なる
