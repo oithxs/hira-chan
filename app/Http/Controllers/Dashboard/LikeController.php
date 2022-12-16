@@ -38,6 +38,7 @@ class LikeController extends Controller
      * [POST] スレッドへの書き込みに対するいいねを保存する．
      *
      * @link https://readouble.com/laravel/9.x/ja/queries.html
+     * @todo https://github.com/oithxs/hira-chan/issues/227
      *
      * @param  \Illuminate\Http\Request  $request
      * @return int
@@ -147,6 +148,7 @@ class LikeController extends Controller
      * [POST] スレッドの書き込みに対するいいねを削除する
      *
      * @link https://readouble.com/laravel/9.x/ja/queries.html
+     * @todo https://github.com/oithxs/hira-chan/issues/227
      *
      * @param  \Illuminate\Htt\Request $request
      * @return int
