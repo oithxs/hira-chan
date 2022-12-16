@@ -2,13 +2,16 @@
 
 namespace Tests\Unit\app\Http\Controllers\Dashboard\LikeController;
 
+
 use App\Http\Controllers\Dashboard\LikeController;
 use App\Models\ClubThread;
 use App\Models\CollegeYearThread;
 use App\Models\DepartmentThread;
+use App\Models\Hub;
 use App\Models\JobHuntingThread;
 use App\Models\LectureThread;
 use App\Models\Like;
+use App\Models\ThreadPrimaryCategory;
 use App\Models\User;
 use ErrorException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -16,7 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Tests\UseFormRequestTestCase;
 
-class StoreTest extends UseFormRequestTestCase
+class DestroyTest extends UseFormRequestTestCase
 {
     use RefreshDatabase;
 
@@ -63,7 +66,7 @@ class StoreTest extends UseFormRequestTestCase
     {
         $this->method = [
             new LikeController,
-            'store'
+            'destroy'
         ];
     }
 
@@ -82,6 +85,21 @@ class StoreTest extends UseFormRequestTestCase
         $this->args->setUserResolver(function () {
             return $this->user;
         });
+    }
+
+    protected function setUpUseFormRequest(): void
+    {
+        foreach ($this->threads as $thread) {
+            $request = new Request([
+                'thread_id' => $thread->hub_id,
+                'message_id' => '1'
+            ]);
+
+            $request->setUserResolver(function () {
+                return $this->user;
+            });
+            (new LikeController)->store($request);
+        }
     }
 
     /**
@@ -139,35 +157,23 @@ class StoreTest extends UseFormRequestTestCase
     }
 
     /**
-     * すべての大枠カテゴリの書き込みにいいね
+     * すべての大枠カテゴリの書き込みのいいねを削除
      *
      * @return void
      */
-    public function test_good_for_all_broad_categories_of_posts(): void
+    public function test_remove_all_broad_categories_of_posts(): void
     {
-        foreach ($this->threads as $key => $value) {
-            $response = $this->useFormRequest(['thread_id'], [$value->hub_id]);
-            $like = Like::where('club_thread_id', '=', $value instanceof ClubThread ? $value->id : NULL)
-                ->where('college_year_thread_id', '=', $value instanceof CollegeYearThread ? $value->id : NULL)
-                ->where('department_thread_id', '=', $value instanceof DepartmentThread ? $value->id : NULL)
-                ->where('job_hunting_thread_id', '=', $value instanceof JobHuntingThread ? $value->id : NULL)
-                ->where('lecture_thread_id', '=', $value instanceof LectureThread ? $value->id : NULL)
-                ->first()
-                ->toArray();
+        foreach ($this->threads as $thread) {
+            $response = $this->useFormRequest(['thread_id'], [$thread->hub_id]);
+            $like = Like::where('club_thread_id', '=', $thread instanceof ClubThread ? $thread->id : NULL)
+                ->where('college_year_thread_id', '=', $thread instanceof CollegeYearThread ? $thread->id : NULL)
+                ->where('department_thread_id', '=', $thread instanceof DepartmentThread ? $thread->id : NULL)
+                ->where('job_hunting_thread_id', '=', $thread instanceof JobHuntingThread ? $thread->id : NULL)
+                ->where('lecture_thread_id', '=', $thread instanceof LectureThread ? $thread->id : NULL)
+                ->first();
 
-            $this->assertSame(1, $response);
-            $this->assertSame($this->getKeysExpected(), array_keys($like));
-            $this->assertSame(
-                $this->getValuesExpected($key),
-                $this->getArrayElement($like, [
-                    'club_thread_id',
-                    'college_year_thread_id',
-                    'department_thread_id',
-                    'job_hunting_thread_id',
-                    'lecture_thread_id',
-                    'user_id',
-                ])
-            );
+            $this->assertSame(0, $response);
+            $this->assertSame(null, $like);
         }
     }
 
@@ -274,37 +280,47 @@ class StoreTest extends UseFormRequestTestCase
     }
 
     /**
-     * すべての大枠カテゴリで1つの書き込みに複数のいいね
+     * すべての大枠カテゴリの書き込みにおいて複数人で1つの書き込みにいいねをしている中，
+     * テストユーザのいいねのみを削除
      *
      * @return void
      */
-    public function test_multiple_likes_for_one_post_in_all_broad_categories(): void
+    public function test_removed_only_the_test_users_likes_while_multiple_people_were_liking_a_post_in_all_broad_categories_of_posts(): void
     {
-        foreach (range(1, 10) as $num) {
-            foreach ($this->threads as $key => $value) {
-                $response = $this->useFormRequest(['thread_id'], [$value->hub_id]);
-                $like = Like::where('club_thread_id', '=', $value instanceof ClubThread ? $value->id : NULL)
-                    ->where('college_year_thread_id', '=', $value instanceof CollegeYearThread ? $value->id : NULL)
-                    ->where('department_thread_id', '=', $value instanceof DepartmentThread ? $value->id : NULL)
-                    ->where('job_hunting_thread_id', '=', $value instanceof JobHuntingThread ? $value->id : NULL)
-                    ->where('lecture_thread_id', '=', $value instanceof LectureThread ? $value->id : NULL)
-                    ->first()
-                    ->toArray();
+        // 複数のユーザで1つの書き込みにいいね
+        foreach (range(1, 9) as $num) {
+            foreach ($this->threads as $thread) {
+                $request = new Request([
+                    'thread_id' => $thread->hub_id,
+                    'message_id' => '1'
+                ]);
 
-                $this->assertSame($num, $response);
-                $this->assertSame($this->getKeysExpected(), array_keys($like));
-                $this->assertSame(
-                    $this->getValuesExpected($key),
-                    $this->getArrayElement($like, [
-                        'club_thread_id',
-                        'college_year_thread_id',
-                        'department_thread_id',
-                        'job_hunting_thread_id',
-                        'lecture_thread_id',
-                        'user_id',
-                    ])
-                );
+                $request->setUserResolver(function () {
+                    return User::factory()->create();
+                });
+                (new LikeController)->store($request);
             }
+        }
+
+        foreach ($this->threads as $thread) {
+            $response = $this->useFormRequest(['thread_id'], [$thread->hub_id]);
+            $this_user_like = Like::where('club_thread_id', '=', $thread instanceof ClubThread ? $thread->id : NULL)
+                ->where('college_year_thread_id', '=', $thread instanceof CollegeYearThread ? $thread->id : NULL)
+                ->where('department_thread_id', '=', $thread instanceof DepartmentThread ? $thread->id : NULL)
+                ->where('job_hunting_thread_id', '=', $thread instanceof JobHuntingThread ? $thread->id : NULL)
+                ->where('lecture_thread_id', '=', $thread instanceof LectureThread ? $thread->id : NULL)
+                ->where('user_id', '=', $this->user->id)
+                ->first();
+            $other_user_like = Like::where('club_thread_id', '=', $thread instanceof ClubThread ? $thread->id : NULL)
+                ->where('college_year_thread_id', '=', $thread instanceof CollegeYearThread ? $thread->id : NULL)
+                ->where('department_thread_id', '=', $thread instanceof DepartmentThread ? $thread->id : NULL)
+                ->where('job_hunting_thread_id', '=', $thread instanceof JobHuntingThread ? $thread->id : NULL)
+                ->where('lecture_thread_id', '=', $thread instanceof LectureThread ? $thread->id : NULL)
+                ->first();
+
+            $this->assertSame(9, $response);
+            $this->assertEmpty($this_user_like);
+            $this->assertNotEmpty($other_user_like);
         }
     }
 }
