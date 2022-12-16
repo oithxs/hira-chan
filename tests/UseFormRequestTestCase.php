@@ -14,9 +14,9 @@ abstract class UseFormRequestTestCase extends TestCase
     /**
      * テスト対象メソッドの引数
      *
-     * @var array
+     * @var mixed
      */
-    protected array $args;
+    protected mixed $args;
 
     public function setUp(): void
     {
