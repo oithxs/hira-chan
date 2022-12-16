@@ -33,6 +33,7 @@ class HubController extends Controller
      * [POST] スレッドを作成する．
      *
      * @link https://readouble.com/laravel/9.x/ja/queries.html
+     * @todo https://github.com/oithxs/hira-chan/issues/170
      *
      * @param  \Illuminate\Http\Request  $request
      * @return void
