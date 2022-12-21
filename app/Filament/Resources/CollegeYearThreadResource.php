@@ -32,6 +32,15 @@ class CollegeYearThreadResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     /**
+     * 項目のグループ化
+     *
+     * @link https://filamentphp.com/docs/2.x/admin/navigation#grouping-navigation-items
+     *
+     * @var string|null
+     */
+    protected static ?string $navigationGroup = 'Posts';
+
+    /**
      * 管理画面で作成・編集する際のフォーム
      *
      * @link https://filamentphp.com/docs/2.x/forms/fields
