@@ -74,4 +74,54 @@ class LikeFactory extends Factory
             'user_id' => User::factory()->create(),
         ];
     }
+
+    /**
+     * 書き込んだスレッドのインスタンスにいいねをつける
+     *
+     * @param \App\Models\ClubThread |
+     *        \App\Models\CollegeYearThread |
+     *        \App\Models\DepartmentThread |
+     *        \App\Models\JboHuntingThread |
+     *        \App\Models\LectureThread $thread
+     * @return LikeFactory
+     */
+    public function post($thread): LikeFactory
+    {
+        $club_thread_id = ClubThread::where('hub_id', '=', $thread->hub_id)
+            ->where('message_id', '=', $thread->message_id)
+            ->first()
+            ->id ?? null;
+        $college_year_thread_id = CollegeYearThread::where('hub_id', '=', $thread->hub_id)
+            ->where('message_id', '=', $thread->message_id)
+            ->first()
+            ->id ?? null;
+        $department_thread_id = DepartmentThread::where('hub_id', '=', $thread->hub_id)
+            ->where('message_id', '=', $thread->message_id)
+            ->first()
+            ->id ?? null;
+        $job_hunting_thread_id = JobHuntingThread::where('hub_id', '=', $thread->hub_id)
+            ->where('message_id', '=', $thread->message_id)
+            ->first()
+            ->id ?? null;
+        $lecture_thread_id = LectureThread::where('hub_id', '=', $thread->hub_id)
+            ->where('message_id', '=', $thread->message_id)
+            ->first()
+            ->id ?? null;
+
+        return $this->state(function (array $attributes) use (
+            $club_thread_id,
+            $college_year_thread_id,
+            $department_thread_id,
+            $job_hunting_thread_id,
+            $lecture_thread_id,
+        ) {
+            return [
+                'club_thread_id' => $club_thread_id,
+                'college_year_thread_id' => $college_year_thread_id,
+                'department_thread_id' => $department_thread_id,
+                'job_hunting_thread_id' => $job_hunting_thread_id,
+                'lecture_thread_id' => $lecture_thread_id,
+            ];
+        });
+    }
 }
