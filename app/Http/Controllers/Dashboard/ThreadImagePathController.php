@@ -53,7 +53,7 @@ class ThreadImagePathController extends Controller
     public function store(UploadedFile $img = null, string $user_id, string $thread_id, int $message_id, string $thread_primary_category)
     {
         if ($img) {
-            $img = Image::make($img)->encode('jpg')->orientate()->save();
+            $img = Image::make($img)->encode('jpg')->orientate();
 
             $size = $img->filesize();
             $path = 'public/images/thread_message/' . str_replace('-', '', Str::uuid()) . '.jpg';
