@@ -39,11 +39,13 @@
         },
         "exclude-from-classmap": [
             "vendor\\laravel\\fortify\\src\\Http\\Controllers\\AuthenticatedSessionController.php",
-            "vendor\\laravel\\fortify\\src\\Http\\Requests\\LoginRequest.php"
+            "vendor\\laravel\\fortify\\src\\Http\\Requests\\LoginRequest.php",
+            "vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\FilesystemAdapter.php"
         ],
         "files": [
             "app\\laravel\\fortify\\src\\Http\\Controllers\\AuthenticatedSessionController.php",
-            "app\\laravel\\fortify\\src\\Http\\Requests\\LoginRequest.php"
+            "app\\laravel\\fortify\\src\\Http\\Requests\\LoginRequest.php",
+            "app\\laravel\\framework\\src\\Illuminate\\Filesystem\\FilesystemAdapter.php"
         ]
     },
     "autoload-dev": {
