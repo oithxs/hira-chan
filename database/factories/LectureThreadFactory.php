@@ -14,9 +14,20 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class LectureThreadFactory extends Factory
 {
     /**
-     * Define the model's default state.
+     * factory の対象モデル．
      *
-     * @return array<string, mixed>
+     * @link https://readouble.com/laravel/9.x/ja/database-testing.html
+     *
+     * @var string
+     */
+    protected $model = LectureThread::class;
+
+    /**
+     * モデルのデフォルトの状態を定義する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/database-testing.html
+     *
+     * @return array
      */
     public function definition()
     {
