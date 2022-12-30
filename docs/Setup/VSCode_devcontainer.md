@@ -106,7 +106,6 @@ docker-compose -v
 4. メール送信を可能とするために， `.env` ファイルの以下の項目を設定する
     - `MAIL_USERNAME` -> Gmail アドレス
     - `MAIL_PASSWORD` -> 上記の Gmail アドレスのアプリパスワード
-    - `MAIL_FROM_ADDRESS` -> Gmail アドレス
 
 コンテナの構築・作成・起動はこれで完了です．
 
