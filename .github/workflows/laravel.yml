@@ -38,10 +38,10 @@ jobs:
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
       - name: Create Database
-        run: mysql --protocol=tcp -h localhost -P 3306 -u root -ppassword -e "CREATE DATABASE main"
+        run: mysql --protocol=tcp -h localhost -P 3306 -u root -ppassword -e "CREATE DATABASE IF NOT EXISTS testing"
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         env:
-          DB_DATABASE: main
+          DB_DATABASE: testing
           DB_PASSWORD: password
           MAIL_FROM_ADDRESS: from@example.com
         run: vendor/bin/phpunit
