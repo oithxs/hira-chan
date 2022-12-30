@@ -7,16 +7,14 @@
     <table style="margin-bottom:0px" class="table table-borderless">
         <thead>
             <tr>
-                @foreach ($category_types as $category_type)
+                @foreach ($thread_primary_categorys as $thread_primary_category)
                 <th class="col-md-1">
                     <select onChange="location.href=value;">
-                        <option>{{ $category_type->category_type }}</option>
-                        @foreach ($categorys as $category)
-                        @if ($category->category_type == $category_type->category_type)
-                        <option value="dashboard?category={{ $category->id }}">
-                            {{ $category->category_name }}
+                        <option>{{ $thread_primary_category->name }}</option>
+                        @foreach ($thread_primary_category->thread_secondary_categorys as $thread_secondary_category)
+                        <option value="dashboard?category={{ $thread_secondary_category->id }}">
+                            {{ $thread_secondary_category->name }}
                         </option>
-                        @endif
                         @endforeach
                     </select>
                 </th>

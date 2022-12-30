@@ -29,7 +29,7 @@ class SelectThreadPages extends Component
      *
      * @var string
      */
-    public $category;
+    public $narrowing_down_category;
 
     /**
      * このページで使用するデータの定義
@@ -45,12 +45,12 @@ class SelectThreadPages extends Component
         if ($request->category == NULL) {
             $this->max_thread = Hub::count();
         } else {
-            $this->max_thread = Hub::where('thread_category_id', '=', $request->category)
+            $this->max_thread = Hub::where('thread_secondary_category_id', '=', $request->category)
                 ->count();
         }
 
         $this->sort = $request->sort;
-        $this->category = $request->category;
+        $this->narrowing_down_category = $request->category;
     }
 
     /**

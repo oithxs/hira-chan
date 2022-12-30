@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ThreadPrimaryCategory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,6 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UserPageThemeSeeder::class);
-        $this->call(ThreadCategorySeeder::class);
+        $this->call(ThreadPrimaryCategorySeeder::class);
+        $this->call(ThreadSecondaryCategorySeeder::class);
     }
 }

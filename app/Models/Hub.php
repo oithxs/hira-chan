@@ -40,7 +40,7 @@ class Hub extends UuidModel
      * @var string[]
      */
     protected $fillable = [
-        'thread_category_id',
+        'thread_secondary_category_id',
         'user_id',
         'name',
     ];
@@ -125,14 +125,14 @@ class Hub extends UuidModel
     }
 
     /**
-     * hub を所有する thread category を取得します．
+     * hub を所有する thread secondary category を取得します．
      * 多：1
      *
      * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
      */
-    public function thread_category()
+    public function thread_secondary_category()
     {
-        return $this->belongsTo(ThreadCategory::class);
+        return $this->belongsTo(ThreadSecondaryCategory::class);
     }
 
     /**

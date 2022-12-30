@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ThreadCategory extends Model
+class ThreadSecondaryCategory extends Model
 {
     use HasFactory;
     use SerializeDate;
@@ -27,7 +27,7 @@ class ThreadCategory extends Model
      *
      * @var string
      */
-    protected $table = 'thread_categorys';
+    protected $table = 'thread_secondary_categorys';
 
     /**
      * マスアサインメント可能な属性
@@ -39,8 +39,8 @@ class ThreadCategory extends Model
      * @var string[]
      */
     protected $fillable = [
-        'category_name',
-        'category_type',
+        'thread_primary_category_id',
+        'name',
     ];
 
     /**
@@ -52,7 +52,7 @@ class ThreadCategory extends Model
      */
     protected $casts = [
         'created_at' => 'datetime:Y-m-d H:i:s',
-        'updated_at' => 'datetime:Y-m-d H:i:s',
+        'update_at' => 'datetime:Y-m-d H:i:s',
     ];
 
     /**
@@ -64,5 +64,16 @@ class ThreadCategory extends Model
     public function hub()
     {
         return $this->hasMany(Hub::class);
+    }
+
+    /**
+     * thread secondary category に関連する thread primary category を取得する．
+     * 多：1
+     *
+     * @return void
+     */
+    public function thread_primary_category()
+    {
+        return $this->belongsTo(ThreadPrimaryCategory::class);
     }
 }

@@ -38,17 +38,18 @@ class LikeController extends Controller
      * [POST] スレッドへの書き込みに対するいいねを保存する．
      *
      * @link https://readouble.com/laravel/9.x/ja/queries.html
+     * @todo https://github.com/oithxs/hira-chan/issues/227
      *
      * @param  \Illuminate\Http\Request  $request
      * @return int
      */
     public function store(Request $request)
     {
-        $thread = Hub::with('thread_category')
+        $thread = Hub::with('thread_secondary_category')
             ->where('id', '=', $request->thread_id)
             ->first();
 
-        switch ($thread->thread_category->category_type) {
+        switch ($thread->thread_secondary_category->thread_primary_category->name) {
             case '部活':
                 $club_thread_id = ClubThread::where('hub_id', '=', $request->thread_id)
                     ->where('message_id', '=', $request->message_id)
@@ -147,17 +148,18 @@ class LikeController extends Controller
      * [POST] スレッドの書き込みに対するいいねを削除する
      *
      * @link https://readouble.com/laravel/9.x/ja/queries.html
+     * @todo https://github.com/oithxs/hira-chan/issues/227
      *
      * @param  \Illuminate\Htt\Request $request
      * @return int
      */
     public function destroy(Request $request)
     {
-        $thread = Hub::with('thread_category')
+        $thread = Hub::with('thread_secondary_category')
             ->where('id', '=', $request->thread_id)
             ->first();
 
-        switch ($thread->thread_category->category_type) {
+        switch ($thread->thread_secondary_category->thread_primary_category->name) {
             case '部活':
                 $club_thread_id = ClubThread::where('hub_id', '=', $request->thread_id)
                     ->where('message_id', '=', $request->message_id)

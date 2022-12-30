@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Dashboard;
 
 use App\Models\Hub;
-use App\Models\ThreadCategory;
+use App\Models\ThreadPrimaryCategory;
 use Livewire\Component;
 use Illuminate\Http\Request;
 
@@ -17,30 +17,23 @@ class Threads extends Component
     public $threads;
 
     /**
-     * カテゴリ一覧
+     * 大枠カテゴリ
      *
      * @var \Illuminate\Support\Collection
      */
-    public $categorys;
-
-    /**
-     * 大枠カテゴリ一覧
-     *
-     * @var \Illuminate\Support\Collection
-     */
-    public $category_types;
+    public $thread_primary_categorys;
 
     /**
      * ダッシュボードで表示するスレッドをカテゴリで絞り込む時の対象カテゴリ
      *
-     * @var \Illuminate\Support\Collection
+     * @var string
      */
-    public $category_name;
+    public $narrowing_down_category;
 
     /**
      * ダッシュボードで表示するスレッドのページ（10個ごと）
      *
-     * @var \Illuminate\Support\Collection
+     * @var int
      */
     public $page;
 
@@ -57,7 +50,11 @@ class Threads extends Component
      */
     public function mount(Request $request)
     {
-        if ($request->category == NULL) {
+        $this->narrowing_down_category = $request->category;
+        $this->page = $request->page;
+        $this->thread_primary_categorys = ThreadPrimaryCategory::with('thread_secondary_categorys')->get();
+
+        if ($this->narrowing_down_category == NULL) {
             if ($request->sort == 'new_create') {
                 $this->threads = Hub::withCount('access_logs')
                     ->orderBy('created_at', 'desc')
@@ -74,28 +71,21 @@ class Threads extends Component
         } else {
             if ($request->sort == 'new_create') {
                 $this->threads = Hub::withCount('access_logs')
-                    ->where('thread_category_id', '=', $request->category)
+                    ->where('thread_secondary_category_id', '=', $this->narrowing_down_category)
                     ->orderBy('created_at', 'desc')
                     ->get();
             } else if ($request->sort == 'access_count') {
                 $this->threads = Hub::withCount('access_logs')
-                    ->where('thread_category_id', '=', $request->category)
+                    ->where('thread_secondary_category_id', '=', $this->narrowing_down_category)
                     ->orderBy('access_logs_count', 'desc')
                     ->get();
             } else {
                 $this->threads = Hub::withCount('access_logs')
-                    ->where('thread_category_id', '=', $request->category)
+                    ->where('thread_secondary_category_id', '=', $this->narrowing_down_category)
                     ->orderBy('created_at', 'desc')
                     ->get();
             }
         }
-
-        $this->categorys = ThreadCategory::get();
-        $this->category_types = ThreadCategory::select('category_type')
-            ->distinct('category_type')
-            ->get();
-        $this->category_name = $request->category;
-        $this->page = $request->page;
     }
 
     /**

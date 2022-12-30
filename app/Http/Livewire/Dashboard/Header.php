@@ -2,25 +2,18 @@
 
 namespace App\Http\Livewire\Dashboard;
 
-use App\Models\ThreadCategory;
+use App\Models\ThreadPrimaryCategory;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
 class Header extends Component
 {
     /**
-     * カテゴリテーブルの全てのデータ
+     * 大枠カテゴリ
      *
      * @var \Illuminate\Support\Collection
      */
-    public $categorys;
-
-    /**
-     * カテゴリテーブルの内大枠カテゴリのみ
-     *
-     * @var \Illuminate\Support\Collection
-     */
-    public $category_types;
+    public $thread_primary_categorys;
 
     /**
      * このページで使用するデータ定義
@@ -33,10 +26,7 @@ class Header extends Component
      */
     public function mount(Request $request)
     {
-        $this->categorys = ThreadCategory::get();
-        $this->category_types = ThreadCategory::select('category_type')
-            ->distinct('category_type')
-            ->get();
+        $this->thread_primary_categorys = ThreadPrimaryCategory::with('thread_secondary_categorys')->get();
     }
 
     /**

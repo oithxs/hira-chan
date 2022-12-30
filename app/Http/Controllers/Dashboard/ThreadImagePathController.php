@@ -46,21 +46,21 @@ class ThreadImagePathController extends Controller
      * @param string $user_id ユーザID
      * @param string $thread_id スレッド（Hub）ID
      * @param int $message_id メッセージID
-     * @param string $category_type 大枠カテゴリ
+     * @param string $thread_primary_category 大枠カテゴリ
      *
      * @return void
      */
-    public function store(UploadedFile $img = null, string $user_id, string $thread_id, int $message_id, string $category_type)
+    public function store(UploadedFile $img = null, string $user_id, string $thread_id, int $message_id, string $thread_primary_category)
     {
         if ($img) {
-            $img = Image::make($img)->encode('jpg')->orientate()->save();
+            $img = Image::make($img)->encode('jpg')->orientate();
 
             $size = $img->filesize();
             $path = 'public/images/thread_message/' . str_replace('-', '', Str::uuid()) . '.jpg';
             Storage::put($path, $img);
 
             if ($path) {
-                switch ($category_type) {
+                switch ($thread_primary_category) {
                     case '部活':
                         ThreadImagePath::create([
                             'club_thread_id' => ClubThread::where('hub_id', '=', $thread_id)
