@@ -48,6 +48,8 @@ services:
       MARIADB_PASSWORD: pass
       TZ: Asia/Tokyo
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./mariadb/initdb:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
     tty: true
