@@ -148,6 +148,7 @@ class ShowTest extends UseFormRequestTestCase
             'message',
             'created_at',
             'updated_at',
+            'deleted_at',
             'likes_count',
             'user',
             'thread_image_path',

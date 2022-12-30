@@ -169,6 +169,7 @@ class StoreTest extends UseFormRequestTestCase
             'message',
             'created_at',
             'updated_at',
+            'deleted_at'
         ];
     }
 
