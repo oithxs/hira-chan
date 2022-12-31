@@ -412,12 +412,27 @@ class StoreTest extends UseFormRequestTestCase
         foreach ($this->posts as $key => $value) {
             $this->thread_primary_category = $key;
             $img = new UploadedFile($this->images['webp']['path'], $this->images['webp']['name']);
-            $this->assertThrows(
-                fn () => $this->useFormRequest(['img'], [$img]),
-                NotReadableException::class
+            $this->useFormRequest(['img'], [$img]);
+            $thread_image_path = ThreadImagePath::where($key . '_id', '=', $value->id)->first()->toArray();
+
+            Storage::disk('local')->assertExists($thread_image_path['img_path']);
+            $this->assertSame($this->getKeysExpected(), array_keys($thread_image_path));
+            $this->assertSame(
+                $this->getValuesExpected($value, $img),
+                $this->getArrayElement($thread_image_path, [
+                    'club_thread_id',
+                    'college_year_thread_id',
+                    'department_thread_id',
+                    'job_hunting_thread_id',
+                    'lecture_thread_id',
+                    'user_id',
+                    'img_size',
+                ])
             );
-            Storage::disk('local')->assertDirectoryEmpty('public/images/thread_message');
-            $this->assertSame([], ThreadImagePath::where($key . '_id', '=', $value->id)->get()->toArray());
+            $this->assertMatchesRegularExpression(
+                '/^public\/images\/thread_message\/[0-9a-z]{32}\.jpg$/',
+                $thread_image_path['img_path']
+            );
         }
     }
 

@@ -18,6 +18,7 @@ RUN \
         libfreetype6-dev \
         libjpeg-dev \
         libpng-dev \
+        libwebp-dev \
         libzip-dev \
         zlib1g-dev \
     ; \
@@ -28,7 +29,10 @@ RUN \
 	rm -rf /var/lib/apt/lists/* \
     ; \
     # # Install Required PHP extensions
-	docker-php-ext-configure gd --with-freetype --with-jpeg; \
+	docker-php-ext-configure gd \
+        --with-freetype \
+        --with-jpeg \
+        --with-webp; \
 	docker-php-ext-install \
 		bcmath \
 		exif \
