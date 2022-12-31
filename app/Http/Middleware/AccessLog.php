@@ -27,10 +27,15 @@ class AccessLog
     public function handle(Request $request, Closure $next)
     {
         $response = $next($request);
-        Log::create([
-            'hub_id' => $request->thread_id,
-            'user_id' => $request->user()->id ?? null,
-        ]);
+
+        if (session()->get('thread_id') !== $request->thread_id) {
+            Log::create([
+                'hub_id' => $request->thread_id,
+                'user_id' => $request->user()->id ?? null,
+            ]);
+        }
+        session()->put('thread_id', $request->thread_id);
+
         return $response;
     }
 }
