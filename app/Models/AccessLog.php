@@ -40,9 +40,7 @@ class AccessLog extends Model
      */
     protected $fillable = [
         'hub_id',
-        'session_id',
         'user_id',
-        'uri',
     ];
 
     /**
