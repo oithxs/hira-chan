@@ -866,10 +866,7 @@ EOF;
         foreach ($this->threads as $key => $value) {
             $this->message_id = 1;
             $this->setArgumentWithImage($this->images['webp']);
-            $this->assertThrows(
-                fn () => $this->useFormRequest(['thread_id'], [$value->id]),
-                NotReadableException::class
-            );
+            $this->useFormRequest(['thread_id'], [$value->id]);
 
             if ($value->thread_secondary_category->thread_primary_category->name == "部活") {
                 $post = ClubThread::where('hub_id', '=', $value->id)->first() ?? null;
@@ -883,9 +880,10 @@ EOF;
                 $post = LectureThread::where('hub_id', '=', $value->id)->first() ?? null;
             }
 
-            Storage::disk('local')->assertDirectoryEmpty('public/images/thread_message');
+            $thread_image_path = ThreadImagePath::where($key . '_id', '=', $post->id)->first()->toArray();
+            Storage::disk('local')->assertExists($thread_image_path['img_path']);
             $this->assertSame($this->getKeysExpected(), array_keys($post->toArray()));
-            $this->assertSame([], ThreadImagePath::where($key . '_id', '=', $post->id)->get()->toArray());
+            $this->assertSame($this->getKeysThreadImagePathExpected(), array_keys($thread_image_path));
             $this->assertSame(
                 $this->getValuesExpected($value),
                 $this->getArrayElement($post->toArray(), [
@@ -894,6 +892,22 @@ EOF;
                     'message_id',
                     'message',
                 ])
+            );
+            $this->assertSame(
+                $this->getValuesThreadImagePathExpected($post, $this->images['webp']),
+                $this->getArrayElement($thread_image_path, [
+                    'club_thread_id',
+                    'college_year_thread_id',
+                    'department_thread_id',
+                    'job_hunting_thread_id',
+                    'lecture_thread_id',
+                    'user_id',
+                    'img_size',
+                ])
+            );
+            $this->assertMatchesRegularExpression(
+                '/^public\/images\/thread_message\/[0-9a-z]{32}\.jpg$/',
+                $thread_image_path['img_path']
             );
         }
     }
