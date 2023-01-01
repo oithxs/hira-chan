@@ -28,26 +28,16 @@ class AccessLog
     {
         $response = $next($request);
 
-        if (strcmp(url()->current(), route('thread.get')) !== 0) {
-            $thread_id = $request->thread_id;
-            if (strpos($request->path(), 'jQuery.ajax') === 0) {
-                $thread_id = null;
-            }
-
-            try {
+        if (Hub::where('id', '=', $request->thread_id)->first()->id ?? null === $request->thread_id) {
+            if (session()->get('thread_id') !== $request->thread_id) {
                 Log::create([
-                    'hub_id' => $thread_id,
-                    'session_id' => $request->session()->getId(),
+                    'hub_id' => $request->thread_id,
                     'user_id' => $request->user()->id ?? null,
-                    'uri' => $request->path(),
                 ]);
-            } catch (RuntimeException) {
-                /*
-                RuntimeException: Session store not set on request.
-
-                実際にはSessionの取得が出来ているため，例外が発生した場合は何もしない
-                */
+                session()->put('thread_id', $request->thread_id);
             }
+        } else {
+            abort(404);
         }
 
         return $response;
