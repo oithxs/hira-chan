@@ -19,6 +19,9 @@ mix.js('resources/js/app.js', 'public/js')
         require('tailwindcss'),
     ]);
 
+mix.js('resources/js/app.jsx', 'public/js')
+    .react();
+
 glob.sync('resources/js/*/*.js').map(function (file) {
     mix.js(file, 'public/js/app_jquery.js')
 });
