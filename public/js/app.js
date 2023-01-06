@@ -5109,7 +5109,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
-var TBody = function TBody(props) {
+/**
+ * 過去に閲覧したスレッド一覧を表示する
+ *
+ * @param {*} props
+ * @returns
+ */
+var History = function History(props) {
   var threads = props.history.map(function (accessLog, index) {
     var url = "/dashboard/thread/name=" + accessLog.hub.name + "&id=" + accessLog.hub.id;
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", {
@@ -5129,11 +5135,6 @@ var TBody = function TBody(props) {
       })]
     }, index);
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", {
-    children: threads
-  });
-};
-var History = function History(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", {
     className: "table",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("thead", {
@@ -5143,9 +5144,8 @@ var History = function History(props) {
           children: "\u30B9\u30EC\u30C3\u30C9\u540D"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", {})]
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(TBody, {
-      history: props.history,
-      onClick: props.onClick
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", {
+      children: threads
     })]
   });
 };
@@ -5174,6 +5174,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+/**
+ * 閲覧履歴ページの表示を行う
+ *
+ * @returns
+ */
 
 
 var Index = function Index() {

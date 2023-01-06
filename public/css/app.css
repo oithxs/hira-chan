@@ -4460,6 +4460,7 @@ select {
   }
 }
 
+/* テーブルの td タグ内にある a タグのリンクを拡大 */
 td.a-block a {
     display: block;
 }

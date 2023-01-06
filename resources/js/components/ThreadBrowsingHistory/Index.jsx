@@ -2,6 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { History } from './History';
 
+/**
+ * 閲覧履歴ページの表示を行う
+ *
+ * @returns
+ */
 const Index = () => {
     const [thread, setThread] = React.useState({});
     const element = document.getElementById('thread_browsing_history');

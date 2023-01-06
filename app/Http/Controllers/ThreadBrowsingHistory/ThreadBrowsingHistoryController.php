@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class ThreadBrowsingHistoryController extends Controller
 {
+    /**
+     * 重複なしで，過去に閲覧したスレッドを取得する
+     *
+     * @param Request $request
+     * @return void
+     */
     public function __invoke(Request $request)
     {
         $history = AccessLog::with('hub')
