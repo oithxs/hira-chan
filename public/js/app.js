@@ -5187,7 +5187,7 @@ var Index = function Index() {
     _React$useState2 = _slicedToArray(_React$useState, 2),
     thread = _React$useState2[0],
     setThread = _React$useState2[1];
-  var element = document.getElementById('thread_browsing_history');
+  var element = document.getElementById("thread_browsing_history");
   var history = JSON.parse(element.dataset.history);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
     className: "container",
@@ -5209,7 +5209,7 @@ var Index = function Index() {
     })
   });
 };
-var threadBrowsingHistory = react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot(document.getElementById('thread_browsing_history'));
+var threadBrowsingHistory = react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot(document.getElementById("thread_browsing_history"));
 threadBrowsingHistory.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Index, {}));
 
 /***/ }),
