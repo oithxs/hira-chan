@@ -2,3 +2,16 @@
 td.a-block a {
     display: block;
 }
+
+/* 表示横幅を超えないようにする */
+.ow-break-word {
+    overflow-wrap: break-word;
+}
+
+/* 縦方向において，オーバーフローした場合にスクロールを可能にする */
+.thread-posts {
+    height: 100vh;
+    width: 50;
+    overflow-y: scroll;
+    overflow-x: hidde;
+}
