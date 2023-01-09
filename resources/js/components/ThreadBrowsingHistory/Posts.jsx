@@ -38,7 +38,7 @@ export const Posts = (props) => {
     }
 
     return (
-        <div className="overflow-hidden sm:rounded-lg">
+        <div className="overflow-hidden sm:rounded-lg sticky">
             <div className="row px-3 bg-primary bg-opacity-25">
                 <div className="col-sm-12 col-xs-12 bg-secondry thread-posts">
                     {posts}

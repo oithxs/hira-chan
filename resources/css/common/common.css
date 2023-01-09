@@ -10,8 +10,14 @@ td.a-block a {
 
 /* 縦方向において，オーバーフローした場合にスクロールを可能にする */
 .thread-posts {
-    height: 100vh;
+    height: 90vh;
     width: 50;
     overflow-y: scroll;
     overflow-x: hidde;
+}
+
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 5%;
 }

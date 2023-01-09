@@ -5314,7 +5314,7 @@ var Posts = function Posts(props) {
     }, i));
   }
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-    className: "overflow-hidden sm:rounded-lg",
+    className: "overflow-hidden sm:rounded-lg sticky",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
       className: "row px-3 bg-primary bg-opacity-25",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
