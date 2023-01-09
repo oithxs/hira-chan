@@ -7,9 +7,9 @@ abstract class UseFormRequestTestCase extends TestCase
     /**
      * テスト対象のメソッド
      *
-     * @var array
+     * @var mixed
      */
-    protected array $method;
+    protected mixed $method;
 
     /**
      * テスト対象メソッドの引数
