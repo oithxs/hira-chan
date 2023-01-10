@@ -62,7 +62,9 @@ const Index = () => {
     );
 };
 
-const threadBrowsingHistory = ReactDOM.createRoot(
-    document.getElementById("thread_browsing_history")
-);
-threadBrowsingHistory.render(<Index />);
+if (document.getElementById("thread_browsing_history")) {
+    const threadBrowsingHistory = ReactDOM.createRoot(
+        document.getElementById("thread_browsing_history")
+    );
+    threadBrowsingHistory.render(<Index />);
+}
