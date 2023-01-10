@@ -75,11 +75,11 @@ abstract class UseFormRequestTestCase extends TestCase
      * 対象メソッド実行時の引数を変更する．
      * このメソッドは，対象となるメソッドでエラーが発生したかどうかを返す．
      *
-     * @param array $key
-     * @param array $value
+     * @param array $keys
+     * @param array $values
      * @return mixed
      */
-    protected function useFormRequest(array $keys, array $values): mixed
+    protected function useFormRequest(array $keys = [], array $values = []): mixed
     {
         $this->setUpUseFormRequest();
         for ($i = 0; $i < count($keys); $i++) {
