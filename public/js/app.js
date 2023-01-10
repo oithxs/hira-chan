@@ -5260,8 +5260,10 @@ var Index = function Index() {
     })
   });
 };
-var threadBrowsingHistory = react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot(document.getElementById("thread_browsing_history"));
-threadBrowsingHistory.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Index, {}));
+if (document.getElementById("thread_browsing_history")) {
+  var threadBrowsingHistory = react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot(document.getElementById("thread_browsing_history"));
+  threadBrowsingHistory.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Index, {}));
+}
 
 /***/ }),
 
