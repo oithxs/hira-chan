@@ -139,6 +139,10 @@
                                 {{ __('My page') }}
                             </x-jet-dropdown-link>
 
+                            <x-jet-dropdown-link href="{{ route('thread.history') }}" class="text-decoration-none">
+                                {{ __('Thread history') }}
+                            </x-jet-dropdown-link>
+
                             <x-jet-dropdown-link href="{{ route('profile.show') }}" class="text-decoration-none">
                                 {{ __('Profile') }}
                             </x-jet-dropdown-link>

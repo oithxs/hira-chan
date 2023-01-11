@@ -51,6 +51,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('/mypage', 'App\Http\Controllers\MyPage\MyPageController')->name('mypage');
     Route::get('/report/create', 'App\Http\Controllers\Report\FormContactAdministratorController@create')->name('report.create');
+    Route::get('/thread/history', 'App\Http\Controllers\ThreadBrowsingHistory\ThreadBrowsingHistoryController')->name('thread.history');
 });
 
 // CRUD
