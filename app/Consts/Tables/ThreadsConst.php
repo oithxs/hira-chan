@@ -14,6 +14,15 @@ class ThreadsConst
     const UPDATED_AT = 'updated_at';
     const DELETED_AT = 'deleted_at';
 
+    // 大枠カテゴリ一覧
+    const CATEGORYS = [
+        ThreadPrimaryCategoryConst::CLUB,
+        ThreadPrimaryCategoryConst::COLLEGE_YEAR,
+        ThreadPRimaryCategoryConst::DEPARTMENT,
+        ThreadPrimaryCategoryConst::JOB_HUNTING,
+        ThreadPrimaryCategoryConst::LECTURE,
+    ];
+
     // カラム一覧
     const COLUMNS = [
         self::ID,
@@ -24,6 +33,15 @@ class ThreadsConst
         self::CREATED_AT,
         self::UPDATED_AT,
         self::DELETED_AT,
+    ];
+
+    // Eloquentモデルまでの完全修飾クラス名
+    const MODEL_FQCNS = [
+        ClubThreadConst::MODEL_FQCN,
+        CollegeYearThreadConst::MODEL_FQCN,
+        DepartmentThreadConst::MODEL_FQCN,
+        JobHuntingThreadConst::MODEL_FQCN,
+        LectureThreadConst::MODEL_FQCN,
     ];
 
     // スレッドへの書き込みを保存するテーブル一覧
@@ -42,14 +60,5 @@ class ThreadsConst
         DepartmentThreadConst::USED_FOREIGN_KEY,
         JobHuntingThreadConst::USED_FOREIGN_KEY,
         LectureThreadConst::USED_FOREIGN_KEY,
-    ];
-
-    // Eloquentモデルまでの完全修飾クラス名
-    const MODEL_FQCNS = [
-        ClubThreadConst::MODEL_FQCN,
-        CollegeYearThreadConst::MODEL_FQCN,
-        DepartmentThreadConst::MODEL_FQCN,
-        JobHuntingThreadConst::MODEL_FQCN,
-        LectureThreadCOnst::MODEL_FQCN,
     ];
 }
