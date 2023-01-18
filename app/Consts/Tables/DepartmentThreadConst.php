@@ -2,13 +2,15 @@
 
 namespace App\Consts\Tables;
 
+use App\Models\DepartmentThread;
+
 class DepartmentThreadConst extends ThreadsConst
 {
     // 大枠カテゴリ名
     const PRIMARY_CATEGORY_NAME = ThreadPrimaryCategoryConst::DEPARTMENT;
 
     // Eloquentモデルまでの完全修飾クラス名
-    const MODEL_FQCN = '\App\Models\DepartmentThread';
+    const MODEL_FQCN = DepartmentThread::class;
 
     // テーブル名
     const NAME = 'department_threads';

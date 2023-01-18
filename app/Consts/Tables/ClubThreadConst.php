@@ -2,13 +2,15 @@
 
 namespace App\Consts\Tables;
 
+use App\Models\ClubThread;
+
 class ClubThreadConst extends ThreadsConst
 {
     // 大枠カテゴリ名
     const PRIMARY_CATEGORY_NAME = ThreadPrimaryCategoryConst::CLUB;
 
     // Eloquentモデルまでの完全修飾クラス名
-    const MODEL_FQCN = '\App\Models\ClubThread';
+    const MODEL_FQCN = ClubThread::class;
 
     // テーブル名
     const NAME = 'club_threads';
