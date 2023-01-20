@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Unit\app\Services\HubService;
+namespace Tests\Unit\app\Services\ThreadService;
 
 use App\Consts\Tables\ThreadsConst;
-use App\Services\HubService;
+use App\Services\ThreadService;
 use PHPUnit\Framework\TestCase;
 use TypeError;
 
@@ -17,7 +17,7 @@ class GetTableNameTest extends TestCase
     public function testAssertsTheTableNameOfTheRetrievedModel(): void
     {
         for ($i = 0; $i < count(ThreadsConst::TABLES); $i++) {
-            $response = (new HubService)->getTableName(ThreadsConst::CATEGORYS[$i]);
+            $response = (new ThreadService)->getTableName(ThreadsConst::CATEGORYS[$i]);
             $this->assertSame(
                 ThreadsConst::TABLES[$i],
                 $response
@@ -33,7 +33,7 @@ class GetTableNameTest extends TestCase
     public function testArgumentIsAThreadPrimaryCategoryNameThatDoseNotExist(): void
     {
         $threadPrimaryCategoryName = 'not existent thread primary category';
-        $response = (new HubService)->getTableName($threadPrimaryCategoryName);
+        $response = (new ThreadService)->getTableName($threadPrimaryCategoryName);
         $this->assertSame('', $response);
     }
 
@@ -45,7 +45,7 @@ class GetTableNameTest extends TestCase
     public function testThreadPrimaryCategoryNameUndefined(): void
     {
         $this->expectException(TypeError::class);
-        $response = (new HubService)->getTableName();
+        $response = (new ThreadService)->getTableName();
         $this->assertSame('', $response);
     }
 }
