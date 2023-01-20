@@ -4,13 +4,15 @@ namespace Tests\Unit\app\Services\ThreadService;
 
 use App\Consts\Tables\ThreadsConst;
 use App\Services\ThreadService;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Support\TestPost;
 use Tests\TestCase;
 use TypeError;
 
 class PostToTableNameTest extends TestCase
 {
-    use TestPost;
+    use RefreshDatabase,
+        TestPost;
 
     private ThreadService $threadService;
 
