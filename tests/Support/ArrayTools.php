@@ -2,7 +2,7 @@
 
 namespace Tests\Support;
 
-class ArrayTools
+trait ArrayTools
 {
     /**
      * 渡された配列のうち，指定したインデックスの要素を返却する
