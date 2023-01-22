@@ -5,8 +5,11 @@ namespace App\Repositories;
 use App\Models\ClubThread;
 use App\Models\CollegeYearThread;
 use App\Models\DepartmentThread;
+use App\Models\Hub;
 use App\Models\JobHuntingThread;
 use App\Models\LectureThread;
+use App\Models\ThreadPrimaryCategory;
+use App\Models\ThreadSecondaryCategory;
 
 class ThreadRepository
 {
@@ -57,5 +60,65 @@ class ThreadRepository
         ClubThread | CollegeYearThread | DepartmentThread | JobHuntingThread | LectureThread $post
     ): string {
         return $post->id;
+    }
+
+    /**
+     * 書き込みの `hub_id` を取得する
+     *
+     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post
+     * @return string
+     */
+    public static function getHubId(
+        ClubThread | CollegeYearThread | DepartmentThread | JobHuntingThread | LectureThread $post
+    ): string {
+        return $post->hub_id;
+    }
+
+    /**
+     * 書き込みからスレッドを取得する
+     *
+     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post
+     * @return Hub
+     */
+    public static function postToHub(
+        ClubThread | CollegeYearThread | DepartmentThread | JobHuntingThread | LectureThread $post
+    ): Hub {
+        return $post->hub;
+    }
+
+    /**
+     * 書き込みから詳細カテゴリを取得する
+     *
+     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post
+     * @return ThreadSecondaryCategory
+     */
+    public static function postToThreadSecondaryCategory(
+        ClubThread | CollegeYearThread | DepartmentThread | JobHuntingThread | LectureThread $post
+    ): ThreadSecondaryCategory {
+        return self::postToHub($post)->thread_secondary_category;
+    }
+
+    /**
+     * 書き込みから大枠カテゴリを取得する
+     *
+     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post
+     * @return ThreadPrimaryCategory
+     */
+    public static function postToThreadPrimaryCategory(
+        ClubThread | CollegeYearThread | DepartmentThread | JobHuntingThread | LectureThread $post
+    ): ThreadPrimaryCategory {
+        return self::postToThreadSecondaryCategory($post)->thread_primary_category;
+    }
+
+    /**
+     * 書き込みから大枠カテゴリ名を取得する
+     *
+     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post
+     * @return string
+     */
+    public static function postToThreadPrimaryCategoryName(
+        ClubThread | CollegeYearThread | DepartmentThread | JobHuntingThread | LectureThread $post
+    ): string {
+        return self::postToThreadPrimaryCategory($post)->name;
     }
 }
