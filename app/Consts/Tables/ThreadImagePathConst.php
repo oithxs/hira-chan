@@ -5,7 +5,10 @@ namespace App\Consts\Tables;
 class ThreadImagePathConst
 {
     // テーブル名
-    const NAME = 'access_logs';
+    const NAME = 'thread_image_paths';
+
+    // 外部キーとして利用されるときのカラム名
+    const USED_FOREIGN_KEY = 'thread_image_path_id';
 
     // カラム名
     const ID = 'id';

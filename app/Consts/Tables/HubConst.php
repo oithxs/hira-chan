@@ -7,6 +7,9 @@ class HubConst
     // テーブル名
     const NAME = 'hub';
 
+    // 外部キーとして利用されるときのカラム名
+    const USED_FOREIGN_KEY = 'hub_id';
+
     // カラム名
     const ID = 'id';
     const THREAD_SECONDARY_CATEGORY_ID = 'thread_secondary_category_id';

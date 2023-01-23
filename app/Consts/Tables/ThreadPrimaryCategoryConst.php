@@ -7,6 +7,9 @@ class ThreadPrimaryCategoryConst
     // テーブル名
     const NAME = 'thread_primary_categorys';
 
+    // 外部キーとして利用されるときのカラム名
+    const USED_FOREIGN_KEY = 'thread_primary_category_id';
+
     // カラム名
     const ID = 'id';
     const _NAME = 'name';
