@@ -7,7 +7,7 @@ use App\Models\Hub;
 use App\Repositories\ThreadRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Support\ArrayToolsTrait;
-use Tests\Support\AssertSameInterface;
+use Tests\Support\AssertSame\AssertSameInterface;
 use Tests\Support\PostTestTrait;
 use Tests\TestCase;
 use TypeError;
