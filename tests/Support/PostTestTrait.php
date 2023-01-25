@@ -8,7 +8,7 @@ use App\Consts\Tables\ThreadSecondaryCategoryConst;
 use App\Models\Hub;
 use App\Models\ThreadSecondaryCategory;
 
-trait TestPost
+trait PostTestTrait
 {
     public array $posts;
 

@@ -2,7 +2,7 @@
 
 namespace Tests\Support;
 
-interface AssertSame
+interface AssertSameInterface
 {
     /**
      * 対象データの全要素を取得する

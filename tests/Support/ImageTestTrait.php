@@ -5,7 +5,7 @@ namespace Tests\Support;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 
-trait TestImage
+trait ImageTestTrait
 {
     /**
      * テストで使用する各フォーマットの画像パス
