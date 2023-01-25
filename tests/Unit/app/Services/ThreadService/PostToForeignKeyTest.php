@@ -5,14 +5,14 @@ namespace Tests\Unit\app\Services\ThreadService;
 use App\Consts\Tables\ThreadsConst;
 use App\Services\ThreadService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\Support\TestPost;
+use Tests\Support\PostTestTrait;
 use Tests\TestCase;
 use TypeError;
 
 class PostToForeignKeyTest extends TestCase
 {
     use RefreshDatabase,
-        TestPost;
+        PostTestTrait;
 
     private ThreadService $threadService;
 

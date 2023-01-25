@@ -8,17 +8,17 @@ use App\Models\ThreadPrimaryCategory;
 use App\Models\ThreadSecondaryCategory;
 use App\Repositories\ThreadRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\Support\ArrayTools;
-use Tests\Support\AssertSame;
-use Tests\Support\TestPost;
+use Tests\Support\ArrayToolsTrait;
+use Tests\Support\AssertSameInterface;
+use Tests\Support\PostTestTrait;
 use Tests\TestCase;
 use TypeError;
 
-class PostToThreadPrimaryCategoryTest extends TestCase implements AssertSame
+class PostToThreadPrimaryCategoryTest extends TestCase implements AssertSameInterface
 {
     use RefreshDatabase,
-        TestPost,
-        ArrayTools;
+        PostTestTrait,
+        ArrayToolsTrait;
 
     /**
      * テースト対象のメソッド

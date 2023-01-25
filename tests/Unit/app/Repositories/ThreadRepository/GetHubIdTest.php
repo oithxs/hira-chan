@@ -4,14 +4,14 @@ namespace Tests\Unit\app\Repositories\ThreadRepository;
 
 use App\Repositories\ThreadRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\Support\TestPost;
+use Tests\Support\PostTestTrait;
 use Tests\TestCase;
 use TypeError;
 
 class GetHubIdTest extends TestCase
 {
     use RefreshDatabase,
-        TestPost;
+        PostTestTrait;
 
     /**
      * テースト対象のメソッド
