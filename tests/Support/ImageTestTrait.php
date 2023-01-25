@@ -74,8 +74,8 @@ trait ImageTestTrait
      */
     public function makeImageSize(): int
     {
-        $this->fileSize = random_int(1, 10485760);
-        return $this->fileSize;
+        $this->imageSize = random_int(1, 10485760);
+        return $this->imageSize;
     }
 
     /**
