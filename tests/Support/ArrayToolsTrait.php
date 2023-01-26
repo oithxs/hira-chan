@@ -11,7 +11,7 @@ trait ArrayToolsTrait
      * @param array $keys 連想配列のインデックスを指定
      * @return array インデックスと一致した連想配列を返却
      */
-    public static function getArrayElement(array $ary, array $keys): array
+    public function getArrayElement(array $ary, array $keys): array
     {
         $response = [];
         foreach ($keys as $key) {
