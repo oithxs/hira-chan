@@ -4,9 +4,12 @@ namespace Tests\Support\AssertSame\Tables;
 
 use App\Consts\Tables\ThreadImagePathConst;
 use App\Consts\Tables\ThreadsConst;
+use Tests\Support\ArrayToolsTrait;
 
 trait ThreadImagePathTrait
 {
+    use ArrayToolsTrait;
+
     /**
      * 対応する thread_image_paths テーブルのデータ
      *
