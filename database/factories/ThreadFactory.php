@@ -4,9 +4,9 @@ namespace Database\Factories;
 
 use App\Consts\Tables\ThreadsConst;
 use App\Models\Hub;
-use App\Models\ThreadPrimaryCategory;
 use App\Models\User;
 use App\Repositories\ThreadPrimaryCategoryRepository;
+use App\Repositories\ThreadRepository;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -42,9 +42,37 @@ class ThreadFactory extends Factory
         return [
             'hub_id' => $thread->id,
             'user_id' => User::factory()->create()->id,
-            'message_id' => $this->model::where('hub_id', '=', $thread->id)
-                ->max('message_id') + 1 ?? 0,
+            'message_id' => $this->getNextMessageId($this->model, $thread->id),
             'message' => $this->faker->text(),
         ];
+    }
+
+    /**
+     * 書き込むスレッドを指定する
+     * メッセージIDは自動更新する
+     *
+     * @param string $threadId スレッドID
+     * @return ThreadFactory
+     */
+    public function thread(string $threadId): ThreadFactory
+    {
+        return $this->state(function (array $attributes) use ($threadId) {
+            return [
+                'hub_id' => $threadId,
+                'message_id' => $this->getNextMessageId($this->model, $threadId),
+            ];
+        });
+    }
+
+    /**
+     * 対応するスレッドにおける次のメッセージIDを取得する
+     *
+     * @param string $model モデルクラス名
+     * @param string $threadId スレッドID
+     * @return integer
+     */
+    private function getNextMessageId(string $model, string $threadId): int
+    {
+        return ThreadRepository::getMaxMessageId($model, $threadId) + 1;
     }
 }
