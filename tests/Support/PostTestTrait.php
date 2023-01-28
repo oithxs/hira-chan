@@ -10,6 +10,11 @@ use App\Models\ThreadSecondaryCategory;
 
 trait PostTestTrait
 {
+    /**
+     * スレッドへの書き込み
+     *
+     * @var array
+     */
     public array $posts;
 
     /**
@@ -41,6 +46,23 @@ trait PostTestTrait
                 $this->posts[] = ThreadsConst::MODEL_FQCNS[$i]::factory()->create([
                     'hub_id' => $thread->id
                 ]);
+            }
+        }
+    }
+
+    /**
+     * 指定された数，すべての大枠カテゴリの書き込みをメンバ変数に代入する
+     *
+     * @param integer $max
+     * @return void
+     */
+    public function multiPostsSetUp(int $max): void
+    {
+        $this->posts = [];
+        for ($i = 0; $i < count(ThreadsConst::CATEGORYS); $i++) {
+            $thread = Hub::factory()->primaryCategory(ThreadsConst::CATEGORYS[$i])->create();
+            foreach (range(1, $max) as $_) {
+                $this->posts[$i][] = ThreadsConst::MODEL_FQCNS[$i]::factory()->thread($thread->id)->create();
             }
         }
     }
