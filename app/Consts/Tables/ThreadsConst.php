@@ -18,9 +18,18 @@ class ThreadsConst
     const CATEGORYS = [
         ThreadPrimaryCategoryConst::CLUB,
         ThreadPrimaryCategoryConst::COLLEGE_YEAR,
-        ThreadPRimaryCategoryConst::DEPARTMENT,
+        ThreadPrimaryCategoryConst::DEPARTMENT,
         ThreadPrimaryCategoryConst::JOB_HUNTING,
         ThreadPrimaryCategoryConst::LECTURE,
+    ];
+
+    // モデル名を key として，大枠カテゴリ名を value とした連想配列
+    const MODEL_TO_CATEGORYS = [
+        self::MODEL_FQCNS[0] => self::CATEGORYS[0],
+        self::MODEL_FQCNS[1] => self::CATEGORYS[1],
+        self::MODEL_FQCNS[2] => self::CATEGORYS[2],
+        self::MODEL_FQCNS[3] => self::CATEGORYS[3],
+        self::MODEL_FQCNS[4] => self::CATEGORYS[4],
     ];
 
     // カラム一覧
