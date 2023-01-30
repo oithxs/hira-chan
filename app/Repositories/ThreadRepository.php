@@ -10,9 +10,40 @@ use App\Models\JobHuntingThread;
 use App\Models\LectureThread;
 use App\Models\ThreadPrimaryCategory;
 use App\Models\ThreadSecondaryCategory;
+use Illuminate\Support\Collection;
 
 class ThreadRepository
 {
+    /**
+     * スレッドの書き込みを取得する
+     *
+     * @param string $threadModelFQCN 書き込みを取得するモデルクラスまでの完全修飾クラス名
+     * @param string $threadId 取得するスレッドのID
+     * @param string $userId ログインしているユーザID
+     * @param integer $preMaxMessageId 前回取得したメッセージIDの最大値
+     * @return Collection
+     */
+    public static function show(
+        string $threadModelFQCN,
+        string $threadId,
+        string $userId,
+        int $preMaxMessageId
+    ): Collection {
+        return $threadModelFQCN::with([
+            'user',
+            'thread_image_path',
+            'likes' => function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            }
+        ])
+            ->withCount('likes')
+            ->where([
+                ['hub_id', $threadId],
+                ['message_id', '>', $preMaxMessageId]
+            ])
+            ->get();
+    }
+
     /**
      * スレッドに書き込みを行う
      *
