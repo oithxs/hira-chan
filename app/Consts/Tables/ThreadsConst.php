@@ -70,4 +70,13 @@ class ThreadsConst
         JobHuntingThreadConst::USED_FOREIGN_KEY,
         LectureThreadConst::USED_FOREIGN_KEY,
     ];
+
+    // モデル名を key として，テーブルが外部キーとして利用される時のカラム名を value とした連想配列
+    const MODEL_TO_USED_FOREIGN_KEYS = [
+        self::MODEL_FQCNS[0] => self::USED_FOREIGN_KEYS[0],
+        self::MODEL_FQCNS[1] => self::USED_FOREIGN_KEYS[1],
+        self::MODEL_FQCNS[2] => self::USED_FOREIGN_KEYS[2],
+        self::MODEL_FQCNS[3] => self::USED_FOREIGN_KEYS[3],
+        self::MODEL_FQCNS[4] => self::USED_FOREIGN_KEYS[4],
+    ];
 }
