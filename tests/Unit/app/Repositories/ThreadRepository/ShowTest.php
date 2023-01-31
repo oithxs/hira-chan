@@ -5,14 +5,12 @@ namespace Tests\Unit\app\Repositories\ThreadRepository;
 use App\Consts\Tables\ThreadsConst;
 use App\Models\Like;
 use App\Models\ThreadImagePath;
-use App\Models\ThreadModel;
 use App\Models\User;
 use App\Repositories\ThreadRepository;
 use Error;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Support\AssertSame\AssertSameInterface;
-use Tests\Support\AssertSame\Tables\ThreadsTrait;
+use Tests\Support\AssertSame\ExtPostTrait;
 use Tests\Support\ImageTestTrait;
 use Tests\Support\PostTestTrait;
 use Tests\TestCase;
@@ -20,10 +18,10 @@ use TypeError;
 
 class ShowTest extends TestCase implements AssertSameInterface
 {
-    use PostTestTrait,
+    use ExtPostTrait,
+        PostTestTrait,
         RefreshDatabase,
-        ImageTestTrait,
-        ThreadsTrait;
+        ImageTestTrait;
 
     private User $user;
 
@@ -45,173 +43,13 @@ class ShowTest extends TestCase implements AssertSameInterface
     }
 
     /**
-     * 書き込みを取得した際に期待する key を取得する
-     *
-     * @return array
-     */
-    private function getPostKeysExpected(): array
-    {
-        $expected = $this->getKeysExpected();
-        $expected[] = 'likes_count';
-        $expected[] = 'user';
-        $expected[] = 'thread_image_path';
-        $expected[] = 'likes';
-        return $expected;
-    }
-
-    /**
-     * 実際に取得した書き込みを返却する
-     *
-     * @return array
-     */
-    private function getPostValuesActual(): array
-    {
-        $postActualKeys = [
-            'likes_count',
-            'user',
-            'thread_image_path',
-            'likes',
-        ];
-
-        $actual = $this->getValuesActual();
-        foreach ($postActualKeys as $postActualKey) {
-            $actual[$postActualKey] = $this->post[$postActualKey];
-        }
-        return $actual;
-    }
-
-    /**
-     * スレッドへの書き込みを保存するテーブルの
-     * 期待するデータを取得する
-     *
-     * @param array $args
-     * @return array
-     */
-    public function getValuesExpected(array $args): array
-    {
-        $post = $this->getExpectedPost(
-            ThreadsConst::MODEL_FQCNS[$args['i']],
-            $args['threadId'],
-            $args['messageId']
-        );
-
-        $expected = [];
-        $expected['hub_id'] = $post->hub_id;
-        $expected['user_id'] = $post->user_id;
-        $expected['message_id'] = $post->message_id;
-        $expected['message'] = $post->message;
-        $expected['likes_count'] = $this->getExpectedLikesCount(
-            $args['i'],
-            $args['postId'],
-        );
-        $expected['user'] = $this->getExpectedUser($args['userId']);
-        $expected['thread_image_path'] = $this->getExpectedThreadImagePath(
-            $args['i'],
-            $args['postId']
-        );
-        $expected['likes'] = $this->getExpectedLike(
-            $args['i'],
-            $args['postId'],
-            $args['login'] ?? ''
-        );
-        return $expected;
-    }
-
-    /**
-     * 期待する書き込みをデータベースから取得する
-     *
-     * @param string $model
-     * @param string $threadId
-     * @param string $messageId
-     * @return ThreadModel
-     */
-    private function getExpectedPost(string $model, string $threadId, string $messageId): ThreadModel
-    {
-        return $model::where([
-            ['hub_id', $threadId],
-            ['message_id', $messageId],
-        ])->first();
-    }
-
-    /**
-     * 対応する likes テーブルのデータを取得する
-     *
-     * @param integer $i
-     * @param integer $postId
-     * @return Builder
-     */
-    private function getLikeBuilder(int $i, int $postId): Builder
-    {
-        return Like::where([
-            [ThreadsConst::USED_FOREIGN_KEYS[$i], $postId]
-        ]);
-    }
-
-    /**
-     * 期待する書き込みへのいいね数を取得する
-     *
-     * @param integer $i
-     * @param integer $postId
-     * @return integer
-     */
-    private function getExpectedLikesCount(int $i, int $postId): int
-    {
-        return $this->getLikeBuilder($i, $postId)->count();
-    }
-
-    /**
-     * 期待するデータベースに保存されたいいねを取得する
-     *
-     * @param integer $i
-     * @param integer $postId
-     * @param string $userId
-     * @return array
-     */
-    private function getExpectedLike(int $i, int $postId, string $userId): array
-    {
-        return $this->getLikeBuilder($i, $postId)
-            ->where([[
-                'user_id', $userId
-            ]])->get()->toArray();
-    }
-
-    /**
-     * 期待するデータベースに保存されたユーザを取得する
-     *
-     * @param string $userId
-     * @return array
-     */
-    private function getExpectedUser(string $userId): array
-    {
-        return User::find($userId)->toArray();
-    }
-
-    /**
-     * 期待するデータベースに保存された画像の情報を取得する
-     *
-     * @param integer $i
-     * @param integer $postId
-     * @return array|null
-     */
-    public function getExpectedThreadImagePath(int $i, int $postId): array | null
-    {
-        $response = ThreadImagePath::where([
-            [ThreadsConst::USED_FOREIGN_KEYS[$i], $postId],
-        ])->get()->toArray();
-
-        return $response !== []
-            ? $response[count($response) - 1]
-            : null;
-    }
-
-    /**
      * 画像の情報をデータベースに保存する
      *
-     * @param string $foreignKey
-     * @param integer $postId
-     * @param string $userId
-     * @param string|null $imagePath
-     * @param string|null $imageSize
+     * @param string $foreignKey 書き込んだスレッドの外部キー名
+     * @param integer $postId 書き込みの主キー
+     * @param string $userId 画像を保存するユーザID
+     * @param string|null $imagePath 画像のパス
+     * @param string|null $imageSize 画像のサイズ
      * @return void
      */
     private function storeThreadImagePath(
@@ -249,8 +87,8 @@ class ShowTest extends TestCase implements AssertSameInterface
     /**
      * いいねをデータベースに保存する
      *
-     * @param array $posts
-     * @param User|null $user
+     * @param array $posts いいねをつける書き込み
+     * @param User|null $user いいねをつけるユーザ
      * @return void
      */
     private function storeLike(array $posts, User $user = null): void
@@ -284,18 +122,16 @@ class ShowTest extends TestCase implements AssertSameInterface
             for ($j = 0; $j < count($response); $j++) {
                 $this->post = $response[$j]->toArray();
                 $this->assertSame(
-                    $this->getPostKeysExpected(),
+                    $this->getKeysExpected(),
                     array_keys($this->post)
                 );
                 $this->assertSame(
                     $this->getValuesExpected([
-                        'i' => $i,
-                        'postId' => $this->posts[$i][$j]->id,
+                        'model' => ThreadsConst::MODEL_FQCNS[$i],
                         'threadId' => $this->posts[$i][$j]->hub_id,
                         'messageId' => $this->posts[$i][$j]->message_id,
-                        'userId' => $this->posts[$i][$j]->user_id
                     ]),
-                    $this->getPostValuesActual()
+                    $this->getValuesActual()
                 );
             }
         }
@@ -340,18 +176,16 @@ class ShowTest extends TestCase implements AssertSameInterface
 
                 // 取得した書き込みが期待するものか
                 $this->assertSame(
-                    $this->getPostKeysExpected(),
+                    $this->getKeysExpected(),
                     array_keys($this->post)
                 );
                 $this->assertSame(
                     $this->getValuesExpected([
-                        'i' => $i,
-                        'postId' => $this->posts[$i][$j + $preMaxMessageId]->id,
+                        'model' => ThreadsConst::MODEL_FQCNS[$i],
                         'threadId' => $this->posts[$i][$j + $preMaxMessageId]->hub_id,
                         'messageId' => $this->posts[$i][$j + $preMaxMessageId]->message_id,
-                        'userId' => $this->posts[$i][$j + $preMaxMessageId]->user_id
                     ]),
-                    $this->getPostValuesActual()
+                    $this->getValuesActual()
                 );
             }
         }
@@ -399,18 +233,16 @@ class ShowTest extends TestCase implements AssertSameInterface
             for ($j = 0; $j < count($response); $j++) {
                 $this->post = $response[$j]->toArray();
                 $this->assertSame(
-                    $this->getPostKeysExpected(),
+                    $this->getKeysExpected(),
                     array_keys($this->post)
                 );
                 $this->assertSame(
                     $this->getValuesExpected([
-                        'i' => $i,
-                        'postId' => $this->posts[$i][$j]->id,
+                        'model' => ThreadsConst::MODEL_FQCNS[$i],
                         'threadId' => $this->posts[$i][$j]->hub_id,
                         'messageId' => $this->posts[$i][$j]->message_id,
-                        'userId' => $this->posts[$i][$j]->user_id
                     ]),
-                    $this->getPostValuesActual()
+                    $this->getValuesActual()
                 );
             }
         }
@@ -435,18 +267,16 @@ class ShowTest extends TestCase implements AssertSameInterface
             for ($j = 0; $j < count($response); $j++) {
                 $this->post = $response[$j]->toArray();
                 $this->assertSame(
-                    $this->getPostKeysExpected(),
+                    $this->getKeysExpected(),
                     array_keys($this->post)
                 );
                 $this->assertSame(
                     $this->getValuesExpected([
-                        'i' => $i,
-                        'postId' => $this->posts[$i][$j]->id,
+                        'model' => ThreadsConst::MODEL_FQCNS[$i],
                         'threadId' => $this->posts[$i][$j]->hub_id,
                         'messageId' => $this->posts[$i][$j]->message_id,
-                        'userId' => $this->posts[$i][$j]->user_id
                     ]),
-                    $this->getPostValuesActual()
+                    $this->getValuesActual()
                 );
             }
         }
@@ -471,19 +301,17 @@ class ShowTest extends TestCase implements AssertSameInterface
             for ($j = 0; $j < count($response); $j++) {
                 $this->post = $response[$j]->toArray();
                 $this->assertSame(
-                    $this->getPostKeysExpected(),
+                    $this->getKeysExpected(),
                     array_keys($this->post)
                 );
                 $this->assertSame(
                     $this->getValuesExpected([
-                        'i' => $i,
-                        'postId' => $this->posts[$i][$j]->id,
+                        'model' => ThreadsConst::MODEL_FQCNS[$i],
                         'threadId' => $this->posts[$i][$j]->hub_id,
                         'messageId' => $this->posts[$i][$j]->message_id,
-                        'userId' => $this->posts[$i][$j]->user_id,
-                        'login' => $this->user->id,
+                        'loginUserId' => $this->user->id,
                     ]),
-                    $this->getPostValuesActual()
+                    $this->getValuesActual()
                 );
             }
         }
@@ -588,19 +416,17 @@ class ShowTest extends TestCase implements AssertSameInterface
             for ($j = 0; $j < count($response); $j++) {
                 $this->post = $response[$j]->toArray();
                 $this->assertSame(
-                    $this->getPostKeysExpected(),
+                    $this->getKeysExpected(),
                     array_keys($this->post)
                 );
                 $this->assertSame(
                     $this->getValuesExpected([
-                        'i' => $i,
-                        'postId' => $this->posts[$i][$j]->id,
+                        'model' => ThreadsConst::MODEL_FQCNS[$i],
                         'threadId' => $this->posts[$i][$j]->hub_id,
                         'messageId' => $this->posts[$i][$j]->message_id,
-                        'userId' => $this->posts[$i][$j]->user_id,
-                        'login' => $userId,
+                        'loginUserId' => $userId,
                     ]),
-                    $this->getPostValuesActual()
+                    $this->getValuesActual()
                 );
             }
         }
@@ -664,18 +490,16 @@ class ShowTest extends TestCase implements AssertSameInterface
 
                 // 取得した書き込みが期待するものか
                 $this->assertSame(
-                    $this->getPostKeysExpected(),
+                    $this->getKeysExpected(),
                     array_keys($this->post)
                 );
                 $this->assertSame(
                     $this->getValuesExpected([
-                        'i' => $i,
-                        'postId' => $this->posts[$i][$j]->id,
+                        'model' => ThreadsConst::MODEL_FQCNS[$i],
                         'threadId' => $this->posts[$i][$j]->hub_id,
                         'messageId' => $this->posts[$i][$j]->message_id,
-                        'userId' => $this->posts[$i][$j]->user_id
                     ]),
-                    $this->getPostValuesActual()
+                    $this->getValuesActual()
                 );
             }
         }
