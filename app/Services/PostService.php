@@ -11,6 +11,7 @@ use App\Repositories\HubRepository;
 use App\Repositories\ThreadRepository;
 use App\Services\ThreadService;
 use App\Services\Support\HtmlSpecialCharsService;
+use Illuminate\Support\Collection;
 
 class PostService
 {
@@ -19,6 +20,29 @@ class PostService
     public function __construct()
     {
         $this->threadService = new ThreadService();
+    }
+
+    /**
+     * スレッドの書き込みを取得する
+     *
+     * @param string $threadId hubテーブルの`id`
+     * @param string $userId userテーブルの`id`
+     * @param integer $preMaxMessageId 前回取得したメッセージIDの最大値
+     * @return Collection
+     */
+    public function show(
+        string $threadId,
+        string $userId,
+        int $preMaxMessageId
+    ): Collection {
+        return ThreadRepository::show(
+            $this->threadService->getThreadClassName(
+                HubRepository::getThreadPrimaryCategoryName($threadId)
+            ),
+            $threadId,
+            $userId,
+            $preMaxMessageId
+        );
     }
 
     /**
