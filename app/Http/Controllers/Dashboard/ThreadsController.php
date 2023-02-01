@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Dashboard\NotLoggedIn\ThreadsController as Controller;
+use App\Http\Controllers\Controller;
 use App\Services\PostService;
 use App\Services\ThreadImageService;
 use Illuminate\Http\Request;
@@ -17,6 +17,21 @@ class ThreadsController extends Controller
     {
         $this->postService = new PostService();
         $this->threadImageService = new ThreadImageService();
+    }
+
+    /**
+     * [POST] スレッドの書き込みを取得する．
+
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Support\Collection | void
+     */
+    public function show(Request $request)
+    {
+        return $this->postService->show(
+            $request->thread_id,
+            $request->user()->id ?? '',
+            $request->max_message_id
+        );
     }
 
     /**
