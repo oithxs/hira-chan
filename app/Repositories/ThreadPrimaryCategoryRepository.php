@@ -12,7 +12,7 @@ class ThreadPrimaryCategoryRepository
      * `id` から対象のデータを取得する
      *
      * @param integer $id ThreadPrimaryCategoryテーブルの`id`
-     * @return ThreadPrimaryCategory|null
+     * @return ThreadPrimaryCategory|null ThreadPrimaryCategoryテーブルの`id`に対応する大枠カテゴリ
      */
     public static function find(int $id): ThreadPrimaryCategory | null
     {
@@ -23,7 +23,7 @@ class ThreadPrimaryCategoryRepository
      * `id` から対象カテゴリの名前を取得する
      *
      * @param integer $id ThreadPrimaryCategoryテーブルの`id`
-     * @return string
+     * @return string ThreadPrimaryCategoryテーブルの`id`に対応する大枠カテゴリ名
      */
     public static function getName(int $id): string | null
     {
@@ -34,7 +34,7 @@ class ThreadPrimaryCategoryRepository
      * `name` から対象のデータを取得する
      *
      * @param string $primaryCategoryName 大枠カテゴリ名
-     * @return Builder
+     * @return Builder 戻り値に対してクエリビルダを利用できる
      */
     public static function getThreadPrimaryCategoryBuilder(string $primaryCategoryName): Builder
     {
@@ -45,7 +45,7 @@ class ThreadPrimaryCategoryRepository
      * `name` から対応する詳細カテゴリのデータを取得する
      *
      * @param string $primaryCategoryName 大枠カテゴリ名
-     * @return HasMany
+     * @return HasMany 戻り値に対してクエリビルだを利用できる
      */
     public static function getThreadSecondaryCategoryHasMany(string $primaryCategoryName): HasMany
     {

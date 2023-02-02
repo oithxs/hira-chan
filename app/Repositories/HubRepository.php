@@ -12,7 +12,7 @@ class HubRepository
      * id からスレッドを取得する
      *
      * @param string $threadId スレッドID
-     * @return Hub|null
+     * @return Hub|null スレッドIDに対応するスレッド
      */
     public static function find(string $threadId): Hub | null
     {
@@ -23,7 +23,7 @@ class HubRepository
      * id から該当スレッドの詳細カテゴリを取得する
      *
      * @param string $threadId スレッドID
-     * @return ThreadSecondaryCategory
+     * @return ThreadSecondaryCategory スレッドIDに対応する詳細カテゴリ
      */
     public static function getThreadSecondaryCategory(string $threadId): ThreadSecondaryCategory
     {
@@ -34,7 +34,7 @@ class HubRepository
      * id から該当スレッドの大枠カテゴリを取得する
      *
      * @param string $threadId スレッドID
-     * @return ThreadPrimaryCategory
+     * @return ThreadPrimaryCategory スレッドIDに対応する大枠カテゴリ
      */
     public static function getThreadPrimaryCategory(string $threadId): ThreadPrimaryCategory
     {
@@ -45,7 +45,7 @@ class HubRepository
      * id から該当スレッドの大枠カテゴリの名前を取得する
      *
      * @param string $threadId スレッドID
-     * @return string
+     * @return string スレッドIDに対応する大枠カテゴリ名
      */
     public static function getThreadPrimaryCategoryName(string $threadId): string
     {

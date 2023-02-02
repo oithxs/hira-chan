@@ -17,7 +17,7 @@ class ThreadRepository
      * @param string $threadId 取得するスレッドのID
      * @param string $userId ログインしているユーザID
      * @param integer $preMaxMessageId 前回取得したメッセージIDの最大値
-     * @return Collection
+     * @return Collection 対応するスレッドへの書き込み一覧．書き込みに対する「いいね」や「ユーザ」，「画像の情報」含む
      */
     public static function show(
         string $threadModelFQCN,
@@ -47,7 +47,7 @@ class ThreadRepository
      * @param string $threadId 書き込むスレッドのID
      * @param string $userId 書き込むユーザのID
      * @param string $message 書き込む内容
-     * @return ThreadModel
+     * @return ThreadModel スレッド（テーブル）へ保存した書き込み
      */
     public static function store(
         string $threadClassName,
@@ -68,7 +68,7 @@ class ThreadRepository
      *
      * @param string $threadClassName スレッドを保存しているモデルクラスの完全修飾クラス名
      * @param string $threadId スレッドID
-     * @return integer|null
+     * @return integer|null スレッドの最大メッセージID
      */
     public static function getMaxMessageId(
         string $threadClassName,
@@ -81,7 +81,7 @@ class ThreadRepository
      * 書き込みの `id` を取得する
      *
      * @param ThreadModel $post スレッドへの書き込み
-     * @return string
+     * @return string 書き込みの`id`
      */
     public static function getId(ThreadModel $post): string
     {
@@ -92,7 +92,7 @@ class ThreadRepository
      * 書き込みの `hub_id` を取得する
      *
      * @param ThreadModel $post スレッドへの書き込み
-     * @return string
+     * @return string 書き込みの`hub_id`
      */
     public static function getHubId(ThreadModel $post): string
     {
@@ -103,7 +103,7 @@ class ThreadRepository
      * 書き込みからスレッドを取得する
      *
      * @param ThreadModel $post　スレッドへの書き込み
-     * @return Hub
+     * @return Hub 書き込んだスレッド
      */
     public static function postToHub(ThreadModel $post): Hub
     {
@@ -114,7 +114,7 @@ class ThreadRepository
      * 書き込みから詳細カテゴリを取得する
      *
      * @param ThreadModel $post スレッドへの書き込み
-     * @return ThreadSecondaryCategory
+     * @return ThreadSecondaryCategory 書き込んだスレッドが属する詳細カテゴリ
      */
     public static function postToThreadSecondaryCategory(ThreadModel $post): ThreadSecondaryCategory
     {
@@ -125,7 +125,7 @@ class ThreadRepository
      * 書き込みから大枠カテゴリを取得する
      *
      * @param ThreadModel $post スレッドへの書き込み
-     * @return ThreadPrimaryCategory
+     * @return ThreadPrimaryCategory 書き込んだスレッドが属する大枠カテゴリ
      */
     public static function postToThreadPrimaryCategory(ThreadModel $post): ThreadPrimaryCategory
     {
@@ -136,7 +136,7 @@ class ThreadRepository
      * 書き込みから大枠カテゴリ名を取得する
      *
      * @param ThreadModel $post スレッドへの書き込み
-     * @return string
+     * @return string 書き込んだスレッドが属する大枠カテゴリの名前
      */
     public static function postToThreadPrimaryCategoryName(ThreadModel $post): string
     {

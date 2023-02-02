@@ -9,7 +9,7 @@ class ClubThreadRepository
     /**
      * テーブル名を取得する
      *
-     * @return string
+     * @return string テーブル名
      */
     public static function getTableName(): string
     {
