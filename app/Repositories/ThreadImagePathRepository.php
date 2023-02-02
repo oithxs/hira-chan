@@ -9,11 +9,11 @@ class ThreadImagePathRepository
     /**
      * `thread_image_paths` テーブルのレコードを作成
      *
-     * @param string $foreignKeyName
-     * @param string $messageId
-     * @param string $userId
-     * @param string $imagePath
-     * @param integer $fileSize
+     * @param string $foreignKeyName 書き込んだテーブルの外部キー名
+     * @param string $messageId 書き込みのメッセージID
+     * @param string $userId 画像をアップロードしたユーザのID
+     * @param string $imagePath 保存した画像までのパス
+     * @param integer $fileSize 保存した画像のサイズ
      * @return void
      */
     public static function store(

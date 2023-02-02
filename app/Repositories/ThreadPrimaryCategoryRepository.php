@@ -11,7 +11,7 @@ class ThreadPrimaryCategoryRepository
     /**
      * `id` から対象のデータを取得する
      *
-     * @param integer $id
+     * @param integer $id ThreadPrimaryCategoryテーブルの`id`
      * @return ThreadPrimaryCategory|null
      */
     public static function find(int $id): ThreadPrimaryCategory | null
@@ -22,7 +22,7 @@ class ThreadPrimaryCategoryRepository
     /**
      * `id` から対象カテゴリの名前を取得する
      *
-     * @param integer $id
+     * @param integer $id ThreadPrimaryCategoryテーブルの`id`
      * @return string
      */
     public static function getName(int $id): string | null
@@ -44,7 +44,7 @@ class ThreadPrimaryCategoryRepository
     /**
      * `name` から対応する詳細カテゴリのデータを取得する
      *
-     * @param string $primaryCategoryName
+     * @param string $primaryCategoryName 大枠カテゴリ名
      * @return HasMany
      */
     public static function getThreadSecondaryCategoryHasMany(string $primaryCategoryName): HasMany

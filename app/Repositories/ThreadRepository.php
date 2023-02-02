@@ -47,10 +47,10 @@ class ThreadRepository
     /**
      * スレッドに書き込みを行う
      *
-     * @param string $threadClassName
-     * @param string $threadId
-     * @param string $userId
-     * @param string $message
+     * @param string $threadClassName 書き込みを保存するモデルクラスまでの完全修飾クラス名
+     * @param string $threadId 書き込むスレッドのID
+     * @param string $userId 書き込むユーザのID
+     * @param string $message 書き込む内容
      * @return ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread
      */
     public static function store(
@@ -70,8 +70,8 @@ class ThreadRepository
     /**
      * スレッドの最大 `message_id` を取得する
      *
-     * @param string $threadClassName
-     * @param string $threadId
+     * @param string $threadClassName スレッドを保存しているモデルクラスの完全修飾クラス名
+     * @param string $threadId スレッドID
      * @return integer|null
      */
     public static function getMaxMessageId(
@@ -84,7 +84,7 @@ class ThreadRepository
     /**
      * 書き込みの `id` を取得する
      *
-     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post
+     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post スレッドへの書き込み
      * @return string
      */
     public static function getId(
@@ -96,7 +96,7 @@ class ThreadRepository
     /**
      * 書き込みの `hub_id` を取得する
      *
-     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post
+     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post スレッドへの書き込み
      * @return string
      */
     public static function getHubId(
@@ -108,7 +108,7 @@ class ThreadRepository
     /**
      * 書き込みからスレッドを取得する
      *
-     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post
+     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post　スレッドへの書き込み
      * @return Hub
      */
     public static function postToHub(
@@ -120,7 +120,7 @@ class ThreadRepository
     /**
      * 書き込みから詳細カテゴリを取得する
      *
-     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post
+     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post スレッドへの書き込み
      * @return ThreadSecondaryCategory
      */
     public static function postToThreadSecondaryCategory(
@@ -132,7 +132,7 @@ class ThreadRepository
     /**
      * 書き込みから大枠カテゴリを取得する
      *
-     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post
+     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post スレッドへの書き込み
      * @return ThreadPrimaryCategory
      */
     public static function postToThreadPrimaryCategory(
@@ -144,7 +144,7 @@ class ThreadRepository
     /**
      * 書き込みから大枠カテゴリ名を取得する
      *
-     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post
+     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post スレッドへの書き込み
      * @return string
      */
     public static function postToThreadPrimaryCategoryName(
