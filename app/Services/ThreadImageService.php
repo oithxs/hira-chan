@@ -2,11 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\ClubThread;
-use App\Models\CollegeYearThread;
-use App\Models\DepartmentThread;
-use App\Models\JobHuntingThread;
-use App\Models\LectureThread;
+use App\Models\ThreadModel;
 use App\Repositories\ThreadImagePathRepository;
 use App\Repositories\ThreadRepository;
 use App\Services\ThreadService;
@@ -48,13 +44,13 @@ class ThreadImageService
      * 画像を storage に保存し，DBに画像の情報を保存する
      *
      * @param UploadedFile $image アップロードされた画像
-     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post スレッドへの書き込み
+     * @param ThreadModel $post スレッドへの書き込み
      * @param string $userId 画像をアップロードしたユーザのID
      * @return void
      */
     public function store(
         UploadedFile $image,
-        ClubThread | CollegeYearThread | DepartmentThread | JobHuntingThread | LectureThread $post,
+        ThreadModel $post,
         string $userId
     ): void {
         // 画像をストレージに保存
@@ -80,12 +76,12 @@ class ThreadImageService
     /**
      * 画像の情報をデータベースに保存する
      *
-     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post スレッドへの書き込み
+     * @param ThreadModel $post スレッドへの書き込み
      * @param string $userId 画像をアップロードしたユーザのID
      * @return void
      */
     public function storeToDB(
-        ClubThread | CollegeYearThread | DepartmentThread | JobHuntingThread | LectureThread $post,
+        ThreadModel $post,
         $userId
     ): void {
         ThreadImagePathRepository::store(

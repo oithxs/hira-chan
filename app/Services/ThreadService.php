@@ -7,11 +7,7 @@ use App\Consts\Tables\CollegeYearThreadConst;
 use App\Consts\Tables\DepartmentThreadConst;
 use App\Consts\Tables\JobHuntingThreadConst;
 use App\Consts\Tables\LectureThreadConst;
-use App\Models\ClubThread;
-use App\Models\CollegeYearThread;
-use App\Models\DepartmentThread;
-use App\Models\JobHuntingThread;
-use App\Models\LectureThread;
+use App\Models\ThreadModel;
 use App\Repositories\ThreadRepository;
 use App\Services\TableService;
 
@@ -75,35 +71,32 @@ class ThreadService
     /**
      * スレッドへの書き込みから外部キー名を取得する
      *
-     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post スレッドへの書き込み
+     * @param ThreadModel $post スレッドへの書き込み
      * @return string 外部キー名
      */
-    public function postToForeignKey(
-        ClubThread | CollegeYearThread | DepartmentThread | JobHuntingThread | LectureThread $post
-    ): string {
+    public function postToForeignKey(ThreadModel $post): string
+    {
         return  $this->tableService->makeForeignKeyName($this->postToTableName($post));
     }
 
     /**
      * スレッドへの書き込みからテーブル名を取得する
      *
-     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post スレッドへの書き込み
+     * @param ThreadModel $post スレッドへの書き込み
      */
-    public function postToTableName(
-        ClubThread | CollegeYearThread | DepartmentThread | JobHuntingThread | LectureThread $post
-    ): string {
+    public function postToTableName(ThreadModel $post): string
+    {
         return $this->getTableName($this->postToThreadPrimaryCategoryName($post));
     }
 
     /**
      * スレッドへの書き込みから大枠カテゴリ名を取得する
      *
-     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post スレッドへの書き込み
+     * @param ThreadModel $post スレッドへの書き込み
      * @return string
      */
-    public function postToThreadPrimaryCategoryName(
-        ClubThread | CollegeYearThread | DepartmentThread | JobHuntingThread | LectureThread $post
-    ): string {
+    public function postToThreadPrimaryCategoryName(ThreadModel $post): string
+    {
         return ThreadRepository::postToThreadPrimaryCategoryName($post);
     }
 }

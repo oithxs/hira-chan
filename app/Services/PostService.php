@@ -2,11 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\ClubThread;
-use App\Models\CollegeYearThread;
-use App\Models\DepartmentThread;
-use App\Models\JobHuntingThread;
-use App\Models\LectureThread;
+use App\Models\ThreadModel;
 use App\Repositories\HubRepository;
 use App\Repositories\ThreadRepository;
 use App\Services\ThreadService;
@@ -52,14 +48,14 @@ class PostService
      * @param string $userId スレッドに書き込むユーザのID
      * @param string $message スレッドに書き込む内容
      * @param string|null $reply 書き込みの返信先`message_id`
-     * @return ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread スレッド（テーブル）へ保存した書き込み
+     * @return ThreadModel スレッド（テーブル）へ保存した書き込み
      */
     public function store(
         string $threadId,
         string $userId,
         string $message,
         string | null $reply
-    ): ClubThread | CollegeYearThread | DepartmentThread | JobHuntingThread | LectureThread {
+    ): ThreadModel {
         return ThreadRepository::store(
             $this->threadService->getThreadClassName(
                 HubRepository::getThreadPrimaryCategoryName($threadId)
