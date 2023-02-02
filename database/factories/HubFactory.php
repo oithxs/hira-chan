@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Hub;
-use App\Models\ThreadPrimaryCategory;
 use App\Models\ThreadSecondaryCategory;
 use App\Models\User;
 use App\Repositories\ThreadPrimaryCategoryRepository;
@@ -45,18 +44,18 @@ class HubFactory extends Factory
     /**
      * 大枠カテゴリを指定する
      *
-     * @param string $primaryCategory
+     * @param string $primaryCategoryName
      * @return HubFactory
      */
-    public function primaryCategory(string $primaryCategory): HubFactory
+    public function primaryCategory(string $primaryCategoryName): HubFactory
     {
-        return $this->state(function (array $attributes) use ($primaryCategory) {
+        return $this->state(function (array $attributes) use ($primaryCategoryName) {
             return [
                 'thread_secondary_category_id' => random_int(
-                    ThreadPrimaryCategoryRepository::getThreadSecondaryCategoryHasMany($primaryCategory)
+                    ThreadPrimaryCategoryRepository::getThreadSecondaryCategoryHasMany($primaryCategoryName)
                         ->first()
                         ->id,
-                    ThreadPrimaryCategoryRepository::getThreadSecondaryCategoryHasMany($primaryCategory)
+                    ThreadPrimaryCategoryRepository::getThreadSecondaryCategoryHasMany($primaryCategoryName)
                         ->orderByDesc('id')
                         ->first()
                         ->id
