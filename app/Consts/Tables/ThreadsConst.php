@@ -6,8 +6,8 @@ class ThreadsConst
 {
     // カラム名
     const ID = 'id';
-    const HUB_ID = 'hub_id';
-    const USER_ID = 'user_id';
+    const HUB_ID = HubConst::USED_FOREIGN_KEY;
+    const USER_ID = UserConst::USED_FOREIGN_KEY;
     const MESSAGE_ID = 'message_id';
     const MESSAGE = 'message';
     const CREATED_AT = 'created_at';

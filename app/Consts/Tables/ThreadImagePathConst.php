@@ -12,12 +12,12 @@ class ThreadImagePathConst
 
     // カラム名
     const ID = 'id';
-    const CLUB_THREAD_ID = 'club_thread_id';
-    const COLLEGE_YEAR_THREAD_ID = 'college_year_thread_id';
-    const DEPARTMENT_THREAD_ID = 'department_thread_id';
-    const JOB_HUNTING_THREAD_ID = 'job_hunting_thread_id';
-    const LECTURE_THREAD_ID = 'lecture_thread_id';
-    const USER_ID = 'user_id';
+    const CLUB_THREAD_ID = ClubThreadConst::USED_FOREIGN_KEY;
+    const COLLEGE_YEAR_THREAD_ID = CollegeYearTHreadConst::USED_FOREIGN_KEY;
+    const DEPARTMENT_THREAD_ID = DepartmentThreadConst::USED_FOREIGN_KEY;
+    const JOB_HUNTING_THREAD_ID = JobHuntingThreadConst::USED_FOREIGN_KEY;
+    const LECTURE_THREAD_ID = LectureThreadConst::USED_FOREIGN_KEY;
+    const USER_ID = UserConst::USED_FOREIGN_KEY;
     const IMG_PATH = 'img_path';
     const IMG_SIZE = 'img_size';
     const CREATED_AT = 'created_at';

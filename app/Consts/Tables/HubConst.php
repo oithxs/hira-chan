@@ -12,8 +12,8 @@ class HubConst
 
     // カラム名
     const ID = 'id';
-    const THREAD_SECONDARY_CATEGORY_ID = 'thread_secondary_category_id';
-    const USER_ID = 'user_id';
+    const THREAD_SECONDARY_CATEGORY_ID = ThreadSecondarYCategoryConst::USED_FOREIGN_KEY;
+    const USER_ID = UserConst::USED_FOREIGN_KEY;
     const _NAME = 'name';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';

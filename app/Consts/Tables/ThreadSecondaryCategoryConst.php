@@ -12,7 +12,7 @@ class ThreadSecondaryCategoryConst
 
     // カラム名
     const ID = 'id';
-    const THREAD_PRIMARY_CATEGORY_ID = 'thread_primary_category_id';
+    const THREAD_PRIMARY_CATEGORY_ID = ThreadPrimaryCategoryConst::USED_FOREIGN_KEY;
     const _NAME = 'name';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
