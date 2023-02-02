@@ -27,8 +27,8 @@ class ThreadService
     /**
      * 大枠カテゴリ名から各テーブルの定数クラスの完全修飾クラス名を取得する
      *
-     * @param string $threadPrimaryCategoryName
-     * @return string|null
+     * @param string $threadPrimaryCategoryName 大枠カテゴリ名
+     * @return string|null 大枠カテゴリ名に対応する各モデルの完全修飾クラス名
      */
     public function getTableConst(string $threadPrimaryCategoryName): string | null
     {
@@ -51,8 +51,8 @@ class ThreadService
     /**
      * 大枠カテゴリから，Eloquent モデルの完全修飾クラス名を取得する
      *
-     * @param string $threadPrimaryCategoryName
-     * @return string|null
+     * @param string $threadPrimaryCategoryName 大枠カテゴリ名
+     * @return string 大枠カテゴリ名に対応する各モデルの完全修飾クラス名
      */
     public function getThreadClassName(string $threadPrimaryCategoryName): string
     {
@@ -63,8 +63,8 @@ class ThreadService
     /**
      * 大枠カテゴリから，テーブル名を取得する
      *
-     * @param string $threadPrimaryCategoryName
-     * @return string|null
+     * @param string $threadPrimaryCategoryName 大枠カテゴリ名
+     * @return string 大枠カテゴリ名に対応する各モデルのテーブル名
      */
     public function getTableName(string $threadPrimaryCategoryName): string
     {
@@ -75,8 +75,8 @@ class ThreadService
     /**
      * スレッドへの書き込みから外部キー名を取得する
      *
-     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post
-     * @return string
+     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post スレッドへの書き込み
+     * @return string 外部キー名
      */
     public function postToForeignKey(
         ClubThread | CollegeYearThread | DepartmentThread | JobHuntingThread | LectureThread $post
@@ -87,7 +87,7 @@ class ThreadService
     /**
      * スレッドへの書き込みからテーブル名を取得する
      *
-     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post
+     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post スレッドへの書き込み
      */
     public function postToTableName(
         ClubThread | CollegeYearThread | DepartmentThread | JobHuntingThread | LectureThread $post
@@ -98,7 +98,7 @@ class ThreadService
     /**
      * スレッドへの書き込みから大枠カテゴリ名を取得する
      *
-     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post
+     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post スレッドへの書き込み
      * @return string
      */
     public function postToThreadPrimaryCategoryName(

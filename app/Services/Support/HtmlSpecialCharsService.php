@@ -23,8 +23,8 @@ class HtmlSpecialCharsService
     /**
      * 元の文字列と同様にHTMLで表示できるように文字列を変換する
      *
-     * @param string $text
-     * @return string
+     * @param string $text 変換する文字列
+     * @return string HTMLで問題なく表示できるように変換した文字列
      */
     public static function encode(string $text): string
     {

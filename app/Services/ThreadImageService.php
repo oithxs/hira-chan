@@ -47,9 +47,9 @@ class ThreadImageService
     /**
      * 画像を storage に保存し，DBに画像の情報を保存する
      *
-     * @param UploadedFile $image
-     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post
-     * @param string $userId
+     * @param UploadedFile $image アップロードされた画像
+     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post スレッドへの書き込み
+     * @param string $userId 画像をアップロードしたユーザのID
      * @return void
      */
     public function store(
@@ -67,7 +67,7 @@ class ThreadImageService
     /**
      * 画像を storage に保存する
      *
-     * @param UploadedFile $image
+     * @param UploadedFile $image アップロードされた画像
      * @return void
      */
     public function storeImage(UploadedFile $image)
@@ -80,8 +80,8 @@ class ThreadImageService
     /**
      * 画像の情報をデータベースに保存する
      *
-     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post
-     * @param string $userId
+     * @param ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread $post スレッドへの書き込み
+     * @param string $userId 画像をアップロードしたユーザのID
      * @return void
      */
     public function storeToDB(
@@ -100,7 +100,7 @@ class ThreadImageService
     /**
      * 画像パスを作成する
      *
-     * @return string
+     * @return string スレッドへアップロードされた画像の保存先（の文字列）
      */
     public function makeImagePath(): string
     {
@@ -111,8 +111,8 @@ class ThreadImageService
     /**
      * 画像をJPGに変換する
      *
-     * @param UploadedFile $image
-     * @return Image
+     * @param UploadedFile $image アップロードした画像
+     * @return Image JPG形式に変換した画像
      */
     public function encodeToJpg(UploadedFile $image): Image
     {
@@ -122,7 +122,7 @@ class ThreadImageService
     /**
      * インスタンスの画像パスを取得する
      *
-     * @return string
+     * @return string （メンバ変数：imagePath）画像パス
      */
     public function getImagePath(): string
     {
@@ -132,7 +132,7 @@ class ThreadImageService
     /**
      * ファイルサイズを取得する
      *
-     * @return integer
+     * @return integer （メンバ変数：imageSize）画像のサイズ
      */
     public function getImageSize(): int
     {

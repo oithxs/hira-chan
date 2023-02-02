@@ -25,10 +25,10 @@ class PostService
     /**
      * スレッドの書き込みを取得する
      *
-     * @param string $threadId hubテーブルの`id`
-     * @param string $userId userテーブルの`id`
+     * @param string $threadId 書き込みを取得するスレッドのID
+     * @param string $userId 書き込みを取得するユーザのID
      * @param integer $preMaxMessageId 前回取得したメッセージIDの最大値
-     * @return Collection
+     * @return Collection 指定されたスレッドへの書き込み（すべて）
      */
     public function show(
         string $threadId,
@@ -48,11 +48,11 @@ class PostService
     /**
      * スレッドに書き込みを行う
      *
-     * @param string $threadId hubテーブルの`id`
-     * @param string $userId usersテーブルの`id`
+     * @param string $threadId 書き込むスレッドのID
+     * @param string $userId スレッドに書き込むユーザのID
      * @param string $message スレッドに書き込む内容
      * @param string|null $reply 書き込みの返信先`message_id`
-     * @return ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread
+     * @return ClubThread|CollegeYearThread|DepartmentThread|JobHuntingThread|LectureThread スレッド（テーブル）へ保存した書き込み
      */
     public function store(
         string $threadId,
@@ -73,9 +73,9 @@ class PostService
     /**
      * データの加工を行う
      *
-     * @param string $message スレッドに書き込む内容
+     * @param string $message 加工元の文字列
      * @param string|null $reply 書き込みの返信先`message_id`
-     * @return string
+     * @return string HTMLで表示可能にし，返信用のリンクを追加した文字列
      */
     public function messageProcessing(string $message, string | null $reply): string
     {
@@ -89,9 +89,9 @@ class PostService
     /**
      * 該当する `message_id` に移動するリンクを追加する
      *
-     * @param string $text スレッドに書き込む内容
+     * @param string $text 加工元の文字列
      * @param string $reply 書き込みの返信先`message_id`
-     * @return string
+     * @return string 返信先へ移動できるリンクを追加した文字列
      */
     public function addReply(string $text, string $reply): string
     {
