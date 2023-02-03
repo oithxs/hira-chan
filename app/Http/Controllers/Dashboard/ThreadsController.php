@@ -2,83 +2,54 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Dashboard\NotLoggedIn\ThreadsController as Controller;
-use App\Models\Hub;
+use App\Http\Controllers\Controller;
+use App\Services\PostService;
+use App\Services\ThreadImageService;
 use Illuminate\Http\Request;
 
 class ThreadsController extends Controller
 {
+    private PostService $postService;
+
+    private ThreadImageService $threadImageService;
+
+    public function __construct()
+    {
+        $this->postService = new PostService();
+        $this->threadImageService = new ThreadImageService();
+    }
+
+    /**
+     * [POST] スレッドの書き込みを取得する．
+
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Support\Collection | void
+     */
+    public function show(Request $request)
+    {
+        return $this->postService->show(
+            $request->thread_id,
+            $request->user()->id ?? '',
+            $request->max_message_id
+        );
+    }
+
     /**
      * [POST] スレッドへの書き込みを検証し，保存する
      *
      * 特殊文字変換のエスケープなどを行う．
      * このメソッドから各カテゴリ用のクラスを呼び出し，DBにメッセージなどを書き込む．
-     * ファイルがアップロードされた場合，ThreadImagePathController を呼び出す．
-     *
-     * @link https://readouble.com/laravel/9.x/ja/queries.html
-     * @see \App\Http\Controllers\Dashboard\ClubThreadController::store() [Call]
-     * @see \App\Http\Controllers\Dashboard\CollegeYearThreadController::store() [Call]
-     * @see \App\Http\Controllers\Dashboard\DepartmentThreadController::store() [Call]
-     * @see \App\Http\Controllers\Dashboard\JobHuntingThreadController::store() [Call]
-     * @see \App\Http\Controllers\Dashboard\LectureThreadController::store() [Call]
-     * @see \App\Http\Controllers\Dashboard\ThreadImagePathController::store() [Call]
+     * ファイルがアップロードされた場合，画像を保存する．
      *
      * @param  \Illuminate\Http\Request  $request
      * @return void
      */
     public function store(Request $request)
     {
-        $special_character_set = array(
-            "&" => "&amp;",
-            "<" => "&lt;",
-            ">" => "&gt;",
-            " " => "&ensp;",
-            "　" => "&emsp;",
-            "\n" => "<br>",
-            "\t" => "&ensp;&ensp;"
-        );
+        // 書き込みの保存（メッセージ）
+        $post = $this->postService->store($request->thread_id, $request->user()->id, $request->message, $request->reply, $request->file('img'));
 
-        $message = $request->message;
-        foreach ($special_character_set as $key => $value) {
-            $message = str_replace($key, $value, $message);
-        }
-
-        if ($request->reply != null) {
-            $reply = '<a class="bg-info" href="#thread_message_id_' . str_replace('>>> ', '', $request->reply) . '">' . $request->reply . '</a>';
-            $message = $reply . '<br>' . $message;
-        }
-
-        $message_id = 0;
-        $thread = Hub::with('thread_secondary_category')
-            ->where('id', '=', $request->thread_id)
-            ->first();
-
-        switch ($thread->thread_secondary_category->thread_primary_category->name) {
-            case '部活':
-                $message_id = (new ClubThreadController)->store($request->thread_id, $request->user()->id, $message);
-                break;
-            case '学年':
-                $message_id = (new CollegeYearThreadController)->store($request->thread_id, $request->user()->id, $message);
-                break;
-            case '学科':
-                $message_id = (new DepartmentThreadController)->store($request->thread_id, $request->user()->id, $message);
-                break;
-            case '就職':
-                $message_id = (new JobHuntingThreadController)->store($request->thread_id, $request->user()->id, $message);
-                break;
-            case '授業':
-                $message_id = (new LectureThreadController)->store($request->thread_id, $request->user()->id, $message);
-                break;
-            default:
-                break;
-        }
-
-        (new ThreadImagePathController)->store(
-            $request->file('img'),
-            $request->user()->id,
-            $request->thread_id,
-            $message_id,
-            $thread->thread_secondary_category->thread_primary_category->name
-        );
+        // 書き込みでアップロードされた画像の保存（画像があれば）
+        !$request->hasFile('img') ?: $this->threadImageService->store($request->file('img'), $post, $request->user()->id);
     }
 }
