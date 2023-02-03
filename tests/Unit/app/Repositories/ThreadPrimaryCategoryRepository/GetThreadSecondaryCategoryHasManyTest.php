@@ -78,7 +78,7 @@ class GetThreadSecondaryCategoryHasManyTest extends TestCase implements AssertSa
                 $this->assertSame(
                     $this->getValuesExpected([
                         'primaryCategoryName' => $primaryCategoryName,
-                        'secondaryCategoryName' => ThreadSecondaryCategoryConst::SECONDARY_CATEGORYS[$primaryCategoryName][$i],
+                        'secondaryCategoryName' => ThreadSecondaryCategoryConst::PRIMARY_IN_SECONDARY_CATEGORYS[$primaryCategoryName][$i],
                     ]),
                     $this->getValuesActual()
                 );

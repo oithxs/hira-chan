@@ -49,8 +49,11 @@ class ThreadSecondaryCategoryConst
     // 授業
     const CAREER_COURSES = 'キャリア科目';
 
-    // 保存された詳細カテゴリ名一覧
-    const SECONDARY_CATEGORYS = [
+    /*
+    | 大枠カテゴリカテゴリをkeyとして
+    | それに属する詳細カテゴリの配列を値とする連想配列
+    */
+    const PRIMARY_IN_SECONDARY_CATEGORYS = [
         ThreadPrimaryCategoryConst::CLUB => [
             self::HXS,
         ],
@@ -73,5 +76,21 @@ class ThreadSecondaryCategoryConst
         ThreadPrimaryCategoryConst::LECTURE => [
             self::CAREER_COURSES,
         ],
+    ];
+
+    // 保存された詳細カテゴリ名一覧
+    const SECONDARY_CATEGORYS = [
+        self::HXS,
+        self::FRESHMAN,
+        self::SOPHOMORE,
+        self::JUNIOR,
+        self::SENIOR,
+        self::_ID,
+        self::IC,
+        self::IS,
+        self::IM,
+        self::IN,
+        self::TWENTY_TWENTY_TWO,
+        self::CAREER_COURSES,
     ];
 }
