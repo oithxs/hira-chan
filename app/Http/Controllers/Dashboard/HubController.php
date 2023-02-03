@@ -4,11 +4,18 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Hub;
-use App\Models\ThreadSecondaryCategory;
+use App\Services\HubService;
 use Illuminate\Http\Request;
 
 class HubController extends Controller
 {
+    private HubService $hubService;
+
+    public function __construct()
+    {
+        $this->hubService = new HubService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -32,7 +39,6 @@ class HubController extends Controller
     /**
      * [POST] スレッドを作成する．
      *
-     * @link https://readouble.com/laravel/9.x/ja/queries.html
      * @todo https://github.com/oithxs/hira-chan/issues/170
      *
      * @param  \Illuminate\Http\Request  $request
@@ -40,13 +46,11 @@ class HubController extends Controller
      */
     public function store(Request $request)
     {
-        $thread_category_id = ThreadSecondaryCategory::where('name', '=', $request->thread_category)->first()->id;
-
-        Hub::create([
-            'thread_secondary_category_id' => $thread_category_id,
-            'user_id' => $request->user()->id,
-            'name' => $request->thread_name
-        ]);
+        $this->hubService->store(
+            $request->thread_category,
+            $request->user()->id,
+            $request->thread_name
+        );
     }
 
     /**
