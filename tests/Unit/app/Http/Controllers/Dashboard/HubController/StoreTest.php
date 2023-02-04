@@ -6,14 +6,13 @@ use App\Http\Controllers\Dashboard\HubController;
 use App\Models\Hub;
 use App\Models\ThreadSecondaryCategory;
 use App\Models\User;
-use ErrorException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use SebastianBergmann\Type\VoidType;
 use Tests\UseFormRequestTestCase;
+use TypeError;
 
 class StoreTest extends UseFormRequestTestCase
 {
@@ -284,7 +283,7 @@ class StoreTest extends UseFormRequestTestCase
     {
         $this->assertThrows(
             fn () => $this->useFormRequest(['thread_category'], [Str::random(0)]),
-            ErrorException::class
+            TypeError::class
         );
     }
 
@@ -323,7 +322,7 @@ class StoreTest extends UseFormRequestTestCase
     {
         $this->assertThrows(
             fn () => $this->useFormRequest(['thread_category'], [now()]),
-            ErrorException::class
+            TypeError::class
         );
     }
 }

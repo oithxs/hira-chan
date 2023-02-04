@@ -39,7 +39,7 @@ trait PostTestTrait
     {
         $this->posts = [];
         for ($i = 0; $i < count(ThreadsConst::MODEL_FQCNS); $i++) {
-            foreach (ThreadSecondaryCategoryConst::SECONDARY_CATEGORYS[ThreadPrimaryCategoryConst::PRIMARY_CATEGORYS[$i]] as $secondary_category) {
+            foreach (ThreadSecondaryCategoryConst::PRIMARY_IN_SECONDARY_CATEGORYS[ThreadPrimaryCategoryConst::PRIMARY_CATEGORYS[$i]] as $secondary_category) {
                 $thread = Hub::factory()->create([
                     'thread_secondary_category_id' => ThreadSecondaryCategory::where('name', $secondary_category)->first()->id
                 ]);

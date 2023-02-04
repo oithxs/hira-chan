@@ -9,6 +9,26 @@ use App\Models\ThreadSecondaryCategory;
 class HubRepository
 {
     /**
+     * スレッドを作成する
+     *
+     * @param integer $threadSecondaryCategoryId スレッドが属する詳細カテゴリのID
+     * @param string $userId スレッドを作成するユーザのID
+     * @param string $name スレッド名
+     * @return void
+     */
+    public static function store(
+        int $threadSecondaryCategoryId,
+        string $userId,
+        string $name
+    ): void {
+        Hub::create([
+            'thread_secondary_category_id' => $threadSecondaryCategoryId,
+            'user_id' => $userId,
+            'name' => $name,
+        ]);
+    }
+
+    /**
      * id からスレッドを取得する
      *
      * @param string $threadId スレッドID
