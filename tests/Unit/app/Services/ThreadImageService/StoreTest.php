@@ -127,6 +127,10 @@ class StoreTest extends TestCase implements AssertSameInterface
 
                 Storage::disk('local')->assertExists($this->imagePath);
                 Storage::disk('local')->assertDirectoryNotEmpty(config('image.path.upload.thread'));
+                $this->assertMatchesRegularExpression(
+                    '/^public\/images\/thread_message\/[0-9a-z]{32}\.jpg$/',
+                    $this->imagePath
+                );
                 $this->assertSame($this->getKeysExpected(), array_keys($this->getThreadImagePath($i)));
                 $this->assertSame($this->getValuesExpected(['i' => $i]), $this->getValuesActual());
             }
@@ -256,6 +260,10 @@ class StoreTest extends TestCase implements AssertSameInterface
 
                 Storage::disk('local')->assertExists($this->imagePath);
                 Storage::disk('local')->assertDirectoryNotEmpty(config('image.path.upload.thread'));
+                $this->assertMatchesRegularExpression(
+                    '/^public\/images\/thread_message\/[0-9a-z]{32}\.jpg$/',
+                    $this->imagePath
+                );
                 $this->assertSame([],  $this->getAllThreadImagePath());
             }
         }
