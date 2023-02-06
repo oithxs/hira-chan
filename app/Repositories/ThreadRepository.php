@@ -142,4 +142,33 @@ class ThreadRepository
     {
         return self::postToThreadPrimaryCategory($post)->name;
     }
+
+    /**
+     * 書き込みを取得する
+     *
+     * @param string $model 書き込みを取得したいモデルクラス
+     * @param string $threadId 書き込みを取得したいスレッドのID
+     * @param integer $messageId 書き込みを取得したいメッセージのID
+     * @return ThreadModel|null 書き込み
+     */
+    public static function find(string $model, string $threadId, int $messageId): ThreadModel | null
+    {
+        return $model::where([
+            ['hub_id', $threadId],
+            ['message_id', $messageId]
+        ])->first();
+    }
+
+    /**
+     * 書き込みのIDを取得する
+     *
+     * @param string $model 書き込みを取得したいモデルクラス
+     * @param string $threadId 書き込みを取得したいスレッドのID
+     * @param integer $messageId 書き込みを取得したいメッセージのID
+     * @return integer|null 書き込み
+     */
+    public static function findId(string $model, string $threadId, int $messageId): int | null
+    {
+        return self::find($model, $threadId, $messageId)->id ?? null;
+    }
 }
