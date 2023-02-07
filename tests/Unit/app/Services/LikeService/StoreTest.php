@@ -7,9 +7,11 @@ use App\Consts\Tables\ThreadsConst;
 use App\Models\Like;
 use App\Models\User;
 use App\Services\LikeService;
+use Error;
 use ErrorException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use ReflectionClass;
 use Tests\Support\AssertSame\AssertSameInterface;
 use Tests\Support\AssertSame\Tables\LikeTrait;
 use Tests\Support\PostTestTrait;
@@ -25,9 +27,16 @@ class StoreTest extends TestCase implements AssertSameInterface
     private User $user;
 
     /**
-     * @var array テスト対象のメソッド
+     * @var mixed テスト対象メソッドがあるクラスのプライベートなメンバ変数 foreignKey
      */
-    private array $method;
+    private mixed $propertyForeignKey;
+
+    /**
+     * @var mixed テスト対象メソッドがあるクラスのプライベートなメンバ変数 postId
+     */
+    private mixed $propertyPostId;
+
+    private LikeService $likeService;
 
     public function setUp(): void
     {
@@ -35,8 +44,13 @@ class StoreTest extends TestCase implements AssertSameInterface
         $this->postSetUp();
 
         // メンバ変数に値を代入する
+        $this->likeService = new LikeService;
+        $reflection = new ReflectionClass($this->likeService);
+        $this->propertyForeignKey = $reflection->getProperty('foreignKey');
+        $this->propertyForeignKey->setAccessible(true);
+        $this->propertyPostId = $reflection->getProperty('postId');
+        $this->propertyPostId->setAccessible(true);
         $this->user = User::factory()->create();
-        $this->method = [new LikeService, 'store'];
     }
 
     /**
@@ -90,7 +104,7 @@ class StoreTest extends TestCase implements AssertSameInterface
     public function testAssertThatACanLikeThePost(): void
     {
         for ($i = 0; $i < count($this->posts); $i++) {
-            ($this->method)(
+            $this->likeService->store(
                 $this->posts[$i]->hub_id,
                 $this->posts[$i]->message_id,
                 $this->user->id
@@ -106,6 +120,16 @@ class StoreTest extends TestCase implements AssertSameInterface
                 ThreadsConst::USED_FOREIGN_KEYS[$i] => $this->posts[$i]->id,
                 'userId' => $this->user->id
             ]), $this->getValuesActual());
+
+            // メンバ変数に期待する値が入っているかどうか
+            $this->assertSame(
+                ThreadsConst::USED_FOREIGN_KEYS[$i],
+                $this->propertyForeignKey->getValue($this->likeService)
+            );
+            $this->assertSame(
+                $this->posts[$i]->id,
+                $this->propertyPostId->getValue($this->likeService)
+            );
         }
     }
 
@@ -123,7 +147,7 @@ class StoreTest extends TestCase implements AssertSameInterface
 
         for ($i = 0; $i < count($this->posts); $i++) {
             foreach ($users as $user) {
-                ($this->method)(
+                $this->likeService->store(
                     $this->posts[$i]->hub_id,
                     $this->posts[$i]->message_id,
                     $user->id
@@ -155,7 +179,7 @@ class StoreTest extends TestCase implements AssertSameInterface
         $threadId = 'not existent thread id';
         for ($i = 0; $i < count($this->posts); $i++) {
             $this->assertThrows(
-                fn () => ($this->method)(
+                fn () => $this->likeService->store(
                     $threadId,
                     $this->posts[$i]->message_id,
                     $this->user->id
@@ -175,11 +199,11 @@ class StoreTest extends TestCase implements AssertSameInterface
     {
         for ($i = 0; $i < count($this->posts); $i++) {
             $this->assertThrows(
-                fn () => ($this->method)(
+                fn () => $this->likeService->store(
                     messageId: $this->posts[$i]->message_id,
                     userId: $this->user->id
                 ),
-                TypeError::class
+                Error::class
             );
         }
         $this->assertSame([], $this->getAllLike());
@@ -195,7 +219,7 @@ class StoreTest extends TestCase implements AssertSameInterface
         $messageId = -1;
         for ($i = 0; $i < count($this->posts); $i++) {
             $this->assertThrows(
-                fn () => ($this->method)(
+                fn () => $this->likeService->store(
                     $this->posts[$i]->hub_id,
                     $messageId,
                     $this->user->id
@@ -215,11 +239,11 @@ class StoreTest extends TestCase implements AssertSameInterface
     {
         for ($i = 0; $i < count($this->posts); $i++) {
             $this->assertThrows(
-                fn () => ($this->method)(
+                fn () => $this->likeService->store(
                     threadId: $this->posts[$i]->hub_id,
                     userId: $this->user->id
                 ),
-                TypeError::class
+                Error::class
             );
         }
         $this->assertSame([], $this->getAllLike());
@@ -235,7 +259,7 @@ class StoreTest extends TestCase implements AssertSameInterface
         $userId = 'not existent user id';
         for ($i = 0; $i < count($this->posts); $i++) {
             $this->assertThrows(
-                fn () => ($this->method)(
+                fn () => $this->likeService->store(
                     $this->posts[$i]->hub_id,
                     $this->posts[$i]->message_id,
                     $userId
@@ -255,11 +279,11 @@ class StoreTest extends TestCase implements AssertSameInterface
     {
         for ($i = 0; $i < count($this->posts); $i++) {
             $this->assertThrows(
-                fn () => ($this->method)(
+                fn () => $this->likeService->store(
                     threadId: $this->posts[$i]->hub_id,
                     messageId: $this->posts[$i]->message_id
                 ),
-                TypeError::class
+                Error::class
             );
         }
         $this->assertSame([], $this->getAllLike());

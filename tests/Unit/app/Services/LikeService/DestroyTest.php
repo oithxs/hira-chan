@@ -5,8 +5,10 @@ namespace Tests\Unit\app\Services\LikeService;
 use App\Consts\Tables\ThreadsConst;
 use App\Models\Like;
 use App\Services\LikeService;
+use Error;
 use ErrorException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use ReflectionClass;
 use Tests\Support\LikeTestTrait;
 use Tests\TestCase;
 use TypeError;
@@ -17,9 +19,16 @@ class DestroyTest extends TestCase
         RefreshDatabase;
 
     /**
-     * @var array テスト対象のメソッド
+     * @var mixed テスト対象メソッドがあるクラスのプライベートなメンバ変数 foreignKey
      */
-    private array $method;
+    private mixed $propertyForeignKey;
+
+    /**
+     * @var mixed テスト対象メソッドがあるクラスのプライベートなメンバ変数 postId
+     */
+    private mixed $propertyPostId;
+
+    private LikeService $likeService;
 
     public function setUp(): void
     {
@@ -27,7 +36,13 @@ class DestroyTest extends TestCase
         $this->likeSetUp();
 
         // メンバ変数に値を代入する
-        $this->method = [new LikeService, 'destroy'];
+        // メンバ変数に値を代入する
+        $this->likeService = new LikeService;
+        $reflection = new ReflectionClass($this->likeService);
+        $this->propertyForeignKey = $reflection->getProperty('foreignKey');
+        $this->propertyForeignKey->setAccessible(true);
+        $this->propertyPostId = $reflection->getProperty('postId');
+        $this->propertyPostId->setAccessible(true);
     }
 
     /**
@@ -69,7 +84,7 @@ class DestroyTest extends TestCase
     {
         for ($i = 0; $i < count($this->likes); $i++) {
             for ($j = 0; $j < count($this->likes[$i]); $j++) {
-                ($this->method)(
+                $this->likeService->destroy(
                     $this->posts[$i]->hub_id,
                     $this->posts[$i]->message_id,
                     $this->likes[$i][$j]->user_id
@@ -81,6 +96,15 @@ class DestroyTest extends TestCase
                         $this->posts[$i]->id,
                         $this->likes[$i][$j]->user_id
                     )
+                );
+                // メンバ変数に期待する値が入っているかどうか
+                $this->assertSame(
+                    ThreadsConst::USED_FOREIGN_KEYS[$i],
+                    $this->propertyForeignKey->getValue($this->likeService)
+                );
+                $this->assertSame(
+                    $this->posts[$i]->id,
+                    $this->propertyPostId->getValue($this->likeService)
                 );
             }
         }
@@ -98,7 +122,7 @@ class DestroyTest extends TestCase
         for ($i = 0; $i < count($this->likes); $i++) {
             for ($j = 0; $j < count($this->likes[$i]); $j++) {
                 $this->assertThrows(
-                    fn () => ($this->method)(
+                    fn () => $this->likeService->destroy(
                         $threadId,
                         $this->posts[$i]->id,
                         $this->likes[$i][$j]->user_id
@@ -122,11 +146,11 @@ class DestroyTest extends TestCase
         for ($i = 0; $i < count($this->likes); $i++) {
             for ($j = 0; $j < count($this->likes[$i]); $j++) {
                 $this->assertThrows(
-                    fn () => ($this->method)(
+                    fn () => $this->likeService->destroy(
                         messageId: $this->posts[$i]->id,
                         userId: $this->likes[$i][$j]->user_id
                     ),
-                    TypeError::class
+                    Error::class
                 );
             }
         }
@@ -146,7 +170,7 @@ class DestroyTest extends TestCase
         for ($i = 0; $i < count($this->likes); $i++) {
             for ($j = 0; $j < count($this->likes[$i]); $j++) {
                 $this->assertThrows(
-                    fn () => ($this->method)(
+                    fn () => $this->likeService->destroy(
                         $this->posts[$i]->hub_id,
                         $messageId,
                         $this->likes[$i][$j]->user_id
@@ -170,11 +194,11 @@ class DestroyTest extends TestCase
         for ($i = 0; $i < count($this->likes); $i++) {
             for ($j = 0; $j < count($this->likes[$i]); $j++) {
                 $this->assertThrows(
-                    fn () => ($this->method)(
+                    fn () => $this->likeService->destroy(
                         threadId: $this->posts[$i]->hub_id,
                         userId: $this->likes[$i][$j]->user_id
                     ),
-                    TypeError::class
+                    Error::class
                 );
             }
         }
