@@ -50,6 +50,29 @@ class LikeService
     }
 
     /**
+     * 書き込みのいいねを削除する
+     *
+     * @param string $threadId 削除する，いいねがついた書き込みのスレッドID
+     * @param string $messageId 削除する，いいねがついた書き込みのメッセージID
+     * @param string $userId 削除するいいねをつけたユーザID
+     * @return void
+     */
+    public function destroy(string $threadId, string $messageId, string $userId): void
+    {
+        $this->foreignKey = $this->threadService->threadIdToForeignKey($threadId);
+        $this->postId = ThreadRepository::findId(
+            $this->threadService->threadIdToModel($threadId),
+            $threadId,
+            $messageId
+        );
+        LikeRepository::destroy(
+            $this->foreignKey,
+            $this->postId,
+            $userId
+        );
+    }
+
+    /**
      * 指定された書き込みにされたいいね数をカウントする
      *
      * @param string|null $foreignKey 書き込みを保存しているテーブルの外部キー名
