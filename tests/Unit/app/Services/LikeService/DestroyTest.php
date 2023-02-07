@@ -206,4 +206,49 @@ class DestroyTest extends TestCase
             ? $this->assertTrue(true)
             : $this->assertTrue(false);
     }
+
+    /**
+     * 存在しないユーザIDを引数とする
+     *
+     * @return void
+     */
+    public function testArgumentIsAUserIdThatDoesNotExist(): void
+    {
+        $userId = 'not existent user id';
+        for ($i = 0; $i < count($this->likes); $i++) {
+            for ($j = 0; $j < count($this->likes[$i]); $j++) {
+                $this->likeService->destroy(
+                    $this->posts[$i]->hub_id,
+                    $this->posts[$i]->message_id,
+                    $userId
+                );
+            }
+        }
+        [] !== $this->getAllLike()
+            ? $this->assertTrue(true)
+            : $this->assertTrue(false);
+    }
+
+    /**
+     * ユーザID未定義
+     *
+     * @return void
+     */
+    public function testUserIdUndefined(): void
+    {
+        for ($i = 0; $i < count($this->likes); $i++) {
+            for ($j = 0; $j < count($this->likes[$i]); $j++) {
+                $this->assertThrows(
+                    fn () => $this->likeService->destroy(
+                        threadId: $this->posts[$i]->hub_id,
+                        messageId: $this->posts[$i]->message_id
+                    ),
+                    Error::class
+                );
+            }
+        }
+        [] !== $this->getAllLike()
+            ? $this->assertTrue(true)
+            : $this->assertTrue(false);
+    }
 }
