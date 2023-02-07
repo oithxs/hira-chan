@@ -22,7 +22,7 @@ trait LikeTestTrait
      * すべての大枠カテゴリの書き込みをメンバ変数に代入し，
      * すべての書き込みにいいねをする
      *
-     * @param integer $num
+     * @param integer $num 書き込みにつけるいいね数
      * @return void
      */
     public function likeSetUp(int $num = 10): void
