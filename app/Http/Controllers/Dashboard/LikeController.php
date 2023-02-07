@@ -97,7 +97,6 @@ class LikeController extends Controller
     /**
      * [POST] スレッドの書き込みに対するいいねを削除する
      *
-     * @link https://readouble.com/laravel/9.x/ja/queries.html
      * @todo https://github.com/oithxs/hira-chan/issues/227
      *
      * @param  \Illuminate\Htt\Request $request
@@ -105,63 +104,11 @@ class LikeController extends Controller
      */
     public function destroy(Request $request)
     {
-        $thread = Hub::with('thread_secondary_category')
-            ->where('id', '=', $request->thread_id)
-            ->first();
-
-        switch ($thread->thread_secondary_category->thread_primary_category->name) {
-            case '部活':
-                $club_thread_id = ClubThread::where('hub_id', '=', $request->thread_id)
-                    ->where('message_id', '=', $request->message_id)
-                    ->first()
-                    ->id;
-                Like::where('club_thread_id', '=', $club_thread_id)
-                    ->where('user_id', '=', $request->user()->id)
-                    ->delete();
-                return Like::where('club_thread_id', '=', $club_thread_id)->count();
-
-            case '学年':
-                $college_year_thread_id = CollegeYearThread::where('hub_id', '=', $request->thread_id)
-                    ->where('message_id', '=', $request->message_id)
-                    ->first()
-                    ->id;
-                Like::where('college_year_thread_id', '=', $college_year_thread_id)
-                    ->where('user_id', '=', $request->user()->id)
-                    ->delete();
-                return Like::where('college_year_thread_id', '=', $college_year_thread_id)->count();
-
-            case '学科':
-                $department_thread_id = DepartmentThread::where('hub_id', '=', $request->thread_id)
-                    ->where('message_id', '=', $request->message_id)
-                    ->first()
-                    ->id;
-                Like::where('department_thread_id', '=', $department_thread_id)
-                    ->where('user_id', '=', $request->user()->id)
-                    ->delete();
-                return Like::where('department_thread_id', '=', $department_thread_id)->count();
-
-            case '就職':
-                $job_hunting_thread_id = JobHuntingThread::where('hub_id', '=', $request->thread_id)
-                    ->where('message_id', '=', $request->message_id)
-                    ->first()
-                    ->id;
-                Like::where('job_hunting_thread_id', '=', $job_hunting_thread_id)
-                    ->where('user_id', '=', $request->user()->id)
-                    ->delete();
-                return Like::where('job_hunting_thread_id', '=', $job_hunting_thread_id)->count();
-
-            case '授業':
-                $lecture_thread_id = LectureThread::where('hub_id', '=', $request->thread_id)
-                    ->where('message_id', '=', $request->message_id)
-                    ->first()
-                    ->id;
-                Like::where('lecture_thread_id', '=', $lecture_thread_id)
-                    ->where('user_id', '=', $request->user()->id)
-                    ->delete();
-                return Like::where('lecture_thread_id', '=', $lecture_thread_id)->count();
-
-            default:
-                return 0;
-        }
+        $this->likeService->destroy(
+            $request->thread_id,
+            $request->message_id,
+            $request->user()->id
+        );
+        return $this->likeService->countLike();
     }
 }
