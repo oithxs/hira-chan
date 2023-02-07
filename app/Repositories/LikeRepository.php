@@ -23,6 +23,22 @@ class LikeRepository
     }
 
     /**
+     * 書き込みへのいいねを削除する
+     *
+     * @param string $foreignKey 書き込みを保存しているテーブルの外部キー名
+     * @param integer $postId 書き込みのID
+     * @param string $userId いいねを削除するユーザのID
+     * @return void
+     */
+    public static function destroy(string $foreignKey, int $postId, string $userId): void
+    {
+        Like::where([
+            [$foreignKey, $postId],
+            ['user_id', $userId],
+        ])->delete();
+    }
+
+    /**
      * 対応する書き込みのいいね数を取得する
      *
      * @param string $foreignKey 書き込みを保存しているテーブルの外部キー名
