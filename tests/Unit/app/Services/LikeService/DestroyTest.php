@@ -34,8 +34,7 @@ class DestroyTest extends TestCase
     {
         parent::setUp();
         $this->likeSetUp();
-
-        // メンバ変数に値を代入する
+        
         // メンバ変数に値を代入する
         $this->likeService = new LikeService;
         $reflection = new ReflectionClass($this->likeService);
