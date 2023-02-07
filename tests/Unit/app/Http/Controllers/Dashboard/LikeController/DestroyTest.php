@@ -18,6 +18,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Tests\UseFormRequestTestCase;
+use TypeError;
 
 class DestroyTest extends UseFormRequestTestCase
 {
@@ -225,7 +226,7 @@ class DestroyTest extends UseFormRequestTestCase
         foreach ($this->threads as $thread) {
             $this->assertThrows(
                 fn () => $this->useFormRequest(['thread_id', 'message_id'], [$thread->hub_id, Str::random(0)]),
-                ErrorException::class
+                TypeError::class
             );
         }
     }
@@ -245,7 +246,7 @@ class DestroyTest extends UseFormRequestTestCase
             foreach (range('a', 'z') as $str) {
                 $this->assertThrows(
                     fn () => $this->useFormRequest(['thread_id', 'message_id'], [$thread->hub_id, $str]),
-                    ErrorException::class
+                    TypeError::class
                 );
             }
         }
@@ -273,7 +274,7 @@ class DestroyTest extends UseFormRequestTestCase
             foreach ($symbols as $symbol) {
                 $this->assertThrows(
                     fn () => $this->useFormRequest(['thread_id', 'message_id'], [$thread->hub_id, $symbol]),
-                    ErrorException::class
+                    TypeError::class
                 );
             }
         }

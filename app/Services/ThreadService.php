@@ -8,6 +8,7 @@ use App\Consts\Tables\DepartmentThreadConst;
 use App\Consts\Tables\JobHuntingThreadConst;
 use App\Consts\Tables\LectureThreadConst;
 use App\Models\ThreadModel;
+use App\Repositories\HubRepository;
 use App\Repositories\ThreadRepository;
 use App\Services\TableService;
 
@@ -66,6 +67,33 @@ class ThreadService
     {
         $tableConst = $this->getTableConst($threadPrimaryCategoryName);
         return $tableConst !== null ? $tableConst::NAME : '';
+    }
+
+    /**
+     * スレッドIDから外部キー名を取得する
+     *
+     * @param string $threadId 外部キー名を取得したいスレッドID
+     * @return string 外部キー名
+     */
+    public function threadIdToForeignKey(string $threadId): string
+    {
+        $threadPrimaryCategoryName = HubRepository::getThreadPrimaryCategoryName($threadId);
+        return $this->tableService->makeForeignKeyName(
+            $this->getTableName($threadPrimaryCategoryName)
+        );
+    }
+
+    /**
+     * スレッドIDからモデルクラスを取得する
+     *
+     * @param string $threadId モデルクラスを取得したいスレッドID
+     * @return string モデルクラス名
+     */
+    public function threadIdToModel(string $threadId): string
+    {
+        return $this->getThreadClassName(
+            HubRepository::getThreadPrimaryCategoryName($threadId)
+        );
     }
 
     /**
