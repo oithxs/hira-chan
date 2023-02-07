@@ -170,7 +170,7 @@ class StoreTest extends TestCase implements AssertSameInterface
     }
 
     /**
-     * 存在しない外部キー名を引数とする
+     * 存在しないスレッドIDを引数とする
      *
      * @return void
      */
