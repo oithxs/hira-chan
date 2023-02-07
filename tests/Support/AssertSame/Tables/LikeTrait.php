@@ -27,8 +27,8 @@ trait LikeTrait
     /**
      * likes テーブルの実際の値を取得する
      *
-     * @param array|null $args
-     * @return array
+     * @param array|null $args 値は使用しない
+     * @return array likesテーブルの実際のデータ
      */
     public function getValuesActual(array $args = null): array
     {

@@ -36,7 +36,7 @@ class FindTest extends TestCase implements AssertSameInterface
      * 期待する書き込みのデータを取得する
      *
      * @param array $args ['hubId', 'userId', 'messageId', 'message']の要素が必要
-     * @return array
+     * @return array 期待する書き込みのデータ
      */
     public function getValuesExpected(array $args): array
     {

@@ -100,9 +100,9 @@ class LikeController extends Controller
      * @todo https://github.com/oithxs/hira-chan/issues/227
      *
      * @param  \Illuminate\Htt\Request $request
-     * @return int
+     * @return integer いいねを削除した書き込みがされているいいね数
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request): int
     {
         $this->likeService->destroy(
             $request->thread_id,
