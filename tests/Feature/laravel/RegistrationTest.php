@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\_laravel;
+namespace Tests\Feature\laravel;
 
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
