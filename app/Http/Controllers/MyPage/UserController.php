@@ -4,10 +4,18 @@ namespace App\Http\Controllers\MyPage;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    private UserService $userService;
+
+    public function __construct()
+    {
+        $this->userService = new UserService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -66,14 +74,15 @@ class UserController extends Controller
      *
      * @link https://readouble.com/laravel/9.x/ja/queries.html
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return void
+     * @param \Illuminate\Http\Request $request ['page_theme']の要素が必要
+     * @return void なし
      */
-    public function update(Request $request)
+    public function update(Request $request): void
     {
-        User::where('id', '=', $request->user()->id)->update([
-            'user_page_theme_id' => $request->page_theme
-        ]);
+        $this->userService->updateUserPageTheme(
+            $request->user()->id,
+            $request->page_theme
+        );
     }
 
     /**
