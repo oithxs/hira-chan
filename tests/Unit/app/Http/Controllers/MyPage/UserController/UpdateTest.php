@@ -159,7 +159,7 @@ class updateTest extends TestCase implements AssertSameInterface
      *
      * @return void
      */
-    public function test(): void
+    public function testUserUndefined(): void
     {
         foreach (UserPageThemeConst::PAGE_THEMES as $userPageTheme) {
             $userPageThemeId = $this->getUserPageThemeId($userPageTheme);
