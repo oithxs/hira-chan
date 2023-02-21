@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\ThreadPrimaryCategory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserPageThemeSeeder::class);
         $this->call(ThreadPrimaryCategorySeeder::class);
         $this->call(ThreadSecondaryCategorySeeder::class);
+        $this->call(ContactTypeSeeder::class);
     }
 }
