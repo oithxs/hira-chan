@@ -12,8 +12,8 @@ class ContactAdministratorConst
 
     // カラム名
     const ID = 'id';
+    const CONTACT_TYPE_ID = ContactTypeConst::USED_FOREIGN_KEY;
     const USER_ID = UserConst::USED_FOREIGN_KEY;
-    const TYPE = 'type';
     const MESSAGE = 'message';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
@@ -21,8 +21,8 @@ class ContactAdministratorConst
     // カラム一覧
     const COLUMNS = [
         self::ID,
+        self::CONTACT_TYPE_ID,
         self::USER_ID,
-        self::TYPE,
         self::MESSAGE,
         self::CREATED_AT,
         self::UPDATED_AT,
