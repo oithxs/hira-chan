@@ -33,9 +33,9 @@ trait ContactAdministratorTrait
     public function getValuesActual(array $args = null): array
     {
         return $this->getArrayElement($this->contactAdministrator, [
-            'user_id',
-            'type',
-            'message',
+            ContactAdministratorConst::CONTACT_TYPE_ID,
+            ContactAdministratorConst::USER_ID,
+            ContactAdministratorConst::MESSAGE,
         ]);
     }
 }
