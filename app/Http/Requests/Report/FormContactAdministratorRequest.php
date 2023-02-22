@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Report;
 
+use App\Consts\Tables\ContactTypeConst;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -30,7 +31,7 @@ class FormContactAdministratorRequest extends FormRequest
     public function rules()
     {
         return [
-            'radio_1' => 'required',
+            'radio_1' => 'required | exists:' . ContactTypeConst::NAME . ',name',
             'report_form_textarea' => 'required | max:15000'
         ];
     }
@@ -46,6 +47,7 @@ class FormContactAdministratorRequest extends FormRequest
     {
         return [
             'radio_1.required' => 'どのような内容かを選択して下さい',
+            'radio_1.exists' => '選択された値は有効ではありません',
             'report_form_textarea.required' => '詳しい内容を入力して下さい',
             'report_form_textarea.max' => '15000文字以内で入力して下さい'
         ];
