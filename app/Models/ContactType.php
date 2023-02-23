@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ContactAdministrator extends Model
+class ContactType extends Model
 {
-    use HasFactory;
-    use SerializeDate;
+    use HasFactory,
+        SerializeDate;
 
     /**
      * 接続するデータベース
@@ -27,7 +27,7 @@ class ContactAdministrator extends Model
      *
      * @var string
      */
-    protected $table = 'contact_administrators';
+    protected $table = 'contact_types';
 
     /**
      * マスアサインメント可能な属性
@@ -39,9 +39,7 @@ class ContactAdministrator extends Model
      * @var string[]
      */
     protected $fillable = [
-        'contact_type_id',
-        'user_id',
-        'message',
+        'name',
     ];
 
     /**
@@ -57,24 +55,13 @@ class ContactAdministrator extends Model
     ];
 
     /**
-     * contact_administrator を所有する contact_type を取得する
-     * 多：1
+     * contact_type に関連する contact_administrator を取得する
+     * 1：多
      *
      * @return void
      */
-    public function contact_type()
+    public function contact_administrators()
     {
-        return $this->belongsTo(ContactType::class);
-    }
-
-    /**
-     * contact administrator を所有する user を取得します．
-     * 多：1
-     *
-     * @link https://readouble.com/laravel/9.x/ja/eloquent-relationships.html
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(ContactAdministrator::class);
     }
 }

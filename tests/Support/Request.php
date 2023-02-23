@@ -14,9 +14,9 @@ class Request
      * @param User|null $user $request->user()で取得可能にするユーザ
      * @return HttpRequest Illuminate\Http\Requestのインスタンス
      */
-    public function make(array $query = [], User $user = null): HttpRequest
+    public function make(array $query = [], User $user = null, string $httpRequest = HttpRequest::class): HttpRequest
     {
-        $request = new HttpRequest($query);
+        $request = new $httpRequest($query);
         $user === null ?: $request->setUserResolver(function () use ($user) {
             return $user;
         });

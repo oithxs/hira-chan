@@ -5,10 +5,18 @@ namespace App\Http\Controllers\Report;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Report\FormContactAdministratorRequest;
 use App\Models\ContactAdministrator;
+use App\Services\ContactAdministratorService;
 use Illuminate\Http\Request;
 
 class FormContactAdministratorController extends Controller
 {
+    private ContactAdministratorService $contactAdministratorService;
+
+    public function __construct()
+    {
+        $this->contactAdministratorService = new ContactAdministratorService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -43,11 +51,11 @@ class FormContactAdministratorController extends Controller
      */
     public function store(FormContactAdministratorRequest $request)
     {
-        ContactAdministrator::create([
-            'user_id' => $request->user()->id,
-            'type' => $request->radio_1,
-            'message' => $request->report_form_textarea
-        ]);
+        $this->contactAdministratorService->store(
+            $request->radio_1,
+            $request->user()->id,
+            $request->report_form_textarea
+        );
     }
 
     /**

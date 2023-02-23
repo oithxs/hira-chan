@@ -48,4 +48,24 @@ class MakeType
 
         return $types;
     }
+
+    /**
+     * string で指定された引数に渡すとエラーが出る型を要素とした配列を返却する
+     *
+     * @return array string で指定された引数に渡すとTypeErrorが発生する型を要素とした配列
+     */
+    public static function ignoreString(): array
+    {
+        return self::ignores(['int', 'bool', 'float', 'string']);
+    }
+
+    /**
+     * int で指定された引数に渡すとエラーが出る型を要素とした配列を返却する
+     *
+     * @return array int で指定された引数に渡すとTypeErrorが発生する型を要素とした配列
+     */
+    public static function ignoreInt(): array
+    {
+        return self::ignores(['bool', 'int', 'float']);
+    }
 }

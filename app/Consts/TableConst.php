@@ -6,6 +6,7 @@ use App\Consts\Tables\AccessLogConst;
 use App\Consts\Tables\ClubThreadConst;
 use App\Consts\Tables\CollegeYearThreadConst;
 use App\Consts\Tables\ContactAdministratorConst;
+use App\Consts\Tables\ContactTypeConst;
 use App\Consts\Tables\DepartmentThreadConst;
 use App\Consts\Tables\FailedJobConst;
 use App\Consts\Tables\HubConst;
@@ -29,6 +30,7 @@ class TableConst
         ClubThreadConst::NAME,
         CollegeYearThreadConst::NAME,
         ContactAdministratorConst::NAME,
+        ContactTypeConst::NAME,
         DepartmentThreadConst::NAME,
         FailedJobConst::NAME,
         HubConst::NAME,
@@ -51,6 +53,7 @@ class TableConst
         ClubThreadConst::USED_FOREIGN_KEY,
         CollegeYearThreadConst::USED_FOREIGN_KEY,
         ContactAdministratorConst::USED_FOREIGN_KEY,
+        ContactTypeConst::USED_FOREIGN_KEY,
         DepartmentThreadConst::USED_FOREIGN_KEY,
         FailedJobConst::USED_FOREIGN_KEY,
         HubConst::USED_FOREIGN_KEY,
