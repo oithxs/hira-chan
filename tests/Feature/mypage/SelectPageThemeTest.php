@@ -4,10 +4,9 @@ namespace Tests\Feature\mypage;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class SelectPagethemeTest extends TestCase
+class SelectPageThemeTest extends TestCase
 {
     use RefreshDatabase;
 

@@ -35,7 +35,7 @@ class StoreTest extends TestCase
         // メンバ変数に値を代入する
         $this->user = User::factory()->create();
         $this->controller = new FormContactAdministratorController();
-        $this->repositoryTest = new RepositoryTest();
+        $this->repositoryTest = new RepositoryTest('');
     }
 
     /**

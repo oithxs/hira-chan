@@ -34,7 +34,7 @@ class StoreTest extends TestCase implements AssertSameInterface
         // メンバ変数に値を代入する
         $this->user = User::factory()->create();
         $this->contactAdministratorService = new ContactAdministratorService;
-        $this->repositoryTest = new RepositoryTest;
+        $this->repositoryTest = new RepositoryTest('');
     }
 
     /**
