@@ -17,7 +17,7 @@ use Tests\Support\Request;
 use Tests\TestCase;
 use TypeError;
 
-class updateTest extends TestCase implements AssertSameInterface
+class UpdateTest extends TestCase implements AssertSameInterface
 {
     use RefreshDatabase,
         UserTrait;

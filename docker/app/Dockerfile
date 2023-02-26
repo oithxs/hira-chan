@@ -20,6 +20,7 @@ RUN \
         libpng-dev \
         libwebp-dev \
         libzip-dev \
+        unzip \
         zlib1g-dev \
     ; \
     DEBIAN_FRONTEND=noninteractive apt-get install postfix -y \
