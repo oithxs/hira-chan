@@ -71,11 +71,11 @@
                 <div class="hidden sm:flex sm:items-center">
                     <div class="text-lg leading-7 font-semibold">
                         <button
-                            onclick="location.href='/dashboard?category={{ $narrowing_down_category }}&page={{ $page }}&sort=access_count'">
+                            onclick="location.href='{{ config('app.url') }}/dashboard?category={{ $narrowing_down_category }}&page={{ $page }}&sort=access_count'">
                         </button>
                         {{ __("Thread name") }}
                         <button
-                            onclick="location.href='/dashboard?category={{ $narrowing_down_category }}&page={{ $page }}&sort=new_create'">
+                            onclick="location.href='{{ config('app.url') }}/dashboard?category={{ $narrowing_down_category }}&page={{ $page }}&sort=new_create'">
                         </button>
                     </div>
                     <div class="text-lg text-right leading-7 font-semibold ms-auto">
@@ -114,7 +114,7 @@
         @if ($flag == 1)
         <tr>
             <td style="word-wrap:break-word;">
-                <a href="/dashboard/thread/name={{ $thread['name'] }}&id={{ $thread['id'] }}"
+                <a href="{{ config('app.url') }}/dashboard/thread/name={{ $thread['name'] }}&id={{ $thread['id'] }}"
                     class="font-semibold text-center">
                     {{$thread["name"]}}
                 </a>

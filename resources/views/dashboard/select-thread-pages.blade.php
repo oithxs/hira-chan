@@ -10,7 +10,7 @@
 <table class="table table-striped">
     <tr>
         <!-- @for ($i = 1; $i <= $max_page; $i++) -->
-        <th> <a href="dashboard?category={{ $narrowing_down_category }}&page={{ $i }}&sort={{ $sort }}">{{ $i }}</a>
+        <th> <a href="{{ config('app.url') }}/dashboard?category={{ $narrowing_down_category }}&page={{ $i }}&sort={{ $sort }}">{{ $i }}</a>
         </th>
         <!-- @endfor -->
     </tr>

@@ -12,7 +12,7 @@
                     <select onChange="location.href=value;">
                         <option>{{ $thread_primary_category->name }}</option>
                         @foreach ($thread_primary_category->thread_secondary_categorys as $thread_secondary_category)
-                        <option value="dashboard?category={{ $thread_secondary_category->id }}">
+                        <option value="{{ config('app.url') }}/dashboard?category={{ $thread_secondary_category->id }}">
                             {{ $thread_secondary_category->name }}
                         </option>
                         @endforeach
