@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Gate;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
-     * The policy mappings for the application.
+     * アプリケーションのポリシーマッピング．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/authorization.html
      *
      * @var array<class-string, class-string>
      */
@@ -17,7 +19,9 @@ class AuthServiceProvider extends ServiceProvider
     ];
 
     /**
-     * Register any authentication / authorization services.
+     * 任意の認証 / 認可サービスを登録する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/authorization.html
      *
      * @return void
      */

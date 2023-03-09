@@ -1,15 +1,18 @@
 <?php
 
+/**
+ * @link https://readouble.com/laravel/9.x/ja/configuration.html
+ */
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Name
+    | アプリケーション名
     |--------------------------------------------------------------------------
     |
-    | This value is the name of your application. This value is used when the
-    | framework needs to place the application's name in a notification or
-    | any other location as required by the application or its packages.
+    | この値は，アプリケーションの名前です．この値は，フレームワークが
+    | アプリケーションの名前を通知またはアプリケーションやパッケージが必要とする
+    | 他の場所に配置する必要があるときに使用されます．
     |
     */
 
@@ -17,12 +20,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Environment
+    | アプリケーション環境
     |--------------------------------------------------------------------------
     |
-    | This value determines the "environment" your application is currently
-    | running in. This may determine how you prefer to configure various
-    | services the application utilizes. Set this in your ".env" file.
+    | この値は，アプリケーションが現在動作している「environment」を決定します．
+    | この値は，アプリケーションが利用するさまざまなサービスをどのように
+    | 設定するのが望ましいかを「.env」ファイルで設定します．
     |
     */
 
@@ -30,12 +33,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Debug Mode
+    | アプリケーションデバッグモード
     |--------------------------------------------------------------------------
     |
-    | When your application is in debug mode, detailed error messages with
-    | stack traces will be shown on every error that occurs within your
-    | application. If disabled, a simple generic error page is shown.
+    | デバッグモードにすると，アプリケーションで発生したすべてのエラーについて，
+    | スタックトレース付きの詳細なエラーメッセージが表示されます．無効にすると，
+    | 単純な一般的なエラーページが表示されます．
     |
     */
 
@@ -43,12 +46,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application URL
+    | アプリケーションURL
     |--------------------------------------------------------------------------
     |
-    | This URL is used by the console to properly generate URLs when using
-    | the Artisan command line tool. You should set this to the root of
-    | your application so that it is used when running Artisan tasks.
+    | このURLは，Artisanコマンドラインツールを使用する際に，コンソールがURLを
+    | 適切に生成するために使用されます．これをアプリケーションのルートに設定し，
+    | Artisan タスクを実行するときに使用する必要があります．
     |
     */
 
@@ -58,38 +61,38 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application Timezone
+    | アプリケーションタイムゾーン
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the default timezone for your application, which
-    | will be used by the PHP date and date-time functions. We have gone
-    | ahead and set this to a sensible default for you out of the box.
-    |
-    */
-
-    'timezone' => 'UTC',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Application Locale Configuration
-    |--------------------------------------------------------------------------
-    |
-    | The application locale determines the default locale that will be used
-    | by the translation service provider. You are free to set this value
-    | to any of the locales which will be supported by the application.
+    | ここでアプリケーションのデフォルトのタイムゾーンを指定し， PHP の date および
+    | date-time 関数でそれを使用するようにします．私たちは，この設定をデフォルトで
+    | 適切なものに設定しました．
     |
     */
 
-    'locale' => 'en',
+    'timezone' => 'Asia/Tokyo',
 
     /*
     |--------------------------------------------------------------------------
-    | Application Fallback Locale
+    | アプリケーションロケールの設定
     |--------------------------------------------------------------------------
     |
-    | The fallback locale determines the locale to use when the current one
-    | is not available. You may change the value to correspond to any of
-    | the language folders that are provided through your application.
+    | アプリケーションロケールは，翻訳サービスプロバイダで使用されるデフォルトの
+    | ロケールを決定します．この値は，アプリケーションでサポートされる任意の
+    | ロケールに自由に設定することができます．
+    |
+    */
+
+    'locale' => 'ja',
+
+    /*
+    |--------------------------------------------------------------------------
+    | アプリケーションフォールバックロケール
+    |--------------------------------------------------------------------------
+    |
+    | フォールバックロケールは，現在のロケールが使用できないときに使用するロケールを
+    | 決定する．この値は，アプリケーションで使用する言語フォルダに対応するように
+    | 変更することができます．
     |
     */
 
@@ -97,25 +100,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Faker Locale
+    | フェイカー・ロケール
     |--------------------------------------------------------------------------
     |
-    | This locale will be used by the Faker PHP library when generating fake
-    | data for your database seeds. For example, this will be used to get
-    | localized telephone numbers, street address information and more.
+    | このロケールは，Faker PHP ライブラリがデータベースのシード用に偽のデータを
+    | 生成する際に使用されます．たとえば，ローカライズされた電話番号や住所情報などを
+    | 取得する際に使用します．
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'ja_JP',
 
     /*
     |--------------------------------------------------------------------------
-    | Encryption Key
+    | 暗号化キー
     |--------------------------------------------------------------------------
     |
-    | This key is used by the Illuminate encrypter service and should be set
-    | to a random, 32 character string, otherwise these encrypted strings
-    | will not be safe. Please do this before deploying an application!
+    | このキーはIlluminate暗号化サービスによって使用され，ランダムな32文字の
+    | 文字列に設定する必要があります．そうしないと，これらの暗号化された文字列は
+    | 安全ではありません．アプリケーションをデプロイする前にこの作業を行ってください．
     |
     */
 
@@ -125,12 +128,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Autoloaded Service Providers
+    | オートロード・サービス・プロバイダー
     |--------------------------------------------------------------------------
     |
-    | The service providers listed here will be automatically loaded on the
-    | request to your application. Feel free to add your own services to
-    | this array to grant expanded functionality to your applications.
+    | ここに掲載されているサービスプロバイダーは，お客様のアプリケーションへの
+    | リクエスト時に自動的に読み込まれます．この配列に独自のサービスを追加して，
+    | アプリケーションに拡張機能を付与することも可能です．
     |
     */
 
@@ -174,17 +177,19 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\FortifyServiceProvider::class,
+        App\Providers\JetstreamServiceProvider::class,
 
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Class Aliases
+    | クラスの別名
     |--------------------------------------------------------------------------
     |
-    | This array of class aliases will be registered when this application
-    | is started. However, feel free to register as many as you wish as
-    | the aliases are "lazy" loaded so they don't hinder performance.
+    | このクラスエイリアスの配列は，このアプリケーションの起動時に登録されます．
+    | エイリアスは「lazy」ロードされるため，パフォーマンスの妨げになることは
+    | ありません．
     |
     */
 

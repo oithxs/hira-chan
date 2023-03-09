@@ -11,25 +11,27 @@ use Illuminate\Support\Facades\Route;
 class RouteServiceProvider extends ServiceProvider
 {
     /**
-     * The path to the "home" route for your application.
+     * アプリケーションの「ホーム」ルートへのパス．
      *
-     * This is used by Laravel authentication to redirect users after login.
+     * これは、Laravel認証で、ログイン後にユーザーをリダイレクトするために使用される．
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/dashboard';
 
     /**
-     * The controller namespace for the application.
+     * アプリケーションのコントローラ名前空間．
      *
-     * When present, controller route declarations will automatically be prefixed with this namespace.
+     * この名前空間を指定すると、コントローラのルート宣言の先頭に自動的にこの名前空間が追加される．
      *
      * @var string|null
      */
     // protected $namespace = 'App\\Http\\Controllers';
 
     /**
-     * Define your route model bindings, pattern filters, etc.
+     * ルートモデルのバインディング、パターンフィルタなどを定義する．
+     *
+     * @link https://readouble.com/laravel/8.x/ja/routing.html
      *
      * @return void
      */
@@ -50,7 +52,9 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     /**
-     * Configure the rate limiters for the application.
+     * アプリケーションのレートリミッターを設定する．
+     *
+     * @link https://readouble.com/laravel/8.x/ja/routing.html
      *
      * @return void
      */

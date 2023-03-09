@@ -1,22 +1,27 @@
 <?php
 
+use Laravel\Sanctum\Sanctum;
+
+/**
+ * @link https://readouble.com/laravel/9.x/ja/sanctum.html
+ */
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Stateful Domains
+    | ステートフルドメイン
     |--------------------------------------------------------------------------
     |
-    | Requests from the following domains / hosts will receive stateful API
-    | authentication cookies. Typically, these should include your local
-    | and production domains which access your API via a frontend SPA.
+    | 以下のドメイン / ホストからのリクエストは，ステートフルAPI認証クッキーを
+    | 受け取ります．一般的に，これらはフロントエンドSPAを介してAPIにアクセスする
+    | ローカルドメインとプロダクションドメインを含むべきです．
     |
     */
 
     'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
         '%s%s',
         'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1',
-        env('APP_URL') ? ','.parse_url(env('APP_URL'), PHP_URL_HOST) : ''
+        Sanctum::currentApplicationUrlWithPort()
     ))),
 
     /*
@@ -24,10 +29,9 @@ return [
     | Sanctum Guards
     |--------------------------------------------------------------------------
     |
-    | This array contains the authentication guards that will be checked when
-    | Sanctum is trying to authenticate a request. If none of these guards
-    | are able to authenticate the request, Sanctum will use the bearer
-    | token that's present on an incoming request for authentication.
+    | この配列には，Sanctum がリクエストの認証を試みる際にチェックする認証ガードが
+    | 含まれています．これらのガードのいずれでもリクエストを認証できない場合は，
+    | Sanctum は受信したリクエストに存在するベアラトークンを認証に使用します．
     |
     */
 
@@ -35,12 +39,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Expiration Minutes
+    | 有効期限切れ分
     |--------------------------------------------------------------------------
     |
-    | This value controls the number of minutes until an issued token will be
-    | considered expired. If this value is null, personal access tokens do
-    | not expire. This won't tweak the lifetime of first-party sessions.
+    | この値は，発行されたトークンが期限切れとみなされるまでの分数を制御します．
+    | この値がNULLの場合，パーソナルアクセストークンは期限切れになりません．
+    | これは，ファーストパーティセッションのライフタイムを微調整することはありません．
     |
     */
 
@@ -48,12 +52,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Sanctum Middleware
+    | Sanctum ミドルウェア
     |--------------------------------------------------------------------------
     |
-    | When authenticating your first-party SPA with Sanctum you may need to
-    | customize some of the middleware Sanctum uses while processing the
-    | request. You may change the middleware listed below as required.
+    | ファーストパーティーのSPAをSanctumで認証する場合，リクエストを処理する際に
+    | Sanctumが使用するミドルウェアの一部をカスタマイズする必要がある場合があります．
+    | 以下のミドルウェアは必要に応じて変更してください．
     |
     */
 

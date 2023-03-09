@@ -1,4 +1,6 @@
+const { js, babelConfig } = require('laravel-mix');
 const mix = require('laravel-mix');
+const glob = require('glob');
 
 /*
  |--------------------------------------------------------------------------
@@ -12,6 +14,32 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+    .js('resources/js/app.jsx', 'public/js')
+    .ts('resources/ts/app.ts', 'public/js')
+    .ts('resources/ts/app.tsx', 'public/js')
+    .react()
     .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+        require('postcss-import'),
+        require('tailwindcss'),
+    ])
+    .postCss('resources/css/common/common.css', 'public/css/app.css');
+
+glob.sync('resources/js/*/*.js').map(function (file) {
+    mix.js(file, 'public/js/app_jquery.js')
+});
+
+glob.sync('resources/css/default/*/*.css').map(function (file) {
+    mix.postCss(file, 'public/css/design.css')
+});
+
+glob.sync('resources/css/dark/*/*.css').map(function (file) {
+    mix.postCss(file, 'public/css/design-dark.css')
+});
+
+glob.sync('resources/css/errors/*.css').map(function (file) {
+    mix.postCss(file, 'public/css/design-error.css')
+});
+
+if (mix.inProduction()) {
+    mix.version();
+}

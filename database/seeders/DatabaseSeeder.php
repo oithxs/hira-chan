@@ -7,12 +7,17 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * アプリケーションのデータベースにデータを挿入する．
+     *
+     * @link https://readouble.com/laravel/9.x/ja/seeding.html
      *
      * @return void
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call(UserPageThemeSeeder::class);
+        $this->call(ThreadPrimaryCategorySeeder::class);
+        $this->call(ThreadSecondaryCategorySeeder::class);
+        $this->call(ContactTypeSeeder::class);
     }
 }

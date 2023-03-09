@@ -1,0 +1,11 @@
+{
+    "editor.formatOnSave": true,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "editor.formatOnType": true,
+    "blade.format.enable": true,
+    "extensions.ignoreRecommendations": false,
+    "[blade]": {
+        "editor.defaultFormatter": "onecentlin.laravel-blade"
+    }
+}

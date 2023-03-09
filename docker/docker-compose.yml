@@ -1,0 +1,78 @@
+version: "3"
+services:
+  hira-chan_app:
+    image: hira-chan_app:latest
+    container_name: hira-chan_app
+    build:
+      context: ..
+      dockerfile: ./docker/app/Dockerfile
+    user: dev
+    environment:
+      TZ: Asia/Tokyo
+    volumes:
+      - ..:/usr/src/app
+    depends_on:
+      - hira-chan_mariadb
+    tty: true
+
+  hira-chan_nginx:
+    image: hira-chan_nginx:latest
+    container_name: hira-chan_nginx
+    build:
+      context: ..
+      dockerfile: ./docker/nginx/Dockerfile
+    environment:
+      TZ: Asia/Tokyo
+    ports:
+      - 8080:80
+    volumes:
+      - ..:/var/www/hira-chan
+      - hira-chan_phpmyadmin-vol:/var/www/phpmyadmin
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    working_dir: /var/www
+    depends_on:
+      - hira-chan_app
+      - hira-chan_phpmyadmin
+    tty: true
+
+  hira-chan_mariadb:
+    image: hira-chan_mariadb:latest
+    container_name: hira-chan_mariadb
+    build:
+      context: ..
+      dockerfile: ./docker/mariadb/Dockerfile
+    environment:
+      MARIADB_DATABASE: forum
+      MARIADB_USER: user
+      MARIADB_ROOT_PASSWORD: rootpass
+      MARIADB_PASSWORD: pass
+      TZ: Asia/Tokyo
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./mariadb/initdb:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
+    tty: true
+
+  hira-chan_phpmyadmin:
+    image: hira-chan_phpmyadmin:latest
+    container_name: hira-chan_phpmyadmin
+    build:
+      context: ..
+      dockerfile: ./docker/phpmyadmin/Dockerfile
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: hira-chan_mariadb
+      PMA_USER: root
+      PMA_PASSWORD: rootpass
+      PMA_VERBOSE: phpmyadmin
+      PMA_PORT: 3306
+      TZ: Asia/Tokyo
+    volumes:
+      - hira-chan_phpmyadmin-vol:/var/www/html
+    depends_on:
+      - hira-chan_mariadb
+    tty: true
+
+volumes:
+  hira-chan_phpmyadmin-vol:

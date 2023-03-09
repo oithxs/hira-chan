@@ -2,16 +2,19 @@
 
 use Illuminate\Support\Str;
 
+/**
+ * @link https://readouble.com/laravel/9.x/ja/database.html
+ */
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Database Connection Name
+    | デフォルトのデータベース接続名
     |--------------------------------------------------------------------------
     |
-    | Here you may specify which of the database connections below you wish
-    | to use as your default connection for all database work. Of course
-    | you may use many connections at once using the Database library.
+    | ここでは，以下のデータベース接続のうち，すべてのデータベース作業で
+    | デフォルト接続として使用するものを指定することができます．もちろん，
+    | データベースライブラリを使用すれば，一度に多くの接続を使用することもできます．
     |
     */
 
@@ -19,17 +22,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Database Connections
+    | データベース接続
     |--------------------------------------------------------------------------
     |
-    | Here are each of the database connections setup for your application.
-    | Of course, examples of configuring each database platform that is
-    | supported by Laravel is shown below to make development simple.
+    | ここでは，アプリケーションに必要な各データベース接続の設定を行います．
+    | もちろん，Laravelがサポートしている各データベースプラットフォームの設定例も
+    | 以下に示していますので，簡単に開発することができます．
     |
     |
-    | All database work in Laravel is done through the PHP PDO facilities
-    | so make sure you have the driver for your particular database of
-    | choice installed on your machine before you begin development.
+    | LaravelのデータベースはすべてPHPのPDO機能で処理されるので，開発を始める前に，
+    | 選択した特定のデータベースのドライバがマシンにインストールされていることを
+    | 確認してください．
     |
     */
 
@@ -57,6 +60,14 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
             'strict' => true,
+            'modes' => [
+                // 'ONLY_FULL_GROUP_BY',
+                'STRICT_TRANS_TABLES',
+                'NO_ZERO_IN_DATE',
+                'NO_ZERO_DATE',
+                'ERROR_FOR_DIVISION_BY_ZERO',
+                'NO_ENGINE_SUBSTITUTION',
+            ],
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
@@ -95,12 +106,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Migration Repository Table
+    | 移行用リポジトリテーブル
     |--------------------------------------------------------------------------
     |
-    | This table keeps track of all the migrations that have already run for
-    | your application. Using this information, we can determine which of
-    | the migrations on disk haven't actually been run in the database.
+    | このテーブルは，アプリケーションに対してすでに実行されたすべての
+    | マイグレーションを記録しています．この情報を使って，ディスク上の
+    | マイグレーションのうち，実際にデータベースで実行されていないものを特定する
+    | ことができます．
     |
     */
 
@@ -108,12 +120,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Redis Databases
+    | Redisデータベース
     |--------------------------------------------------------------------------
     |
-    | Redis is an open source, fast, and advanced key-value store that also
-    | provides a richer body of commands than a typical key-value system
-    | such as APC or Memcached. Laravel makes it easy to dig right in.
+    | Redisはオープンソースの高速かつ高度なキーバリューストアで，APCやMemcached
+    | のような一般的なキーバリューシステムよりも豊富なコマンドを提供することも
+    | できます．Laravelを使えば，簡単に使いこなすことができます．
     |
     */
 
@@ -123,7 +135,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
         ],
 
         'default' => [

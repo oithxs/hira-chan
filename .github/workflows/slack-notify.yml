@@ -1,0 +1,55 @@
+name: Github Notification
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  slackNotification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send GitHub Action trigger data to Slack workflow
+        uses: slackapi/slack-github-action@v1.19.0
+        with:
+          payload: |
+            {
+              "channel": "${{ secrets.SLACK_CHANNEL_ID }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "<!channel>\n*プルリクエストがマージされました*\n`git pull`を実行してローカルリポジトリを更新して下さい"
+                  }
+                }
+              ],
+              "attachments": [
+                {
+                  "fallback": "Confirm merge Pull-Requests",
+                  "color": "good",
+                  "author_name": "${{ github.actor }}",
+                  "author_icon": "${{ github.event.sender.avatar_url }}",
+                  "fields": [
+                    {
+                      "title": "Pull request Title",
+                      "value": "${{ github.event.pull_request.title }}",
+                      "short": false
+                    },
+                    {
+                      "title": "Number",
+                      "value": "<${{ github.event.pull_request.html_url }}|hxs-mini2#${{ github.event.pull_request.number }}>",
+                      "short": true
+                    },
+                    {
+                      "title": "Event Type",
+                      "value": "${{ github.event_name }}",
+                      "short": true
+                    }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
