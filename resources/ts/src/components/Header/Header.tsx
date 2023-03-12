@@ -2,6 +2,12 @@ import { routesContext, userContext } from "../../hooks/useContext";
 import { Logout } from "../../feature/auth/components/Logout";
 import { cutText } from "../../utils/format";
 
+/**
+ * HxS のロゴを表示する
+ * ロゴをクリックで https://oithxs.github.io
+ *
+ * @return {JSX.Element}
+ */
 const HxSLogo = () => {
     return (
         <a href="https://oithxs.github.io/" className="vw-5">
@@ -10,6 +16,12 @@ const HxSLogo = () => {
     );
 };
 
+/**
+ * 「hira-chan」のロゴを表示する
+ * ロゴクリックで ダッシュボードへ移動
+ *
+ * @return {JSX.Element}
+ */
 const Title = () => {
     const routes: { [key: string]: string } = routesContext();
 
@@ -20,6 +32,11 @@ const Title = () => {
     );
 };
 
+/**
+ * ユーザ名を表示し，ログイン状態で利用できる様々なリンクをまとめたドロップダウンを表示する
+ *
+ * @return {JSX.Element}
+ */
 const AcctCtrDropDown = () => {
     const routes: { [key: string]: string } = routesContext();
     const user: { [key: string]: string } = userContext();
@@ -66,6 +83,11 @@ const AcctCtrDropDown = () => {
     );
 };
 
+/**
+ * ログイン・新規登録ページへ移動するボタンを表示する
+ *
+ * @return {JSX.Element}
+ */
 const AuthFalse = () => {
     const routes: { [key: string]: string } = routesContext();
 
@@ -81,6 +103,11 @@ const AuthFalse = () => {
     );
 };
 
+/**
+ * ヘッダを表示する
+ *
+ * @return {JSX.Element}
+ */
 export const Header = () => {
     const user: { [key: string]: string } = userContext();
     const acctCtr = user["name"] !== "" ? AcctCtrDropDown() : AuthFalse();

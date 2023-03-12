@@ -5195,6 +5195,12 @@ var __assign = undefined && undefined.__assign || function () {
 
 
 
+/**
+ * HxS のロゴを表示する
+ * ロゴをクリックで https://oithxs.github.io
+ *
+ * @return {JSX.Element}
+ */
 var HxSLogo = function HxSLogo() {
   return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", __assign({
     href: "https://oithxs.github.io/",
@@ -5206,6 +5212,12 @@ var HxSLogo = function HxSLogo() {
     })
   }));
 };
+/**
+ * 「hira-chan」のロゴを表示する
+ * ロゴクリックで ダッシュボードへ移動
+ *
+ * @return {JSX.Element}
+ */
 var Title = function Title() {
   var routes = (0,_hooks_useContext__WEBPACK_IMPORTED_MODULE_1__.routesContext)();
   return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", __assign({
@@ -5218,6 +5230,11 @@ var Title = function Title() {
     })
   }));
 };
+/**
+ * ユーザ名を表示し，ログイン状態で利用できる様々なリンクをまとめたドロップダウンを表示する
+ *
+ * @return {JSX.Element}
+ */
 var AcctCtrDropDown = function AcctCtrDropDown() {
   var routes = (0,_hooks_useContext__WEBPACK_IMPORTED_MODULE_1__.routesContext)();
   var user = (0,_hooks_useContext__WEBPACK_IMPORTED_MODULE_1__.userContext)();
@@ -5276,6 +5293,11 @@ var AcctCtrDropDown = function AcctCtrDropDown() {
     }))]
   }));
 };
+/**
+ * ログイン・新規登録ページへ移動するボタンを表示する
+ *
+ * @return {JSX.Element}
+ */
 var AuthFalse = function AuthFalse() {
   var routes = (0,_hooks_useContext__WEBPACK_IMPORTED_MODULE_1__.routesContext)();
   return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
@@ -5292,6 +5314,11 @@ var AuthFalse = function AuthFalse() {
     }))]
   });
 };
+/**
+ * ヘッダを表示する
+ *
+ * @return {JSX.Element}
+ */
 var Header = function Header() {
   var user = (0,_hooks_useContext__WEBPACK_IMPORTED_MODULE_1__.userContext)();
   var acctCtr = user["name"] !== "" ? AcctCtrDropDown() : AuthFalse();
@@ -5345,6 +5372,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Header_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Header/index */ "./resources/ts/src/components/Header/index.ts");
 
 
+/**
+ * ダッシュボードを表示する
+ *
+ * @return {JSX.Element}
+ */
 var Dashboard = function Dashboard() {
   return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Header_index__WEBPACK_IMPORTED_MODULE_1__.Header, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
@@ -5384,6 +5416,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _lib_axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../lib/axios */ "./resources/ts/src/lib/axios.ts");
 
+/**
+ * 呼び出すことでログアウトを行う
+ *
+ * @param {string} logoutUrl - ログアウトを行うためのURL
+ */
 var logout = function logout(logoutUrl) {
   return _lib_axios__WEBPACK_IMPORTED_MODULE_0__.axios.post(logoutUrl).then(function () {
     return window.location.reload();
@@ -5421,6 +5458,12 @@ var __assign = undefined && undefined.__assign || function () {
 
 
 
+/**
+ * ログアウト用のリンクを表示する
+ *
+ * @param {logoutProps} props - cssのクラス
+ * @returns
+ */
 var Logout = function Logout(props) {
   var routes = (0,_hooks_useContext__WEBPACK_IMPORTED_MODULE_1__.routesContext)();
   return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", __assign({
@@ -5453,9 +5496,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _providers_app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../providers/app */ "./resources/ts/src/providers/app.tsx");
 
 
+/**
+ * アプリで共通して使用可能なルートを返却する
+ *
+ * @return {{ [key: string]: string  }}
+ */
 var routesContext = function routesContext() {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_providers_app__WEBPACK_IMPORTED_MODULE_1__.RoutesContext);
 };
+/**
+ * ログインしていれば，ログインしているユーザの情報を返却する
+ *
+ * @return {{ [key: string]: string }}
+ */
 var userContext = function userContext() {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_providers_app__WEBPACK_IMPORTED_MODULE_1__.UserContext);
 };
@@ -5478,6 +5531,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/**
+ * 指定された id に指定されたレイアウトを表示する
+ *
+ * @param element 表示する要素 (id)
+ * @param Layout 表示する JSX.Element
+ */
 var Render = function Render(element, Layout) {
   var root = react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot(element);
   var App = Layout;
@@ -5485,6 +5544,7 @@ var Render = function Render(element, Layout) {
     children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(App, {})
   }));
 };
+/** id="dashboard" の部分にダッシュボードを表示する */
 if (document.getElementById("dashboard")) {
   Render(document.getElementById("dashboard"), _components_Layouts_index__WEBPACK_IMPORTED_MODULE_2__.Dashboard);
 }
@@ -5504,7 +5564,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var _a, _b;
 var Axios = (__webpack_require__(/*! axios */ "./node_modules/axios/index.js")["default"]);
+/** CSRFトークン */
 var csrfToken = (_b = (_a = document.head.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute("content")) !== null && _b !== void 0 ? _b : "";
+/**
+ * CSRFトークンをヘッダにつけた状態でリクエストが可能
+ */
 var axios = Axios.create({
   headers: {
     "X-CSRF-TOKEN": csrfToken
@@ -5541,8 +5605,16 @@ var __assign = undefined && undefined.__assign || function () {
 };
 
 
+/** ルート（各種ページのリンク）を保存したコンテキスト */
 var RoutesContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createContext({});
+/** ログインしているユーザの情報を保存したコンテキスト */
 var UserContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createContext({});
+/**
+ * アプリ共通で使用可能な値を設定する
+ *
+ * @param {React.ReactNode} - 表示するレイアウト
+ * @return {JSX.Element}
+ */
 var AppProvider = function AppProvider(_a) {
   var _b, _c, _d, _e, _f, _g, _h, _j;
   var children = _a.children;
@@ -5583,6 +5655,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "cutText": () => (/* binding */ cutText)
 /* harmony export */ });
+/**
+ * 指定された条件で引数の文字列を切り抜く
+ *
+ * @param {string} text - 原文
+ * @param {cutOption} option - 省略可能
+ *     - start: 文字列を切り抜くはじめの位置．初期値は 0
+ *     - end: 文字列を切り抜く終わりの位置．初期値は 30
+ *     - endStr: 文字列を切り抜いた場合に最後につける文字列．初期値は "..."
+ *     - byte: 文字長をバイト数でカウントするか否か．初期値は true
+ * @return {string} 切り抜いた文字列
+ */
 var cutText = function cutText(text, option) {
   var _a, _b, _c, _d;
   var start = (_a = option === null || option === void 0 ? void 0 : option.start) !== null && _a !== void 0 ? _a : 0;
