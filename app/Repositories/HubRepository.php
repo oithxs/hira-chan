@@ -5,9 +5,20 @@ namespace App\Repositories;
 use App\Models\Hub;
 use App\Models\ThreadPrimaryCategory;
 use App\Models\ThreadSecondaryCategory;
+use Illuminate\Database\Eloquent\Collection;
 
 class HubRepository
 {
+    /**
+     * スレッド一覧を取得する
+     *
+     * @return Collection スレッド一覧
+     */
+    public static function index(): Collection
+    {
+        return Hub::get();
+    }
+
     /**
      * スレッドを作成する
      *
