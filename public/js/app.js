@@ -5343,12 +5343,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var _Header_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Header/index */ "./resources/ts/src/components/Header/index.ts");
-/* harmony import */ var _providers_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../providers/app */ "./resources/ts/src/providers/app.tsx");
-
 
 
 var Dashboard = function Dashboard() {
-  return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_providers_app__WEBPACK_IMPORTED_MODULE_2__.AppProvider, {
+  return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Header_index__WEBPACK_IMPORTED_MODULE_1__.Header, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
       children: "main"
     })]
@@ -5480,9 +5478,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Render = function Render(element, Dashboard) {
+var Render = function Render(element, Layout) {
   var root = react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot(element);
-  var App = Dashboard;
+  var App = Layout;
   root.render((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_providers_app__WEBPACK_IMPORTED_MODULE_3__.AppProvider, {
     children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(App, {})
   }));

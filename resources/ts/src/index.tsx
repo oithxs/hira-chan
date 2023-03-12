@@ -2,9 +2,9 @@ import * as ReactDOM from "react-dom/client";
 import { Dashboard } from "./components/Layouts/index";
 import { AppProvider } from "./providers/app";
 
-const Render = (element: HTMLElement | null, Dashboard: CallableFunction) => {
+const Render = (element: HTMLElement | null, Layout: CallableFunction) => {
     const root: ReactDOM.Root = ReactDOM.createRoot(element as Element);
-    const App: CallableFunction = Dashboard;
+    const App: CallableFunction = Layout;
 
     root.render(
         <AppProvider>
