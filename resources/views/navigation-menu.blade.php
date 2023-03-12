@@ -37,7 +37,8 @@
                         {{ __('Create new thread') }}
                         </x-jet-denger-button>
                         @else
-                        <x-jet-danger-button type="button" class="btn btn-danger" onclick="location.href='/login'">
+                        <x-jet-danger-button type="button" class="btn btn-danger"
+                            onclick="location.href='{{ route('login') }}'">
                             {{ __('Create new thread') }}
                             </x-jet-denger-button>
                             @endif
