@@ -5157,21 +5157,453 @@ module.exports = {
 /*!*****************************!*\
   !*** ./resources/ts/app.ts ***!
   \*****************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
+
+
+__webpack_require__(/*! ./src/index */ "./resources/ts/src/index.tsx");
+
+/***/ }),
+
+/***/ "./resources/ts/src/components/Header/Header.tsx":
+/*!*******************************************************!*\
+  !*** ./resources/ts/src/components/Header/Header.tsx ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Header": () => (/* binding */ Header)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _hooks_useContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../hooks/useContext */ "./resources/ts/src/hooks/useContext.ts");
+/* harmony import */ var _feature_auth_components_Logout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../feature/auth/components/Logout */ "./resources/ts/src/feature/auth/components/Logout.tsx");
+/* harmony import */ var _utils_format__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/format */ "./resources/ts/src/utils/format.ts");
+var __assign = undefined && undefined.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+      for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+    }
+    return t;
+  };
+  return __assign.apply(this, arguments);
+};
+
+
+
+
+var HxSLogo = function HxSLogo() {
+  return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", __assign({
+    href: "https://oithxs.github.io/",
+    className: "vw-5"
+  }, {
+    children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
+      src: "/img/hxs_logo.svg",
+      alt: "hxs sns logo"
+    })
+  }));
+};
+var Title = function Title() {
+  var routes = (0,_hooks_useContext__WEBPACK_IMPORTED_MODULE_1__.routesContext)();
+  return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", __assign({
+    href: routes["dashboard"],
+    className: "vw-10"
+  }, {
+    children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", {
+      src: "/img/hira-chan.svg",
+      alt: "hira-chan logo"
+    })
+  }));
+};
+var AcctCtrDropDown = function AcctCtrDropDown() {
+  var routes = (0,_hooks_useContext__WEBPACK_IMPORTED_MODULE_1__.routesContext)();
+  var user = (0,_hooks_useContext__WEBPACK_IMPORTED_MODULE_1__.userContext)();
+  return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", __assign({
+    className: "dropdown mx-1"
+  }, {
+    children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", __assign({
+      className: "btn btn-secondary dropdown-toggle",
+      href: "#",
+      role: "button",
+      id: "dropdownMenuLink",
+      "data-bs-toggle": "dropdown",
+      "aria-expanded": "false"
+    }, {
+      children: (0,_utils_format__WEBPACK_IMPORTED_MODULE_3__.cutText)(user["name"])
+    })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", __assign({
+      className: "dropdown-menu",
+      "aria-labelledby": "dropdownMenuLink"
+    }, {
+      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+        children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", __assign({
+          className: "dropdown-header"
+        }, {
+          children: "\u30A2\u30AB\u30A6\u30F3\u30C8\u7BA1\u7406"
+        }))
+      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+        children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", __assign({
+          className: "dropdown-item",
+          href: routes["myPage"]
+        }, {
+          children: "\u30DE\u30A4\u30DA\u30FC\u30B8"
+        }))
+      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+        children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", __assign({
+          className: "dropdown-item",
+          href: routes["threadHistory"]
+        }, {
+          children: "\u95B2\u89A7\u5C65\u6B74"
+        }))
+      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+        children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", __assign({
+          className: "dropdown-item",
+          href: routes["profileShow"]
+        }, {
+          children: "\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB"
+        }))
+      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+        children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("hr", {
+          className: "dropdown-divider"
+        })
+      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+        children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_feature_auth_components_Logout__WEBPACK_IMPORTED_MODULE_2__.Logout, {
+          "class": "dropdown-item"
+        })
+      })]
+    }))]
+  }));
+};
+var AuthFalse = function AuthFalse() {
+  var routes = (0,_hooks_useContext__WEBPACK_IMPORTED_MODULE_1__.routesContext)();
+  return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", __assign({
+      href: routes["login"],
+      className: "btn btn-outline-dark mx-1"
+    }, {
+      children: "\u30ED\u30B0\u30A4\u30F3"
+    })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", __assign({
+      href: routes["register"],
+      className: "btn btn-secondary mx-1"
+    }, {
+      children: "\u65B0\u898F\u767B\u9332"
+    }))]
+  });
+};
+var Header = function Header() {
+  var user = (0,_hooks_useContext__WEBPACK_IMPORTED_MODULE_1__.userContext)();
+  var acctCtr = user["name"] !== "" ? AcctCtrDropDown() : AuthFalse();
+  return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("header", __assign({
+    className: "bg-aqua vh-12"
+  }, {
+    children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", __assign({
+      className: "flex-between mx-3"
+    }, {
+      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", __assign({
+        className: "flex-center"
+      }, {
+        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(HxSLogo, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Title, {})]
+      })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+        children: acctCtr
+      })]
+    }))
+  }));
+};
+
+/***/ }),
+
+/***/ "./resources/ts/src/components/Header/index.ts":
+/*!*****************************************************!*\
+  !*** ./resources/ts/src/components/Header/index.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Header": () => (/* reexport safe */ _Header__WEBPACK_IMPORTED_MODULE_0__.Header)
+/* harmony export */ });
+/* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Header */ "./resources/ts/src/components/Header/Header.tsx");
 
 
 /***/ }),
 
-/***/ "./resources/ts/app.tsx":
-/*!******************************!*\
-  !*** ./resources/ts/app.tsx ***!
-  \******************************/
-/***/ (() => {
+/***/ "./resources/ts/src/components/Layouts/Dashboard.tsx":
+/*!***********************************************************!*\
+  !*** ./resources/ts/src/components/Layouts/Dashboard.tsx ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Dashboard": () => (/* binding */ Dashboard)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _Header_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Header/index */ "./resources/ts/src/components/Header/index.ts");
+/* harmony import */ var _providers_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../providers/app */ "./resources/ts/src/providers/app.tsx");
 
+
+
+var Dashboard = function Dashboard() {
+  return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_providers_app__WEBPACK_IMPORTED_MODULE_2__.AppProvider, {
+    children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Header_index__WEBPACK_IMPORTED_MODULE_1__.Header, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+      children: "main"
+    })]
+  });
+};
+
+/***/ }),
+
+/***/ "./resources/ts/src/components/Layouts/index.ts":
+/*!******************************************************!*\
+  !*** ./resources/ts/src/components/Layouts/index.ts ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Dashboard": () => (/* reexport safe */ _Dashboard__WEBPACK_IMPORTED_MODULE_0__.Dashboard)
+/* harmony export */ });
+/* harmony import */ var _Dashboard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Dashboard */ "./resources/ts/src/components/Layouts/Dashboard.tsx");
+
+
+/***/ }),
+
+/***/ "./resources/ts/src/feature/auth/api/logout.ts":
+/*!*****************************************************!*\
+  !*** ./resources/ts/src/feature/auth/api/logout.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "logout": () => (/* binding */ logout)
+/* harmony export */ });
+/* harmony import */ var _lib_axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../lib/axios */ "./resources/ts/src/lib/axios.ts");
+
+var logout = function logout(logoutUrl) {
+  return _lib_axios__WEBPACK_IMPORTED_MODULE_0__.axios.post(logoutUrl).then(function () {
+    return window.location.reload();
+  })["catch"](function (error) {
+    return null;
+  });
+};
+
+/***/ }),
+
+/***/ "./resources/ts/src/feature/auth/components/Logout.tsx":
+/*!*************************************************************!*\
+  !*** ./resources/ts/src/feature/auth/components/Logout.tsx ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Logout": () => (/* binding */ Logout)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _hooks_useContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../hooks/useContext */ "./resources/ts/src/hooks/useContext.ts");
+/* harmony import */ var _api_logout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../api/logout */ "./resources/ts/src/feature/auth/api/logout.ts");
+var __assign = undefined && undefined.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+      for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+    }
+    return t;
+  };
+  return __assign.apply(this, arguments);
+};
+
+
+
+var Logout = function Logout(props) {
+  var routes = (0,_hooks_useContext__WEBPACK_IMPORTED_MODULE_1__.routesContext)();
+  return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", __assign({
+    href: "#",
+    className: props["class"],
+    onClick: function onClick() {
+      return (0,_api_logout__WEBPACK_IMPORTED_MODULE_2__.logout)(routes["logout"]);
+    }
+  }, {
+    children: "\u30ED\u30B0\u30A2\u30A6\u30C8"
+  }));
+};
+
+/***/ }),
+
+/***/ "./resources/ts/src/hooks/useContext.ts":
+/*!**********************************************!*\
+  !*** ./resources/ts/src/hooks/useContext.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "routesContext": () => (/* binding */ routesContext),
+/* harmony export */   "userContext": () => (/* binding */ userContext)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _providers_app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../providers/app */ "./resources/ts/src/providers/app.tsx");
+
+
+var routesContext = function routesContext() {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_providers_app__WEBPACK_IMPORTED_MODULE_1__.RoutesContext);
+};
+var userContext = function userContext() {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_providers_app__WEBPACK_IMPORTED_MODULE_1__.UserContext);
+};
+
+/***/ }),
+
+/***/ "./resources/ts/src/index.tsx":
+/*!************************************!*\
+  !*** ./resources/ts/src/index.tsx ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
+/* harmony import */ var _components_Layouts_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Layouts/index */ "./resources/ts/src/components/Layouts/index.ts");
+/* harmony import */ var _providers_app__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./providers/app */ "./resources/ts/src/providers/app.tsx");
+
+
+
+
+var Render = function Render(element, Dashboard) {
+  var root = react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot(element);
+  var App = Dashboard;
+  root.render((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_providers_app__WEBPACK_IMPORTED_MODULE_3__.AppProvider, {
+    children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(App, {})
+  }));
+};
+if (document.getElementById("dashboard")) {
+  Render(document.getElementById("dashboard"), _components_Layouts_index__WEBPACK_IMPORTED_MODULE_2__.Dashboard);
+}
+
+/***/ }),
+
+/***/ "./resources/ts/src/lib/axios.ts":
+/*!***************************************!*\
+  !*** ./resources/ts/src/lib/axios.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "axios": () => (/* binding */ axios)
+/* harmony export */ });
+var _a, _b;
+var Axios = (__webpack_require__(/*! axios */ "./node_modules/axios/index.js")["default"]);
+var csrfToken = (_b = (_a = document.head.querySelector('meta[name="csrf-token"]')) === null || _a === void 0 ? void 0 : _a.getAttribute("content")) !== null && _b !== void 0 ? _b : "";
+var axios = Axios.create({
+  headers: {
+    "X-CSRF-TOKEN": csrfToken
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/ts/src/providers/app.tsx":
+/*!********************************************!*\
+  !*** ./resources/ts/src/providers/app.tsx ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AppProvider": () => (/* binding */ AppProvider),
+/* harmony export */   "RoutesContext": () => (/* binding */ RoutesContext),
+/* harmony export */   "UserContext": () => (/* binding */ UserContext)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+var __assign = undefined && undefined.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+      for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+    }
+    return t;
+  };
+  return __assign.apply(this, arguments);
+};
+
+
+var RoutesContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createContext({});
+var UserContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createContext({});
+var AppProvider = function AppProvider(_a) {
+  var _b, _c, _d, _e, _f, _g, _h, _j;
+  var children = _a.children;
+  var element = document.getElementById("main");
+  var routes = {
+    dashboard: (_b = element === null || element === void 0 ? void 0 : element.dataset.dashboardurl) !== null && _b !== void 0 ? _b : "",
+    myPage: (_c = element === null || element === void 0 ? void 0 : element.dataset.mypageurl) !== null && _c !== void 0 ? _c : "",
+    threadHistory: (_d = element === null || element === void 0 ? void 0 : element.dataset.threadhistoryurl) !== null && _d !== void 0 ? _d : "",
+    profileShow: (_e = element === null || element === void 0 ? void 0 : element.dataset.profileshowurl) !== null && _e !== void 0 ? _e : "",
+    login: (_f = element === null || element === void 0 ? void 0 : element.dataset.loginurl) !== null && _f !== void 0 ? _f : "",
+    logout: (_g = element === null || element === void 0 ? void 0 : element.dataset.logouturl) !== null && _g !== void 0 ? _g : "",
+    register: (_h = element === null || element === void 0 ? void 0 : element.dataset.registerurl) !== null && _h !== void 0 ? _h : ""
+  };
+  var user = {
+    name: (_j = element === null || element === void 0 ? void 0 : element.dataset.username) !== null && _j !== void 0 ? _j : ""
+  };
+  return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(RoutesContext.Provider, __assign({
+    value: routes
+  }, {
+    children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(UserContext.Provider, __assign({
+      value: user
+    }, {
+      children: children
+    }))
+  }));
+};
+
+/***/ }),
+
+/***/ "./resources/ts/src/utils/format.ts":
+/*!******************************************!*\
+  !*** ./resources/ts/src/utils/format.ts ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "cutText": () => (/* binding */ cutText)
+/* harmony export */ });
+var cutText = function cutText(text, option) {
+  var _a, _b, _c, _d;
+  var start = (_a = option === null || option === void 0 ? void 0 : option.start) !== null && _a !== void 0 ? _a : 0;
+  var end = (_b = option === null || option === void 0 ? void 0 : option.end) !== null && _b !== void 0 ? _b : 30;
+  var endStr = (_c = option === null || option === void 0 ? void 0 : option.endStr) !== null && _c !== void 0 ? _c : "...";
+  var _byte = (_d = option === null || option === void 0 ? void 0 : option["byte"]) !== null && _d !== void 0 ? _d : true;
+  var byteSum = 0;
+  var charNum = 0;
+  if (_byte) {
+    text.split("").some(function (_char) {
+      _char.charCodeAt(0) > 255 ? byteSum += 3 : byteSum++;
+      charNum++;
+      return byteSum >= end;
+    });
+  } else {
+    charNum = end;
+  }
+  return text.length > charNum ? text.substring(start, charNum) + endStr : text;
+};
 
 /***/ }),
 
@@ -23063,6 +23495,19 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
+/***/ "./resources/css/default/dashboard/ranking.css":
+/*!*****************************************************!*\
+  !*** ./resources/css/default/dashboard/ranking.css ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./resources/css/default/welcome/normalize.css":
 /*!*****************************************************!*\
   !*** ./resources/css/default/welcome/normalize.css ***!
@@ -23167,10 +23612,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/css/default/dashboard/ranking.css":
-/*!*****************************************************!*\
-  !*** ./resources/css/default/dashboard/ranking.css ***!
-  \*****************************************************/
+/***/ "./resources/css/default/dashboard/header.css":
+/*!****************************************************!*\
+  !*** ./resources/css/default/dashboard/header.css ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -58296,9 +58741,9 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 	__webpack_require__.O(undefined, ["css/design","css/app","css/design-error","css/design-dark"], () => (__webpack_require__("./resources/js/app.js")))
 /******/ 	__webpack_require__.O(undefined, ["css/design","css/app","css/design-error","css/design-dark"], () => (__webpack_require__("./resources/js/app.jsx")))
 /******/ 	__webpack_require__.O(undefined, ["css/design","css/app","css/design-error","css/design-dark"], () => (__webpack_require__("./resources/ts/app.ts")))
-/******/ 	__webpack_require__.O(undefined, ["css/design","css/app","css/design-error","css/design-dark"], () => (__webpack_require__("./resources/ts/app.tsx")))
 /******/ 	__webpack_require__.O(undefined, ["css/design","css/app","css/design-error","css/design-dark"], () => (__webpack_require__("./resources/css/app.css")))
 /******/ 	__webpack_require__.O(undefined, ["css/design","css/app","css/design-error","css/design-dark"], () => (__webpack_require__("./resources/css/common/common.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/design","css/app","css/design-error","css/design-dark"], () => (__webpack_require__("./resources/css/default/dashboard/header.css")))
 /******/ 	__webpack_require__.O(undefined, ["css/design","css/app","css/design-error","css/design-dark"], () => (__webpack_require__("./resources/css/default/dashboard/ranking.css")))
 /******/ 	__webpack_require__.O(undefined, ["css/design","css/app","css/design-error","css/design-dark"], () => (__webpack_require__("./resources/css/default/welcome/normalize.css")))
 /******/ 	__webpack_require__.O(undefined, ["css/design","css/app","css/design-error","css/design-dark"], () => (__webpack_require__("./resources/css/default/welcome/welcome.css")))

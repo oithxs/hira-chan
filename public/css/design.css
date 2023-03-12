@@ -1,3 +1,7 @@
+.bg-aqua {
+    background-color: aqua;
+}
+
 /*ここからランキングの順位の文字を上下中央にするCSS*/
 .table-block{
     height: 30px;
