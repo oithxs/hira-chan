@@ -21,3 +21,27 @@ td.a-block a {
     position: sticky;
     top: 5%;
 }
+
+.flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vw-5 {
+    width: 5vw;
+}
+
+.vw-10 {
+    width: 10vw;
+}
+
+.vh-12 {
+    height: 12vh;
+}

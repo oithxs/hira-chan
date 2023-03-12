@@ -16,7 +16,6 @@ const glob = require('glob');
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/app.jsx', 'public/js')
     .ts('resources/ts/app.ts', 'public/js')
-    .ts('resources/ts/app.tsx', 'public/js')
     .react()
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),

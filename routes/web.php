@@ -22,6 +22,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/dashboard/dev', function () {
+    return view('dashboard.dev');
+});
+
 // 画面遷移：ログインしていない状態でもアクセス許可
 Route::middleware([
     config('jetstream.auth_session'),
