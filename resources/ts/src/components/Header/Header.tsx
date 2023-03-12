@@ -1,5 +1,5 @@
 import { routesContext, userContext } from "../../hooks/useContext";
-import { Logout } from "../../feature/auth/components/Logout";
+import { Logout } from "../../features/auth/components/Logout";
 import { cutText } from "../../utils/format";
 
 /**
