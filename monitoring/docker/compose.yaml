@@ -8,12 +8,17 @@ services:
     command:
       - '--config.file=/etc/prometheus/prometheus.yaml'
       - '--storage.tsdb.path=/prometheus'
-      - '--storage.tsdb.retention.time=30d'
+      - '--storage.tsdb.retention.time=365d'
     restart: always
   nginx-prometheus-exporter:
     image: nginx/nginx-prometheus-exporter:latest
     ports:
       - 9113:9113
     command:
-      - '--nginx.scrape-uri=http://192.168.0.10:8080/stub_status'
+      - '--nginx.scrape-uri=${NGINX_SCRAPE_URI}'
     restart: always
+  # cloudflared:
+  #   image: cloudflare/cloudflared:latest
+  #   command: tunnel --no-autoupdate --url http://${IP_PORT}
+  #   # command: tunnel --no-autoupdate run --token ${TUNNEL_TOKEN}
+  #   restart: always
