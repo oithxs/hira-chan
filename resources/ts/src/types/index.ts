@@ -7,6 +7,7 @@ export type RoutesType = {
     login: string;
     logout: string;
     register: string;
+    "hub.index": string;
 };
 
 /** ログインしてるユーザ情報の型 */
