@@ -28,7 +28,7 @@ class AccessLog
     {
         $response = $next($request);
 
-        if (Hub::where('id', '=', $request->thread_id)->first()->id ?? null === $request->thread_id) {
+        if (Hub::where('id', '=', $request->thread_id)->first()->id ?? "No data" === $request->thread_id) {
             if (session()->get('thread_id') !== $request->thread_id) {
                 Log::create([
                     'hub_id' => $request->thread_id,
@@ -36,8 +36,6 @@ class AccessLog
                 ]);
                 session()->put('thread_id', $request->thread_id);
             }
-        } else {
-            abort(404);
         }
 
         return $response;
