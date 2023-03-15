@@ -4,6 +4,8 @@
       "target": "ES5",
       "module": "ES2015",
       "strict": true,
-      "jsx": "react-jsx"
+      "jsx": "react-jsx",
+      "moduleResolution": "node",
+      "allowSyntheticDefaultImports": true
     }
   }
