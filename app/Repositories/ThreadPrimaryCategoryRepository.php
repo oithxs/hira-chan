@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\ThreadPrimaryCategory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ThreadPrimaryCategoryRepository
@@ -17,6 +18,18 @@ class ThreadPrimaryCategoryRepository
     public static function find(int $id): ThreadPrimaryCategory | null
     {
         return ThreadPrimaryCategory::find($id);
+    }
+
+    /**
+     * 大枠カテゴリ一覧を取得する
+     *
+     * @param array $with 追加で取得するリレーション
+     * @param array $withCount カウントするリレーションの関連モデル
+     * @return Collection 大枠カテゴリ一覧
+     */
+    public static function get(array $with = [], array $withCount = []): Collection
+    {
+        return ThreadPrimaryCategory::with($with)->withCount($withCount)->get();
     }
 
     /**
