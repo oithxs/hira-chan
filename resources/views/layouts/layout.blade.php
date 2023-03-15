@@ -30,10 +30,11 @@
 </head>
 
 <body class="antialiased">
-    <main id="main" data-dashboardurl={{ route('dashboard') }} data-loginurl={{ route('login') }}
-        data-logouturl={{route('logout') }} data-registerurl={{ route('register') }} data-mypageurl={{ route('mypage')
-        }} data-threadhistoryurl={{ route('thread.history') }} data-profileshowurl={{ route('profile.show') }}
-        data-hubindexurl={{ route('hub.index') }} data-username={{ Auth::check() && Auth::user()->
+    <main id="main" data-dashboardurl={{ {{-- route('dashboard') --}} route('dashboard.dev') }} data-loginurl={{
+        route('login') }} data-logouturl={{route('logout') }} data-registerurl={{ route('register') }} data-mypageurl={{
+        route('mypage') }} data-threadhistoryurl={{ route('thread.history') }} data-profileshowurl={{
+        route('profile.show') }} data-hubindexurl={{ route('hub.index') }} data-username={{ Auth::check() &&
+        Auth::user()->
         hasVerifiedEmail()
         ? Auth::user()->name : null }}
         >
