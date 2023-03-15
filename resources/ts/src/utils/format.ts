@@ -1,3 +1,5 @@
+import { default as dayjs } from "dayjs";
+
 /** テキストを切り抜く際に指定できるオプションの型 */
 type cutOption = {
     start?: number;
@@ -39,3 +41,15 @@ export const cutText = (text: string, option?: cutOption) => {
         ? text.substring(start, charNum) + endStr
         : text;
 };
+
+/**
+ * 日時のフォーマットを行う
+ *
+ * @param {string | number | dayjs.Dayjs | Date | null | undefined} date - 日時
+ * @param {string} format - 省略可能．フォーマット後の形式を指定する
+ * @return {string} フォーマット後の日時
+ */
+export const formatDate = (
+    date: string | number | dayjs.Dayjs | Date | null | undefined,
+    format: string = "YYYY-MM-DD HH:mm"
+) => dayjs(date).format(format);
