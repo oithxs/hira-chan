@@ -8,6 +8,7 @@ export type RoutesType = {
     logout: string;
     register: string;
     hub: string;
+    threadPrimaryCategory: string;
     threadSecondaryCategory: string;
 };
 
