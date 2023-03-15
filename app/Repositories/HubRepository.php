@@ -12,11 +12,13 @@ class HubRepository
     /**
      * スレッド一覧を取得する
      *
+     * @param array $with 追加で取得するリレーション
+     * @param array $withCount カウントするリレーションの関連モデル
      * @return Collection スレッド一覧
      */
-    public static function index(): Collection
+    public static function get(array $with = [], array $withCount = []): Collection
     {
-        return Hub::get();
+        return Hub::with($with)->withCount($withCount)->get();
     }
 
     /**

@@ -15,7 +15,7 @@ class HubService
      */
     public function index(): Collection
     {
-        return HubRepository::index();
+        return HubRepository::get(['thread_secondary_category'], ['access_logs']);
     }
 
     /**
