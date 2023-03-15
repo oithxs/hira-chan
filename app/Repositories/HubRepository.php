@@ -16,9 +16,9 @@ class HubRepository
      * @param array $withCount カウントするリレーションの関連モデル
      * @return Collection スレッド一覧
      */
-    public static function get(array $with = [], array $withCount = []): Collection
+    public static function get(array $with = [], array $withCount = [], array $orderBy = ['created_at']): Collection
     {
-        return Hub::with($with)->withCount($withCount)->get();
+        return Hub::with($with)->withCount($withCount)->orderBy(...$orderBy)->get();
     }
 
     /**
