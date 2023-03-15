@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\ThreadSecondaryCategory;
 use App\Services\ThreadSecondaryCategoryService;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class ThreadSecondaryCategoryController extends Controller
@@ -17,11 +18,11 @@ class ThreadSecondaryCategoryController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * 大枠カテゴリ一覧を取得する
      */
-    public function index()
+    public function index(): Collection
     {
-        //
+        return $this->threadSecondaryCategoryService->index();
     }
 
     /**
