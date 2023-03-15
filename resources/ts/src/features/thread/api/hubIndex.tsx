@@ -4,13 +4,13 @@ import { axios } from "../../../lib/axios";
 /**
  * state・スレッド一覧を取得するAPIを利用し，呼び出し元にスレッド一覧を渡す
  *
- * @param {string} hubIndexUrl - スレッド一覧を取得するAPIのURL
+ * @param {string} hubUrl - スレッド一覧を取得するAPIのURL
  * @param {CallableFunction} setThreads - stateでスレッド一覧を保存するための関数
  */
-export const index = (hubIndexUrl: string, setThreads: CallableFunction) => {
+export const hubIndex = (hubUrl: string, setThreads: CallableFunction) => {
     useEffect(() => {
         axios
-            .get(hubIndexUrl)
+            .get(hubUrl)
             .then((response: any) => {
                 return response.data;
             })
