@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Collection;
 class ThreadSecondaryCategoryRepository
 {
     /**
-     * 対応する大枠カテゴリを取得する
+     * 対応する詳細カテゴリを取得する
      *
-     * @param int $id 大枠カテゴリのID
+     * @param int $id 詳細カテゴリのID
      * @param array $with 追加で取得するリレーション
      * @param array $withCount カウントするリレーションの関連モデル
-     * @return ThreadSecondaryCategory 対応する大枠カテゴリを取得する
+     * @return ThreadSecondaryCategory 対応する詳細カテゴリを取得する
      */
     public static function find(int $id, array $with = [], array $withCount = []): ThreadSecondaryCategory
     {
@@ -23,11 +23,11 @@ class ThreadSecondaryCategoryRepository
     }
 
     /**
-     * 大枠カテゴリ一覧を取得する
+     * 詳細カテゴリ一覧を取得する
      *
      * @param array $with 追加で取得するリレーション
      * @param array $withCount カウントするリレーションの関連モデル
-     * @return Collection 大枠カテゴリ一覧を取得する
+     * @return Collection 詳細カテゴリ一覧を取得する
      */
     public static function get(array $with = [], array $withCount = []): Collection
     {

@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\Collection;
 class ThreadSecondaryCategoryService
 {
     /**
-     * 大枠カテゴリ一覧を取得する
+     * 詳細カテゴリ一覧を取得する
      *
-     * @return Collection 大枠カテゴリ一覧
+     * @return Collection 詳細カテゴリ一覧
      */
     public function index(): Collection
     {
@@ -19,9 +19,9 @@ class ThreadSecondaryCategoryService
     }
 
     /**
-     * 対応する大枠カテゴリを取得する
+     * 対応する詳細カテゴリを取得する
      *
-     * @return ThreadSecondaryCategory 対応する大枠カテゴリ
+     * @return ThreadSecondaryCategory 対応する詳細カテゴリ
      */
     public function show(int $id): ThreadSecondaryCategory
     {

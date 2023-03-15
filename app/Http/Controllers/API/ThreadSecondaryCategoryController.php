@@ -18,7 +18,7 @@ class ThreadSecondaryCategoryController extends Controller
     }
 
     /**
-     * 大枠カテゴリ一覧を取得する
+     * 詳細カテゴリ一覧を取得する
      */
     public function index(): Collection
     {
@@ -34,7 +34,7 @@ class ThreadSecondaryCategoryController extends Controller
     }
 
     /**
-     * 対応する大枠カテゴリを取得する
+     * 対応する詳細カテゴリを取得する
      */
     public function show(string $id): ThreadSecondaryCategory
     {
