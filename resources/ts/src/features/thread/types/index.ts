@@ -38,7 +38,7 @@ export type threadPrimaryCategoryEntity = {
     name: string;
     created_at: string;
     updated_at: string;
-    thread_secondary_category: {
+    thread_secondary_categorys?: {
         id: number;
         thread_primary_category_id: number;
         name: string;
