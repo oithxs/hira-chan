@@ -15,8 +15,9 @@ type modalProps = {
  */
 export const Modal = ({ id, children }: modalProps) => (
     <div
-        className="modal fade"
+        className="modal"
         id={id}
+        tabIndex={-1}
         aria-labelledby={id + "Label"}
         aria-hidden="true"
     >
