@@ -5,6 +5,7 @@ services:
       - 9090:9090
     volumes:
       - ../prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml
+      - prometheus:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yaml'
       - '--storage.tsdb.path=/prometheus'
@@ -15,7 +16,7 @@ services:
     ports:
       - 9113:9113
     command:
-      - '--nginx.scrape-uri=${NGINX_SCRAPE_URI}'
+      - --nginx.scrape-uri=http://192.168.0.10:8080/stub_status
     restart: always
   # cloudflared:
   #   image: cloudflare/cloudflared:latest
