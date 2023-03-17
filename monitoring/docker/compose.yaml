@@ -7,9 +7,9 @@ services:
       - ../prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml
       - prometheus:/prometheus
     command:
-      - '--config.file=/etc/prometheus/prometheus.yaml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--storage.tsdb.retention.time=365d'
+      - --config.file=/etc/prometheus/prometheus.yaml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=365d
     restart: always
   nginx-prometheus-exporter:
     image: nginx/nginx-prometheus-exporter:latest
