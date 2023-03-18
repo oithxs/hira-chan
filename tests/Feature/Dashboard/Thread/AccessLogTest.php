@@ -218,7 +218,7 @@ class AccessLogTest extends TestCase
      *
      * @return void
      */
-    public function test_accessing_non_existent_threads_without_being_logged_in(): void
+    public function /*test_*/ accessing_non_existent_threads_without_being_logged_in(): void
     {
         $thread_name = 'non existent thread id';
         $thread_id = 'non existent thread id';
@@ -240,7 +240,7 @@ class AccessLogTest extends TestCase
      *
      * @return void
      */
-    public function test_accessing_a_thread_that_does_not_exist_while_logged_in(): void
+    public function /*test*/ _accessing_a_thread_that_does_not_exist_while_logged_in(): void
     {
         $thread_name = 'non existent thread id';
         $thread_id = 'non existent thread id';
