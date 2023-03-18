@@ -144,21 +144,18 @@ const Body = ({
 
 /** スレッド検索モーダルで表示するフッターの引数 */
 type FooterProps = {
-    message: string;
     onClick: CallableFunction;
 };
 
 /**
  * スレッド検索モーダルで表示するフッター
  *
- * @param {string} message - 条件未入力で検索実行した際に表示するエラーメッセージ
  * @param {CallableFunction} onClick - 「検索」ボタンクリックで実行
  * @returns {JSX.Element}
  */
-const Footer = ({ message, onClick }: FooterProps) => {
+const Footer = ({ onClick }: FooterProps) => {
     return (
         <div className="modal-footer">
-            <div className="text-danger">{message}</div>
             <button
                 type="button"
                 onClick={() => onClick()}
@@ -175,15 +172,14 @@ const Footer = ({ message, onClick }: FooterProps) => {
 type SearchThreadModalProps = {
     isOpen: boolean;
     setIsOpen: CallableFunction;
-    message: string;
     setFilter: CallableFunction;
     onClick: CallableFunction;
     threadPrimaryCategorys: threadPrimaryCategoryEntity[];
     threadSecondaryCategorys: threadSecondaryCategoryEntity[];
 };
 
+/** モーダルのスタイル */
 const customStyles: Modal.Styles = {
-    // ダイアログ内のスタイル（中央に表示）
     content: {
         top: "50%",
         left: "50%",
@@ -192,7 +188,6 @@ const customStyles: Modal.Styles = {
         marginRight: "-50%",
         transform: "translate(-50%, -50%)",
     },
-    // 親ウィンドウのスタイル（ちょっと暗くする）
     overlay: {
         background: "rgba(0, 0, 0, 0.5)",
     },
@@ -203,7 +198,6 @@ const customStyles: Modal.Styles = {
  *
  * @param {boolean} isOpen - モーダルの開閉
  * @param {CallableFunction} setIsOpen - モーダルの開閉を保存する
- * @param {string} message - スレッド検索時のメッセージ（主にエラーメッセージ）
  * @param {CallableFunction} setFilter - スレッドの検索条件を保存するstate
  * @param {CallableFunction} onClick - スレッド検索ボタンの動作
  * @param {threadPrimaryCategoryEntity[]} threadPrimaryCategorys - 大枠カテゴリ一覧
@@ -213,7 +207,6 @@ const customStyles: Modal.Styles = {
 export const SearchThreadModal = ({
     isOpen,
     setIsOpen,
-    message,
     setFilter,
     onClick,
     threadPrimaryCategorys,
@@ -234,6 +227,6 @@ export const SearchThreadModal = ({
             threadPrimaryCategorys={threadPrimaryCategorys}
             threadSecondaryCategorys={threadSecondaryCategorys}
         />
-        <Footer message={message} onClick={onClick} />
+        <Footer onClick={onClick} />
     </Modal>
 );

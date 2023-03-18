@@ -11,11 +11,19 @@ import {
 } from "../types/index";
 import { SearchThreadModal } from "./SearchThreadModal";
 
+/** テーブルのヘッダを表示する関数の引数 */
 type TheadProps = {
     onChange: CallableFunction;
     setSearchThreadModalIsOpen: CallableFunction;
 };
 
+/**
+ * スレッドテーブルのヘッダを表示する
+ *
+ * @param {CallableFunction} onChange - 表示するスレッド行数を変更する
+ * @param {CallableFunction} setSearchThreadModalIsOpen - モーダル表示のフラグ
+ * @returns {JSX.Element}
+ */
 const Thead = ({ onChange, setSearchThreadModalIsOpen }: TheadProps) => {
     return (
         <thead>
@@ -58,6 +66,7 @@ const Thead = ({ onChange, setSearchThreadModalIsOpen }: TheadProps) => {
     );
 };
 
+/** スレッドテーブルのbodyを表示する関数の引数 */
 type TbodyType = {
     threads: threadEntity[];
     threadSecondaryCategorys: threadSecondaryCategoryEntity[];
@@ -65,6 +74,15 @@ type TbodyType = {
     dashboardUrl: string;
 };
 
+/**
+ * スレッドテーブルのbodyを表示する
+ *
+ * @param {threadEntity[]} threads - スレッド一覧
+ * @param {threadSecondaryCategoryEntity[]} threadSecondaryCategorys - 詳細カテゴリ一覧
+ * @param {threadNumType} threadNum - 1ページに表示するスレッド数や，表示しているページなど
+ * @param {string} dashboardUrl - ダッシュボードのURL
+ * @returns {JSX.Element}
+ */
 const Tbody = ({
     threadNum,
     threadSecondaryCategorys,
@@ -108,14 +126,26 @@ const Tbody = ({
     return <tbody>{tbody}</tbody>;
 };
 
+/** スレッドのページを表示する関数の引数 */
 type SelectPageProps = {
     threadNum: threadNumType;
     onClick: CallableFunction;
 };
 
+/**
+ * スレッドのページを表示する（現在のページ・表示できるページ）
+ *
+ * @param {threadNumType} threadNum - 1ページに表示するスレッド数や，表示しているページなど
+ * @param {CallableFunction} onClick - 表示するページ数変更のボタンクリックイベント
+ * @returns
+ */
 const SelectPage = ({ threadNum, onClick }: SelectPageProps) => {
     const pagesLength = threadNum.pages.length;
 
+    /**
+     * 表示する最小ページを取得する
+     * @returns {number}
+     */
     const min = () => {
         if (1 <= threadNum.page - 5) {
             if (pagesLength - 10 < threadNum.page - 5) {
@@ -127,6 +157,10 @@ const SelectPage = ({ threadNum, onClick }: SelectPageProps) => {
         }
     };
 
+    /**
+     * 表示する最大ページを取得する
+     * @returns {number}
+     */
     const max = () => {
         if (threadNum.page + 5 < pagesLength) {
             if (threadNum.page + 5 < 10 && 10 < pagesLength) {
@@ -181,16 +215,21 @@ export type filterType = {
     secondaryCategory?: threadSecondaryCategoryEntity;
 };
 
+/** 1ページに表示するスレッド数や，表示しているページなどの型 */
 export type threadNumType = {
     row: number;
     page: number;
     pages: number[];
 };
 
+/**
+ * スレッド一覧などを表示する
+ *
+ * @returns {JSX.Element}
+ */
 export const Layout = () => {
     const routes: { [key: string]: string } = routesContext();
     const [filter, setFilter] = useState<filterType>({});
-    const [message, setMessage] = useState<string>("");
     const [threadNum, setThreadNum] = useState<threadNumType>({
         row: 10,
         page: 1,
@@ -231,50 +270,40 @@ export const Layout = () => {
 
     /** スレッドの検索実行 */
     const handleSearchThreadClick = () => {
-        if (
-            !filter.title &&
-            typeof filter.primaryCategory === "undefined" &&
-            typeof filter.secondaryCategory === "undefined"
-        ) {
-            setMessage("※ 少なくとも1つは検索の条件を入力してください");
-        } else {
-            setMessage("");
-            setProcessedThreads(
-                threads.filter((o) => {
-                    let response: boolean = true;
+        setProcessedThreads(
+            threads.filter((o) => {
+                let response: boolean = true;
 
-                    if (filter.title && !o.name.match(filter.title)) {
-                        response = false;
-                    }
-                    if (
-                        filter.primaryCategory &&
-                        o.thread_secondary_category
-                            .thread_primary_category_id !==
-                            filter.primaryCategory.id
-                    ) {
-                        response = false;
-                    }
-                    if (
-                        filter.secondaryCategory &&
-                        o.thread_secondary_category_id !==
-                            filter.secondaryCategory.id
-                    ) {
-                        response = false;
-                    }
+                if (filter.title && !o.name.match(filter.title)) {
+                    response = false;
+                }
+                if (
+                    filter.primaryCategory &&
+                    o.thread_secondary_category.thread_primary_category_id !==
+                        filter.primaryCategory.id
+                ) {
+                    response = false;
+                }
+                if (
+                    filter.secondaryCategory &&
+                    o.thread_secondary_category_id !==
+                        filter.secondaryCategory.id
+                ) {
+                    response = false;
+                }
 
-                    return response;
-                })
-            );
-            setThreadNum((state: threadNumType) => ({
-                ...state,
-                pages: Array.from(
-                    Array(Math.ceil(processedThreads.length / threadNum.row)),
-                    (_, i) => i + 1
-                ),
-            }));
-            setFilter({});
-            setSearchThreadModalIsOpen(false);
-        }
+                return response;
+            })
+        );
+        setThreadNum((state: threadNumType) => ({
+            ...state,
+            pages: Array.from(
+                Array(Math.ceil(processedThreads.length / threadNum.row)),
+                (_, i) => i + 1
+            ),
+        }));
+        setFilter({});
+        setSearchThreadModalIsOpen(false);
     };
 
     /**
@@ -322,7 +351,6 @@ export const Layout = () => {
             <SearchThreadModal
                 isOpen={searchThreadModalIsOpen}
                 setIsOpen={setSearchThreadModalIsOpen}
-                message={message}
                 setFilter={setFilter}
                 onClick={handleSearchThreadClick}
                 threadPrimaryCategorys={threadPrimaryCategorys}
