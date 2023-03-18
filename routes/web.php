@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/dashboard/dev', function () {
+Route::middleware(['access_log'])->name('dashboard.dev')->get('/dashboard/dev', function () {
     return view('dashboard.dev');
 });
 

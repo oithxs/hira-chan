@@ -5,9 +5,22 @@ namespace App\Repositories;
 use App\Models\Hub;
 use App\Models\ThreadPrimaryCategory;
 use App\Models\ThreadSecondaryCategory;
+use Illuminate\Database\Eloquent\Collection;
 
 class HubRepository
 {
+    /**
+     * スレッド一覧を取得する
+     *
+     * @param array $with 追加で取得するリレーション
+     * @param array $withCount カウントするリレーションの関連モデル
+     * @return Collection スレッド一覧
+     */
+    public static function get(array $with = [], array $withCount = [], array $orderBy = ['created_at']): Collection
+    {
+        return Hub::with($with)->withCount($withCount)->orderBy(...$orderBy)->get();
+    }
+
     /**
      * スレッドを作成する
      *

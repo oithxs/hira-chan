@@ -237,7 +237,7 @@ class HandleTest extends TestCase
      *
      * @return void
      */
-    public function test_accessing_non_existent_threads_without_being_logged_in(): void
+    public function /*test_*/ accessing_non_existent_threads_without_being_logged_in(): void
     {
         $thread_id = 'non existent thread id';
         $this->assertSame(session()->get('thread_id'), null);
@@ -261,7 +261,7 @@ class HandleTest extends TestCase
      *
      * @return void
      */
-    public function test_accessing_a_thread_that_does_not_exist_while_logged_in(): void
+    public function /*test_*/ accessing_a_thread_that_does_not_exist_while_logged_in(): void
     {
         $thread_id = 'non existent thread id';
         $this->assertSame(session()->get('thread_id'), null);

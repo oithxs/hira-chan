@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::apiResource('/hub', \App\Http\Controllers\API\HubController::class);
+Route::apiResource('/threadPrimaryCategory', \App\Http\Controllers\API\ThreadPrimaryCategoryController::class);
+Route::apiResource('/threadSecondaryCategory', \App\Http\Controllers\API\ThreadSecondaryCategoryController::class);
