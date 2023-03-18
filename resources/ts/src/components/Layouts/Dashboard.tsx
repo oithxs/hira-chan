@@ -1,3 +1,4 @@
+import { Layout as Thread } from "../../features/thread";
 import { Header } from "../Header/index";
 
 /**
@@ -9,7 +10,10 @@ export const Dashboard = () => {
     return (
         <>
             <Header />
-            <div>main</div>
+            <div className="container-fluid">
+                {/* とりあえず表示 */}
+                <Thread />
+            </div>
         </>
     );
 };
