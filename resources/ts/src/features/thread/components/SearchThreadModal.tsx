@@ -61,7 +61,7 @@ const Body = ({
     const handlePrimaryCategorysChange = (primaryKey: string) => {
         setFilter((state: filterType) => ({
             ...state,
-            primaryCategory: threadPrimaryCategorys[Number(primaryKey)],
+            primaryCategory: threadPrimaryCategorys[Number(primaryKey) - 1],
             secondaryCategory: undefined,
         }));
 
@@ -85,7 +85,7 @@ const Body = ({
         setFilter((state: filterType) => ({
             ...state,
             secondaryCategory:
-                threadSecondaryCategorys[Number(secondaryKey)],
+                threadSecondaryCategorys[Number(secondaryKey) - 1],
         }));
 
     return (

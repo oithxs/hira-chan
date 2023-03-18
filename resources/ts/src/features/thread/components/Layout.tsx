@@ -196,6 +196,9 @@ export const Layout = () => {
         pages: [],
     });
     const [threads, setThreads] = useState<threadEntity[]>([]);
+    const [processedThreads, setProcessedThreads] = useState<threadEntity[]>(
+        []
+    );
     const [threadPrimaryCategorys, setThreadPrimaryCategorys] = useState<
         threadPrimaryCategoryEntity[]
     >([]);
@@ -213,15 +216,16 @@ export const Layout = () => {
         routes["threadSecondaryCategory"],
         setThreadSecondaryCategorys
     );
+    useEffect(() => setProcessedThreads(threads), [threads]);
     useEffect(() => {
         setThreadNum((state: threadNumType) => ({
             ...state,
             pages: Array.from(
-                Array(Math.ceil(threads.length / threadNum.row)),
+                Array(Math.ceil(processedThreads.length / threadNum.row)),
                 (_, i) => i + 1
             ),
         }));
-    }, [threads]);
+    }, [processedThreads]);
 
     const handleSearchThreadClick = () => {
         if (
@@ -232,7 +236,43 @@ export const Layout = () => {
             setMessage("※ 少なくとも1つは検索の条件を入力してください");
         } else {
             setMessage("");
-            // 検索結果ページへ
+            setProcessedThreads(
+                threads.filter((o) => {
+                    let response: boolean = true;
+
+                    if (filter.title) {
+                        if (!o.name.match(filter.title)) {
+                            response = false;
+                        }
+                    }
+                    if (filter.primaryCategory) {
+                        if (
+                            o.thread_secondary_category
+                                .thread_primary_category_id !==
+                            filter.primaryCategory.id
+                        ) {
+                            response = false;
+                        }
+                    }
+                    if (filter.secondaryCategory) {
+                        if (
+                            o.thread_secondary_category_id !==
+                            filter.secondaryCategory.id
+                        ) {
+                            response = false;
+                        }
+                    }
+
+                    return response;
+                })
+            );
+            setThreadNum((state: threadNumType) => ({
+                ...state,
+                pages: Array.from(
+                    Array(Math.ceil(processedThreads.length / threadNum.row)),
+                    (_, i) => i + 1
+                ),
+            }));
         }
     };
 
@@ -264,7 +304,7 @@ export const Layout = () => {
             <table className="table table-hover">
                 <Thead modalTarget={modalTarget} onChange={handleRowChange} />
                 <Tbody
-                    threads={threads}
+                    threads={processedThreads}
                     threadSecondaryCategorys={threadSecondaryCategorys}
                     threadNum={threadNum}
                     dashboardUrl={routes["dashboard"]}
