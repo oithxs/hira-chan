@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Button } from "../../../components/Modal";
 import { routesContext } from "../../../hooks/useContext";
 import { formatDate } from "../../../utils/format";
 import { hubIndex } from "../api/hubIndex";
@@ -13,18 +12,20 @@ import {
 import { SearchThreadModal } from "./SearchThreadModal";
 
 type TheadProps = {
-    modalTarget: string;
     onChange: CallableFunction;
+    setSearchThreadModalIsOpen: CallableFunction;
 };
 
-const Thead = ({ modalTarget, onChange }: TheadProps) => {
+const Thead = ({ onChange, setSearchThreadModalIsOpen }: TheadProps) => {
     return (
         <thead>
             <tr>
                 <th>
                     <div className="d-flex align-items-center">
-                        <div className="align-middle fs-4">新着スレッド</div>
-                        <Button modalTarget={modalTarget}>
+                        <div className="align-middle fs-4">スレッド</div>
+                        <button
+                            onClick={() => setSearchThreadModalIsOpen(true)}
+                        >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16"
@@ -35,7 +36,7 @@ const Thead = ({ modalTarget, onChange }: TheadProps) => {
                             >
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                             </svg>
-                        </Button>
+                        </button>
                     </div>
                     <div className="d-flex align-items-center">
                         <div className="d-flex align-items-center">
@@ -205,7 +206,8 @@ export const Layout = () => {
     const [threadSecondaryCategorys, setThreadSecondaryCategorys] = useState<
         threadSecondaryCategoryEntity[]
     >([]);
-    const modalTarget: string = "searchThreadModal";
+    const [searchThreadModalIsOpen, setSearchThreadModalIsOpen] =
+        useState<boolean>(false);
 
     hubIndex(routes["hub"], setThreads);
     threadPrimaryCategoryIndex(
@@ -227,6 +229,7 @@ export const Layout = () => {
         }));
     }, [processedThreads]);
 
+    /** スレッドの検索実行 */
     const handleSearchThreadClick = () => {
         if (
             !filter.title &&
@@ -240,27 +243,23 @@ export const Layout = () => {
                 threads.filter((o) => {
                     let response: boolean = true;
 
-                    if (filter.title) {
-                        if (!o.name.match(filter.title)) {
-                            response = false;
-                        }
+                    if (filter.title && !o.name.match(filter.title)) {
+                        response = false;
                     }
-                    if (filter.primaryCategory) {
-                        if (
-                            o.thread_secondary_category
-                                .thread_primary_category_id !==
+                    if (
+                        filter.primaryCategory &&
+                        o.thread_secondary_category
+                            .thread_primary_category_id !==
                             filter.primaryCategory.id
-                        ) {
-                            response = false;
-                        }
+                    ) {
+                        response = false;
                     }
-                    if (filter.secondaryCategory) {
-                        if (
-                            o.thread_secondary_category_id !==
+                    if (
+                        filter.secondaryCategory &&
+                        o.thread_secondary_category_id !==
                             filter.secondaryCategory.id
-                        ) {
-                            response = false;
-                        }
+                    ) {
+                        response = false;
                     }
 
                     return response;
@@ -273,6 +272,8 @@ export const Layout = () => {
                     (_, i) => i + 1
                 ),
             }));
+            setFilter({});
+            setSearchThreadModalIsOpen(false);
         }
     };
 
@@ -290,6 +291,10 @@ export const Layout = () => {
             ),
         });
 
+    /**
+     * スレッド一覧のページ移動のためにデータを保存する
+     * @param {number} selectedPage 選択されたページ
+     */
     const handleSelectPageClick = (selectedPage: number) => {
         threadNum.pages.some((e) => e === selectedPage)
             ? setThreadNum((state: threadNumType) => ({
@@ -302,7 +307,10 @@ export const Layout = () => {
     return (
         <div>
             <table className="table table-hover">
-                <Thead modalTarget={modalTarget} onChange={handleRowChange} />
+                <Thead
+                    onChange={handleRowChange}
+                    setSearchThreadModalIsOpen={setSearchThreadModalIsOpen}
+                />
                 <Tbody
                     threads={processedThreads}
                     threadSecondaryCategorys={threadSecondaryCategorys}
@@ -312,7 +320,8 @@ export const Layout = () => {
             </table>
             <SelectPage threadNum={threadNum} onClick={handleSelectPageClick} />
             <SearchThreadModal
-                id={modalTarget}
+                isOpen={searchThreadModalIsOpen}
+                setIsOpen={setSearchThreadModalIsOpen}
                 message={message}
                 setFilter={setFilter}
                 onClick={handleSearchThreadClick}

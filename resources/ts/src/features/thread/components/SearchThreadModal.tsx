@@ -1,5 +1,5 @@
 import { KeyboardEvent, useEffect, useState } from "react";
-import { Modal } from "../../../components/Modal";
+import Modal from "react-modal";
 import {
     threadPrimaryCategoryEntity,
     threadSecondaryCategoryEntity,
@@ -173,7 +173,8 @@ const Footer = ({ message, onClick }: FooterProps) => {
 
 /** スレッド検索を行うためのモーダルを表示する関数の引数 */
 type SearchThreadModalProps = {
-    id: string;
+    isOpen: boolean;
+    setIsOpen: CallableFunction;
     message: string;
     setFilter: CallableFunction;
     onClick: CallableFunction;
@@ -181,10 +182,27 @@ type SearchThreadModalProps = {
     threadSecondaryCategorys: threadSecondaryCategoryEntity[];
 };
 
+const customStyles: Modal.Styles = {
+    // ダイアログ内のスタイル（中央に表示）
+    content: {
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        marginRight: "-50%",
+        transform: "translate(-50%, -50%)",
+    },
+    // 親ウィンドウのスタイル（ちょっと暗くする）
+    overlay: {
+        background: "rgba(0, 0, 0, 0.5)",
+    },
+};
+
 /**
  * スレッド検索を行うためのモーダルを表示する
  *
- * @param {string} id - モーダルのID
+ * @param {boolean} isOpen - モーダルの開閉
+ * @param {CallableFunction} setIsOpen - モーダルの開閉を保存する
  * @param {string} message - スレッド検索時のメッセージ（主にエラーメッセージ）
  * @param {CallableFunction} setFilter - スレッドの検索条件を保存するstate
  * @param {CallableFunction} onClick - スレッド検索ボタンの動作
@@ -193,14 +211,20 @@ type SearchThreadModalProps = {
  * @returns {JSX.Element}
  */
 export const SearchThreadModal = ({
-    id,
+    isOpen,
+    setIsOpen,
     message,
     setFilter,
     onClick,
     threadPrimaryCategorys,
     threadSecondaryCategorys,
 }: SearchThreadModalProps) => (
-    <Modal id={id}>
+    <Modal
+        isOpen={isOpen}
+        onRequestClose={() => setIsOpen(false)}
+        ariaHideApp={false}
+        style={customStyles}
+    >
         <div className="modal-header bg-warning bg-opacity-25">
             スレッド検索
         </div>
