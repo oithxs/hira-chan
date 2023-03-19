@@ -1,4 +1,4 @@
-import { Layout as Thread } from "../../features/thread";
+import { Layout as Thread } from "../../features/threads";
 import { Header } from "../Header/index";
 
 /**
