@@ -54,6 +54,16 @@ services:
       - 3306:3306
     tty: true
 
+  hira-chan_redis:
+    image: hira-chan_redis:latest
+    container_name: hira-chan_redis
+    build:
+      context: ..
+      dockerfile: ./docker/redis/Dockerfile
+    ports:
+      - 6379:6379
+    tty: true
+
   hira-chan_phpmyadmin:
     image: hira-chan_phpmyadmin:latest
     container_name: hira-chan_phpmyadmin
