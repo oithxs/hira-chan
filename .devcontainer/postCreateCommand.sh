@@ -12,9 +12,7 @@ EOF
 cp /usr/src/app/.env.example /usr/src/app/.env
 
 # スレッドにアップロードされた画像を格納するディレクトリの作成
-mkdir storage/app/public
-mkdir storage/app/public/images
-mkdir storage/app/public/images/thread_message
+mkdir -p storage/app/public/images/thread_message
 
 # ディレクトリのパーミッションを変更し、laravelが書き込みできるようにする。
 chmod -R 777 storage
@@ -29,6 +27,7 @@ sed -ie "s/DB_HOST=127.0.0.1/DB_HOST=hira-chan_mariadb/g" /usr/src/app/.env
 sed -ie "s/DB_DATABASE=/DB_DATABASE=forum/g" /usr/src/app/.env
 sed -ie "s/DB_PASSWORD=/DB_PASSWORD=rootpass/g" /usr/src/app/.env
 sed -ie "s/MAIL_FROM_ADDRESS=null/MAIL_FROM_ADDRESS=hira-chan@example.com/g" /usr/src/app/.env
+sed -ie "s/REDIS_HOST=127.0.0.1/REDIS_HOST=hira-chan_redis/g" /usr/src/app/.env
 
 # hira-chanを動作させるためのコマンドの実行
 php artisan key:generate
