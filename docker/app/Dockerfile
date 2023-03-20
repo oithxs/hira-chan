@@ -11,37 +11,39 @@ RUN \
     # # Install Required Linux Packages
     apt-get update; \
     apt-get install -y --no-install-recommends \
-        git \
-        openssh-client \
-        wget \
-        default-mysql-client \
-        libfreetype6-dev \
-        libjpeg-dev \
-        libpng-dev \
-        libwebp-dev \
-        libzip-dev \
-        unzip \
-        zlib1g-dev \
+    git \
+    openssh-client \
+    wget \
+    default-mysql-client \
+    libfreetype6-dev \
+    libjpeg-dev \
+    libpng-dev \
+    libwebp-dev \
+    libzip-dev \
+    unzip \
+    zlib1g-dev \
     ; \
     DEBIAN_FRONTEND=noninteractive apt-get install postfix -y \
     ; \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
-	apt-get clean; \
-	rm -rf /var/lib/apt/lists/* \
+    apt-get clean; \
+    rm -rf /var/lib/apt/lists/* \
     ; \
     # # Install Required PHP extensions
-	docker-php-ext-configure gd \
-        --with-freetype \
-        --with-jpeg \
-        --with-webp; \
-	docker-php-ext-install \
-		bcmath \
-		exif \
-		gd \
-		mysqli \
-		opcache \
-		pdo_mysql \
-		zip \
+    git clone https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis; \
+    docker-php-ext-configure gd \
+    --with-freetype \
+    --with-jpeg \
+    --with-webp; \
+    docker-php-ext-install \
+    bcmath \
+    exif \
+    gd \
+    mysqli \
+    opcache \
+    pdo_mysql \
+    redis \
+    zip \
     ; \
     \
     useradd -m -s /bin/bash dev
