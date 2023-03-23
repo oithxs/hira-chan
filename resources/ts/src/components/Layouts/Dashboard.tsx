@@ -1,5 +1,6 @@
 import { Layout as Thread } from "../../features/threads";
 import { Header } from "../Header/index";
+import { Footer } from "../Footer/index";
 
 /**
  * ダッシュボードを表示する
@@ -14,6 +15,7 @@ export const Dashboard = () => {
                 {/* とりあえず表示 */}
                 <Thread />
             </div>
+            <Footer />
         </>
     );
 };
