@@ -18,6 +18,9 @@ Route::apiResource('/hub', \App\Http\Controllers\API\HubController::class);
 Route::apiResource('/threadPrimaryCategory', \App\Http\Controllers\API\ThreadPrimaryCategoryController::class);
 Route::apiResource('/threadSecondaryCategory', \App\Http\Controllers\API\ThreadSecondaryCategoryController::class);
 
+Route::prefix('/post')->name('post.')->controller(\App\Http\Controllers\API\PostController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+});
 
 // 要認証
 Route::middleware([
