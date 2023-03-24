@@ -1,6 +1,7 @@
 import { routesContext, userContext } from "../../hooks/useContext";
 import { Logout } from "../../features/auth/components/Logout";
 import { cutText } from "../../utils/format";
+import { slide as Menu } from "react-burger-menu";
 
 /**
  * HxS のロゴを表示する
@@ -83,6 +84,27 @@ const AcctCtrDropDown = () => {
     );
 };
 
+const HamburgerMenu = () => {
+    return (
+        <Menu noOverlay>
+            <a className="menu-item" href="/">
+                ホーム
+            </a>
+            <a className="menu-item" href="/ranking">
+                ランキング
+            </a>
+            <a className="menu-item" href="/thread_history">
+                履歴
+            </a>
+            <a className="menu-item" href="/category">
+                カテゴリー
+            </a>
+        </Menu>
+    );
+};
+
+export default HamburgerMenu;
+
 /**
  * ログイン・新規登録ページへ移動するボタンを表示する
  *
@@ -119,7 +141,10 @@ export const Header = () => {
                     <HxSLogo />
                     <Title />
                 </div>
-                <div>{acctCtr}</div>
+                <div className="flex-center">
+                    <div className="mx-3">{acctCtr}</div>
+                    <HamburgerMenu />
+                </div>
             </div>
         </header>
     );
