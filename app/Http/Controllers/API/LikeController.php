@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Events\Post\AddLikeToPost;
+use App\Events\ThreadBrowsing\AddLikeOnPost;
 use App\Http\Controllers\Controller;
 use App\Services\Tables\LikeService;
 use Illuminate\Http\Request;
@@ -45,7 +45,7 @@ class LikeController extends Controller
         $post['likes_count'] += 1;
 
         // 同じスレッドを閲覧しているユーザに，いいねがされたことをブロードキャスト
-        broadcast(new AddLikeToPost($request->threadId, $post));
+        broadcast(new AddLikeOnPost($request->threadId, $post));
     }
 
     /**

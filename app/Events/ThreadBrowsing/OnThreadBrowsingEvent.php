@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events\Post;
+namespace App\Events\ThreadBrowsing;
 
 use App\Consts\ChannelConst;
 use Illuminate\Broadcasting\Channel;
@@ -16,7 +16,7 @@ class OnThreadBrowsingEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    private string $threadId;
+    protected string $threadId;
 
     protected mixed $response;
 

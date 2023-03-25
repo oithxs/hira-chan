@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events\Post;
+namespace App\Events\ThreadBrowsing;
 
 use App\Http\Resources\PostLikeResource;
 use App\Models\ThreadModel;
@@ -10,7 +10,7 @@ use App\Models\ThreadModel;
  *
  * 書き込みにされたいいね数を返却する
  */
-class AddLikeToPost extends OnThreadBrowsingEvent
+class AddLikeOnPost extends OnThreadBrowsingEvent
 {
     /**
      * 新しいイベントインスタンスを作成する

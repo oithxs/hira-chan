@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events\Post;
+namespace App\Events\ThreadBrowsing;
 
 use App\Http\Resources\PostResource;
 use App\Models\ThreadModel;
@@ -10,7 +10,7 @@ use App\Models\ThreadModel;
  *
  * スレッドに追加された書き込みを返却する
  */
-class PostStoreEvent extends OnThreadBrowsingEvent
+class PostStored extends OnThreadBrowsingEvent
 {
     /**
      * 新しいイベントインスタンスを作成する

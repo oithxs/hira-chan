@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Events\Post\PostStoreEvent;
+use App\Events\ThreadBrowsing\PostStored;
 use App\Exceptions\ThreadNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
@@ -62,7 +62,7 @@ class PostController extends Controller
             ?: $this->threadImageService->store($request->file('img'), $post, $request->user()->id);
 
         // 同じスレッドを閲覧しているユーザにブロードキャスト
-        broadcast(new PostStoreEvent($request->threadId, $post));
+        broadcast(new PostStored($request->threadId, $post));
     }
 
     /**
