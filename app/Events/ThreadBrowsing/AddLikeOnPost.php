@@ -2,9 +2,6 @@
 
 namespace App\Events\ThreadBrowsing;
 
-use App\Http\Resources\PostLikeResource;
-use App\Models\ThreadModel;
-
 /**
  * 書き込みにいいねがされた際に発生するイベント
  *
@@ -12,12 +9,5 @@ use App\Models\ThreadModel;
  */
 class AddLikeOnPost extends OnThreadBrowsingEvent
 {
-    /**
-     * 新しいイベントインスタンスを作成する
-     */
-    public function __construct(string $threadId, ThreadModel $post)
-    {
-        parent::__construct($threadId);
-        $this->response = new PostLikeResource(collect($post));
-    }
+    use LikeToPost;
 }
