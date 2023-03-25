@@ -2,6 +2,7 @@
 
 namespace App\Services\Tables;
 
+use App\Exceptions\PostNotFoundException;
 use App\Models\ThreadModel;
 use App\Repositories\PostRepository;
 use App\Services\PostService as PrePostService;
@@ -22,6 +23,26 @@ class PostService
         $this->threadService = $threadService;
         $this->hubRelationship = $hubRelationship;
         $this->prePostService = $prePostService;
+    }
+
+    /**
+     * 対応する書き込みを取得する
+     *
+     * @param string $model 書き込みが保存されているテーブルのモデル名
+     * @param string $threadId スレッドID
+     * @param integer $messageId メッセージID
+     * @return ThreadModel 対応する書き込み
+     * @throws PostNotFoundException 対応する書き込みが存在しない場合
+     */
+    public static function find(string $model, string $threadId, int $messageId): ThreadModel
+    {
+        $post = PostRepository::find($model, $threadId, $messageId);
+
+        if ($post !== null) {
+            return $post;
+        } else {
+            throw new PostNotFoundException();
+        }
     }
 
     /**

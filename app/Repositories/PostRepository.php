@@ -8,6 +8,19 @@ use Illuminate\Support\Collection;
 
 class PostRepository
 {
+    const GET_POST_WITH_COUNT = 'likes';
+
+    public static function getPostWith(string $userId): array
+    {
+        return [
+            'user',
+            'thread_image_path',
+            'likes' => function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            }
+        ];
+    }
+
     /**
      * 書き込みが保存されているテーブルからデータを取得する際のリレーションシップを操作する
      *
@@ -18,6 +31,23 @@ class PostRepository
     public static function baseBuilder(string $model, array | string $with = [], array | string $withCount = []): Builder
     {
         return $model::with($with)->withCount($withCount);
+    }
+
+    /**
+     * 書き込みを取得する
+     *
+     * @param string $model 書き込みを取得したいモデルクラス
+     * @param string $threadId 書き込みを取得したいスレッドのID
+     * @param integer $messageId 書き込みを取得したいメッセージのID
+     * @return ThreadModel|null 書き込み
+     */
+    public static function find(string $model, string $threadId, int $messageId): ThreadModel | null
+    {
+        return  self::baseBuilder(model: $model, withCount: self::GET_POST_WITH_COUNT)
+            ->where([
+                ['hub_id', $threadId],
+                ['message_id', $messageId]
+            ])->first();
     }
 
     /**
@@ -37,16 +67,7 @@ class PostRepository
      */
     public static function getPostWithUserImageAndLikes(string $model, string $threadId, string $userId): Collection
     {
-        $with = [
-            'user',
-            'thread_image_path',
-            'likes' => function ($query) use ($userId) {
-                $query->where('user_id', $userId);
-            }
-        ];
-        $withCount = 'likes';
-
-        return self::baseBuilder($model, $with, $withCount)
+        return self::baseBuilder($model, self::getPostWith($userId), self::GET_POST_WITH_COUNT)
             ->where('hub_id', $threadId)
             ->get();
     }
