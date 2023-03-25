@@ -51,7 +51,7 @@ class PostController extends Controller
     {
         // 書き込みの保存（メッセージ）
         $post = $this->postService->store(
-            $request->thread_id, // react では threadId
+            $request->threadId,
             $request->user()->id,
             $request->message,
             $request->reply
@@ -62,7 +62,7 @@ class PostController extends Controller
             ?: $this->threadImageService->store($request->file('img'), $post, $request->user()->id);
 
         // 同じスレッドを閲覧しているユーザにブロードキャスト
-        broadcast(new PostStoreEvent($request->thread_id /* react では threadId */, $post));
+        broadcast(new PostStoreEvent($request->threadId, $post));
     }
 
     /**
