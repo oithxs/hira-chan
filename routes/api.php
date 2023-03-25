@@ -26,6 +26,12 @@ Route::prefix('/post')->name('post.')->controller(\App\Http\Controllers\API\Post
     });
 });
 
+Route::prefix('/like')->name('like.')->controller(\App\Http\Controllers\API\LikeController::class)->group(function () {
+    Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+        Route::post('/store', 'store')->name('store');
+    });
+});
+
 // 要認証
 Route::middleware([
     'auth:sanctum',
