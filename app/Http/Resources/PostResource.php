@@ -12,10 +12,10 @@ class PostResource extends ResourceCollection
      * スレッドへの書き込みを必要最低限の要素に整形し返却する
      * 必要になり次第要素追加
      *
-     * @param Request $request アクセス時のパラメータなど
+     * @param Request|null $request アクセス時のパラメータなど
      * @return array<int|string, mixed> スレッドへの書き込み．必要最低限の要素に整形
      */
-    public function toArray(Request $request): array
+    public function toArray(Request $request = null): array
     {
         return [
             'data' => $this->collection->map(function (mixed $v) {
@@ -23,7 +23,7 @@ class PostResource extends ResourceCollection
                     'messageId' => $v['message_id'],
                     'message' => $v['message'],
                     'createdAt' => Format::formatDate($v['created_at']),
-                    'likesCount' => $v['likes_count'],
+                    'likesCount' => $v['likes_count'] ?? 0,
                     'user' => [
                         'name' => $v['user']['name']
                     ],
