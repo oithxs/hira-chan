@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\ThreadModel;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 
@@ -48,5 +49,36 @@ class PostRepository
         return self::baseBuilder($model, $with, $withCount)
             ->where('hub_id', $threadId)
             ->get();
+    }
+
+    /**
+     * スレッドに書き込みを行う
+     *
+     * @param string $model 書き込みを保存するモデル名
+     * @param string $threadId 書き込むスレッドのID
+     * @param string $userId 書き込むユーザのID
+     * @param string $message 書き込む内容
+     * @return ThreadModel スレッド（テーブル）へ保存した書き込み
+     */
+    public static function insert(string $model, string $threadId, string $userId, string $message): ThreadModel
+    {
+        return $model::create([
+            'hub_id' => $threadId,
+            'user_id' => $userId,
+            'message_id' => self::getMaxMessageId($model, $threadId) + 1 ?? 0,
+            'message' => $message
+        ]);
+    }
+
+    /**
+     * スレッドの最大 `message_id` を取得する
+     *
+     * @param string $model スレッドを保存しているモデルクラスの完全修飾クラス名
+     * @param string $threadId スレッドID
+     * @return integer|null スレッドの最大メッセージID
+     */
+    public static function getMaxMessageId(string $model, string $threadId): int | null
+    {
+        return $model::where('hub_id', '=', $threadId)->max('message_id');
     }
 }
