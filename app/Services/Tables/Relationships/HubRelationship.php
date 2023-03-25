@@ -2,29 +2,28 @@
 
 namespace App\Services\Tables\Relationships;
 
-use App\Exceptions\ThreadNotFoundException;
 use App\Models\ThreadPrimaryCategory;
 use App\Models\ThreadSecondaryCategory;
-use App\Repositories\HubRepository;
+use App\Services\Tables\HubService;
 
 class HubRelationship
 {
+    private HubService $hubService;
+
+    public function __construct(HubService $hubService)
+    {
+        $this->hubService = $hubService;
+    }
+
     /**
      * 該当スレッドの詳細カテゴリを取得する
      *
      * @param string $threadId スレッドID
      * @return ThreadSecondaryCategory スレッドIDに対応する詳細カテゴリ
-     * @throws ThreadNotFoundException スレッドが存在しなかった場合
      */
     public function getThreadSecondaryCategory(string $threadId): ThreadSecondaryCategory
     {
-        $thread = HubRepository::find($threadId);
-
-        if ($thread !== null) {
-            return $thread->thread_secondary_category;
-        } else {
-            throw new ThreadNotFoundException();
-        }
+        return $this->hubService->find($threadId)->thread_secondary_category;
     }
 
     /**
