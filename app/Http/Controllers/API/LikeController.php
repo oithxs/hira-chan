@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Events\ThreadBrowsing\AddLikeOnPost;
+use App\Events\ThreadBrowsing\DeleteLikeOnPost;
 use App\Http\Controllers\Controller;
 use App\Services\Tables\LikeService;
 use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ class LikeController extends Controller
     public function store(Request $request): void
     {
         // 書き込みへのいいねを保存
-        $post = $this->likeService->addLikeToPost(
+        $post = $this->likeService->addLikeOnPost(
             $request->threadId,
             $request->messageId,
             $request->user()->id
@@ -65,10 +66,26 @@ class LikeController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * スレッドの書き込みに対するいいねを削除する
+     *
+     * @todo https://github.com/oithxs/hira-chan/issues/227
+     *
+     * @param  Request $request
+     * @return void
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        // 書き込みのいいねを取り消し
+        $post = $this->likeService->deleteLikeOnPost(
+            $request->threadId,
+            $request->messageId,
+            $request->user()->id
+        );
+
+        // 返却する書き込みのいいね数を減少させる
+        $post['likes_count'] -= 1;
+
+        // 同じスレッドを閲覧しているユーザに，いいねがされたことをブロードキャスト
+        broadcast(new DeleteLikeOnPost($request->threadId, $post));
     }
 }
