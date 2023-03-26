@@ -44,7 +44,7 @@ class PostController extends Controller
     /**
      * 該当スレッドへ書き込みを行う
      *
-     * @param Request $request
+     * @param Request $request アクセス時のパラメータなど
      * @return void
      */
     public function store(Request $request)

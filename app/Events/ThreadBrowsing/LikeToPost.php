@@ -5,11 +5,6 @@ namespace App\Events\ThreadBrowsing;
 use App\Http\Resources\PostLikeResource;
 use App\Models\ThreadModel;
 
-/**
- * 書き込みにいいねがされた際に発生するイベント
- *
- * 書き込みにされたいいね数を返却する
- */
 trait LikeToPost
 {
     /**

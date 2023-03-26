@@ -9,10 +9,10 @@ use App\Repositories\HubRepository;
 class HubService
 {
     /**
-     * 対応する書き込みを返却する
+     * 対応するスレッドを返却する
      *
-     * @param string $threadId
-     * @return Hub
+     * @param string $threadId スレッドID
+     * @return Hub 対応するスレッド
      * @throws ThreadNotFoundException スレッドが存在しなかった場合
      */
     public function find(string $threadId): Hub

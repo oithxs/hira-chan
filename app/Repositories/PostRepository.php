@@ -8,8 +8,15 @@ use Illuminate\Support\Collection;
 
 class PostRepository
 {
+    /** スレッドの書き込み取得の際にレコードをよくカウントするテーブル */
     const GET_POST_WITH_COUNT = 'likes';
 
+    /**
+     * スレッドの書き込み取得の際によく取得するリレーションシップ
+     *
+     * @param string $userId ログインしているユーザID
+     * @return array リレーションシップ名．条件
+     */
     public static function getPostWith(string $userId): array
     {
         return [
