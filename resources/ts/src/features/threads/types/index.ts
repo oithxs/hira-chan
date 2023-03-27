@@ -1,20 +1,11 @@
 /** スレッドの情報 */
 export type threadEntity = {
     id: string;
-    thread_secondary_category_id: number;
-    user_id: string;
     name: string;
-    created_at: string;
-    updated_at: string;
-    deleted_at: string;
-    thread_secondary_category: {
-        id: number;
-        thread_primary_category_id: number;
-        name: string;
-        created_at: string;
-        updated_at: string;
-    };
-    access_logs_count: number;
+    accessCount: number;
+    primaryCategoryId: number;
+    secondaryCategoryId: number;
+    createdAt: string;
 };
 
 /** 詳細カテゴリの情報 */

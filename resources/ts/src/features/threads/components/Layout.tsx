@@ -96,8 +96,7 @@ const Tbody = ({
 
     const tbody = someThreads.map((o: threadEntity, i: number) => {
         const threadSecondaryCategory: threadSecondaryCategoryEntity =
-            threadSecondaryCategorys[o["thread_secondary_category_id"] - 1] ??
-            {};
+            threadSecondaryCategorys[o["secondaryCategoryId"] - 1] ?? {};
         const threadPrimaryCategory: threadPrimaryCategoryEntity =
             threadSecondaryCategory["thread_primary_category"] ?? {};
         const url: string = dashboardUrl + "?thread_id=" + o["id"];
@@ -113,7 +112,7 @@ const Tbody = ({
                                 {threadSecondaryCategory["name"]}
                                 {" / "}
                                 {"作成："}
-                                {formatDate(o["created_at"])}
+                                {formatDate(o["createdAt"])}
                             </small>
                         </p>
                         <p>{o["name"]}</p>
@@ -279,15 +278,13 @@ export const Layout = () => {
                 }
                 if (
                     filter.primaryCategory &&
-                    o.thread_secondary_category.thread_primary_category_id !==
-                        filter.primaryCategory.id
+                    o.primaryCategoryId !== filter.primaryCategory.id
                 ) {
                     response = false;
                 }
                 if (
                     filter.secondaryCategory &&
-                    o.thread_secondary_category_id !==
-                        filter.secondaryCategory.id
+                    o.secondaryCategoryId !== filter.secondaryCategory.id
                 ) {
                     response = false;
                 }
