@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Events\ThreadBrowsing\PostStored;
 use App\Exceptions\ThreadNotFoundException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\IndexRequest;
 use App\Http\Resources\PostResource;
 use App\Services\Tables\PostService;
 use App\Services\ThreadImageService;
@@ -29,7 +30,7 @@ class PostController extends Controller
      * @param Request $request アクセス時のパラメータなど
      * @return PostResource 成形済みの書き込み一覧
      */
-    public function index(Request $request): PostResource
+    public function index(IndexRequest $request): PostResource
     {
         try {
             return new PostResource($this->postService->getPostWithUserImageAndLikes(
