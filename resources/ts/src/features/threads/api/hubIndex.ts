@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { axios } from "../../../lib/axios";
+import { threadEntity } from "../types";
 
 /**
  * state・スレッド一覧を取得するAPIを利用し，呼び出し元にスレッド一覧を渡す
@@ -14,8 +15,11 @@ export const hubIndex = (hubUrl: string, setThreads: CallableFunction) => {
             .then((response: any) => {
                 return response.data;
             })
-            .then((data: object) => {
-                setThreads(data);
+            .then((data: any) => {
+                return data.data;
+            })
+            .then((threads: threadEntity[]) => {
+                setThreads(threads);
             })
             .catch((error: any) => null);
     }, []);
