@@ -14528,6 +14528,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _features_threads__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../features/threads */ "./resources/ts/src/features/threads/index.ts");
 /* harmony import */ var _Header_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Header/index */ "./resources/ts/src/components/Header/index.ts");
 /* harmony import */ var _Footer_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Footer/index */ "./resources/ts/src/components/Footer/index.ts");
+/* harmony import */ var _features_posts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../features/posts */ "./resources/ts/src/features/posts/index.ts");
 var __assign = undefined && undefined.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -14542,6 +14543,7 @@ var __assign = undefined && undefined.__assign || function () {
 
 
 
+
 /**
  * ダッシュボードを表示する
  *
@@ -14549,10 +14551,10 @@ var __assign = undefined && undefined.__assign || function () {
  */
 var Dashboard = function Dashboard() {
   return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-    children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Header_index__WEBPACK_IMPORTED_MODULE_2__.Header, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", __assign({
+    children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Header_index__WEBPACK_IMPORTED_MODULE_2__.Header, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", __assign({
       className: "container-fluid"
     }, {
-      children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_features_threads__WEBPACK_IMPORTED_MODULE_1__.Layout, {})
+      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_features_threads__WEBPACK_IMPORTED_MODULE_1__.Layout, {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_features_posts__WEBPACK_IMPORTED_MODULE_4__.Posts, {})]
     })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Footer_index__WEBPACK_IMPORTED_MODULE_3__.Footer, {})]
   });
 };
@@ -14648,6 +14650,169 @@ var Logout = function Logout(props) {
     children: "\u30ED\u30B0\u30A2\u30A6\u30C8"
   }));
 };
+
+/***/ }),
+
+/***/ "./resources/ts/src/features/posts/Posts.tsx":
+/*!***************************************************!*\
+  !*** ./resources/ts/src/features/posts/Posts.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Posts": () => (/* binding */ Posts)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/Grid/Grid.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/Typography/Typography.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/Link/Link.js");
+var __assign = undefined && undefined.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+      for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+    }
+    return t;
+  };
+  return __assign.apply(this, arguments);
+};
+
+
+// APIで取得すようにするので下記のJSONは削除するように
+var posts_data = {
+  data: [{
+    messageId: 1,
+    message: "HELLO",
+    createdAt: "2023-03-24 01:08:37",
+    likesCount: 1,
+    user: {
+      name: "Admin"
+    },
+    threadImagePath: null,
+    onLike: false
+  }, {
+    messageId: 2,
+    message: "WORLD",
+    createdAt: "2023-03-24 02:18:10",
+    likesCount: 0,
+    user: {
+      name: "Admin"
+    },
+    threadImagePath: null,
+    onLike: false
+  }, {
+    messageId: 3,
+    message: "IMG",
+    createdAt: "2023-03-24 02:37:51",
+    likesCount: 0,
+    user: {
+      name: "Admin"
+    },
+    threadImagePath: {
+      imgPath: "public/images/thread_message/dc8f18baef484e388239993ed91854aa.jpg"
+    },
+    onLike: false
+  }]
+};
+function getAllPosts() {
+  return posts_data.data.map(function (post) {
+    return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_1__["default"], __assign({
+      item: true,
+      xs: 12,
+      sm: 12,
+      md: 12,
+      lg: 12,
+      xl: 12
+    }, {
+      children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_2__["default"], __assign({
+        sx: {
+          p: 2,
+          mt: 2,
+          mb: 2
+        },
+        bgcolor: "#f0f0f0"
+      }, {
+        children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_1__["default"], __assign({
+          container: true
+        }, {
+          children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_1__["default"], __assign({
+            item: true,
+            xs: 12,
+            sm: 2
+          }, {
+            children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_3__["default"], {
+              children: post.user.name
+            })
+          })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_1__["default"], __assign({
+            item: true,
+            xs: 12,
+            sm: 10
+          }, {
+            children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_3__["default"], {
+              children: post.message
+            })
+          }))]
+        }))
+      }))
+    }));
+  });
+}
+var Posts = function Posts() {
+  return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_2__["default"], __assign({
+      sx: {
+        p: 2,
+        mt: 2,
+        mb: 2
+      },
+      borderRadius: 2,
+      bgcolor: "#f0f0f0"
+    }, {
+      children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_1__["default"], __assign({
+        container: true
+      }, {
+        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_1__["default"], __assign({
+          item: true,
+          xs: 12,
+          sm: 2
+        }, {
+          children: ["\uFF1E", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_4__["default"], __assign({
+            href: "/dashboard"
+          }, {
+            children: "\u623B\u308B"
+          }))]
+        })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_1__["default"], __assign({
+          item: true,
+          xs: 12,
+          sm: 10
+        }, {
+          children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            children: "\u3053\u3053\u306B\u306F\u30B9\u30EC\u30C3\u30C9\u540D\u3092\u66F8\u304D\u307E\u3059"
+          })
+        })), getAllPosts()]
+      }))
+    }))
+  });
+};
+
+/***/ }),
+
+/***/ "./resources/ts/src/features/posts/index.ts":
+/*!**************************************************!*\
+  !*** ./resources/ts/src/features/posts/index.ts ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Posts": () => (/* reexport safe */ _Posts__WEBPACK_IMPORTED_MODULE_0__.Posts)
+/* harmony export */ });
+/* harmony import */ var _Posts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Posts */ "./resources/ts/src/features/posts/Posts.tsx");
+
 
 /***/ }),
 
