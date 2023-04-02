@@ -6,10 +6,12 @@ use App\Events\ThreadBrowsing\PostStored;
 use App\Exceptions\ThreadNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Posts\IndexRequest;
+use App\Http\Requests\Posts\StoreRequest;
 use App\Http\Resources\PostResource;
 use App\Services\Tables\PostService;
 use App\Services\ThreadImageService;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use TypeError;
 
 class PostController extends Controller
@@ -45,18 +47,17 @@ class PostController extends Controller
     /**
      * 該当スレッドへ書き込みを行う
      *
-     * @param Request $request アクセス時のパラメータなど
+     * @param StoreRequest $request アクセス時のパラメータなど
      * @return void
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
+        $message = is_null($request->message) && $request->img instanceof UploadedFile
+            ? ''
+            : $request->message;
+
         // 書き込みの保存（メッセージ）
-        $post = $this->postService->store(
-            $request->threadId,
-            $request->user()->id,
-            $request->message,
-            $request->reply
-        );
+        $post = $this->postService->store($request->threadId, $request->user()->id, $message, $request->reply);
 
         // 書き込みでアップロードされた画像の保存（画像があれば）
         !$request->hasFile('img')
