@@ -1,5 +1,5 @@
-$('#dashboard_sendMessage_btn').click(send_comment);
-$('#dashboard_message_textarea').keydown(function (e) {
+$("#dashboard_sendMessage_btn").click(send_comment);
+$("#dashboard_message_textarea").keydown(function (e) {
     if (event.ctrlKey && e.keyCode === 13) {
         send_comment();
     }
@@ -11,11 +11,13 @@ function send_comment() {
     var formElm = document.getElementById("dashboard_sendMessage_form");
     var message = formElm.dashboard_message_textarea.value;
     var reply = formElm.dashboard_send_comment_reply_disabled_text.value;
+    const img = $("#dashboard_send_comment_upload_img").prop("files")[0];
+
     var formData = new FormData();
-    formData.append('thread_id', thread_id);
-    formData.append('message', message);
-    formData.append('reply', reply);
-    formData.append('img', $('#dashboard_send_comment_upload_img').prop('files')[0]);
+    formData.append("thread_id", thread_id);
+    formData.append("message", message);
+    formData.append("reply", reply);
+    formData.append("img", typeof img === "undefined" ? "" : img);
 
     if (message.trim() == 0) {
         dashboard_sendAlertArea.innerHTML = "<div class='alert alert-danger'>書き込みなし・空白・改行のみの投稿は出来ません</div>";
@@ -52,42 +54,48 @@ function send_comment() {
 }
 
 String.prototype.bytes = function () {
-    return (encodeURIComponent(this).replace(/%../g, "x").length);
-}
+    return encodeURIComponent(this).replace(/%../g, "x").length;
+};
 
 String.prototype.rows = function () {
-    if (this.match(/\n/g)) return (this.match(/\n/g).length) + 1; else return (1);
-}
+    if (this.match(/\n/g)) return this.match(/\n/g).length + 1;
+    else return 1;
+};
 
-$('#dashboard_send_comment_upload_img').change(function (e) {
+$("#dashboard_send_comment_upload_img").change(function (e) {
     var fileset = $(this).val();
 
-    if (fileset !== '' && e.target.files[0].type.indexOf('image') < 0) {
-        dashboard_sendAlertArea.innerHTML = "<div class='alert alert-danger'>画像ファイルを指定してください</div>";
-        $('#dashboard_send_commnet_img_preview').attr('src', '');
-        $(this).val('');
+    if (fileset !== "" && e.target.files[0].type.indexOf("image") < 0) {
+        dashboard_sendAlertArea.innerHTML =
+            "<div class='alert alert-danger'>画像ファイルを指定してください</div>";
+        $("#dashboard_send_commnet_img_preview").attr("src", "");
+        $(this).val("");
         return false;
-    } else if (file_size_check('dashboard_send_comment_upload_img')) {
-        dashboard_sendAlertArea.innerHTML = "<div class='alert alert-danger'>ファイルのサイズは3MB以内にしてください</div>";
-        $('#dashboard_send_commnet_img_preview').attr('src', '');
-        $(this).val('');
+    } else if (file_size_check("dashboard_send_comment_upload_img")) {
+        dashboard_sendAlertArea.innerHTML =
+            "<div class='alert alert-danger'>ファイルのサイズは3MB以内にしてください</div>";
+        $("#dashboard_send_commnet_img_preview").attr("src", "");
+        $(this).val("");
         return false;
     } else {
         dashboard_sendAlertArea.innerHTML = "";
-        if (fileset === '') {
-            $('#dashboard_send_commnet_img_preview').attr('src', '');
+        if (fileset === "") {
+            $("#dashboard_send_commnet_img_preview").attr("src", "");
         } else {
             var reader = new FileReader();
             reader.onload = function (e) {
-                $('#dashboard_send_commnet_img_preview').attr('src', e.target.result);
-            }
+                $("#dashboard_send_commnet_img_preview").attr(
+                    "src",
+                    e.target.result
+                );
+            };
             reader.readAsDataURL(e.target.files[0]);
         }
     }
 });
 
 function file_size_check(idname) {
-    var fileset = $('#' + idname).prop('files')[0];
+    var fileset = $("#" + idname).prop("files")[0];
     if (fileset) {
         // 画像サイズ3MBまで
         if (3145728 <= fileset.size) {
