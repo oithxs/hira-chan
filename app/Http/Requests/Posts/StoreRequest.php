@@ -34,27 +34,4 @@ class StoreRequest extends FormRequest
             'img' => ['nullable', 'required_without:message', 'image', 'mimes:bmp,gif,jpg,jpeg,png,webp', 'max:3000'],
         ];
     }
-
-    /**
-     * バリデーションの失敗を処理する．
-     *
-     * @link https://laravel.com/api/9.x/Illuminate/Foundation/Http/FormRequest.html#method_failedValidation
-     * @todo 上記のリンクをメソッドの説明付きの良さげなURLに置き換える
-     *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
-     * @return void
-     *
-     * @throws \Illuminate\Http\Exceptions\HttpResponseException
-     */
-    protected function failedValidation(Validator $validator)
-    {
-        $response = response()->json(
-            [$validator->errors()],
-            422,
-            [],
-            JSON_UNESCAPED_UNICODE
-        );
-
-        throw new HttpResponseException($response);
-    }
 }
