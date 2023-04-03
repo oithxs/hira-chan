@@ -3,6 +3,7 @@
 namespace Tests\Unit\app\Http\Controllers\Dashboard\ThreadsController;
 
 use App\Http\Controllers\Dashboard\ThreadsController;
+use App\Http\Requests\Posts\StoreRequest;
 use App\Models\ClubThread;
 use App\Models\CollegeYearThread;
 use App\Models\DepartmentThread;
@@ -14,11 +15,9 @@ use App\Models\ThreadPrimaryCategory;
 use App\Models\User;
 use ErrorException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\Exception\NotReadableException;
 use Intervention\Image\Facades\Image;
 use Tests\UseFormRequestTestCase;
 
@@ -143,7 +142,7 @@ class StoreTest extends UseFormRequestTestCase
      */
     protected function setArgument(): void
     {
-        $this->args = new Request([
+        $this->args = new StoreRequest([
             'thread_id' => $this->threads['club_thread'],
             'message' => $this->message,
             'reply' => NULL,
@@ -337,7 +336,7 @@ class StoreTest extends UseFormRequestTestCase
      */
     public function setArgumentWithImage(array $image): void
     {
-        $this->args = new Request(
+        $this->args = new StoreRequest(
             query: [
                 'thread_id' => $this->threads['club_thread'],
                 'message' => $this->message,
