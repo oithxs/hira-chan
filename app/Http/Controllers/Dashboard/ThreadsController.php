@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Posts\StoreRequest;
 use App\Services\PostService;
 use App\Services\ThreadImageService;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 
 class ThreadsController extends Controller
 {
@@ -41,13 +43,17 @@ class ThreadsController extends Controller
      * このメソッドから各カテゴリ用のクラスを呼び出し，DBにメッセージなどを書き込む．
      * ファイルがアップロードされた場合，画像を保存する．
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreRequest  $request
      * @return void
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
+        $message = is_null($request->message) && $request->img instanceof UploadedFile
+            ? ''
+            : $request->message;
+
         // 書き込みの保存（メッセージ）
-        $post = $this->postService->store($request->thread_id, $request->user()->id, $request->message, $request->reply, $request->file('img'));
+        $post = $this->postService->store($request->thread_id, $request->user()->id, $message, $request->reply, $request->file('img'));
 
         // 書き込みでアップロードされた画像の保存（画像があれば）
         !$request->hasFile('img') ?: $this->threadImageService->store($request->file('img'), $post, $request->user()->id);

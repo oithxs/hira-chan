@@ -14843,7 +14843,9 @@ var hubIndex = function hubIndex(hubUrl, setThreads) {
     _lib_axios__WEBPACK_IMPORTED_MODULE_1__.axios.get(hubUrl).then(function (response) {
       return response.data;
     }).then(function (data) {
-      setThreads(data);
+      return data.data;
+    }).then(function (threads) {
+      setThreads(threads);
     })["catch"](function (error) {
       return null;
     });
@@ -15054,7 +15056,7 @@ var Tbody = function Tbody(_a) {
   var someThreads = threads.slice(threadNum.row * (threadNum.page - 1), threadNum.row * threadNum.page);
   var tbody = someThreads.map(function (o, i) {
     var _a, _b;
-    var threadSecondaryCategory = (_a = threadSecondaryCategorys[o["thread_secondary_category_id"] - 1]) !== null && _a !== void 0 ? _a : {};
+    var threadSecondaryCategory = (_a = threadSecondaryCategorys[o["secondaryCategoryId"] - 1]) !== null && _a !== void 0 ? _a : {};
     var threadPrimaryCategory = (_b = threadSecondaryCategory["thread_primary_category"]) !== null && _b !== void 0 ? _b : {};
     var url = dashboardUrl + "?thread_id=" + o["id"];
     return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tr", {
@@ -15066,7 +15068,7 @@ var Tbody = function Tbody(_a) {
         }, {
           children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
             children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("small", {
-              children: [threadPrimaryCategory["name"], "：", threadSecondaryCategory["name"], " / ", "作成：", (0,_utils_format__WEBPACK_IMPORTED_MODULE_3__.formatDate)(o["created_at"])]
+              children: [threadPrimaryCategory["name"], "：", threadSecondaryCategory["name"], " / ", "作成：", (0,_utils_format__WEBPACK_IMPORTED_MODULE_3__.formatDate)(o["createdAt"])]
             })
           }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
             children: o["name"]
@@ -15206,10 +15208,10 @@ var Layout = function Layout() {
       if (filter.title && !o.name.match(filter.title)) {
         response = false;
       }
-      if (filter.primaryCategory && o.thread_secondary_category.thread_primary_category_id !== filter.primaryCategory.id) {
+      if (filter.primaryCategory && o.primaryCategoryId !== filter.primaryCategory.id) {
         response = false;
       }
-      if (filter.secondaryCategory && o.thread_secondary_category_id !== filter.secondaryCategory.id) {
+      if (filter.secondaryCategory && o.secondaryCategoryId !== filter.secondaryCategory.id) {
         response = false;
       }
       return response;
