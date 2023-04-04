@@ -50,4 +50,17 @@ class HubService
     {
         return $this->hubService->index();
     }
+
+    /**
+     * スレッドを作成する
+     *
+     * @param integer $secondaryCategoryId スレッドが属する詳細カテゴリID
+     * @param string $userId スレッドを作成したユーザID
+     * @param string $threadName スレッド名
+     * @return void
+     */
+    public function createThread(int $secondaryCategoryId, string $userId, string $threadName): void
+    {
+        HubRepository::store($secondaryCategoryId, $userId, $threadName);
+    }
 }

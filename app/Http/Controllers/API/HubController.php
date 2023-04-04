@@ -21,15 +21,21 @@ class HubController extends Controller
      */
     public function index(): ThreadResource
     {
-        return new ThreadResource($this->hubService->getThreadBySCategoryAndAccessedDescendingOrder());
+        return new ThreadResource(
+            $this->hubService->getThreadBySCategoryAndAccessedDescendingOrder()
+        );
     }
 
     /**
-     * Store a newly created resource in storage.
+     * スレッドを作成する
      */
     public function store(Request $request)
     {
-        //
+        $this->hubService->createThread(
+            $request->secondaryCategoryId,
+            $request->user()->id,
+            $request->threadName
+        );
     }
 
     /**
