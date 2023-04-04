@@ -4,16 +4,16 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ThreadResource;
-use App\Services\HubService;
+use App\Services\Tables\HubService;
 use Illuminate\Http\Request;
 
 class HubController extends Controller
 {
     private HubService $hubService;
 
-    public function __construct()
+    public function __construct(HubService $hubService)
     {
-        $this->hubService = new HubService();
+        $this->hubService = $hubService;
     }
 
     /**
@@ -21,7 +21,7 @@ class HubController extends Controller
      */
     public function index(): ThreadResource
     {
-        return new ThreadResource($this->hubService->index());
+        return new ThreadResource($this->hubService->getThreadBySCategoryAndAccessedDescendingOrder());
     }
 
     /**
