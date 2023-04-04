@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Threads\StoreRequest;
 use App\Http\Resources\ThreadResource;
 use App\Services\Tables\HubService;
 use Illuminate\Http\Request;
@@ -28,8 +29,11 @@ class HubController extends Controller
 
     /**
      * スレッドを作成する
+     *
+     * @param StoreRequest $request アクセス時のパラメータなど
+     * @return void
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $this->hubService->createThread(
             $request->secondaryCategoryId,
