@@ -37,7 +37,7 @@ class Handler extends ExceptionHandler
     /**
      * アプリケーションの例外処理コールバックを登録する．
      *
-     * @link https://readouble.com/laravel/9.x/ja/errors.html
+     * @link https://readouble.com/laravel/10.x/ja/errors.html
      *
      * @return void
      */
