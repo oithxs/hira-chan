@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Threads\StoreRequest;
 use App\Http\Resources\ThreadResource;
-use App\Services\HubService;
+use App\Services\Tables\HubService;
 use Illuminate\Http\Request;
 
 class HubController extends Controller
 {
     private HubService $hubService;
 
-    public function __construct()
+    public function __construct(HubService $hubService)
     {
-        $this->hubService = new HubService();
+        $this->hubService = $hubService;
     }
 
     /**
@@ -21,15 +22,24 @@ class HubController extends Controller
      */
     public function index(): ThreadResource
     {
-        return new ThreadResource($this->hubService->index());
+        return new ThreadResource(
+            $this->hubService->getThreadBySCategoryAndAccessedDescendingOrder()
+        );
     }
 
     /**
-     * Store a newly created resource in storage.
+     * スレッドを作成する
+     *
+     * @param StoreRequest $request アクセス時のパラメータなど
+     * @return void
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $this->hubService->createThread(
+            $request->secondaryCategoryId,
+            $request->user()->id,
+            $request->threadName
+        );
     }
 
     /**
