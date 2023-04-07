@@ -39,9 +39,7 @@ function getAllPosts() {
     return posts_data.data.map((post) => {
         return (
             <>
-                <Grid item>
 
-                </Grid>
             </>
         );
     });
@@ -50,19 +48,21 @@ function getAllPosts() {
 export const Posts = () => {
     return (
         <>
-            <Box sx={{ p: 2, mt: 2, mb: 2 }} borderRadius={2} bgcolor="#f0f0f0">
+            <Box sx={{ p: 3 }} borderRadius={2} bgcolor="#f0f0f0">
                 <Grid container>
-                    <Grid item xs={12} sm={2}>
+                    <Grid item>
                         {/* TODO 戻るリンクは変えてください */}＞
                         <Link href="/dashboard">戻る</Link>
                     </Grid>
-                    <Grid item xs={12} sm={10}>
+                    <Grid item sx={{ ml: 3 }}>
                         {/* TODO スレッド名を取得して書き込めるように */}
                         <Typography>ここにはスレッド名を書きます</Typography>
                     </Grid>
                 </Grid>
 
-                <Grid container>{getAllPosts()}</Grid>
+                <hr />
+
+                <Box>{getAllPosts()}</Box>
             </Box>
         </>
     );
