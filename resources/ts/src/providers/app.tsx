@@ -1,5 +1,5 @@
 import * as React from "react";
-import { RoutesType, UserType } from "../types/index";
+import { RoutesEntity, UserEntity } from "../types/index";
 
 /** アプリ全体のプロバイダに渡す引数の型 */
 type AppProviderProps = {
@@ -23,7 +23,7 @@ export const AppProvider: CallableFunction = ({
 }: AppProviderProps) => {
     const element = document.getElementById("main");
 
-    const routes: RoutesType = {
+    const routes: RoutesEntity = {
         dashboard: element?.dataset.dashboardurl ?? "",
         myPage: element?.dataset.mypageurl ?? "",
         threadHistory: element?.dataset.threadhistoryurl ?? "",
@@ -42,7 +42,7 @@ export const AppProvider: CallableFunction = ({
         },
     };
 
-    const user: UserType = {
+    const user: UserEntity = {
         name: element?.dataset.username ?? "",
     };
 
