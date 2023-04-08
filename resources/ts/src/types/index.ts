@@ -7,9 +7,15 @@ export type RoutesType = {
     login: string;
     logout: string;
     register: string;
-    hub: string;
-    threadPrimaryCategory: string;
-    threadSecondaryCategory: string;
+    hub: {
+        index: string;
+    };
+    threadPrimaryCategory: {
+        index: string;
+    };
+    threadSecondaryCategory: {
+        index: string;
+    };
 };
 
 /** ログインしてるユーザ情報の型 */

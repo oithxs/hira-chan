@@ -31,10 +31,15 @@ export const AppProvider: CallableFunction = ({
         login: element?.dataset.loginurl ?? "",
         logout: element?.dataset.logouturl ?? "",
         register: element?.dataset.registerurl ?? "",
-        hub: element?.dataset.huburl ?? "",
-        threadPrimaryCategory: element?.dataset.threadprimarycategoryurl ?? "",
-        threadSecondaryCategory:
-            element?.dataset.threadsecondarycategoryurl ?? "",
+        hub: {
+            index: element?.dataset.hubindexurl ?? "",
+        },
+        threadPrimaryCategory: {
+            index: element?.dataset.threadprimarycategoryindexurl ?? "",
+        },
+        threadSecondaryCategory: {
+            index: element?.dataset.threadsecondarycategoryindexurl ?? "",
+        },
     };
 
     const user: UserType = {
