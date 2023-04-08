@@ -1,4 +1,4 @@
-import { Typography, Box, Link, Grid } from "@mui/material";
+import { Typography, Box, Link, Grid, Button } from "@mui/material";
 // APIで取得すようにするので下記のJSONは削除するように
 const posts_data = {
     data: [
@@ -36,10 +36,24 @@ const posts_data = {
 };
 
 function getAllPosts() {
-    return posts_data.data.map((post) => {
+    return posts_data.data.reverse().map((post) => {
         return (
             <>
-
+                <Grid container>
+                    <Grid item>
+                        <Typography>{ post.messageId } :</Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography>{post.user.name} </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography>{post.createdAt}</Typography>
+                    </Grid>
+                </Grid>
+                <Box>
+                    <Typography>{post.message}</Typography>
+                    <Button>いいね</Button>
+                </Box>
             </>
         );
     });
