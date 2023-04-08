@@ -1,5 +1,5 @@
 /** アプリ共通で使用可能なルートの型 */
-export type RoutesType = {
+export type RoutesEntity = {
     dashboard: string;
     myPage: string;
     threadHistory: string;
@@ -19,6 +19,6 @@ export type RoutesType = {
 };
 
 /** ログインしてるユーザ情報の型 */
-export type UserType = {
+export type UserEntity = {
     name: string;
 };
