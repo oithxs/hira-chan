@@ -1,17 +1,19 @@
 import { useEffect } from "react";
 import { axios } from "../../../lib/axios";
 import { threadEntity } from "../types";
+import { routesContext } from "../../../hooks/useContext";
 
 /**
  * state・スレッド一覧を取得するAPIを利用し，呼び出し元にスレッド一覧を渡す
  *
- * @param {string} hubUrl - スレッド一覧を取得するAPIのURL
  * @param {CallableFunction} setThreads - stateでスレッド一覧を保存するための関数
  */
-export const hubIndex = (hubUrl: string, setThreads: CallableFunction) => {
+export const hubIndex = (setThreads: CallableFunction) => {
+    const routes = routesContext();
+
     useEffect(() => {
         axios
-            .get(hubUrl)
+            .get(routes.hub.index)
             .then((response: any) => {
                 return response.data;
             })
