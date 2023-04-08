@@ -40,11 +40,11 @@ function getAllPosts() {
         return (
             <>
                 <Grid container>
-                    <Grid item>
-                        <Typography>{ post.messageId } :</Typography>
+                    <Grid item sx={{ mr: 1 }}>
+                        <Typography>{post.messageId} :</Typography>
                     </Grid>
-                    <Grid item>
-                        <Typography>{post.user.name} </Typography>
+                    <Grid item sx={{ mr: 1 }}>
+                        <Typography>{post.user.name}</Typography>
                     </Grid>
                     <Grid item>
                         <Typography>{post.createdAt}</Typography>
@@ -54,6 +54,8 @@ function getAllPosts() {
                     <Typography>{post.message}</Typography>
                     <Button>いいね</Button>
                 </Box>
+
+                <hr />
             </>
         );
     });
@@ -70,13 +72,11 @@ export const Posts = () => {
                     </Grid>
                     <Grid item sx={{ ml: 3 }}>
                         {/* TODO スレッド名を取得して書き込めるように */}
-                        <Typography>ここにはスレッド名を書きます</Typography>
+                        <Typography variant="h5">ここにはスレッド名を書きます</Typography>
                     </Grid>
                 </Grid>
 
-                <hr />
-
-                <Box>{getAllPosts()}</Box>
+                <Box sx={{ mt: 2 }}>{getAllPosts()}</Box>
             </Box>
         </>
     );
