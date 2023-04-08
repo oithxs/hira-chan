@@ -39,7 +39,7 @@ function getAllPosts() {
     return posts_data.data.reverse().map((post) => {
         return (
             <>
-                <Grid container>
+                <Grid container sx={{ mt: 2 }}>
                     <Grid item sx={{ mr: 1 }}>
                         <Typography>{post.messageId} :</Typography>
                     </Grid>
@@ -51,7 +51,9 @@ function getAllPosts() {
                     </Grid>
                 </Grid>
                 <Box>
-                    <Typography>{post.message}</Typography>
+                    <Box sx={{ p: 2 }}>
+                        <Typography>{post.message}</Typography>
+                    </Box>
                     <Button>いいね</Button>
                 </Box>
 
@@ -66,13 +68,16 @@ export const Posts = () => {
         <>
             <Box sx={{ p: 3 }} borderRadius={2} bgcolor="#f0f0f0">
                 <Grid container>
-                    <Grid item>
-                        {/* TODO 戻るリンクは変えてください */}＞
-                        <Link href="/dashboard">戻る</Link>
+                    <Grid item sx={{ mt: "auto" }}>
+                        <Link href="/dashboard" underline="hover">
+                            ＞戻る
+                        </Link>
                     </Grid>
                     <Grid item sx={{ ml: 3 }}>
                         {/* TODO スレッド名を取得して書き込めるように */}
-                        <Typography variant="h5">ここにはスレッド名を書きます</Typography>
+                        <Typography variant="h5">
+                            ここにはスレッド名を書きます
+                        </Typography>
                     </Grid>
                 </Grid>
 
