@@ -34,6 +34,8 @@ Route::prefix('/post')->name('post.')->controller(\App\Http\Controllers\API\Post
 });
 
 Route::prefix('/like')->name('like.')->controller(\App\Http\Controllers\API\LikeController::class)->group(function () {
+    Route::get('/', fn () => abort(404))->name('index');
+
     Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::post('/store', 'store')->name('store');
         Route::post('/destroy', 'destroy')->name('destroy');

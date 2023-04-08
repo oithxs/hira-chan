@@ -1,4 +1,5 @@
 import { routesContext } from "../../../hooks/useContext";
+import { RoutesEntity } from "../../../types";
 import { logout } from "../api/logout";
 
 /** ログアウト用のリンクを表示する関数の引数の型 */
@@ -13,7 +14,7 @@ type logoutProps = {
  * @returns
  */
 export const Logout = (props: logoutProps) => {
-    const routes: { [key: string]: string } = routesContext();
+    const routes: RoutesEntity = routesContext();
 
     return (
         <a
