@@ -41,10 +41,30 @@
         data-mypageurl={{ route('mypage') }}
         data-threadhistoryurl={{ route('thread.history') }}
         data-profileshowurl={{ route('profile.show') }}
+
         data-hubindexurl={{ route('hub.index') }}
+        data-hubstoreurl={{ route('hub.index') . '/store' }}
+
         data-threadprimarycategoryindexurl={{ route('threadPrimaryCategory.index') }}
         data-threadsecondarycategoryindexurl={{ route('threadSecondaryCategory.index') }}
 
+        data-likestoreurl={{ route('like.index') . '/store' }}
+        data-likedestroyurl={{ route('like.index') . '/destroy' }}
+
+        data-postindexurl={{ route('post.index') }}
+        data-poststoreurl={{ route('post.index') . '/store' }}
+
+
+        {{-- イベント --}}
+        data-threadbrowsingaddlikeonpostevent={{ 'ThreadBrowsing\\AddLikeOnPost' }}
+        data-threadbrowsingdeletelikeonpostevent={{ 'ThreadBrowsing\\DeleteLikeOnPost' }}
+        data-threadbrowsingpoststoredevent={{ 'ThreadBrowsing\\PostStored' }}
+
+
+        {{-- チャンネル --}}
+        data-threadbrowsingchannel={{ \App\Consts\ChannelConst::THREAD_BROWSING }}
+
+        
         {{-- ユーザ名 --}}
         data-username={{ Auth::check() && Auth::user()->hasVerifiedEmail() ? Auth::user()->name : null }}
     >

@@ -9,6 +9,7 @@ export type RoutesEntity = {
     register: string;
     hub: {
         index: string;
+        store: string;
     };
     threadPrimaryCategory: {
         index: string;
@@ -16,9 +17,31 @@ export type RoutesEntity = {
     threadSecondaryCategory: {
         index: string;
     };
+    like: {
+        store: string;
+        destroy: string;
+    };
+    post: {
+        index: string;
+        store: string;
+    };
 };
 
 /** ログインしてるユーザ情報の型 */
 export type UserEntity = {
     name: string;
+};
+
+/** Laravel からブロードキャストされるイベント名 */
+export type EventEntity = {
+    threadBrowsing: {
+        addLikeOnPost: string;
+        deleteLikeOnPost: string;
+        postStored: string;
+    };
+};
+
+/** Laravel からイベントを受け取るために接続するチャンネル名 */
+export type ChannelEntity = {
+    threadBrowsing: string;
 };
