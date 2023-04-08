@@ -68,7 +68,14 @@ function getAllPosts() {
                         <Typography>{post.message}</Typography>
                         {printImage()}
                     </Box>
-                    <Button>いいね</Button>
+                    <Grid container>
+                        <Grid item>
+                            <Button>いいね</Button>
+                        </Grid>
+                        <Grid item sx={{ m: "auto", ml: 2 }}>
+                            <Typography>{post.likesCount}</Typography>
+                        </Grid>
+                    </Grid>
                 </Box>
 
                 <hr />
