@@ -1,4 +1,5 @@
 import { Typography, Box, Link, Grid, Button } from "@mui/material";
+import Image from "mui-image";
 // APIで取得すようにするので下記のJSONは削除するように
 const posts_data = {
     data: [
@@ -27,8 +28,7 @@ const posts_data = {
             likesCount: 0,
             user: { name: "Admin" },
             threadImagePath: {
-                imgPath:
-                    "public/images/thread_message/dc8f18baef484e388239993ed91854aa.jpg",
+                imgPath: "https://picsum.photos/id/674/2000",
             },
             onLike: false,
         },
@@ -37,6 +37,12 @@ const posts_data = {
 
 function getAllPosts() {
     return posts_data.data.reverse().map((post) => {
+        // もし、画像パスがある場合、画像を返却する
+        function printImage() {
+            if (post.threadImagePath != null) {
+                return <Image src={post.threadImagePath.imgPath} />;
+            }
+        }
         return (
             <>
                 <Grid container sx={{ mt: 2 }}>
@@ -53,6 +59,7 @@ function getAllPosts() {
                 <Box>
                     <Box sx={{ p: 2 }}>
                         <Typography>{post.message}</Typography>
+                        {printImage()}
                     </Box>
                     <Button>いいね</Button>
                 </Box>
