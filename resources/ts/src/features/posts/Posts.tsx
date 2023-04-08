@@ -40,7 +40,14 @@ function getAllPosts() {
         // もし、画像パスがある場合、画像を返却する
         function printImage() {
             if (post.threadImagePath != null) {
-                return <Image src={post.threadImagePath.imgPath} />;
+                return (
+                    <Image
+                        src={post.threadImagePath.imgPath}
+                        fit="contain"
+                        style={{ maxWidth: "800px", maxHeight: "600px" }}
+                        showLoading={true}
+                    />
+                );
             }
         }
         return (
