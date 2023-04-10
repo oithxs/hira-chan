@@ -227,7 +227,7 @@ export type threadNumType = {
  * @returns {JSX.Element}
  */
 export const Layout = () => {
-    const routes: { [key: string]: string } = routesContext();
+    const routes = routesContext();
     const [filter, setFilter] = useState<filterType>({});
     const [threadNum, setThreadNum] = useState<threadNumType>({
         row: 10,
@@ -247,15 +247,9 @@ export const Layout = () => {
     const [searchThreadModalIsOpen, setSearchThreadModalIsOpen] =
         useState<boolean>(false);
 
-    hubIndex(routes["hub"], setThreads);
-    threadPrimaryCategoryIndex(
-        routes["threadPrimaryCategory"],
-        setThreadPrimaryCategorys
-    );
-    threadSecondaryCategoryIndex(
-        routes["threadSecondaryCategory"],
-        setThreadSecondaryCategorys
-    );
+    hubIndex(setThreads);
+    threadPrimaryCategoryIndex(setThreadPrimaryCategorys);
+    threadSecondaryCategoryIndex(setThreadSecondaryCategorys);
     useEffect(() => setProcessedThreads(threads), [threads]);
     useEffect(() => {
         setThreadNum((state: threadNumType) => ({
@@ -341,7 +335,7 @@ export const Layout = () => {
                     threads={processedThreads}
                     threadSecondaryCategorys={threadSecondaryCategorys}
                     threadNum={threadNum}
-                    dashboardUrl={routes["dashboard"]}
+                    dashboardUrl={routes.dashboard}
                 />
             </table>
             <SelectPage threadNum={threadNum} onClick={handleSelectPageClick} />

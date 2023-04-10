@@ -2,6 +2,7 @@ FROM php:8.1.4-fpm
 
 WORKDIR /usr/src/app
 
+ENV WORKDIR=/usr/src/app
 ENV LANG=C.UTF-8
 
 # Faster apt commands
@@ -11,16 +12,17 @@ RUN \
     # # Install Required Linux Packages
     apt-get update; \
     apt-get install -y --no-install-recommends \
-    git \
-    openssh-client \
-    wget \
     default-mysql-client \
+    git \
     libfreetype6-dev \
     libjpeg-dev \
     libpng-dev \
     libwebp-dev \
     libzip-dev \
+    openssh-client \
+    screen \
     unzip \
+    wget \
     zlib1g-dev \
     ; \
     DEBIAN_FRONTEND=noninteractive apt-get install postfix -y \

@@ -30,15 +30,44 @@
 </head>
 
 <body class="antialiased">
-    <main id="main" data-dashboardurl={{ {{-- route('dashboard') --}} route('dashboard.dev') }} data-loginurl={{
-        route('login') }} data-logouturl={{route('logout') }} data-registerurl={{ route('register') }} data-mypageurl={{
-        route('mypage') }} data-threadhistoryurl={{ route('thread.history') }} data-profileshowurl={{
-        route('profile.show') }} data-huburl={{ route('hub.index') }} data-threadprimarycategoryurl={{
-        route('threadPrimaryCategory.index') }} data-threadsecondarycategoryurl={{
-        route('threadSecondaryCategory.index') }} data-username={{ Auth::check() && Auth::user()->
-        hasVerifiedEmail()
-        ? Auth::user()->name : null }}
-        >
+    <main
+        id="main"
+
+        {{-- ルーティング --}}
+        data-dashboardurl={{ {{-- route('dashboard') --}} route('dashboard.dev') }}
+        data-loginurl={{ route('login') }}
+        data-logouturl={{route('logout') }}
+        data-registerurl={{ route('register') }}
+        data-mypageurl={{ route('mypage') }}
+        data-threadhistoryurl={{ route('thread.history') }}
+        data-profileshowurl={{ route('profile.show') }}
+
+        data-hubindexurl={{ route('hub.index') }}
+        data-hubstoreurl={{ route('hub.index') . '/store' }}
+
+        data-threadprimarycategoryindexurl={{ route('threadPrimaryCategory.index') }}
+        data-threadsecondarycategoryindexurl={{ route('threadSecondaryCategory.index') }}
+
+        data-likestoreurl={{ route('like.index') . '/store' }}
+        data-likedestroyurl={{ route('like.index') . '/destroy' }}
+
+        data-postindexurl={{ route('post.index') }}
+        data-poststoreurl={{ route('post.index') . '/store' }}
+
+
+        {{-- イベント --}}
+        data-threadbrowsingaddlikeonpostevent={{ 'ThreadBrowsing\\AddLikeOnPost' }}
+        data-threadbrowsingdeletelikeonpostevent={{ 'ThreadBrowsing\\DeleteLikeOnPost' }}
+        data-threadbrowsingpoststoredevent={{ 'ThreadBrowsing\\PostStored' }}
+
+
+        {{-- チャンネル --}}
+        data-threadbrowsingchannel={{ \App\Consts\ChannelConst::THREAD_BROWSING }}
+
+        
+        {{-- ユーザ名 --}}
+        data-username={{ Auth::check() && Auth::user()->hasVerifiedEmail() ? Auth::user()->name : null }}
+    >
         @yield("main")
     </main>
 
