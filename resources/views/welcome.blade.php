@@ -18,8 +18,8 @@
 
     <!-- Bootstrap用JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
 
     <title>Laravel</title>
 
@@ -31,8 +31,7 @@
 </head>
 
 <body class="antialiased">
-    <div
-        class="relative flex items-top justify-center min-h-screen sm:items-center py-4 sm:pt-0 bg-white">
+    <div class="relative flex items-top justify-center min-h-screen sm:items-center py-4 sm:pt-0 bg-white">
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
             <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
                 <p class="h1">HxS コンピュータ部</p>
@@ -85,17 +84,20 @@
 
                     <div class="p-6 border-t md:border-t-0 md:border-l bg-gray-100">
                         <div class="flex items-center">
-                            <!-- よさげなアイコン
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                -->
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-dark">
+                                <path
+                                    d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
                             <div class="ml-4 text-lg leading-7 font-semibold">
-                                <a href="" class="underline char-color text-decoration-none">入部希望者はコチラ</a>
+                                <a href="https://oithxs.github.io/"
+                                    class="underline char-color text-decoration-none">HxS公式サイト</a>
                             </div>
                         </div>
 
                         <div class="ml-12">
                             <div class="mt-2 char-color text-sm">
-                                このリンクは現在機能していません．
+                                開発中のサイトとなりますが、HxSの成果物や最新情報などを掲載予定です。
                             </div>
                         </div>
                     </div>
