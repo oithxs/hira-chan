@@ -53,13 +53,13 @@ function getAllPosts() {
         return (
             <>
                 <Grid container sx={{ mt: 2 }}>
-                    <Grid item sx={{ mr: 1 }}>
+                    <Grid item sx={{ mr: 1, mt: "auto" }}>
                         <Typography>{post.messageId} :</Typography>
                     </Grid>
-                    <Grid item sx={{ mr: 1 }}>
-                        <Typography>{post.user.name}</Typography>
+                    <Grid item sx={{ mr: 1, mt: "auto" }}>
+                        <Typography variant="h6">{post.user.name}</Typography>
                     </Grid>
-                    <Grid item>
+                    <Grid item sx={{ mr: 1, mt: "auto" }}>
                         <Typography>{post.createdAt}</Typography>
                     </Grid>
                 </Grid>
@@ -70,7 +70,7 @@ function getAllPosts() {
                     </Box>
                     <Grid container>
                         <Grid item>
-                            <Button>いいね</Button>
+                            <Button variant="outlined">いいね</Button>
                         </Grid>
                         <Grid item sx={{ m: "auto", ml: 2 }}>
                             <Typography>{post.likesCount}</Typography>
