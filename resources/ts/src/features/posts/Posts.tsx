@@ -1,6 +1,7 @@
 import { Typography, Box, Link, Grid, Button } from "@mui/material";
 import Image from "mui-image";
-// APIで取得すようにするので下記のJSONは削除するように
+// TODO 細かいデザインの変更
+// TODO APIで取得すようにするので下記のJSONは削除するように
 const posts_data = {
     data: [
         {
@@ -35,12 +36,18 @@ const posts_data = {
     ],
 };
 
+/**
+ * すべてのポストデータを取得し、返却を行う
+ * @returns
+ */
 function getAllPosts() {
     return posts_data.data.reverse().map((post) => {
         // もし、画像パスがある場合、画像を返却する
         function printImage() {
             if (post.threadImagePath != null) {
                 return (
+                    // TODO 画像サイズの見直し
+                    // TODO 画像の位置の変更左寄りに+マージンの設定
                     <Image
                         src={post.threadImagePath.imgPath}
                         fit="contain"
@@ -53,6 +60,7 @@ function getAllPosts() {
         return (
             <>
                 <Grid container sx={{ mt: 2 }}>
+                    {/* TODO 文字のフォント,位置を修正 */}
                     <Grid item sx={{ mr: 1, mt: "auto" }}>
                         <Typography>{post.messageId} :</Typography>
                     </Grid>
@@ -70,6 +78,8 @@ function getAllPosts() {
                     </Box>
                     <Grid container>
                         <Grid item>
+                            {/* TODO いいねボタンをアイコンに変更 */}
+                            {/* TODO いいねボタンが押されていることが視覚的にわかるようにする(variantをcontained等に) */}
                             <Button variant="outlined">いいね</Button>
                         </Grid>
                         <Grid item sx={{ m: "auto", ml: 2 }}>
@@ -90,6 +100,7 @@ export const Posts = () => {
             <Box sx={{ p: 3 }} borderRadius={2} bgcolor="#f0f0f0">
                 <Grid container>
                     <Grid item sx={{ mt: "auto" }}>
+                        {/* TODO リンクを置き換えてください */}
                         <Link href="/dashboard" underline="hover">
                             ＞戻る
                         </Link>
