@@ -39,7 +39,7 @@ const postsData = {
 
 /**
  * すべてのポストデータを取得し、返却を行う
- * @returns
+ * @returns {JSX.Element}
  */
 const GetAllPosts = () => {
     return postsData.data.reverse().map((post) => {
@@ -95,6 +95,10 @@ const GetAllPosts = () => {
     });
 }
 
+/**
+ * すべてのポストデータを表示する領域を返却する
+ * @returns {JSX.Element}
+ */
 export const Posts = () => {
     return (
         <>
