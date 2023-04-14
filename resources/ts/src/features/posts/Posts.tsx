@@ -40,10 +40,10 @@ const posts_data = {
  * すべてのポストデータを取得し、返却を行う
  * @returns
  */
-function getAllPosts() {
+const getAllPosts = () => {
     return posts_data.data.reverse().map((post) => {
         // もし、画像パスがある場合、画像を返却する
-        function printImage() {
+        const printImage = () => {
             if (post.threadImagePath != null) {
                 return (
                     // TODO 画像サイズの見直し
