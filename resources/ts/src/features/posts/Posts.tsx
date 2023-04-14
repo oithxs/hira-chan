@@ -1,8 +1,9 @@
 import { Typography, Box, Link, Grid, Button } from "@mui/material";
 import Image from "mui-image";
+
 // TODO 細かいデザインの変更
 // TODO APIで取得すようにするので下記のJSONは削除するように
-const posts_data = {
+const postsData = {
     data: [
         {
             messageId: 1,
@@ -40,10 +41,10 @@ const posts_data = {
  * すべてのポストデータを取得し、返却を行う
  * @returns
  */
-const getAllPosts = () => {
-    return posts_data.data.reverse().map((post) => {
+const GetAllPosts = () => {
+    return postsData.data.reverse().map((post) => {
         // もし、画像パスがある場合、画像を返却する
-        const printImage = () => {
+        const PrintImage = () => {
             if (post.threadImagePath != null) {
                 return (
                     // TODO 画像サイズの見直し
@@ -74,7 +75,7 @@ const getAllPosts = () => {
                 <Box>
                     <Box sx={{ p: 2 }}>
                         <Typography>{post.message}</Typography>
-                        {printImage()}
+                        {PrintImage()}
                     </Box>
                     <Grid container>
                         <Grid item>
@@ -113,7 +114,7 @@ export const Posts = () => {
                     </Grid>
                 </Grid>
 
-                <Box sx={{ mt: 2 }}>{getAllPosts()}</Box>
+                <Box sx={{ mt: 2 }}>{GetAllPosts()}</Box>
             </Box>
         </>
     );
