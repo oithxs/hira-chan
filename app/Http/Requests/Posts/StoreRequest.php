@@ -28,7 +28,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'thread_id' => 'required|regex:/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/',
+            'threadId' => 'required|regex:/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/',
             'reply' => 'integer|nullable',
             'message' => ['nullable', 'required_without:img', 'string', new trim(), 'max:800', new max_line(20)],
             'img' => ['nullable', 'required_without:message', 'image', 'mimes:bmp,gif,jpg,jpeg,png,webp', 'max:3000'],
