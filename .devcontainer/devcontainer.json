@@ -3,7 +3,7 @@
     "dockerComposeFile": "../docker/docker-compose.yml",
     "service": "hira-chan_app",
     "workspaceFolder": "/usr/src/app",
-    "forwardPorts": [8080],
+    "forwardPorts": [80],
     "remoteUser": "dev",
     "postCreateCommand": "chmod u+x ./.devcontainer/postCreateCommand.sh ./.devcontainer/postStartCommand.sh && ./.devcontainer/postCreateCommand.sh",
     "postStartCommand": "./.devcontainer/postStartCommand.sh",
