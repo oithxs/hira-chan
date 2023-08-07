@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Posts\StoreRequest;
 use App\Services\PostService;
 use App\Services\ThreadImageService;
 use Illuminate\Http\Request;
@@ -46,7 +45,7 @@ class ThreadsController extends Controller
      * @param  StoreRequest  $request
      * @return void
      */
-    public function store(StoreRequest $request)
+    public function store(Request $request)
     {
         $message = is_null($request->message) && $request->img instanceof UploadedFile
             ? ''
