@@ -17,6 +17,7 @@ RUN \
         libfreetype6-dev \
         libjpeg-dev \
         libpng-dev \
+        libsasl2-modules \
         libwebp-dev \
         libzip-dev \
         openssh-client \
