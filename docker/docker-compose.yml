@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   hira-chan_app:
-    image: hira-chan:app-1.0.0
+    image: hira-chan:app-1.0.1
     container_name: hira-chan_app
     build:
       context: ..
@@ -11,11 +11,6 @@ services:
       TZ: Asia/Tokyo
     volumes:
       - ..:/usr/src/app
-      - ./app/nginx/default:/etc/nginx/sites-available/default
-      - ./app/php/php.ini:/etc/php/8.1/fpm/pool.d/www.ini
-      - ./app/php/php.ini:/etc/php/8.1/fpm/php.ini
-      - ./app/php/php.ini:/etc/php/8.1/cli/php.ini
-      - ./app/postfix/main.cf:/etc/postfix/main.cf
     ports:
       - 80:80
     depends_on:
