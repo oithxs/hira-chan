@@ -1,0 +1,74 @@
+version: "3.8"
+services:
+  hira-chan_app:
+    image: hira-chan:app-2.0.0
+    container_name: hira-chan_app
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    user: dev
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 80:80
+      - 5173:5173
+    depends_on:
+      - hira-chan_echo-server
+      - hira-chan_mariadb
+    tty: true
+
+  hira-chan_redis:
+    image: hira-chan:redis-2.0.0
+    container_name: hira-chan_redis
+    build:
+      context: .
+      dockerfile: ./docker/redis/Dockerfile
+    ports:
+      - 6379:6379
+    tty: true
+
+  hira-chan_echo-server:
+    image: hira-chan:echo-server-2.0.0
+    container_name: hira-chan_echo-server
+    build:
+      context: .
+      dockerfile: ./docker/echo-server/Dockerfile
+    ports:
+      - 6001:6001
+    depends_on:
+      - hira-chan_redis
+    tty: true
+
+  hira-chan_mariadb:
+    image: hira-chan:mariadb-2.0.0
+    container_name: hira-chan_mariadb
+    build:
+      context: .
+      dockerfile: ./docker/mariadb/Dockerfile
+    environment:
+      MARIADB_DATABASE: hira_chan
+      MARIADB_USER: hira_chan
+      MARIADB_PASSWORD: pass
+      MARIADB_ROOT_PASSWORD: rootpass
+    ports:
+      - 3306:3306
+    tty: true
+
+  hira-chan_phpmyadmin:
+    image: hira-chan:phpmyadmin-2.0.0
+    container_name: hira-chan_phpmyadmin
+    build:
+      context: .
+      dockerfile: ./docker/phpmyadmin/Dockerfile
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: hira-chan_mariadb
+      PMA_USER: root
+      PMA_PASSWORD: rootpass
+      PMA_VERBOSE: phpmyadmin
+      PMA_PORT: 3306
+    ports:
+      - 8080:80
+    depends_on:
+      - hira-chan_mariadb
+    tty: true
