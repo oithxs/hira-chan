@@ -10,6 +10,8 @@
         "amiralizadeh9480.laravel-extra-intellisense",
         "naoray.laravel-goto-components",
         "codingyu.laravel-goto-view",
-        "mikestead.dotenv"
+        "mikestead.dotenv",
+        "dsznajder.es7-react-js-snippets",
+        "dbaeumer.vscode-eslint",
     ]
 }

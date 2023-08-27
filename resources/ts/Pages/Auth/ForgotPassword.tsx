@@ -1,19 +1,21 @@
-import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Head, useForm } from '@inertiajs/react';
-import { FormEventHandler } from 'react';
+import React from "react";
+import GuestLayout from "@/Layouts/GuestLayout";
+import InputError from "@/Components/InputError";
+import PrimaryButton from "@/Components/PrimaryButton";
+import TextInput from "@/Components/TextInput";
+import { Head, useForm } from "@inertiajs/react";
+import { type FormEventHandler } from "react";
+import { isset } from "@/utils/isType";
 
-export default function ForgotPassword({ status }: { status?: string }) {
+export default function ForgotPassword({ status }: { status?: string }): JSX.Element {
     const { data, setData, post, processing, errors } = useForm({
-        email: '',
+        email: "",
     });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route('password.email'));
+        post(route("password.email"));
     };
 
     return (
@@ -25,7 +27,9 @@ export default function ForgotPassword({ status }: { status?: string }) {
                 reset link that will allow you to choose a new one.
             </div>
 
-            {status && <div className="mb-4 font-medium text-sm text-green-600 dark:text-green-400">{status}</div>}
+            {isset(status) && (
+                <div className="mb-4 font-medium text-sm text-green-600 dark:text-green-400">{status}</div>
+            )}
 
             <form onSubmit={submit}>
                 <TextInput
@@ -35,7 +39,9 @@ export default function ForgotPassword({ status }: { status?: string }) {
                     value={data.email}
                     className="mt-1 block w-full"
                     isFocused={true}
-                    onChange={(e) => setData('email', e.target.value)}
+                    onChange={(e) => {
+                        setData("email", e.target.value);
+                    }}
                 />
 
                 <InputError message={errors.email} className="mt-2" />

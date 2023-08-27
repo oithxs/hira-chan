@@ -1,35 +1,39 @@
-import { useRef, FormEventHandler } from 'react';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { useForm } from '@inertiajs/react';
-import { Transition } from '@headlessui/react';
+import React from "react";
+import { useRef, type FormEventHandler } from "react";
+import InputError from "@/Components/InputError";
+import InputLabel from "@/Components/InputLabel";
+import PrimaryButton from "@/Components/PrimaryButton";
+import TextInput from "@/Components/TextInput";
+import { useForm } from "@inertiajs/react";
+import { Transition } from "@headlessui/react";
+import { isset } from "@/utils/isType";
 
-export default function UpdatePasswordForm({ className = '' }: { className?: string }) {
+export default function UpdatePasswordForm({ className = "" }: { className?: string }): JSX.Element {
     const passwordInput = useRef<HTMLInputElement>();
     const currentPasswordInput = useRef<HTMLInputElement>();
 
     const { data, setData, errors, put, reset, processing, recentlySuccessful } = useForm({
-        current_password: '',
-        password: '',
-        password_confirmation: '',
+        current_password: "",
+        password: "",
+        password_confirmation: "",
     });
 
     const updatePassword: FormEventHandler = (e) => {
         e.preventDefault();
 
-        put(route('password.update'), {
+        put(route("password.update"), {
             preserveScroll: true,
-            onSuccess: () => reset(),
+            onSuccess: () => {
+                reset();
+            },
             onError: (errors) => {
-                if (errors.password) {
-                    reset('password', 'password_confirmation');
+                if (isset(errors.password)) {
+                    reset("password", "password_confirmation");
                     passwordInput.current?.focus();
                 }
 
-                if (errors.current_password) {
-                    reset('current_password');
+                if (isset(errors.current_password)) {
+                    reset("current_password");
                     currentPasswordInput.current?.focus();
                 }
             },
@@ -54,7 +58,9 @@ export default function UpdatePasswordForm({ className = '' }: { className?: str
                         id="current_password"
                         ref={currentPasswordInput}
                         value={data.current_password}
-                        onChange={(e) => setData('current_password', e.target.value)}
+                        onChange={(e) => {
+                            setData("current_password", e.target.value);
+                        }}
                         type="password"
                         className="mt-1 block w-full"
                         autoComplete="current-password"
@@ -70,7 +76,9 @@ export default function UpdatePasswordForm({ className = '' }: { className?: str
                         id="password"
                         ref={passwordInput}
                         value={data.password}
-                        onChange={(e) => setData('password', e.target.value)}
+                        onChange={(e) => {
+                            setData("password", e.target.value);
+                        }}
                         type="password"
                         className="mt-1 block w-full"
                         autoComplete="new-password"
@@ -85,7 +93,9 @@ export default function UpdatePasswordForm({ className = '' }: { className?: str
                     <TextInput
                         id="password_confirmation"
                         value={data.password_confirmation}
-                        onChange={(e) => setData('password_confirmation', e.target.value)}
+                        onChange={(e) => {
+                            setData("password_confirmation", e.target.value);
+                        }}
                         type="password"
                         className="mt-1 block w-full"
                         autoComplete="new-password"

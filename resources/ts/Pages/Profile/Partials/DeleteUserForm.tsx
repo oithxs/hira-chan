@@ -1,13 +1,14 @@
-import { useRef, useState, FormEventHandler } from 'react';
-import DangerButton from '@/Components/DangerButton';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import Modal from '@/Components/Modal';
-import SecondaryButton from '@/Components/SecondaryButton';
-import TextInput from '@/Components/TextInput';
-import { useForm } from '@inertiajs/react';
+import React from "react";
+import { useRef, useState, type FormEventHandler } from "react";
+import DangerButton from "@/Components/DangerButton";
+import InputError from "@/Components/InputError";
+import InputLabel from "@/Components/InputLabel";
+import Modal from "@/Components/Modal";
+import SecondaryButton from "@/Components/SecondaryButton";
+import TextInput from "@/Components/TextInput";
+import { useForm } from "@inertiajs/react";
 
-export default function DeleteUserForm({ className = '' }: { className?: string }) {
+export default function DeleteUserForm({ className = "" }: { className?: string }): JSX.Element {
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
     const passwordInput = useRef<HTMLInputElement>();
 
@@ -19,25 +20,29 @@ export default function DeleteUserForm({ className = '' }: { className?: string 
         reset,
         errors,
     } = useForm({
-        password: '',
+        password: "",
     });
 
-    const confirmUserDeletion = () => {
+    const confirmUserDeletion = (): void => {
         setConfirmingUserDeletion(true);
     };
 
     const deleteUser: FormEventHandler = (e) => {
         e.preventDefault();
 
-        destroy(route('profile.destroy'), {
+        destroy(route("profile.destroy"), {
             preserveScroll: true,
-            onSuccess: () => closeModal(),
+            onSuccess: () => {
+                closeModal();
+            },
             onError: () => passwordInput.current?.focus(),
-            onFinish: () => reset(),
+            onFinish: () => {
+                reset();
+            },
         });
     };
 
-    const closeModal = () => {
+    const closeModal = (): void => {
         setConfirmingUserDeletion(false);
 
         reset();
@@ -76,7 +81,9 @@ export default function DeleteUserForm({ className = '' }: { className?: string 
                             name="password"
                             ref={passwordInput}
                             value={data.password}
-                            onChange={(e) => setData('password', e.target.value)}
+                            onChange={(e) => {
+                                setData("password", e.target.value);
+                            }}
                             className="mt-1 block w-3/4"
                             isFocused
                             placeholder="Password"

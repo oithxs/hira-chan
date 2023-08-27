@@ -10,8 +10,16 @@
     },
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-      },
-      "[typescript]": {
+    },
+    "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-      },
+    },
+    "cSpell.userWords": [
+        "Csvg",
+        "Envoyer",
+        "headlessui",
+        "inertiajs",
+        "Laracasts",
+        "laravel"
+    ],
 }
