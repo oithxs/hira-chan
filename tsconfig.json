@@ -10,9 +10,14 @@
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "noEmit": true,
+        "baseUrl": "./",
         "paths": {
-            "@/*": ["./resources/js/*"]
+            "@/*": ["resources/ts/*"]
         }
     },
-    "include": ["resources/js/**/*.ts", "resources/js/**/*.tsx", "resources/js/**/*.d.ts"]
+    "include": [
+        "resources/ts/**/*.ts",
+        "resources/ts/**/*.tsx",
+        "resources/ts/**/*.d.ts"
+    ]
 }

@@ -5,9 +5,9 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
     plugins: [
         laravel({
-            input: "resources/js/app.tsx",
-            ssr: "resources/js/ssr.tsx",
-            refresh: true,
+            input: "resources/ts/app.tsx",
+            ssr: "resources/ts/ssr.tsx",
+            refresh: ["resources/ts/**", "resources/views/**", "routes/**"],
         }),
         react(),
     ],
@@ -16,5 +16,10 @@ export default defineConfig({
             host: "localhost",
         },
         host: true,
+    },
+    resolve: {
+        alias: {
+            "@": "/resources/ts",
+        },
     },
 });
