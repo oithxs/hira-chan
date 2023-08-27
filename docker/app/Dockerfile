@@ -12,6 +12,7 @@ RUN \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         sudo \
         ca-certificates \
+        curl \
         default-mysql-client \
         git \
         libfreetype6-dev \
@@ -66,20 +67,17 @@ COPY --from=composer:2.5.5 /usr/bin/composer /usr/bin/composer
 COPY ./docker/app/php/php.ini /etc/php/8.1/cli/php.ini
 COPY ./docker/app/postfix/main.cf /etc/postfix/main.cf
 
-# イメージビルド時に実行するスクリプトをコピー
-COPY ./docker/app/bin/build.sh /usr/local/bin/build.sh
+# コンテナ作成時に実行するスクリプトをコピー
+COPY ./docker/app/bin/containerCreate.sh /usr/local/bin/containerCreate.sh
 
 # コンテナ起動時に実行するスクリプトをコピー
-COPY ./docker/app/bin/start.sh /usr/local/bin/start.sh
+COPY ./docker/app/bin/containerStart.sh /usr/local/bin/containerStart.sh
 
 # コピーしたスクリプトに実行権限を付与
-RUN chmod +x /usr/local/bin/build.sh ; \
-    chmod +x /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/containerCreate.sh ; \
+    chmod +x /usr/local/bin/containerStart.sh
 
 # 開発ユーザーに切り替え
 USER dev
 
-# アプリケーションをコピー
-COPY . ${WORKDIR}
-
-CMD ["/bin/bash", "-c", "start.sh"]
+CMD ["/bin/bash", "-c", "containerStart.sh"]

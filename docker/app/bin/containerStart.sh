@@ -1,5 +1,27 @@
 #!/bin/bash
 
+# containerCreate.shが存在していれば実行（コンテナ作成時に実行）
+if [ -e "/usr/local/bin/containerCreate.sh" ]; then
+    # 繰り返し
+    while true; do
+        # hira-chan_mariadb:3306の接続を確認
+        curl hira-chan_mariadb:3306
+        if [ $? -eq 1 ]; then
+            break
+        fi
+
+        # 1秒待機
+        sleep 1
+    done
+
+    # containerCreate.shを実行
+    /usr/local/bin/containerCreate.sh
+
+    # containerCreate.shをロック
+    sudo mv /usr/local/bin/containerCreate.sh /usr/local/bin/containerCreate.sh.lock
+    sudo chmod 644 /usr/local/bin/containerCreate.sh.lock
+fi
+
 # 各種サービス起動
 sudo su <<EOF
 service postfix start
