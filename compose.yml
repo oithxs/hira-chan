@@ -1,7 +1,19 @@
 version: "3.8"
 services:
+  hira-chan_nginx:
+    image: hira-chan:nginx-1.0.0
+    container_name: hira-chan_nginx
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - hira-chan_app
+    tty: true
+
   hira-chan_app:
-    image: hira-chan:app-2.0.0
+    image: hira-chan:app-2.1.0
     container_name: hira-chan_app
     build:
       context: .
@@ -10,7 +22,6 @@ services:
     volumes:
       - .:/usr/src/app
     ports:
-      - 80:80
       - 5173:5173
     depends_on:
       - hira-chan_echo-server
