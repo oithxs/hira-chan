@@ -26,6 +26,7 @@ RUN \
         unzip \
         wget \
         zlib1g-dev \
+        php-fpm \
         php-ctype \
         php-curl \
         php-dom \
@@ -65,6 +66,7 @@ COPY --from=composer:2.5.5 /usr/bin/composer /usr/bin/composer
 
 # 設定ファイルをコピー
 COPY ./docker/app/php/php.ini /etc/php/8.1/cli/php.ini
+COPY ./docker/app/php/www.conf /etc/php/8.1/fpm/pool.d/www.conf
 COPY ./docker/app/postfix/main.cf /etc/postfix/main.cf
 
 # コンテナ作成時に実行するスクリプトをコピー
